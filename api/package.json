@@ -9,10 +9,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "tsc": "tsc",
+    "tsc": "tsc *.ts -w",
     "dev": "ts-node-dev src/build/index.js",
     "start": "node src/build/index.js",
-    "build": "tsc --build",
+    "build": "tsc --build -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
