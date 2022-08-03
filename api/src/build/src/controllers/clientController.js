@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getClientById = exports.postNewUser = exports.getAllClients = void 0;
-exports.postNewUser = exports.getAllClients = void 0;
 const { UserClient } = require("../db");
 const getAllClients = () => __awaiter(void 0, void 0, void 0, function* () {
     let allClients = yield UserClient.findAll();

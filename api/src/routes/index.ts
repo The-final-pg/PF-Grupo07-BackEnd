@@ -1,8 +1,9 @@
-const {Router} = require('express')
-const clientRouter = require("./clients")
+import express from 'express';
+
+import clientRouter from "./clients"
 //import workerRouter from "./workers";
 
-const router = Router();
+const router = express.Router();
 
 router.use("/clients", clientRouter)
 //router.use("/workers", workerRouter)
