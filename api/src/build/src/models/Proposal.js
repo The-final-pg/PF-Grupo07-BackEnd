@@ -1,0 +1,30 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const sequelize_1 = require("sequelize");
+module.exports = (sequelize) => {
+    sequelize.define('proposal', {
+        remuneration: {
+            type: sequelize_1.DataTypes.INTEGER,
+            allowNull: false,
+        },
+        proposal_description: {
+            type: sequelize_1.DataTypes.STRING,
+            allowNull: false,
+        },
+        worked_time: {
+            type: sequelize_1.DataTypes.STRING,
+            allowNull: true,
+        },
+        state: {
+            type: sequelize_1.DataTypes.ENUM("posted", "rejected", "accepted", "initiated", "finalized", "released payment"),
+            allowNull: false,
+            defaultValue: "posted"
+        },
+        idProp: {
+            type: sequelize_1.DataTypes.UUID,
+            defaultValue: sequelize_1.DataTypes.UUIDV4,
+            allowNull: false,
+            primaryKey: true
+        }
+    });
+};
