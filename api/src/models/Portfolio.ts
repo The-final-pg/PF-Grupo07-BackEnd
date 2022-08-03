@@ -6,10 +6,10 @@ module.exports = (sequelize:any) => {
             allowNull: true,
         },
         photo: {
-            type: DataTypes.BLOB,
+            type: DataTypes.STRING,
             allowNull: false,
         },
-        description: {
+        portfolio_description: {
             type: DataTypes.STRING,
             allowNull: false,
         },

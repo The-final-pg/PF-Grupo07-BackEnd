@@ -5,21 +5,15 @@ module.exports = (sequelize:any) => {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        description: {
+        review_description: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        idOffer: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
-            allowNull: true,
-        },
-        id: {
+        idReview: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             allowNull: false,
             primaryKey: true
         }
-
     })
 }

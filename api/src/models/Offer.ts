@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 
 module.exports = (sequelize: any) => {
     sequelize.define('offer', {
-        id: {
+        idOffer: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true
@@ -15,7 +15,7 @@ module.exports = (sequelize: any) => {
             type: DataTypes.ARRAY(DataTypes.INTEGER),
             allowNull: false
         },
-        description: {
+        offer_description: {
             type: DataTypes.TEXT,
             allowNull: false
         },
@@ -27,7 +27,7 @@ module.exports = (sequelize: any) => {
             type: DataTypes.DATE
         },
         photo: {
-            type: DataTypes.BLOB
+            type: DataTypes.STRING
         },
         tags: {
             type: DataTypes.ARRAY(DataTypes.STRING)

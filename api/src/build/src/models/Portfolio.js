@@ -8,10 +8,10 @@ module.exports = (sequelize) => {
             allowNull: true,
         },
         photo: {
-            type: sequelize_1.DataTypes.BLOB,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: false,
         },
-        description: {
+        portfolio_description: {
             type: sequelize_1.DataTypes.STRING,
             allowNull: false,
         },

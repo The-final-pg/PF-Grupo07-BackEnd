@@ -7,16 +7,11 @@ module.exports = (sequelize) => {
             type: sequelize_1.DataTypes.INTEGER,
             allowNull: false,
         },
-        description: {
+        review_description: {
             type: sequelize_1.DataTypes.STRING,
             allowNull: false,
         },
-        idOffer: {
-            type: sequelize_1.DataTypes.UUID,
-            defaultValue: sequelize_1.DataTypes.UUIDV4,
-            allowNull: true,
-        },
-        id: {
+        idReview: {
             type: sequelize_1.DataTypes.UUID,
             defaultValue: sequelize_1.DataTypes.UUIDV4,
             allowNull: false,

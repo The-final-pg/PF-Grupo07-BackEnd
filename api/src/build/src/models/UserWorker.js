@@ -2,7 +2,7 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
     sequelize.define('userWorker', {
-        id: {
+        idWorker: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
@@ -40,6 +40,9 @@ module.exports = (sequelize) => {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
         },
+        photo: {
+            type: DataTypes.STRING,
+        }
     }, {
         timestamps: false
     });
