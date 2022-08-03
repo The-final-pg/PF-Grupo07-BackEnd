@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getClientById = exports.postNewUser = exports.getAllClients = void 0;
 exports.postNewUser = exports.getAllClients = void 0;
 const { UserClient } = require("../db");
 const getAllClients = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -21,3 +22,8 @@ const postNewUser = (client) => __awaiter(void 0, void 0, void 0, function* () {
     return "cliente creado con exito";
 });
 exports.postNewUser = postNewUser;
+const getClientById = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    let client = yield UserClient.findByPk(id);
+    return client;
+});
+exports.getClientById = getClientById;
