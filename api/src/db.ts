@@ -59,7 +59,7 @@ fs.readdirSync(path.join(__dirname, '/models'))
 // Para relacionarlos hacemos un destructuring
 
 
-const { } = sequelize.models;
+const { Client, Offer, Portfolio, Proposal, Review, UserWorker } = sequelize.models;
 
 // Aca vendrian las relaciones
 
