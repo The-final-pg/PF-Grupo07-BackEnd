@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 module.exports = (sequelize:any) => {
-    sequelize.define('userclient', {
+    sequelize.define('userClient', {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -26,7 +26,8 @@ module.exports = (sequelize:any) => {
             allowNull: true,
         },
         notification:{
-            type:DataTypes.ARRAY(DataTypes.JSONB)
+            type:DataTypes.ARRAY(DataTypes.JSONB),
+            allowNull:true,
         },
         id: {
             type: DataTypes.UUID,

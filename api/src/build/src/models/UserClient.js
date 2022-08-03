@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 module.exports = (sequelize) => {
-    sequelize.define('userclient', {
+    sequelize.define('userClient', {
         name: {
             type: sequelize_1.DataTypes.STRING,
             allowNull: false,
@@ -28,7 +28,8 @@ module.exports = (sequelize) => {
             allowNull: true,
         },
         notification: {
-            type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSONB)
+            type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSONB),
+            allowNull: true,
         },
         id: {
             type: sequelize_1.DataTypes.UUID,

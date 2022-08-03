@@ -59,11 +59,37 @@ fs.readdirSync(path.join(__dirname, '/models'))
 // Para relacionarlos hacemos un destructuring
 
 
-const { Client, Offer, Portfolio, Proposal, Review, UserWorker } = sequelize.models;
+const { UserClient, Offer, Portfolio, Proposal, Review, UserWorker } = sequelize.models;
 
 // Aca vendrian las relaciones
 
+//Un cliente tiene muchas ofertas, una oferta pertenece a un cliente
+UserClient.hasMany(Offer);
+Offer.belongsTo(UserClient);
 
+//Un cliente tiene muchas reviews, una review pertenece a un cliente
+UserClient.hasMany(Review);
+Review.belongsTo(UserClient);
+
+//Un worker tiene muchas reviews, una review pertenece a un worker
+UserWorker.hasMany(Review);
+Review.belongsTo(UserWorker);
+
+//Un worker tiene muchas proposal, una propuesta pertenece a un worker
+UserWorker.hasMany(Proposal);
+Proposal.belongsTo(UserWorker);
+
+//Una offer tiene muchas proposal, una offer pertenece a una proposal
+Offer.hasMany(Proposal);
+Proposal.belongsTo(Offer);
+
+//Una offer tiene muchas reviews, una review pertenece a una offer
+Offer.hasMany(Review);
+Review.belongsTo(Offer);
+
+//Un worker tiene muchos protfolios, un portfolio pertenece a un worker
+UserWorker.hasMany(Portfolio);
+Portfolio.belongsTo(UserWorker);
 
 module.exports = {
     ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
