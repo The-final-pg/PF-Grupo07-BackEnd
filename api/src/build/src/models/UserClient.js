@@ -19,10 +19,10 @@ module.exports = (sequelize) => {
             type: sequelize_1.DataTypes.STRING,
             allowNull: false,
         },
-        // photo: {
-        //     type:DataTypes.BLOB,
-        //     allowNull: true,
-        // },
+        photo: {
+            type: sequelize_1.DataTypes.STRING,
+            allowNull: true,
+        },
         rating: {
             type: sequelize_1.DataTypes.INTEGER,
             allowNull: true,
@@ -31,7 +31,7 @@ module.exports = (sequelize) => {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSONB),
             allowNull: true,
         },
-        id: {
+        idClient: {
             type: sequelize_1.DataTypes.UUID,
             defaultValue: sequelize_1.DataTypes.UUIDV4,
             allowNull: false,

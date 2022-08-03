@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 module.exports = (sequelize) => {
     sequelize.define('offer', {
-        id: {
+        idOffer: {
             type: sequelize_1.DataTypes.UUID,
             defaultValue: sequelize_1.DataTypes.UUIDV4,
             primaryKey: true
@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.INTEGER),
             allowNull: false
         },
-        description: {
+        offer_description: {
             type: sequelize_1.DataTypes.TEXT,
             allowNull: false
         },
@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
             type: sequelize_1.DataTypes.DATE
         },
         photo: {
-            type: sequelize_1.DataTypes.BLOB
+            type: sequelize_1.DataTypes.STRING
         },
         tags: {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING)
