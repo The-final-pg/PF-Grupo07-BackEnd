@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 module.exports = (sequelize:any) => {
-    sequelize.define('userclient', {
+    sequelize.define('userClient', {
         name: {
             type: DataTypes.STRING,
             allowNull: false,

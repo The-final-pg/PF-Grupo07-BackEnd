@@ -52,6 +52,27 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Client, Offer, Portfolio, Proposal, Review, UserWorker } = sequelize.models;
+const { UserClient, Offer, Portfolio, Proposal, Review, UserWorker } = sequelize.models;
 // Aca vendrian las relaciones
+//Un cliente tiene muchas ofertas, una oferta pertenece a un cliente
+UserClient.hasMany(Offer);
+Offer.belongsTo(UserClient);
+//Un cliente tiene muchas reviews, una review pertenece a un cliente
+UserClient.hasMany(Review);
+Review.belongsTo(UserClient);
+//Un worker tiene muchas reviews, una review pertenece a un worker
+UserWorker.hasMany(Review);
+Review.belongsTo(UserWorker);
+//Un worker tiene muchas proposal, una propuesta pertenece a un worker
+UserWorker.hasMany(Proposal);
+Proposal.belongsTo(UserWorker);
+//Una offer tiene muchas proposal, una offer pertenece a una proposal
+Offer.hasMany(Proposal);
+Proposal.belongsTo(Offer);
+//Una offer tiene muchas reviews, una review pertenece a una offer
+Offer.hasMany(Review);
+Review.belongsTo(Offer);
+//Un worker tiene muchos protfolios, un portfolio pertenece a un worker
+UserWorker.hasMany(Portfolio);
+Portfolio.belongsTo(UserWorker);
 module.exports = Object.assign(Object.assign({}, sequelize.models), { conn: sequelize });
