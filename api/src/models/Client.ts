@@ -1,26 +1,26 @@
-const { DataTypes } = require('sequelize');
+import { DataTypes } from 'sequelize';
 module.exports = (sequelize:any) => {
     sequelize.define('client', {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        mail: {
+        user_mail: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        bornDate: {
+        born_date: {
             type: DataTypes.DATE,
             allowNull: true,
         },
-        token: {
+        password: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        photo: {
-            type:DataTypes.BLOB,
-            allowNull: true,
-        },
+        // photo: {
+        //     type:DataTypes.BLOB,
+        //     allowNull: true,
+        // },
         rating:{
             type:DataTypes.INTEGER,
             allowNull: true,

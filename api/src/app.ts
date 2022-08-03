@@ -1,10 +1,9 @@
-
 const express =  require('express')
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const routes = require('./routes/index');
 const cors = require('cors')
-
+const morgan = require('morgan');
 const app = express()
 
 
@@ -29,6 +28,7 @@ app.use((err:any, _req:any, res:any, _next:any) => { // eslint-disable-line no-u
     console.error(err);
     res.status(status).send(message);
   });
+
 
 
   module.exports = app;

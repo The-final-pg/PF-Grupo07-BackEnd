@@ -1,37 +1,38 @@
 "use strict";
-const { DataTypes } = require('sequelize');
+Object.defineProperty(exports, "__esModule", { value: true });
+const sequelize_1 = require("sequelize");
 module.exports = (sequelize) => {
     sequelize.define('client', {
         name: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: false,
         },
-        mail: {
-            type: DataTypes.STRING,
+        user_mail: {
+            type: sequelize_1.DataTypes.STRING,
             allowNull: false,
         },
-        bornDate: {
-            type: DataTypes.DATE,
+        born_date: {
+            type: sequelize_1.DataTypes.DATE,
             allowNull: true,
         },
-        token: {
-            type: DataTypes.STRING,
+        password: {
+            type: sequelize_1.DataTypes.STRING,
             allowNull: false,
         },
-        photo: {
-            type: DataTypes.BLOB,
-            allowNull: true,
-        },
+        // photo: {
+        //     type:DataTypes.BLOB,
+        //     allowNull: true,
+        // },
         rating: {
-            type: DataTypes.INTEGER,
+            type: sequelize_1.DataTypes.INTEGER,
             allowNull: true,
         },
         notification: {
-            type: DataTypes.ARRAY(DataTypes.JSONB)
+            type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSONB)
         },
         id: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
+            type: sequelize_1.DataTypes.UUID,
+            defaultValue: sequelize_1.DataTypes.UUIDV4,
             allowNull: false,
             primaryKey: true
         }
