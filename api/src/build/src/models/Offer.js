@@ -13,11 +13,11 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         remuneration: {
-            type: sequelize_1.DataTypes.ARRAY,
+            type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.INTEGER),
             allowNull: false
         },
         description: {
-            type: sequelize_1.DataTypes.STRING,
+            type: sequelize_1.DataTypes.TEXT,
             allowNull: false
         },
         post_duration_time: {
@@ -31,14 +31,15 @@ module.exports = (sequelize) => {
             type: sequelize_1.DataTypes.BLOB
         },
         tags: {
-            type: sequelize_1.DataTypes.ARRAY
+            type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING)
         },
         state: {
-            type: sequelize_1.DataTypes.ENUM('active', 'cancelled', 'contract started', 'contrato', 'finalized', 'paymentReleased'),
+            type: sequelize_1.DataTypes.ENUM('active', 'cancelled', 'contract started', 'finalized', 'released payment'),
+            defaultValue: 'active'
         }
     }, {
         timestamps: true,
-        createdAt: false,
-        updatedAt: 'post_date'
+        createdAt: 'post_date',
+        updatedAt: false
     });
 };

@@ -16,8 +16,9 @@ module.exports = (sequelize) => {
             allowNull: true,
         },
         state: {
-            type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.ENUM("rejected", "accepted", "initiated", "finalized", "released payment")),
+            type: sequelize_1.DataTypes.ENUM("posted", "rejected", "accepted", "initiated", "finalized", "released payment"),
             allowNull: false,
+            defaultValue: "posted"
         },
         idProp: {
             type: sequelize_1.DataTypes.UUID,
