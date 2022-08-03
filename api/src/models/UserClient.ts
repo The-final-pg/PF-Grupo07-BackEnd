@@ -26,7 +26,8 @@ module.exports = (sequelize:any) => {
             allowNull: true,
         },
         notification:{
-            type:DataTypes.ARRAY(DataTypes.JSONB)
+            type:DataTypes.ARRAY(DataTypes.JSONB),
+            allowNull:true,
         },
         id: {
             type: DataTypes.UUID,
