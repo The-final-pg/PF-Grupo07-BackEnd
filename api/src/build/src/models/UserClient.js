@@ -28,7 +28,8 @@ module.exports = (sequelize) => {
             allowNull: true,
         },
         notification: {
-            type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSONB)
+            type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSONB),
+            allowNull: true,
         },
         id: {
             type: sequelize_1.DataTypes.UUID,
