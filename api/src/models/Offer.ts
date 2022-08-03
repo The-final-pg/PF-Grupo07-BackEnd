@@ -12,11 +12,11 @@ module.exports = (sequelize: any) => {
             allowNull: false
         },
         remuneration: {
-            type: DataTypes.ARRAY,
+            type: DataTypes.ARRAY(DataTypes.INTEGER),
             allowNull: false
         },
         description: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false
         },
         post_duration_time: {
@@ -30,14 +30,15 @@ module.exports = (sequelize: any) => {
             type: DataTypes.BLOB
         },
         tags: {
-            type: DataTypes.ARRAY
+            type: DataTypes.ARRAY(DataTypes.STRING)
         },
         state: {
-            type: DataTypes.ENUM('active', 'cancelled', 'contract started', 'contrato', 'finalized', 'paymentReleased'),
+            type: DataTypes.ENUM('active', 'cancelled', 'contract started', 'finalized', 'released payment'),
+            defaultValue: 'active'
         }
     }, {
         timestamps: true,
-        createdAt: false,
-        updatedAt: 'post_date'
+        createdAt: 'post_date',
+        updatedAt: false
     });
-}
+};
