@@ -23,10 +23,10 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         tags: {
-            type: DataTypes.ARRAY,
+            type: DataTypes.ARRAY(DataTypes.STRING),
         },
         skills: {
-            type: DataTypes.ARRAY,
+            type: DataTypes.ARRAY(DataTypes.STRING),
         },
         rating: {
             type: DataTypes.INTEGER,
