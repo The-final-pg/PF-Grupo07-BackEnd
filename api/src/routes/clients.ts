@@ -36,4 +36,4 @@ router.get("/:idClient", async (req:any, res:any, next:any) =>{
         next(error)
     }
 })
-module.exports = router;
+export default router;
