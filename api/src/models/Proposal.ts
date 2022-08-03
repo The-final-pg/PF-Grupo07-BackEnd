@@ -18,7 +18,7 @@ module.exports = (sequelize:any) => {
             allowNull: false,
             defaultValue:"posted"
         },
-        idProp: {
+        idProposal: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             allowNull: false,

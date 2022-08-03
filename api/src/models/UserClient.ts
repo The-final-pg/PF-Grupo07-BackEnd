@@ -17,10 +17,10 @@ module.exports = (sequelize:any) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        // photo: {
-        //     type:DataTypes.BLOB,
-        //     allowNull: true,
-        // },
+        photo: {
+            type:DataTypes.STRING,
+            allowNull: true,
+        },
         rating:{
             type:DataTypes.INTEGER,
             allowNull: true,
@@ -29,7 +29,7 @@ module.exports = (sequelize:any) => {
             type:DataTypes.ARRAY(DataTypes.JSONB),
             allowNull:true,
         },
-        id: {
+        idClient: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             allowNull: false,
