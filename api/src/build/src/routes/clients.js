@@ -50,4 +50,4 @@ router.get("/:idClient", (req, res, next) => __awaiter(void 0, void 0, void 0, f
         next(error);
     }
 }));
-module.exports = router;
+exports.default = router;
