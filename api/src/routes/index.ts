@@ -1,6 +1,6 @@
 import express from 'express';
 
-import clientRouter from "./clients"
+const clientRouter = require ("./clients")
 //import workerRouter from "./workers";
 
 const router = express.Router();

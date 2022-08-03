@@ -1,6 +1,7 @@
 import express from "express";
 const router = express.Router();
 import types from "../types"
+const bcrypt = require ('bcrypt')
 import {getAllClients, postNewUser, getClientById} from "../controllers/clientController"
 
 router.get("/", async (_req:any,res:any,next:any) =>{
@@ -15,8 +16,11 @@ router.get("/", async (_req:any,res:any,next:any) =>{
 router.post("/", async (req:any,res:any,next:any) => {
     const newClient = req.body;
     try {
+        const hashedPassword = await bcrypt.hash(newClient.password, 8) 
+        console.log("pw", hashedPassword)
+        console.log("client", newClient)
         let response:String;
-        response = await postNewUser(newClient);
+        response = await postNewUser(newClient, hashedPassword);
         res.send(response)
     } catch (error) {
         next(error)
@@ -36,4 +40,5 @@ router.get("/:idClient", async (req:any, res:any, next:any) =>{
         next(error)
     }
 })
-export default router;
+
+module.exports = router;

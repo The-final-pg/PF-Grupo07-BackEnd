@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
+const bcrypt = require('bcrypt');
 const clientController_1 = require("../controllers/clientController");
 router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -27,8 +28,11 @@ router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function*
 router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const newClient = req.body;
     try {
+        const hashedPassword = yield bcrypt.hash(newClient.password, 8);
+        console.log("pw", hashedPassword);
+        console.log("client", newClient);
         let response;
-        response = yield (0, clientController_1.postNewUser)(newClient);
+        response = yield (0, clientController_1.postNewUser)(newClient, hashedPassword);
         res.send(response);
     }
     catch (error) {
@@ -50,4 +54,4 @@ router.get("/:idClient", (req, res, next) => __awaiter(void 0, void 0, void 0, f
         next(error);
     }
 }));
-exports.default = router;
+module.exports = router;
