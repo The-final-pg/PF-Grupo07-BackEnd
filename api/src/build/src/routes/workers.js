@@ -24,6 +24,16 @@ router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function*
         next(error);
     }
 }));
+router.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const q = req.query.q;
+    try {
+        const worker = yield (0, workerController_1.getWorkerByName)(q);
+        res.send(worker);
+    }
+    catch (error) {
+        next(error instanceof Error);
+    }
+}));
 router.get("/:idWorker", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { idWorker } = req.params;
     try {

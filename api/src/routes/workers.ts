@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 const router = express.Router();
 import { WorkerType } from "../types";
-import { getAllWorkers, getWorkerById } from "../controllers/workerController";
+import { getAllWorkers, getWorkerById, getWorkerByName } from "../controllers/workerController";
 
 router.get(
   "/",
@@ -11,6 +11,19 @@ router.get(
       res.send(worker);
     } catch (error) {
       next(error);
+    }
+  }
+);
+
+router.get(
+  "/search",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const q:string = req.query.q as string;
+    try {
+      const worker: WorkerType[]= await getWorkerByName(q);
+      res.send(worker);
+    } catch (error) {
+      next(error instanceof Error);
     }
   }
 );

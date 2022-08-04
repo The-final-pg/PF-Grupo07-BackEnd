@@ -32,7 +32,7 @@ export interface ReviewType {
 
 export interface OfferType {
     idOffer: integer,
-    title: SString,
+    title: String,
     remuneration: Array[Integer],
     offer_description: String,
     post_duration_time: Date,
