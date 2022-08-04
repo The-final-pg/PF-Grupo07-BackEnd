@@ -16,8 +16,8 @@ const getAllClients = () => __awaiter(void 0, void 0, void 0, function* () {
     return allClients;
 });
 exports.getAllClients = getAllClients;
-const postNewUser = (client) => __awaiter(void 0, void 0, void 0, function* () {
-    yield UserClient.create(client);
+const postNewUser = (client, hashedPassword) => __awaiter(void 0, void 0, void 0, function* () {
+    yield UserClient.create(Object.assign(Object.assign({}, client), { password: hashedPassword }));
     return "cliente creado con exito";
 });
 exports.postNewUser = postNewUser;
