@@ -35,6 +35,16 @@ offer.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
         next(error);
     }
 }));
+offer.get('/search', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const q = req.query.q;
+    try {
+        const offers = yield (0, offerController_1.getOffersBySearch)(q);
+        res.json(offers);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
 offer.get("/:idClient", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { idOffer } = req.params;
     try {

@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import {OfferType} from "../types"
-import {getAllOffers, postOffer, getOfferById} from "../controllers/offerController"
+import {getAllOffers, postOffer, getOfferById, getOffersBySearch} from "../controllers/offerController"
 
 const offer = express.Router();
 
@@ -23,6 +23,16 @@ offer.post("/", async (req:Request,res:Response,next:NextFunction) => {
         next(error)
     }
 })
+
+offer.get('/search', async (req:Request,res:Response,next:NextFunction) =>{
+    const q: string = req.query.q as string;
+    try {
+        const offers: Array<OfferType> = await getOffersBySearch(q);
+        res.json(offers);
+    } catch (error) {
+        next(error);
+    }
+});
 
 offer.get("/:idClient", async (req:Request, res:Response, next:NextFunction) =>{
     const {idOffer} = req.params;
