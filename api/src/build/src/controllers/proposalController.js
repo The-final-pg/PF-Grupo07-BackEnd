@@ -13,8 +13,8 @@ exports.postNewProposal = void 0;
 const { Proposal, Offer } = require("../db");
 const postNewProposal = (proposal, idOffer) => __awaiter(void 0, void 0, void 0, function* () {
     const offer = yield Offer.findByPk(idOffer);
-    const newOffer = yield Proposal.create(proposal);
-    yield offer.addProposal(newOffer);
+    const newProposal = yield Proposal.create(proposal);
+    yield offer.addProposal(newProposal);
     /*     await newProposal.addOffer(offer); */
     return "Propuesta publicada exitosamente";
 });
