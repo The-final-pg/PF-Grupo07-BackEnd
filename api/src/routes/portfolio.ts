@@ -1,10 +1,10 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import types from "../types";
 import { postNewPortfolio } from "../controllers/portfolioController";
 
 const portfolio = express.Router();
 
-portfolio.post('/', async (req:any,res:any,next:any) => {
+portfolio.post('/', async (req:Request,res:Response,next:NextFunction) => {
     const idWorker: string = req.params.idWorker;
     const portfolio: types.portfolio = req.body;
     try {

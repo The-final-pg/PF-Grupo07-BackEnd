@@ -1,11 +1,11 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 const router = express.Router();
 import types from "../types";
 import { getWorkerById} from "../controllers/workerController";
 
 
-router.get("/:idWorker", async (req:any, res:any, next:any) =>{
-  const idWorker = req.params.idWorker;
+router.get("/:idWorker", async (req:Request, res:Response, next:NextFunction) =>{
+  const {idWorker} = req.params;
     try {
       if(idWorker){
         const workerById: types.worker = await getWorkerById(idWorker)

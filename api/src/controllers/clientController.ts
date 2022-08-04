@@ -1,13 +1,13 @@
-import * as types from "../types"
+import { ClientType } from "../types"
 const {UserClient} = require("../db")
 
-export const getAllClients = async (): Promise<types.client[]> => {
+export const getAllClients = async (): Promise<ClientType[]> => {
     let allClients = await UserClient.findAll();
     return allClients
 }
 
 
-export const getClientById = async (id:String): Promise<types.client> =>{
+export const getClientById = async (id:String): Promise<ClientType> =>{
     let client = await UserClient.findByPk(id);
     return client;
 }
