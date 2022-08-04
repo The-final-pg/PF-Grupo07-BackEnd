@@ -1,7 +1,7 @@
 import { IntegerDataType } from "sequelize/types"
 
 
-export interface client {
+export interface ClientType {
     name:String,
     user_mail:String,
     born_date:String,
@@ -11,7 +11,7 @@ export interface client {
     idClient:String
 }
 
-export interface worker {
+export interface WorkerType {
     id:String,
     name:String,
     user_mail:String,
@@ -24,13 +24,13 @@ export interface worker {
     photo:String,
 }
 
-export interface review {
+export interface ReviewType {
     idReview:String,
     valoration:Integer, 
     review_description:String, 
 }
 
-export interface offer {
+export interface OfferType {
     idOffer: integer,
     title: SString,
     remuneration: Array[Integer],
@@ -42,14 +42,14 @@ export interface offer {
     state: String
 }
 
-export interface portfolio {
+export interface PortfolioType {
     idPortfolio: String,
     title: String,
     photo: String,
     portfolio_description: String
 }
 
-export interface proposal {
+export interface ProposalType {
     idProposal: String,
     remuneration: Integer,
     proposal_description: String,

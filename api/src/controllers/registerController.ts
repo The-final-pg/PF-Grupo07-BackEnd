@@ -1,7 +1,7 @@
-import * as types from "../types";
+import { ClientType, WorkerType} from "../types";
 const {UserWorker, UserClient} = require("../db");
 
-export const createClient = async (client: types.client, hashedPassword: string): Promise<string> => {
+export const createClient = async (client: ClientType, hashedPassword: string): Promise<string> => {
     await UserClient.create({
         ...client,
         password: hashedPassword
@@ -9,7 +9,7 @@ export const createClient = async (client: types.client, hashedPassword: string)
     return "Cliente creado con exito"
 }
 
-export const createWorker = async (worker: types.worker, hashedPassword: string): Promise<string> => {
+export const createWorker = async (worker: WorkerType, hashedPassword: string): Promise<string> => {
     await UserWorker.create({
       ...worker,
       password: hashedPassword

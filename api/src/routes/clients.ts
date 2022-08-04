@@ -1,9 +1,9 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 const router = express.Router();
 import types from "../types"
 import {getAllClients, getClientById} from "../controllers/clientController"
 
-router.get("/", async (_req:any,res:any,next:any) =>{
+router.get("/", async (_req:Request,res:Response,next:NextFunction) =>{
     try {
         const clients:Array<types.client> = await getAllClients();
         res.json(clients);
@@ -12,7 +12,7 @@ router.get("/", async (_req:any,res:any,next:any) =>{
     }
 })
 
-router.get("/:idClient", async (req:any, res:any, next:any) =>{
+router.get("/:idClient", async (req:Request, res:Response, next:NextFunction) =>{
     const {idClient} = req.params;
     try {
         if(idClient){

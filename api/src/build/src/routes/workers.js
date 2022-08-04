@@ -16,7 +16,7 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const workerController_1 = require("../controllers/workerController");
 router.get("/:idWorker", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const idWorker = req.params.idWorker;
+    const { idWorker } = req.params;
     try {
         if (idWorker) {
             const workerById = yield (0, workerController_1.getWorkerById)(idWorker);

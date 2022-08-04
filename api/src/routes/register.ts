@@ -1,10 +1,10 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 const register = express.Router();
 const bcrypt = require("bcrypt")
 import { createWorker, createClient } from "../controllers/registerController";
 
 
-register.post("/client", async (req:any,res:any,next:any) => {
+register.post("/client", async (req:Request,res:Response,next:NextFunction) => {
     const newClient = req.body;
     try {
         const hashedPassword = await bcrypt.hash(newClient.password, 8) 
@@ -18,7 +18,7 @@ register.post("/client", async (req:any,res:any,next:any) => {
     }
 })
 
-register.post("/worker", async (req:any, res:any, next:any) =>{
+register.post("/worker", async (req:Request, res:Response, next:NextFunction) =>{
 
   const worker = req.body;
     try {
