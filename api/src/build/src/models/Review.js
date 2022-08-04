@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         review_description: {
-            type: sequelize_1.DataTypes.STRING,
+            type: sequelize_1.DataTypes.TEXT,
             allowNull: false,
         },
         idReview: {
@@ -16,6 +16,10 @@ module.exports = (sequelize) => {
             defaultValue: sequelize_1.DataTypes.UUIDV4,
             allowNull: false,
             primaryKey: true
+        },
+        isActive: {
+            type: sequelize_1.DataTypes.BOOLEAN,
+            defaultValue: true
         }
     });
 };
