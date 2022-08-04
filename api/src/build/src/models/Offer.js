@@ -36,6 +36,10 @@ module.exports = (sequelize) => {
         state: {
             type: sequelize_1.DataTypes.ENUM('active', 'cancelled', 'contract started', 'finalized', 'released payment'),
             defaultValue: 'active'
+        },
+        isActive: {
+            type: sequelize_1.DataTypes.BOOLEAN,
+            defaultValue: true
         }
     }, {
         timestamps: true,

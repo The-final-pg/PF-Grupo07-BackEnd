@@ -6,7 +6,7 @@ module.exports = (sequelize:any) => {
             allowNull: false,
         },
         proposal_description: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
         },
         worked_time: {
@@ -22,6 +22,10 @@ module.exports = (sequelize:any) => {
             defaultValue: DataTypes.UUIDV4,
             allowNull: false,
             primaryKey: true
+        },
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
         }
 
     })
