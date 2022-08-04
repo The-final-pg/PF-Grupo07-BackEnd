@@ -1,11 +1,17 @@
 import express from 'express';
 
-import clientRouter from "./clients"
-//import workerRouter from "./workers";
+import workerRouter from "./workers";
+import clientRouter from "./clients";
+import offerRouter from './offer';
+import proposalRouter from './proposal'
+
 
 const router = express.Router();
 
 router.use("/clients", clientRouter)
-//router.use("/workers", workerRouter)
+router.use("/workers", workerRouter)
+router.use("/offer", offerRouter)
+router.use("/proposal", proposalRouter)
+
 
 module.exports = router;

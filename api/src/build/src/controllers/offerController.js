@@ -9,20 +9,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getClientById = exports.postNewUser = exports.getAllClients = void 0;
-const { UserClient } = require("../db");
-const getAllClients = () => __awaiter(void 0, void 0, void 0, function* () {
-    let allClients = yield UserClient.findAll();
-    return allClients;
+exports.getOfferById = exports.postOffer = exports.getAllOffers = void 0;
+const { Offer, Proposal } = require("../db");
+const getAllOffers = () => __awaiter(void 0, void 0, void 0, function* () {
+    let allOffers = yield Offer.findAll({ include: Proposal });
+    return allOffers;
 });
-exports.getAllClients = getAllClients;
-const postNewUser = (client, hashedPassword) => __awaiter(void 0, void 0, void 0, function* () {
-    yield UserClient.create(Object.assign(Object.assign({}, client), { password: hashedPassword }));
-    return "cliente creado con exito";
+exports.getAllOffers = getAllOffers;
+const postOffer = (offer) => __awaiter(void 0, void 0, void 0, function* () {
+    yield Offer.create(offer);
+    return "Propuesta creado con exito";
 });
-exports.postNewUser = postNewUser;
-const getClientById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    let client = yield UserClient.findByPk(id);
-    return client;
+exports.postOffer = postOffer;
+const getOfferById = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    let offer = yield Offer.findByPk(id);
+    return offer;
 });
-exports.getClientById = getClientById;
+exports.getOfferById = getOfferById;

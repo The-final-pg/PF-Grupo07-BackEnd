@@ -15,7 +15,6 @@ module.exports = (sequelize:any) => {
         },
         state: {
             type: DataTypes.ENUM("posted","rejected", "accepted", "initiated", "finalized", "released payment"),
-            allowNull: false,
             defaultValue:"posted"
         },
         idProposal: {

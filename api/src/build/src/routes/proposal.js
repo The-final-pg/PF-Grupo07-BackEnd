@@ -8,29 +8,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const router = express_1.default.Router();
-const workerController_1 = require("../controllers/workerController");
-router.get("/:idWorker", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const idWorker = req.params.idWorker;
+const proposalController_1 = require("../controllers/proposalController");
+const proposal = express_1.default.Router();
+proposal.post('/', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const _a = req.body, { idOffer } = _a, proposal = __rest(_a, ["idOffer"]);
     try {
-        if (idWorker) {
-            const workerById = yield (0, workerController_1.getWorkerById)(idWorker);
-            return res.json(workerById);
-        }
-        else {
-            throw new Error("worker id not found");
-        }
+        let response;
+        response = yield (0, proposalController_1.postNewProposal)(proposal, idOffer);
+        res.json(response);
     }
     catch (error) {
         next(error);
     }
 }));
-/* router.post("/", async (req:any, res:any, next:any) =>{
-
-}); */
-exports.default = router;
+exports.default = proposal;
