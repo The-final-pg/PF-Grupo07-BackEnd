@@ -6,6 +6,7 @@ const routes = require('./routes/index');
 const cors = require('cors');
 const morgan = require('morgan');
 const app = express();
+app.use(morgan('dev'));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
