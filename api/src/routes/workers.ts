@@ -1,7 +1,8 @@
 import express from "express";
 const router = express.Router();
 import types from "../types";
-import { getWorkerById, postNewWorker } from "../controllers/workerController";
+import { getWorkerById} from "../controllers/workerController";
+
 
 router.get("/:idWorker", async (req:any, res:any, next:any) =>{
   const idWorker = req.params.idWorker;
@@ -17,15 +18,5 @@ router.get("/:idWorker", async (req:any, res:any, next:any) =>{
     }
 });
 
-router.post("/", async (req:any, res:any, next:any) =>{
-  const newWorker = req.body;
-  try {
-    let response:String;
-        response = await postNewWorker(newWorker);
-        res.send(response)
-  } catch (error) {
-    next(error);
-  }
-});
 
 export default router;
