@@ -1,6 +1,7 @@
 import express from "express";
 const router = express.Router();
 import types from "../types";
+
 const bcrypt = require("bcrypt")
 import { getWorkerById, createWorker } from "../controllers/workerController";
 
@@ -20,6 +21,7 @@ router.get("/:idWorker", async (req:any, res:any, next:any) =>{
 });
 
 router.post("/", async (req:any, res:any, next:any) =>{
+
   const worker = req.body;
     try {
       const hashedPassword = await bcrypt.hash(worker.password, 8);
@@ -27,8 +29,9 @@ router.post("/", async (req:any, res:any, next:any) =>{
       response = await createWorker(worker, hashedPassword)
       res.send(response)
     } catch (error) {
-      next(error, {msg: "An error has occurred"})
+      next(error)
     }
 }); 
+
 
 export default router;

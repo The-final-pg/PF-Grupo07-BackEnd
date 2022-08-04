@@ -20,3 +20,4 @@ export const createWorker = async (worker: types.worker, hashedPassword: string)
   })
   return "Worker created succesfully"
 }
+
