@@ -30,7 +30,15 @@ router.get("/:idWorker", (req, res, next) => __awaiter(void 0, void 0, void 0, f
         next(error);
     }
 }));
-/* router.post("/", async (req:any, res:any, next:any) =>{
-
-}); */
+router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const newWorker = req.body;
+    try {
+        let response;
+        response = yield (0, workerController_1.postNewWorker)(newWorker);
+        res.send(response);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
 exports.default = router;
