@@ -10,9 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getOfferById = exports.postOffer = exports.getAllOffers = void 0;
-const { Offer, Proposal } = require("../db");
+const { Offer, Proposal, UserClient } = require("../db");
 const getAllOffers = () => __awaiter(void 0, void 0, void 0, function* () {
-    let allOffers = yield Offer.findAll({ include: Proposal });
+    let allOffers = yield Offer.findAll({ include: UserClient });
     return allOffers;
 });
 exports.getAllOffers = getAllOffers;
@@ -22,7 +22,7 @@ const postOffer = (offer) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.postOffer = postOffer;
 const getOfferById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    let offer = yield Offer.findByPk(id);
+    let offer = yield Offer.findByPk(id, { include: [UserClient, Proposal] });
     return offer;
 });
 exports.getOfferById = getOfferById;

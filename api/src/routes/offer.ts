@@ -14,7 +14,7 @@ offer.get('/', async (_req:Request,res:Response,next:NextFunction) =>{
 });
 
 offer.post("/", async (req:Request,res:Response,next:NextFunction) => {
-    const data = req.body;
+    const data: OfferType = req.body;
     try {
         let newOffer:String;
         newOffer = await postOffer(data);

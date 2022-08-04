@@ -1,8 +1,8 @@
 import {OfferType} from "../types";
-const {Offer, Proposal} = require("../db");
+const {Offer, Proposal, UserClient} = require("../db");
 
 export const getAllOffers = async (): Promise<OfferType[]> => {
-    let allOffers = await Offer.findAll({include: Proposal});
+    let allOffers = await Offer.findAll({include: UserClient});
     return allOffers;
 };
 
@@ -12,6 +12,6 @@ export const postOffer = async (offer: OfferType): Promise<string> => {
 };
 
 export const getOfferById = async (id:String): Promise<OfferType> =>{
-    let offer = await Offer.findByPk(id);
+    let offer = await Offer.findByPk(id, {include: [UserClient, Proposal]});
     return offer;
 };
