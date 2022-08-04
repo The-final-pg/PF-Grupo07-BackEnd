@@ -16,13 +16,16 @@ const express_1 = __importDefault(require("express"));
 const register = express_1.default.Router();
 const bcrypt = require("bcrypt");
 const registerController_1 = require("../controllers/registerController");
+//Segun la ruta, ejecuta un post distinto: en '/register/client' es la siguiente:
 register.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const newClient = req.body;
     try {
+        // de toda la info que viene por body, tomamos la password y la hasheamos con el método hash de bcrypt
         const hashedPassword = yield bcrypt.hash(newClient.password, 8);
-        console.log("pw", hashedPassword);
-        console.log("client", newClient);
+        // el 8 es para el tiempo de las iteraciones, mientras más tiempo más segura, pero con 8 es suficiente.
         let response;
+        // guardamos en response todo lo que viene de body y la password hasheada, 
+        //que la va a recibir la funcion createClient en el controller.
         response = yield (0, registerController_1.createClient)(newClient, hashedPassword);
         res.send(response);
     }
@@ -30,6 +33,7 @@ register.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, f
         next(error);
     }
 }));
+//y en '/register/worker' la siguiente.
 register.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const worker = req.body;
     try {
