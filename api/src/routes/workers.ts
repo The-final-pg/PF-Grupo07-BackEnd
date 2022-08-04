@@ -3,6 +3,10 @@ const router = express.Router();
 import {WorkerType} from "../types";
 import { getWorkerById} from "../controllers/workerController";
 
+/* router.get("/worker", async (req:Request, res:Response, next:NextFunction) => {
+
+}) */
+
 
 router.get("/:idWorker", async (req:Request, res:Response, next:NextFunction) =>{
   const {idWorker} = req.params;

@@ -15,6 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const workerController_1 = require("../controllers/workerController");
+/* router.get("/worker", async (req:Request, res:Response, next:NextFunction) => {
+
+}) */
 router.get("/:idWorker", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { idWorker } = req.params;
     try {
