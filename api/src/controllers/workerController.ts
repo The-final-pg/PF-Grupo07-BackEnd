@@ -1,5 +1,4 @@
 import * as types from "../types";
-
 const {UserWorker/* , Review, Proposal, Portfolio */} = require("../db");
 
 export const getAllWorkers = async (): Promise<types.worker[]> => {
@@ -8,14 +7,16 @@ export const getAllWorkers = async (): Promise<types.worker[]> => {
 };
 
 export const getWorkerById = async (id: string): Promise<types.worker> => {
-  const workerById = await UserWorker.findByPk(parseInt(id)/*,  {
+  const workerById = await UserWorker.findByPk(parseInt(id) /*,  {
     include: [ Review, Proposal, Portfolio ]
-  } */);
+  } */ );
   return workerById;
-};
+}; 
 
-/* export const postNewWorker = async (worker: types.worker): Promise<string> => {
-  await UserWorker.create(worker)
-  return "Trabajador creado con exito"
+export const createWorker = async (worker: types.worker, hashedPassword: string): Promise<string> => {
+  await UserWorker.create({
+    ...worker,
+    password: hashedPassword
+  })
+  return "Worker created succesfully"
 }
- */
