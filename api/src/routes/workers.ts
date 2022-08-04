@@ -1,7 +1,11 @@
-import express, { NextFunction, Request, Response } from "express";
+import express, { NextFunction, Request, Response, Router } from "express";
 const router = express.Router();
 import {WorkerType} from "../types";
 import { getWorkerById} from "../controllers/workerController";
+
+router.get("/worker", async (req, res, next) => {
+
+})
 
 
 router.get("/:idWorker", async (req:Request, res:Response, next:NextFunction) =>{
