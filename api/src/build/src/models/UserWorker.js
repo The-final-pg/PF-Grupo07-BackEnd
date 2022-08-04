@@ -55,6 +55,10 @@ module.exports = (sequelize) => {
             type: DataTypes.BOOLEAN,
             defaultValue: true,
         },
+        isWorker: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true,
+        },
     }, {
         timestamps: false,
     });

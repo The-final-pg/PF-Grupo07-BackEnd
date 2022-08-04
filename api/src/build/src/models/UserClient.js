@@ -45,5 +45,9 @@ module.exports = (sequelize) => {
             type: sequelize_1.DataTypes.BOOLEAN,
             defaultValue: true,
         },
+        isWorker: {
+            type: sequelize_1.DataTypes.BOOLEAN,
+            defaultValue: false,
+        },
     });
 };
