@@ -1,12 +1,12 @@
 import express, { NextFunction, Request, Response } from "express";
-import types from "../types"
+import {OfferType} from "../types"
 import {getAllOffers, postOffer, getOfferById} from "../controllers/offerController"
 
 const offer = express.Router();
 
 offer.get('/', async (_req:Request,res:Response,next:NextFunction) =>{
     try {
-        const offers:Array<types.offer> = await getAllOffers();
+        const offers:Array<OfferType> = await getAllOffers();
         res.json(offers);
     } catch (error) {
         next(error);
@@ -28,7 +28,7 @@ offer.get("/:idClient", async (req:Request, res:Response, next:NextFunction) =>{
     const {idOffer} = req.params;
     try {
         if(idOffer){
-                const offer:types.offer = await getOfferById(idOffer);
+                const offer:OfferType = await getOfferById(idOffer);
                 return res.json(offer);
         }else{
                 throw new Error("id was not found")
