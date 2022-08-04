@@ -10,7 +10,7 @@ module.exports = (sequelize:any) => {
             allowNull: false,
         },
         portfolio_description: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
         },
         idPortfolio: {
@@ -18,6 +18,10 @@ module.exports = (sequelize:any) => {
             defaultValue: DataTypes.UUIDV4,
             allowNull: false,
             primaryKey: true
+        },
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
         }
 
     })

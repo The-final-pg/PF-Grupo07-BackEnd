@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 module.exports = (sequelize) => {
-    sequelize.define('userClient', {
+    sequelize.define("userClient", {
         name: {
             type: sequelize_1.DataTypes.STRING,
             allowNull: false,
@@ -35,7 +35,15 @@ module.exports = (sequelize) => {
             type: sequelize_1.DataTypes.UUID,
             defaultValue: sequelize_1.DataTypes.UUIDV4,
             allowNull: false,
-            primaryKey: true
-        }
+            primaryKey: true,
+        },
+        isAdmin: {
+            type: sequelize_1.DataTypes.BOOLEAN,
+            defaultValue: false,
+        },
+        isActive: {
+            type: sequelize_1.DataTypes.BOOLEAN,
+            defaultValue: true,
+        },
     });
 };

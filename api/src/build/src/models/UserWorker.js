@@ -1,7 +1,7 @@
 "use strict";
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
-    sequelize.define('userWorker', {
+    sequelize.define("userWorker", {
         idWorker: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
@@ -33,8 +33,8 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             validate: {
                 max: 5,
-                min: 1
-            }
+                min: 1,
+            },
         },
         premium: {
             type: DataTypes.BOOLEAN,
@@ -42,8 +42,20 @@ module.exports = (sequelize) => {
         },
         photo: {
             type: DataTypes.STRING,
-        }
+            allowNull: true,
+        },
+        notification: {
+            type: DataTypes.ARRAY(DataTypes.JSONB),
+        },
+        isAdmin: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        },
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true,
+        },
     }, {
-        timestamps: false
+        timestamps: false,
     });
 };
