@@ -13,11 +13,5 @@ export const getWorkerById = async (id: string): Promise<types.worker> => {
   return workerById;
 }; 
 
-export const createWorker = async (worker: types.worker, hashedPassword: string): Promise<string> => {
-  await UserWorker.create({
-    ...worker,
-    password: hashedPassword
-  })
-  return "Worker created succesfully"
-}
+
 
