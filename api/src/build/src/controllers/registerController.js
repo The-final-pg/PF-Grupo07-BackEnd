@@ -9,15 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getClientById = exports.getAllClients = void 0;
-const { UserClient } = require("../db");
-const getAllClients = () => __awaiter(void 0, void 0, void 0, function* () {
-    let allClients = yield UserClient.findAll();
-    return allClients;
+exports.createWorker = exports.createClient = void 0;
+const { UserWorker, UserClient } = require("../db");
+const createClient = (client, hashedPassword) => __awaiter(void 0, void 0, void 0, function* () {
+    yield UserClient.create(Object.assign(Object.assign({}, client), { password: hashedPassword }));
+    return "Cliente creado con exito";
 });
-exports.getAllClients = getAllClients;
-const getClientById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    let client = yield UserClient.findByPk(id);
-    return client;
+exports.createClient = createClient;
+const createWorker = (worker, hashedPassword) => __awaiter(void 0, void 0, void 0, function* () {
+    yield UserWorker.create(Object.assign(Object.assign({}, worker), { password: hashedPassword }));
+    return "Trabajador creado con exito";
 });
-exports.getClientById = getClientById;
+exports.createWorker = createWorker;

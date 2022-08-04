@@ -1,10 +1,10 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import types from "../types"
 import {getAllOffers, postOffer, getOfferById} from "../controllers/offerController"
 
 const offer = express.Router();
 
-offer.get('/', async (_req:any,res:any,next:any) =>{
+offer.get('/', async (_req:Request,res:Response,next:NextFunction) =>{
     try {
         const offers:Array<types.offer> = await getAllOffers();
         res.json(offers);
@@ -13,7 +13,7 @@ offer.get('/', async (_req:any,res:any,next:any) =>{
     }
 });
 
-offer.post("/", async (req:any,res:any,next:any) => {
+offer.post("/", async (req:Request,res:Response,next:NextFunction) => {
     const data = req.body;
     try {
         let newOffer:String;
@@ -24,7 +24,7 @@ offer.post("/", async (req:any,res:any,next:any) => {
     }
 })
 
-offer.get("/:idClient", async (req:any, res:any, next:any) =>{
+offer.get("/:idClient", async (req:Request, res:Response, next:NextFunction) =>{
     const {idOffer} = req.params;
     try {
         if(idOffer){
