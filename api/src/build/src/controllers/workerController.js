@@ -9,7 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postNewWorker = exports.getWorkerById = exports.getAllWorkers = void 0;
+
+exports.createWorker = exports.getWorkerById = exports.getAllWorkers = void 0;
+
 const { UserWorker /* , Review, Proposal, Portfolio */ } = require("../db");
 const getAllWorkers = () => __awaiter(void 0, void 0, void 0, function* () {
     const allWorkers = yield UserWorker.findAll();
@@ -23,8 +25,10 @@ const getWorkerById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     return workerById;
 });
 exports.getWorkerById = getWorkerById;
-const postNewWorker = (worker) => __awaiter(void 0, void 0, void 0, function* () {
-    yield UserWorker.create(worker);
-    return "Trabajador creado con exito";
+
+const createWorker = (worker, hashedPassword) => __awaiter(void 0, void 0, void 0, function* () {
+    yield UserWorker.create(Object.assign(Object.assign({}, worker), { password: hashedPassword }));
+    return "Worker created succesfully";
 });
-exports.postNewWorker = postNewWorker;
+exports.createWorker = createWorker;
+
