@@ -9,7 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getOfferById = exports.postOffer = exports.getAllOffers = void 0;
+exports.getOffersBySearch = exports.getOfferById = exports.postOffer = exports.getAllOffers = void 0;
+const sequelize_1 = require("sequelize");
 const { Offer, Proposal, UserClient } = require("../db");
 const getAllOffers = () => __awaiter(void 0, void 0, void 0, function* () {
     let allOffers = yield Offer.findAll({ include: UserClient });
@@ -26,3 +27,23 @@ const getOfferById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     return offer;
 });
 exports.getOfferById = getOfferById;
+const getOffersBySearch = (q) => __awaiter(void 0, void 0, void 0, function* () {
+    let offers = yield Offer.findAll({
+        where: {
+            [sequelize_1.Op.or]: [
+                {
+                    title: {
+                        [sequelize_1.Op.substring]: q
+                    }
+                },
+                {
+                    offer_description: {
+                        [sequelize_1.Op.substring]: q
+                    }
+                }
+            ]
+        }
+    });
+    return offers;
+});
+exports.getOffersBySearch = getOffersBySearch;
