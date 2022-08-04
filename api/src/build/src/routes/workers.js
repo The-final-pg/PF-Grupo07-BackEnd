@@ -32,7 +32,7 @@ router.get("/:idWorker", (req, res, next) => __awaiter(void 0, void 0, void 0, f
     }
 }));
 router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-
+    
     const worker = req.body;
     try {
         const hashedPassword = yield bcrypt.hash(worker.password, 8);
@@ -41,9 +41,7 @@ router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function*
         res.send(response);
     }
     catch (error) {
-        next(error, { msg: "An error has occurred" });
-
-
+        next(error);
     }
 }));
 exports.default = router;
