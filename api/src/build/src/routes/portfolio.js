@@ -13,32 +13,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const router = express_1.default.Router();
-const workerController_1 = require("../controllers/workerController");
-router.get("/:idWorker", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const portfolioController_1 = require("../controllers/portfolioController");
+const portfolio = express_1.default.Router();
+portfolio.post('/', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const idWorker = req.params.idWorker;
-    try {
-        if (idWorker) {
-            const workerById = yield (0, workerController_1.getWorkerById)(idWorker);
-            return res.json(workerById);
-        }
-        else {
-            throw new Error("worker id not found");
-        }
-    }
-    catch (error) {
-        next(error);
-    }
-}));
-router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const newWorker = req.body;
+    const portfolio = req.body;
     try {
         let response;
-        response = yield (0, workerController_1.postNewWorker)(newWorker);
+        response = yield (0, portfolioController_1.postNewPortfolio)(portfolio, idWorker);
         res.send(response);
     }
     catch (error) {
         next(error);
     }
+    ;
 }));
-exports.default = router;
+exports.default = portfolio;
