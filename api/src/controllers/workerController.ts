@@ -14,8 +14,8 @@ export const getWorkerById = async (id: string): Promise<types.worker> => {
   return workerById;
 };
 
-export const postNewWorker = async (worker: types.worker): Promise<string> => {
+/* export const postNewWorker = async (worker: types.worker): Promise<string> => {
   await UserWorker.create(worker)
   return "Trabajador creado con exito"
 }
-
+ */

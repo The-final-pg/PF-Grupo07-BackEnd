@@ -6,11 +6,11 @@ const routes = require('./routes/index');
 const cors = require('cors');
 const morgan = require('morgan');
 const app = express();
-app.use(morgan('dev'));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(cookieParser());
+app.use(morgan('dev'));
 app.use((_req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
     res.header('Access-Control-Allow-Credentials', 'true');

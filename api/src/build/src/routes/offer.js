@@ -13,24 +13,41 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const router = express_1.default.Router();
-const workerController_1 = require("../controllers/workerController");
-router.get("/:idWorker", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const idWorker = req.params.idWorker;
+const offerController_1 = require("../controllers/offerController");
+const offer = express_1.default.Router();
+offer.get('/', (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        if (idWorker) {
-            const workerById = yield (0, workerController_1.getWorkerById)(idWorker);
-            return res.json(workerById);
+        const offers = yield (0, offerController_1.getAllOffers)();
+        res.json(offers);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
+offer.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = req.body;
+    try {
+        let newOffer;
+        newOffer = yield (0, offerController_1.postOffer)(data);
+        res.send(newOffer);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
+offer.get("/:idClient", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { idOffer } = req.params;
+    try {
+        if (idOffer) {
+            const offer = yield (0, offerController_1.getOfferById)(idOffer);
+            return res.json(offer);
         }
         else {
-            throw new Error("worker id not found");
+            throw new Error("id was not found");
         }
     }
     catch (error) {
         next(error);
     }
 }));
-/* router.post("/", async (req:any, res:any, next:any) =>{
-
-}); */
-exports.default = router;
+exports.default = offer;
