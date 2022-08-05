@@ -19,7 +19,7 @@ export const getWorkerByName = async (name:string): Promise<WorkerType[]> => {
 };
 
 export const getWorkerById = async (id: string): Promise<WorkerType> => {
-  const workerById = await UserWorker.findByPk(parseInt(id) /*,  {
+  const workerById = await UserWorker.findByPk(id /*,  {
     include: [ Review, Proposal, Portfolio ]
   } */ );
   return workerById;
