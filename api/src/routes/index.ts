@@ -11,8 +11,8 @@ import profession from './profession';
 
 const router = express.Router();
 
-router.use("/clients", clientRouter);
-router.use("/workers", workerRouter);
+router.use("/client", clientRouter);
+router.use("/worker", workerRouter);
 router.use("/offer", offerRouter);
 router.use("/proposal", proposalRouter);
 router.use("/portfolio", portfolioRouter);
