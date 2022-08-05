@@ -8,16 +8,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getClientById = exports.getAllClients = void 0;
-const { UserClient, Offer } = require("../db");
-const getAllClients = () => __awaiter(void 0, void 0, void 0, function* () {
-    let allClients = yield UserClient.findAll();
-    return allClients;
-});
-exports.getAllClients = getAllClients;
-const getClientById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    let client = yield UserClient.findByPk(id, { include: Offer });
-    return client;
-});
-exports.getClientById = getClientById;
+const express_1 = __importDefault(require("express"));
+const professionController_1 = require("../controllers/professionController");
+const profession = (0, express_1.default)();
+profession.get('/', (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const profession = yield (0, professionController_1.getAllProfessions)();
+        res.json(profession);
+    }
+    catch (e) {
+        next(e);
+    }
+}));
+exports.default = profession;

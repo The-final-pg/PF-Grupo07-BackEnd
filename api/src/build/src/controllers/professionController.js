@@ -9,15 +9,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getClientById = exports.getAllClients = void 0;
-const { UserClient, Offer } = require("../db");
-const getAllClients = () => __awaiter(void 0, void 0, void 0, function* () {
-    let allClients = yield UserClient.findAll();
-    return allClients;
+exports.getAllProfessions = void 0;
+const { Offer, UserWorker } = require('../db');
+const getAllProfessions = () => __awaiter(void 0, void 0, void 0, function* () {
+    const offers = yield Offer.findAll({
+        attributes: ['profession']
+    });
+    const workers = yield UserWorker.findAll({
+        attributes: ['profession']
+    });
+    let profession = [];
+    offers.forEach(e => profession = [...profession, ...e.dataValues.profession]);
+    workers.forEach(e => profession = [...profession, ...e.dataValues.profession]);
+    profession = profession.filter((e, i) => profession.indexOf(e) === i).sort();
+    return profession;
 });
-exports.getAllClients = getAllClients;
-const getClientById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    let client = yield UserClient.findByPk(id, { include: Offer });
-    return client;
-});
-exports.getClientById = getClientById;
+exports.getAllProfessions = getAllProfessions;
