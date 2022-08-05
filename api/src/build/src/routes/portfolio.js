@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const portfolioController_1 = require("../controllers/portfolioController");
 const portfolio = express_1.default.Router();
-portfolio.post('/', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+portfolio.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const idWorker = req.params.idWorker;
     const portfolio = req.body;
     try {
@@ -26,6 +26,5 @@ portfolio.post('/', (req, res, next) => __awaiter(void 0, void 0, void 0, functi
     catch (error) {
         next(error);
     }
-    ;
 }));
 exports.default = portfolio;
