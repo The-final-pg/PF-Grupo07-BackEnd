@@ -45,7 +45,7 @@ offer.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         next(error);
     }
 }));
-offer.get("/:idClient", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+offer.get("/:idOffer", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { idOffer } = req.params;
     try {
         if (idOffer) {

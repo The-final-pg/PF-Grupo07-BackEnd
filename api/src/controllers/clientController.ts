@@ -1,5 +1,5 @@
 import { ClientType } from "../types";
-const { UserClient } = require("../db");
+const { UserClient, Offer } = require("../db");
 
 export const getAllClients = async (): Promise<ClientType[]> => {
   let allClients = await UserClient.findAll();
@@ -7,6 +7,6 @@ export const getAllClients = async (): Promise<ClientType[]> => {
 };
 
 export const getClientById = async (id: String): Promise<ClientType> => {
-  let client = await UserClient.findByPk(id);
+  let client = await UserClient.findByPk(id, { include: Offer});
   return client;
 };

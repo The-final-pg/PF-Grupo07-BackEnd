@@ -43,7 +43,7 @@ offer.get(
 );
 
 offer.get(
-  "/:idClient",
+  "/:idOffer",
   async (req: Request, res: Response, next: NextFunction) => {
     const { idOffer } = req.params;
     try {

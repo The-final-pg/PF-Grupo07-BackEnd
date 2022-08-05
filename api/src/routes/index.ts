@@ -7,6 +7,7 @@ import portfolioRouter from "./portfolio";
 import register from "./register";
 import login from "./login";
 import logout from "./logout";
+import profession from './profession';
 
 const router = express.Router();
 
@@ -18,5 +19,6 @@ router.use("/portfolio", portfolioRouter);
 router.use("/register", register);
 router.use("/login", login);
 router.use("/logout", logout);
+router.use('/profession', profession);
 
 module.exports = router;
