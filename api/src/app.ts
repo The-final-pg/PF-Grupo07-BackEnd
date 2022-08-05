@@ -32,4 +32,4 @@ app.use((err: any, _req: any, res: any, _next: any) => {
   res.status(status).send(message);
 });
 
-module.exports = app;
+export default app;

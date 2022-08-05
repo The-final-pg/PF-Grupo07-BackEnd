@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getWorkerById = exports.getWorkerByName = exports.getAllWorkers = void 0;
 const sequelize_1 = require("sequelize");
-const { UserWorker /* , Review, Proposal, Portfolio */ } = require("../db");
+const { UserWorker, Review, Proposal, Portfolio } = require("../db");
 const getAllWorkers = () => __awaiter(void 0, void 0, void 0, function* () {
     const allWorkers = yield UserWorker.findAll();
     return allWorkers;
@@ -29,9 +29,9 @@ const getWorkerByName = (name) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.getWorkerByName = getWorkerByName;
 const getWorkerById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const workerById = yield UserWorker.findByPk(id /*,  {
-    include: [ Review, Proposal, Portfolio ]
-  } */);
+    const workerById = yield UserWorker.findByPk(id, {
+        include: [Review, Proposal, Portfolio]
+    });
     return workerById;
 });
 exports.getWorkerById = getWorkerById;
