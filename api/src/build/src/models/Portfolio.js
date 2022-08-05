@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 module.exports = (sequelize) => {
-    sequelize.define('portfolio', {
+    sequelize.define("portfolio", {
         title: {
             type: sequelize_1.DataTypes.STRING,
             allowNull: true,
@@ -19,11 +19,11 @@ module.exports = (sequelize) => {
             type: sequelize_1.DataTypes.UUID,
             defaultValue: sequelize_1.DataTypes.UUIDV4,
             allowNull: false,
-            primaryKey: true
+            primaryKey: true,
         },
         isActive: {
             type: sequelize_1.DataTypes.BOOLEAN,
-            defaultValue: true
-        }
+            defaultValue: true,
+        },
     });
 };

@@ -43,7 +43,7 @@ module.exports = (sequelize: any) => {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     },
-    isWorker:{
+    isWorker: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },

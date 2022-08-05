@@ -1,26 +1,27 @@
 import express, { NextFunction, Request, Response } from "express";
 const router = express.Router();
 import { WorkerType } from "../types";
-import { getAllWorkers, getWorkerById, getWorkerByName } from "../controllers/workerController";
+import {
+  getAllWorkers,
+  getWorkerById,
+  getWorkerByName,
+} from "../controllers/workerController";
 
-router.get(
-  "/",
-  async (_req: Request, res: Response, next: NextFunction) => {
-    try {
-      const worker: WorkerType[] = await getAllWorkers();
-      res.send(worker);
-    } catch (error) {
-      next(error);
-    }
+router.get("/", async (_req: Request, res: Response, next: NextFunction) => {
+  try {
+    const worker: WorkerType[] = await getAllWorkers();
+    res.send(worker);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
 router.get(
   "/search",
   async (req: Request, res: Response, next: NextFunction) => {
-    const q:string = req.query.q as string;
+    const q: string = req.query.q as string;
     try {
-      const worker: WorkerType[]= await getWorkerByName(q);
+      const worker: WorkerType[] = await getWorkerByName(q);
       res.send(worker);
     } catch (error) {
       next(error instanceof Error);

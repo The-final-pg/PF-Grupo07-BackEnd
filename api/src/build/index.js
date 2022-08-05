@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const server = require('./src/app');
-const { conn } = require('./src/db');
+const server = require("./src/app");
+const { conn } = require("./src/db");
 const data_1 = require("./data");
 /* const setData =require('./data');
 const setOffersAndProposals =require('./data'); */

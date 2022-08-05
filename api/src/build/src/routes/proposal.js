@@ -26,7 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const proposalController_1 = require("../controllers/proposalController");
 const proposal = express_1.default.Router();
-proposal.post('/', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+proposal.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const _a = req.body, { idOffer } = _a, proposal = __rest(_a, ["idOffer"]);
     try {
         let response;

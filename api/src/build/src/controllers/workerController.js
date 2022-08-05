@@ -21,7 +21,7 @@ const getWorkerByName = (name) => __awaiter(void 0, void 0, void 0, function* ()
     const worker = yield UserWorker.findAll({
         where: {
             name: {
-                [sequelize_1.Op.iLike]: `%${name}%`
+                [sequelize_1.Op.iLike]: `%${name}%`,
             },
         },
     });
@@ -30,8 +30,8 @@ const getWorkerByName = (name) => __awaiter(void 0, void 0, void 0, function* ()
 exports.getWorkerByName = getWorkerByName;
 const getWorkerById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const workerById = yield UserWorker.findByPk(id /*,  {
-      include: [ Review, Proposal, Portfolio ]
-    } */);
+    include: [ Review, Proposal, Portfolio ]
+  } */);
     return workerById;
 });
 exports.getWorkerById = getWorkerById;

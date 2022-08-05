@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const offerController_1 = require("../controllers/offerController");
 const offer = express_1.default.Router();
-offer.get('/', (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+offer.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const offers = yield (0, offerController_1.getAllOffers)();
         res.json(offers);
@@ -35,7 +35,7 @@ offer.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
         next(error);
     }
 }));
-offer.get('/search', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+offer.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const q = req.query.q;
     try {
         const offers = yield (0, offerController_1.getOffersBySearch)(q);
