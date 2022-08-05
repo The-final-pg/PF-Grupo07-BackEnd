@@ -33,12 +33,12 @@ const getOffersBySearch = (q) => __awaiter(void 0, void 0, void 0, function* () 
             [sequelize_1.Op.or]: [
                 {
                     title: {
-                        [sequelize_1.Op.substring]: q,
+                        [sequelize_1.Op.iLike]: `%${q}%`,
                     },
                 },
                 {
                     offer_description: {
-                        [sequelize_1.Op.substring]: q,
+                        [sequelize_1.Op.iLike]: `%${q}%`,
                     },
                 },
             ],
