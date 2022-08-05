@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
@@ -26,4 +27,4 @@ app.use((err, _req, res, _next) => {
     console.error(err);
     res.status(status).send(message);
 });
-module.exports = app;
+exports.default = app;

@@ -1,6 +1,6 @@
 import { WorkerType } from "../types";
 import { Op } from "sequelize";
-const { UserWorker /* , Review, Proposal, Portfolio */ } = require("../db");
+const { UserWorker , Review, Proposal, Portfolio } = require("../db");
 
 export const getAllWorkers = async (): Promise<WorkerType[]> => {
   const allWorkers = await UserWorker.findAll();
@@ -20,9 +20,9 @@ export const getWorkerByName = async (name: string): Promise<WorkerType[]> => {
 
 export const getWorkerById = async (id: string): Promise<WorkerType> => {
   const workerById = await UserWorker.findByPk(
-    id /*,  {
+    id ,  {
     include: [ Review, Proposal, Portfolio ]
-  } */
+  }
   );
   return workerById;
 };

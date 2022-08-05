@@ -5,7 +5,7 @@ const profession = express();
 
 profession.get('/', async (_req: Request, res: Response, next: NextFunction) => {
     try {
-        const profession: string[] = await getAllProfessions();
+        const profession = await getAllProfessions();
         res.json(profession);
     } catch (e) {
         next(e);
