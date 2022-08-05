@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        tags: {
+        profession: {
             type: DataTypes.ARRAY(DataTypes.STRING),
         },
         skills: {

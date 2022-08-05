@@ -25,7 +25,7 @@ module.exports = (sequelize: any) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      tags: {
+      profession: {
         type: DataTypes.ARRAY(DataTypes.STRING),
       },
       skills: {
