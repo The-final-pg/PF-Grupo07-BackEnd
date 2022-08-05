@@ -1,14 +1,14 @@
 import express, { NextFunction, Request, Response } from "express";
-const log = express.Router();
-const passport = require("passport");
-/* const bcrypt = require("bcrypt"); */
-const jwt = require("jsonwebtoken");
+const login = express.Router();
+import jwt from "jsonwebtoken";
 const { SECRET_KEY } = process.env;
-
+import passport from '../utils/passport/passportConfig'
+login.use(passport.initialize())
+login.use(passport.session())
 // el urlencoded es para que lo que viene por body lo recibamos como string o array
-log.use(express.urlencoded({ extended: true }))
+login.use(express.urlencoded({ extended: true }))
 
-log.post("/login", async (req:Request,res:Response,next:NextFunction) => {
+login.post("/in", async (req:Request,res:Response,next:NextFunction) => {
     passport.authenticate(
         "local",
         { session: false },
@@ -16,6 +16,7 @@ log.post("/login", async (req:Request,res:Response,next:NextFunction) => {
             if(error) return next(error);
             else if(!user) return res.json("Inserte un token válido");
             else {
+                console.log("esto esta en log",user)
                 return res.send(
                     await jwt.sign(
                         {
@@ -33,9 +34,5 @@ log.post("/login", async (req:Request,res:Response,next:NextFunction) => {
     )(req, res, next)
 })
 
-log.get("/logout", (req:any,res:Response) => {
-    req.logOut();
-    req.session = null;
-    res.send("Sesión finalizada")
-})
 
+export default login

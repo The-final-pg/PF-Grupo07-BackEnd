@@ -5,7 +5,7 @@ export interface ClientType {
     name:String,
     user_mail:String,
     born_date:String,
-    password:String,
+    password:string,
     rating:Integer,
     notification:Array[String],
     idClient:String
@@ -16,7 +16,7 @@ export interface WorkerType {
     name:String,
     user_mail:String,
     born_date:Date,
-    password:String,
+    password:string,
     rating:Integer,
     tags:Array[String],
     skills:Array[String],
