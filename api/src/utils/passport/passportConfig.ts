@@ -41,3 +41,33 @@ passport.use(
         }
     )
 )
+
+
+// serializacion y deserializacion de worker
+passport.serializeUser((worker, done) => {
+    done(null, worker.id);
+});
+  
+passport.deserializeUser(async (id, done) => {
+    try{
+        const worker = await UserWorker.findOne({ where: { id } })
+        if (worker) done(null, worker);
+    }catch(e){
+        done(e, null);
+    }
+});
+
+
+// serializacion y deserializacion de client
+passport.serializeUser((client, done) => {
+    done(null, client.id);
+});
+  
+passport.deserializeUser(async (id, done) => {
+    try{
+        const client = await UserClient.findOne({ where: { id } })
+        if (client) done(null, client);
+    }catch(e){
+        done(e, null);
+    }
+});
