@@ -23,12 +23,12 @@ export const getOffersBySearch = async (q: string): Promise<OfferType[]> => {
       [Op.or]: [
         {
           title: {
-            [Op.substring]: q,
+            [Op.iLike]: `%${q}%`,
           },
         },
         {
           offer_description: {
-            [Op.substring]: q,
+            [Op.iLike]: `%${q}%`,
           },
         },
       ],
