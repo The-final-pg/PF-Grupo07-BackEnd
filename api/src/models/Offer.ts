@@ -20,7 +20,7 @@ module.exports = (sequelize: any) => {
             allowNull: false
         },
         post_duration_time: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.DATE,
             allowNull: false
         },
         work_duration_time: {
