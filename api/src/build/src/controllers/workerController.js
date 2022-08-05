@@ -29,7 +29,7 @@ const getWorkerByName = (name) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.getWorkerByName = getWorkerByName;
 const getWorkerById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const workerById = yield UserWorker.findByPk(parseInt(id) /*,  {
+    const workerById = yield UserWorker.findByPk(id /*,  {
       include: [ Review, Proposal, Portfolio ]
     } */);
     return workerById;
