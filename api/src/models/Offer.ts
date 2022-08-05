@@ -24,12 +24,12 @@ module.exports = (sequelize: any) => {
             allowNull: false
         },
         work_duration_time: {
-            type: DataTypes.DATE
+            type: DataTypes.INTEGER
         },
         photo: {
             type: DataTypes.STRING
         },
-        tags: {
+        profession: {
             type: DataTypes.ARRAY(DataTypes.STRING)
         },
         state: {

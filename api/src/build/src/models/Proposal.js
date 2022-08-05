@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         worked_time: {
-            type: sequelize_1.DataTypes.STRING,
+            type: sequelize_1.DataTypes.INTEGER,
             allowNull: true,
         },
         state: {
