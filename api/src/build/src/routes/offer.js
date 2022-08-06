@@ -48,13 +48,8 @@ offer.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
 offer.get("/:idOffer", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { idOffer } = req.params;
     try {
-        if (idOffer) {
-            const offer = yield (0, offerController_1.getOfferById)(idOffer);
-            return res.json(offer);
-        }
-        else {
-            throw new Error("id was not found");
-        }
+        const offer = yield (0, offerController_1.getOfferById)(idOffer);
+        return res.json(offer);
     }
     catch (error) {
         next(error);

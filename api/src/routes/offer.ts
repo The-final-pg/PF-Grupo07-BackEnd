@@ -48,12 +48,8 @@ offer.get(
   async (req: Request, res: Response, next: NextFunction) => {
     const { idOffer } = req.params;
     try {
-      if (idOffer) {
         const offer: OfferType = await getOfferById(idOffer);
         return res.json(offer);
-      } else {
-        throw new Error("id was not found");
-      }
     } catch (error) {
       next(error);
     }
