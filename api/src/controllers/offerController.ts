@@ -1,6 +1,6 @@
 import { OfferType } from "../types";
 import { Op } from "sequelize";
-const { Offer, Proposal, UserClient } = require("../db");
+const { Offer, Proposal, UserClient, UserWorker } = require("../db");
 
 export const getAllOffers = async (): Promise<OfferType[]> => {
   let allOffers = await Offer.findAll({ include: UserClient });
@@ -13,8 +13,13 @@ export const postOffer = async (offer: OfferType): Promise<string> => {
 };
 
 export const getOfferById = async (id: String): Promise<OfferType> => {
-  let offer = await Offer.findByPk(id, { include: [UserClient, Proposal] });
-  return offer;
+  let offer = await Offer.findByPk(id, {
+    include: [
+      { model: UserClient, include: Offer },
+      { model: Proposal, include: UserWorker },
+    ],
+  });
+  return offer.toJSON();
 };
 
 export const getOffersBySearch = async (q: string): Promise<OfferType[]> => {
@@ -23,16 +28,40 @@ export const getOffersBySearch = async (q: string): Promise<OfferType[]> => {
       [Op.or]: [
         {
           title: {
-            [Op.substring]: q,
+            [Op.iLike]: `%${q}%`,
           },
         },
         {
           offer_description: {
-            [Op.substring]: q,
+            [Op.iLike]: `%${q}%`,
           },
         },
       ],
     },
   });
   return offers;
+};
+
+export const putOfferState = async (
+  id: String,
+  state: String
+): Promise<string> => {
+  const offerState: OfferType = await Offer.findAll({
+    where: {
+      id: id,
+    },
+  });
+  if (offerState.state === "cancelled") {
+    return "Flaco la hubieras pensado antes";
+  } else {
+    await Offer.update(
+      { state: state },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
+    return "state updated";
+  }
 };

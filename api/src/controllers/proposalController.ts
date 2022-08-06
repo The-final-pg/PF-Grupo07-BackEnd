@@ -11,3 +11,27 @@ export const postNewProposal = async (
   /*     await newProposal.addOffer(offer); */
   return "Propuesta publicada exitosamente";
 };
+
+export const putProposalState = async (
+  id: String,
+  state: String
+): Promise<string> => {
+  const proposalState: ProposalType = await Proposal.findAll({
+    where: {
+      id: id,
+    },
+  });
+  if (proposalState.state === "rejected") {
+    return "Flaco la quedaste";
+  } else {
+    await Proposal.update(
+      { state: state },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
+    return "state updated";
+  }
+};

@@ -1,5 +1,6 @@
 import express, { Response } from "express";
 const logout = express.Router();
+
 import passport from "../utils/passport/passportConfig";
 logout.use(passport.initialize());
 logout.use(passport.session());
@@ -11,3 +12,4 @@ logout.get("/", (req: any, res: Response) => {
 });
 
 export default logout;
+

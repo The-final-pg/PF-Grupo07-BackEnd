@@ -1,7 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const routes = require("./routes/index");
+import routes  from "./routes/index";
 const cors = require("cors");
 const morgan = require("morgan");
 const app = express();
@@ -32,4 +32,4 @@ app.use((err: any, _req: any, res: any, _next: any) => {
   res.status(status).send(message);
 });
 
-module.exports = app;
+export default app;

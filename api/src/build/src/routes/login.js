@@ -16,12 +16,17 @@ const express_1 = __importDefault(require("express"));
 const login = express_1.default.Router();
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const { SECRET_KEY } = process.env;
+const express_session_1 = __importDefault(require("express-session"));
 const passportConfig_1 = __importDefault(require("../utils/passport/passportConfig"));
 login.use(passportConfig_1.default.initialize());
-login.use(passportConfig_1.default.session());
 // el urlencoded es para que lo que viene por body lo recibamos como string o array
 login.use(express_1.default.urlencoded({ extended: true }));
-login.post("/in", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+login.use((0, express_session_1.default)({
+    secret: SECRET_KEY,
+    resave: true,
+    saveUninitialized: true
+}));
+login.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     passportConfig_1.default.authenticate("local", { session: false }, (error, user) => __awaiter(void 0, void 0, void 0, function* () {
         if (error)
             return next(error);
@@ -33,8 +38,8 @@ login.post("/in", (req, res, next) => __awaiter(void 0, void 0, void 0, function
                 id: user.id,
                 user_mail: user.user_mail,
                 isAdmin: user.isAdmin,
-                isWorker: user.isWorker,
-            }, SECRET_KEY, { expiresIn: "24hr" }));
+                isWorker: user.isWorker
+            }, SECRET_KEY, { expiresIn: "2hr" }));
         }
     }))(req, res, next);
 }));

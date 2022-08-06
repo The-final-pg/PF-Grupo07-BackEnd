@@ -5,6 +5,7 @@ import {
   postOffer,
   getOfferById,
   getOffersBySearch,
+  putOfferState,
 } from "../controllers/offerController";
 
 const offer = express.Router();
@@ -43,20 +44,33 @@ offer.get(
 );
 
 offer.get(
-  "/:idClient",
+  "/:idOffer",
   async (req: Request, res: Response, next: NextFunction) => {
     const { idOffer } = req.params;
     try {
-      if (idOffer) {
-        const offer: OfferType = await getOfferById(idOffer);
-        return res.json(offer);
-      } else {
-        throw new Error("id was not found");
-      }
+      const offer: any = await getOfferById(idOffer);
+      let result = {
+        ...offer,
+        offersCount: offer.userClient.offers.length,
+        workerName: offer.proposals[0].userWorker.name,
+      };
+      return res.json(result);
     } catch (error) {
       next(error);
     }
   }
 );
+
+offer.put("/", async (req: Request, res: Response, next: NextFunction) => {
+  const { id, state } = req.body;
+  try {
+    if (id && state) {
+      const offerState: String = await putOfferState(id, state);
+      res.send(offerState);
+    }
+  } catch (error) {
+    next(error);
+  }
+});;
 
 export default offer;

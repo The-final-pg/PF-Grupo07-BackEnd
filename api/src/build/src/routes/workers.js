@@ -13,9 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const router = express_1.default.Router();
+const worker = express_1.default.Router();
 const workerController_1 = require("../controllers/workerController");
-router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+worker.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const worker = yield (0, workerController_1.getAllWorkers)();
         res.send(worker);
@@ -24,7 +24,7 @@ router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function*
         next(error);
     }
 }));
-router.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+worker.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const q = req.query.q;
     try {
         const worker = yield (0, workerController_1.getWorkerByName)(q);
@@ -34,19 +34,14 @@ router.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, func
         next(error instanceof Error);
     }
 }));
-router.get("/:idWorker", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+worker.get("/:idWorker", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { idWorker } = req.params;
     try {
-        if (idWorker) {
-            const workerById = yield (0, workerController_1.getWorkerById)(idWorker);
-            return res.json(workerById);
-        }
-        else {
-            throw new Error("worker id not found");
-        }
+        const workerById = yield (0, workerController_1.getWorkerById)(idWorker);
+        return res.json(workerById);
     }
     catch (error) {
         next(error);
     }
 }));
-exports.default = router;
+exports.default = worker;

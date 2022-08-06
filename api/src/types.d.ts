@@ -1,26 +1,27 @@
 import { IntegerDataType } from "sequelize/types";
 
 export interface ClientType {
-  name: String;
-  user_mail: String;
-  born_date: String;
-  password: string;
-  rating: Integer;
-  notification: Array[String];
-  idClient: String;
+    name:String,
+    user_mail:String,
+    born_date:String,
+    password:string,
+    rating:Integer,
+    notification:Array[String],
+    idClient:String
 }
 
 export interface WorkerType {
-  id: String;
-  name: String;
-  user_mail: String;
-  born_date: Date;
-  password: string;
-  rating: Integer;
-  tags: Array[String];
-  skills: Array[String];
-  premium: Boolean;
-  photo: String;
+    id:String,
+    name:String,
+    user_mail:String,
+    born_date:Date,
+    password:string,
+    rating:Integer,
+    tags:Array[String],
+    skills:Array[String],
+    premium:Boolean,
+    photo:String,
+
 }
 
 export interface ReviewType {

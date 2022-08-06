@@ -1,4 +1,4 @@
-const server = require("./src/app");
+import server from "./src/app";
 const { conn } = require("./src/db");
 import {
   setData,

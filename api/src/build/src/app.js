@@ -1,8 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const routes = require("./routes/index");
+const index_1 = __importDefault(require("./routes/index"));
 const cors = require("cors");
 const morgan = require("morgan");
 const app = express();
@@ -18,7 +22,7 @@ app.use((_req, res, next) => {
     res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
     next();
 });
-app.use("/", routes);
+app.use("/", index_1.default);
 app.use((err, _req, res, _next) => {
     // eslint-disable-line no-unused-vars
     const status = err.status || 500;
@@ -26,4 +30,4 @@ app.use((err, _req, res, _next) => {
     console.error(err);
     res.status(status).send(message);
 });
-module.exports = app;
+exports.default = app;

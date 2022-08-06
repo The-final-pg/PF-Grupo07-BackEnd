@@ -17,12 +17,8 @@ router.get(
   async (req: Request, res: Response, next: NextFunction) => {
     const { idClient } = req.params;
     try {
-      if (idClient) {
-        const client: ClientType = await getClientById(idClient);
-        return res.json(client);
-      } else {
-        throw new Error("id was not found");
-      }
+      const client: ClientType = await getClientById(idClient);
+      return res.json(client);
     } catch (error) {
       next(error);
     }
