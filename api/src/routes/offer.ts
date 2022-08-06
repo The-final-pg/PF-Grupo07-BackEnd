@@ -5,6 +5,7 @@ import {
   postOffer,
   getOfferById,
   getOffersBySearch,
+  putOfferState,
 } from "../controllers/offerController";
 
 const offer = express.Router();
@@ -58,5 +59,17 @@ offer.get(
     }
   }
 );
+
+offer.put("/", async (req: Request, res: Response, next: NextFunction) => {
+  const { id, state } = req.body;
+  try {
+    if (id && state) {
+      const offerState: String = await putOfferState(id, state);
+      res.send(offerState);
+    }
+  } catch (error) {
+    next(error);
+  }
+})
 
 export default offer;

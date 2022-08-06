@@ -22,8 +22,7 @@ const getAllProfessions = () => __awaiter(void 0, void 0, void 0, function* () {
     offers.forEach(e => profession = [...profession, ...e.dataValues.profession]);
     workers.forEach(e => profession = [...profession, ...e.dataValues.profession]);
     const professionSet = new Set(profession);
-    console.log(professionSet);
-    profession = profession.filter((e, i) => profession.indexOf(e) === i).sort();
-    return profession;
+    // profession = profession.filter((e, i) => profession.indexOf(e) === i).sort()
+    return professionSet;
 });
 exports.getAllProfessions = getAllProfessions;

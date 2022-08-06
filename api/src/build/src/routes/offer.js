@@ -60,4 +60,16 @@ offer.get("/:idOffer", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         next(error);
     }
 }));
+offer.put("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id, state } = req.body;
+    try {
+        if (id && state) {
+            const offerState = yield (0, offerController_1.putOfferState)(id, state);
+            res.send(offerState);
+        }
+    }
+    catch (error) {
+        next(error);
+    }
+}));
 exports.default = offer;

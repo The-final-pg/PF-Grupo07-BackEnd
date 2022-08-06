@@ -36,3 +36,27 @@ export const getOffersBySearch = async (q: string): Promise<OfferType[]> => {
   });
   return offers;
 };
+
+export const putOfferState = async (
+  id: String,
+  state: String
+): Promise<string> => {
+  const offerState: OfferType = await Offer.findAll({
+    where: {
+      id: id,
+    },
+  });
+  if (offerState.state === "cancelled") {
+    return "Flaco la hubieras pensado antes";
+  } else {
+    await Offer.update(
+      { state: state },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
+    return "state updated";
+  }
+};
