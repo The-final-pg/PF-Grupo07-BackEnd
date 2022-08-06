@@ -23,8 +23,12 @@ const postOffer = (offer) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.postOffer = postOffer;
 const getOfferById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    let offer = yield Offer.findByPk(id, { include: [UserClient, Proposal] });
-    return offer;
+    let offer = yield Offer.findByPk(id, { include: [{ model: UserClient,
+                include: Offer
+            },
+            Proposal]
+    });
+    return offer.toJSON();
 });
 exports.getOfferById = getOfferById;
 const getOffersBySearch = (q) => __awaiter(void 0, void 0, void 0, function* () {

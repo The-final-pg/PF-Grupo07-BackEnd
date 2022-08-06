@@ -13,8 +13,14 @@ export const postOffer = async (offer: OfferType): Promise<string> => {
 };
 
 export const getOfferById = async (id: String): Promise<OfferType> => {
-  let offer = await Offer.findByPk(id, { include: [UserClient, Proposal] });
-  return offer;
+  let offer = await Offer.findByPk(id,
+    { include:
+      [{ model: UserClient,
+        include: Offer
+      },
+      Proposal]
+    });
+  return offer.toJSON();
 };
 
 export const getOffersBySearch = async (q: string): Promise<OfferType[]> => {

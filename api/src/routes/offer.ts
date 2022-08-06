@@ -48,12 +48,13 @@ offer.get(
   async (req: Request, res: Response, next: NextFunction) => {
     const { idOffer } = req.params;
     try {
-      if (idOffer) {
-        const offer: OfferType = await getOfferById(idOffer);
-        return res.json(offer);
-      } else {
-        throw new Error("id was not found");
-      }
+        const offer: any = await getOfferById(idOffer);
+        console.log(offer)
+        let result = {
+          ...offer,
+          offersCount: offer.userClient.offers.length
+        }
+        return res.json(result);
     } catch (error) {
       next(error);
     }
