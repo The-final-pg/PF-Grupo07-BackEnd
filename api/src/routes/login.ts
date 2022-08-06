@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 const { SECRET_KEY } = process.env;
 import passport from '../utils/passport/passportConfig'
 login.use(passport.initialize())
-login.use(passport.session())
+/* login.use(passport.session()) */
 // el urlencoded es para que lo que viene por body lo recibamos como string o array
 login.use(express.urlencoded({ extended: true }))
 
