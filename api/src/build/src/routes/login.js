@@ -16,16 +16,21 @@ const express_1 = __importDefault(require("express"));
 const login = express_1.default.Router();
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const { SECRET_KEY } = process.env;
-const express_session_1 = __importDefault(require("express-session"));
+const express_session_1 = __importDefault(require("express-session")); //middleware
 const passportConfig_1 = __importDefault(require("../utils/passport/passportConfig"));
+// inicializamos passport
 login.use(passportConfig_1.default.initialize());
 // el urlencoded es para que lo que viene por body lo recibamos como string o array
 login.use(express_1.default.urlencoded({ extended: true }));
+// usa express session para alojarla en la consola en application Session storage
 login.use((0, express_session_1.default)({
     secret: SECRET_KEY,
     resave: true,
     saveUninitialized: true
 }));
+//login.use(passport.authenticate("session"))
+// autenticación: verifica si el usuario es correcto. Lo busca en la base de datos en passportConfig. Si lo encuentra, genera el token con la info que nos importa para autorizar,
+// osea si es worker o no y si es admin o no.
 login.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     passportConfig_1.default.authenticate("local", { session: false }, (error, user) => __awaiter(void 0, void 0, void 0, function* () {
         if (error)
