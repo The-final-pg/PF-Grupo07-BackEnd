@@ -49,7 +49,6 @@ offer.get("/:idOffer", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
     const { idOffer } = req.params;
     try {
         const offer = yield (0, offerController_1.getOfferById)(idOffer);
-        console.log(offer);
         let result = Object.assign(Object.assign({}, offer), { offersCount: offer.userClient.offers.length, workerName: offer.proposals[0].userWorker.name });
         return res.json(result);
     }
