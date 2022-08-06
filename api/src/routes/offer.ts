@@ -49,7 +49,6 @@ offer.get(
     const { idOffer } = req.params;
     try {
       const offer: any = await getOfferById(idOffer);
-      console.log(offer)
       let result = {
         ...offer,
         offersCount: offer.userClient.offers.length,
