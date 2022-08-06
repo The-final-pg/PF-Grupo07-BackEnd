@@ -49,9 +49,11 @@ offer.get(
     const { idOffer } = req.params;
     try {
       const offer: any = await getOfferById(idOffer);
+      console.log(offer)
       let result = {
         ...offer,
         offersCount: offer.userClient.offers.length,
+        workerName: offer.proposals[0].userWorker.name,
       };
       return res.json(result);
     } catch (error) {
