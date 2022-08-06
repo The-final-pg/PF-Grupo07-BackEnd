@@ -1,6 +1,6 @@
 import { OfferType } from "../types";
 import { Op } from "sequelize";
-const { Offer, Proposal, UserClient, UserWorker } = require("../db");
+const { Offer, Proposal, UserClient, UserWorker, UserWorker } = require("../db");
 
 export const getAllOffers = async (): Promise<OfferType[]> => {
   let allOffers = await Offer.findAll({ include: UserClient });
@@ -13,15 +13,12 @@ export const postOffer = async (offer: OfferType): Promise<string> => {
 };
 
 export const getOfferById = async (id: String): Promise<OfferType> => {
-  let offer = await Offer.findByPk(id,
-    { include:
-      [{ model: UserClient,
-        include: Offer
-      },
-      { model: Proposal,
-        include: UserWorker
-      }]
-    });
+  let offer = await Offer.findByPk(id, {
+    include: [
+      { model: UserClient, include: Offer },
+      { model: Proposal, include: UserWorker },
+    ],
+  });
   return offer.toJSON();
 };
 
