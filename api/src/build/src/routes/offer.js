@@ -69,4 +69,5 @@ offer.put("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
         next(error);
     }
 }));
+;
 exports.default = offer;
