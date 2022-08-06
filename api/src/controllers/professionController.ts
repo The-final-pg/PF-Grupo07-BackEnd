@@ -12,5 +12,17 @@ export const getAllProfessions = async () => {
     workers.forEach(e => profession = [...profession, ...e.dataValues.profession])
     const professionSet = new Set(profession);
     // profession = profession.filter((e, i) => profession.indexOf(e) === i).sort()
-    return professionSet;
+    return [...professionSet];
+};
+
+export const getAllSkills = async () => {
+    const workers: any[] = await UserWorker.findAll({
+        attributes: ['skills']
+    });
+    let skills: string[] = [];
+    workers.forEach(e => skills = [...skills, ...e.dataValues.skills])
+/*     const skillsSet = new Set(skills);
+    console.log(skillsSet); */
+    skills = skills.filter((e, i) => skills.indexOf(e) === i).sort()
+    return skills;
 };
