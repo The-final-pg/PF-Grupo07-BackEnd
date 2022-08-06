@@ -8,7 +8,7 @@ login.use(passport.initialize())
 // el urlencoded es para que lo que viene por body lo recibamos como string o array
 login.use(express.urlencoded({ extended: true }))
 
-login.post("/in", async (req:Request,res:Response,next:NextFunction) => {
+login.post("/", async (req:Request,res:Response,next:NextFunction) => {
     passport.authenticate(
         "local",
         { session: false },
