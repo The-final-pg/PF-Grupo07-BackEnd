@@ -2,12 +2,19 @@ import express, { NextFunction, Request, Response } from "express";
 const login = express.Router();
 import jwt from "jsonwebtoken";
 const { SECRET_KEY } = process.env;
-
+import session from 'express-session'
 import passport from '../utils/passport/passportConfig'
 login.use(passport.initialize())
-/* login.use(passport.session()) */
+
 // el urlencoded es para que lo que viene por body lo recibamos como string o array
 login.use(express.urlencoded({ extended: true }))
+
+login.use(session({
+    secret: SECRET_KEY,
+    resave: true,
+    saveUninitialized: true
+}));
+
 
 login.post("/", async (req:Request,res:Response,next:NextFunction) => {
     passport.authenticate(
@@ -27,7 +34,7 @@ login.post("/", async (req:Request,res:Response,next:NextFunction) => {
                             isWorker: user.isWorker
                         },
                         SECRET_KEY,
-                        { expiresIn: "24hr" }
+                        { expiresIn: "2hr" }
                     )
                 )
             }
