@@ -27,13 +27,8 @@ router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function*
 router.get("/:idClient", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { idClient } = req.params;
     try {
-        if (idClient) {
-            const client = yield (0, clientController_1.getClientById)(idClient);
-            return res.json(client);
-        }
-        else {
-            throw new Error("id was not found");
-        }
+        const client = yield (0, clientController_1.getClientById)(idClient);
+        return res.json(client);
     }
     catch (error) {
         next(error);

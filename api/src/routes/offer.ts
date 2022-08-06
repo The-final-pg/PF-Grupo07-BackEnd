@@ -48,13 +48,12 @@ offer.get(
   async (req: Request, res: Response, next: NextFunction) => {
     const { idOffer } = req.params;
     try {
-        const offer: any = await getOfferById(idOffer);
-        console.log(offer)
-        let result = {
-          ...offer,
-          offersCount: offer.userClient.offers.length
-        }
-        return res.json(result);
+      const offer: any = await getOfferById(idOffer);
+      let result = {
+        ...offer,
+        offersCount: offer.userClient.offers.length,
+      };
+      return res.json(result);
     } catch (error) {
       next(error);
     }
@@ -71,6 +70,6 @@ offer.put("/", async (req: Request, res: Response, next: NextFunction) => {
   } catch (error) {
     next(error);
   }
-})
+});
 
 export default offer;
