@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+
 const express_1 = __importDefault(require("express"));
 const workers_1 = __importDefault(require("./workers"));
 const clients_1 = __importDefault(require("./clients"));
@@ -15,6 +16,7 @@ const logout_1 = __importDefault(require("./logout"));
 const profession_1 = __importDefault(require("./profession"));
 const skills_1 = __importDefault(require("./skills"));
 const router = express_1.default.Router();
+
 router.use("/client", clients_1.default);
 router.use("/worker", workers_1.default);
 router.use("/offer", offer_1.default);
@@ -25,4 +27,5 @@ router.use("/login", login_1.default);
 router.use("/logout", logout_1.default);
 router.use('/profession', profession_1.default);
 router.use('/skills', skills_1.default);
+
 exports.default = router;

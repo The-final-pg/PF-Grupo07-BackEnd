@@ -23,4 +23,5 @@ router.use("/logout", logout);
 router.use('/profession', profession);
 router.use('/skills', skills);
 
+
 export default router;
