@@ -19,7 +19,6 @@ const { SECRET_KEY } = process.env;
 const express_session_1 = __importDefault(require("express-session"));
 const passportConfig_1 = __importDefault(require("../utils/passport/passportConfig"));
 login.use(passportConfig_1.default.initialize());
-login.use(passportConfig_1.default.session());
 // el urlencoded es para que lo que viene por body lo recibamos como string o array
 login.use(express_1.default.urlencoded({ extended: true }));
 login.use((0, express_session_1.default)({
