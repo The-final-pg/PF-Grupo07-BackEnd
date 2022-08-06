@@ -8,7 +8,7 @@ const logout = express_1.default.Router();
 const passportConfig_1 = __importDefault(require("../utils/passport/passportConfig"));
 logout.use(passportConfig_1.default.initialize());
 logout.use(passportConfig_1.default.session());
-logout.get("/", (req, res) => {
+logout.post("/", (req, res) => {
     req.logOut();
     req.session = null;
     res.send("Sesión finalizada");

@@ -5,7 +5,6 @@ import bcrypt from "bcrypt";
 require("dotenv").config();
 import { WorkerType, ClientType  } from "../../types";
 const { UserWorker, UserClient } = require ("../../db");
-
 import jwt from "jsonwebtoken";
 const { SECRET_KEY } = process.env;
 
@@ -13,10 +12,10 @@ const { SECRET_KEY } = process.env;
 passport.use(
     new LocalStrategy(
         {
-            //recibe de los input los parametros
+            //recibe de los input los parámetros
             usernameField: "user_mail", //"user_mail" es el input.name del form
-            passwordField: "password" //lo que hace passport por atras --> let user_mail = usernameField
-        }, async (user_mail, password, done) => { //la function recibe por paramatros al user_mail, password y done es una funcion de resolucion 
+            passwordField: "password", //lo que hace passport por atrás --> let user_mail = usernameField
+        }, async (user_mail, password, done) => { //la function recibe por paramatros al user_mail, password y done es una función de resolución 
             try {
                 const worker: WorkerType  = await UserWorker.findOne({where: {user_mail: user_mail}})//busca en ambas tablas el usuario
                 const client: ClientType = await UserClient.findOne({where: {user_mail: user_mail}})
@@ -35,27 +34,22 @@ passport.use(
                     } else {
                         return done (null, user.dataValues)
                     }
-                })
-                /* bcrypt.compare(password, worker.password, (error, result) => {
-                    if (error) return done(error)
-                    if (!result) {
-                        return done(null, false)//si tiene una discrepancia de pw devuelve null y false para el result.
-                    } else {
-                        return done (null, {id: worker.id})//si coincide, devuelve null para el error y el usuario para el result.
-                    } */            
+                })        
             } catch (e){
-                return done(e, false) //si no encontro ningun usuario, devuelve result en false y el error que corresponda
+                return done(e, false) //si no encontró ningún usuario, devuelve result en false y el error que corresponda
             }
         }
     )
 )
 
 
-// serializacion y deserializacion de worker
-passport.serializeUser((user, done) => { // user = client || user = worker
-    done(null, user);
+// serialización: toma el id y lo almacena en la session (para requerirla: req.session.passport.user)
+passport.serializeUser((user: any, done) => { // user = client || user = worker
+    done(null, user._id);
 });
-  
+
+
+// deserialización: a partir del id serializado, cierra la session 
 passport.deserializeUser(async (id, done) => {
     try{
         const worker = await UserWorker.findOne({ where: { id } })
@@ -69,7 +63,9 @@ passport.deserializeUser(async (id, done) => {
         done(e, null);
     }
 });
- 
+
+
+// estrategia para verificar el token con la sesión ya iniciada
 passport.use(
     new BearerStrategy((token, done) => {
       jwt.verify(token, SECRET_KEY, function (err, user) {
@@ -80,20 +76,5 @@ passport.use(
     })
   ); 
 
-
-/* // serializacion y deserializacion de client
-passport.serializeUser((client: any, done) => {
-    done(null, client.id);
-});
-  
-passport.deserializeUser(async (id, done) => {
-    try{
-        const client = await UserClient.findOne({ where: { id } })
-        if (client) done(null, client);
-    }catch(e){
-        done(e, null);
-    }
-});
- */
 
 export default passport;
