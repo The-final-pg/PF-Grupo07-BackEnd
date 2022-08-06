@@ -24,7 +24,7 @@ register.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, f
         const hashedPassword = yield bcrypt.hash(newClient.password, 8);
         // el 8 es para el tiempo de las iteraciones, mientras más tiempo más segura, pero con 8 es suficiente.
         let response;
-        // guardamos en response todo lo que viene de body y la password hasheada, 
+        // guardamos en response todo lo que viene de body y la password hasheada,
         //que la va a recibir la funcion createClient en el controller.
         response = yield (0, registerController_1.createClient)(newClient, hashedPassword);
         res.send(response);

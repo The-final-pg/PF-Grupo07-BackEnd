@@ -25,7 +25,7 @@ module.exports = (sequelize: any) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      tags: {
+      profession: {
         type: DataTypes.ARRAY(DataTypes.STRING),
       },
       skills: {
@@ -45,7 +45,6 @@ module.exports = (sequelize: any) => {
       photo: {
         type: DataTypes.STRING,
         allowNull: true,
-
       },
       notification: {
         type: DataTypes.ARRAY(DataTypes.JSONB),
@@ -58,7 +57,7 @@ module.exports = (sequelize: any) => {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
-      isWorker:{
+      isWorker: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },

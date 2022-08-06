@@ -1,22 +1,27 @@
-import express from 'express';
+import express from "express";
 import workerRouter from "./workers";
 import clientRouter from "./clients";
-import offerRouter from './offer';
-import proposalRouter from './proposal';
-import portfolioRouter from './portfolio';
-import register from './register'
-import login from './login'
-import logout from './logout';
+import offerRouter from "./offer";
+import proposalRouter from "./proposal";
+import portfolioRouter from "./portfolio";
+import register from "./register";
+import login from "./login";
+import logout from "./logout";
+import profession from './profession';
+import skills from './skills';
 
 const router = express.Router();
 
-router.use("/clients", clientRouter)
-router.use("/workers", workerRouter)
-router.use("/offer", offerRouter)
-router.use("/proposal", proposalRouter)
+router.use("/client", clientRouter);
+router.use("/worker", workerRouter);
+router.use("/offer", offerRouter);
+router.use("/proposal", proposalRouter);
 router.use("/portfolio", portfolioRouter);
-router.use("/register", register)
-router.use("/login", login)
-router.use("/logout", logout)
+router.use("/register", register);
+router.use("/login", login);
+router.use("/logout", logout);
+router.use('/profession', profession);
+router.use('/skills', skills);
 
-module.exports = router;
+
+export default router;

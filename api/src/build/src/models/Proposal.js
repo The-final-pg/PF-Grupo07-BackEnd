@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 module.exports = (sequelize) => {
-    sequelize.define('proposal', {
+    sequelize.define("proposal", {
         remuneration: {
             type: sequelize_1.DataTypes.INTEGER,
             allowNull: false,
@@ -12,22 +12,22 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         worked_time: {
-            type: sequelize_1.DataTypes.STRING,
+            type: sequelize_1.DataTypes.INTEGER,
             allowNull: true,
         },
         state: {
-            type: sequelize_1.DataTypes.ENUM("posted", "rejected", "accepted", "initiated", "finalized", "released payment"),
-            defaultValue: "posted"
+            type: sequelize_1.DataTypes.ENUM("posted", "rejected", "accepted", "contract started", "finalized", "released payment"),
+            defaultValue: "posted",
         },
         idProposal: {
             type: sequelize_1.DataTypes.UUID,
             defaultValue: sequelize_1.DataTypes.UUIDV4,
             allowNull: false,
-            primaryKey: true
+            primaryKey: true,
         },
         isActive: {
             type: sequelize_1.DataTypes.BOOLEAN,
-            defaultValue: true
-        }
+            defaultValue: true,
+        },
     });
 };

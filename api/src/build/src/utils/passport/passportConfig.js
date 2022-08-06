@@ -24,11 +24,18 @@ const { SECRET_KEY } = process.env;
 passport_1.default.use(new passport_local_1.Strategy({
     //recibe de los input los parametros
     usernameField: "user_mail",
-    passwordField: "password" //lo que hace passport por atras --> let user_mail = usernameField
+    passwordField: "password", //lo que hace passport por atras --> let user_mail = usernameField
 }, (user_mail, password, done) => __awaiter(void 0, void 0, void 0, function* () {
+    //la function recibe por paramatros al user_mail, password y done es una funcion de resolucion
     try {
-        const worker = yield UserWorker.findOne({ where: { user_mail: user_mail } }); //busca en ambas tablas el usuario
-        const client = yield UserClient.findOne({ where: { user_mail: user_mail } });
+
+        const worker = yield UserWorker.findOne({
+            where: { user_mail: user_mail },
+        }); //busca en ambas tablas el usuario
+        const client = yield UserClient.findOne({
+            where: { user_mail: user_mail },
+        });
+
         let user;
         if (worker) {
             user = worker; //dependiendo del usuario realiza diferentes acciones
@@ -62,6 +69,9 @@ passport_1.default.use(new passport_local_1.Strategy({
 })));
 // serializacion y deserializacion de worker
 passport_1.default.serializeUser((user, done) => {
+
+    // user = client || user = worker
+
     done(null, user);
 });
 passport_1.default.deserializeUser((id, done) => __awaiter(void 0, void 0, void 0, function* () {
@@ -74,7 +84,6 @@ passport_1.default.deserializeUser((id, done) => __awaiter(void 0, void 0, void 
         else if (client) {
             done(null, client);
         }
-        ;
     }
     catch (e) {
         done(e, null);
@@ -82,9 +91,9 @@ passport_1.default.deserializeUser((id, done) => __awaiter(void 0, void 0, void 
 }));
 passport_1.default.use(new passport_http_bearer_1.Strategy((token, done) => {
     jsonwebtoken_1.default.verify(token, SECRET_KEY, function (err, user) {
-        if (err)
-            return done(err);
-        console.log('Estoy ene l verify', token);
+        if (err) return done(err);
+        console.log("Estoy ene l verify", token);
+
         return done(null, user ? user : false);
     });
 }));

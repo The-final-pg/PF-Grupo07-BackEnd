@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postNewProposal = void 0;
+exports.putProposalState = exports.postNewProposal = void 0;
 const { Proposal, Offer } = require("../db");
 const postNewProposal = (proposal, idOffer) => __awaiter(void 0, void 0, void 0, function* () {
     const offer = yield Offer.findByPk(idOffer);
@@ -19,3 +19,22 @@ const postNewProposal = (proposal, idOffer) => __awaiter(void 0, void 0, void 0,
     return "Propuesta publicada exitosamente";
 });
 exports.postNewProposal = postNewProposal;
+const putProposalState = (id, state) => __awaiter(void 0, void 0, void 0, function* () {
+    const proposalState = yield Proposal.findAll({
+        where: {
+            id: id,
+        },
+    });
+    if (proposalState.state === "rejected") {
+        return "Flaco la quedaste";
+    }
+    else {
+        yield Proposal.update({ state: state }, {
+            where: {
+                id: id,
+            },
+        });
+        return "state updated";
+    }
+});
+exports.putProposalState = putProposalState;

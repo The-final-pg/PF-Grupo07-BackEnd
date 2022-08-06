@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 require("dotenv").config();
 import { WorkerType, ClientType  } from "../../types";
 const { UserWorker, UserClient } = require ("../../db");
+
 import jwt from "jsonwebtoken";
 const { SECRET_KEY } = process.env;
 
@@ -79,6 +80,7 @@ passport.use(
     })
   ); 
 
+
 /* // serializacion y deserializacion de client
 passport.serializeUser((client: any, done) => {
     done(null, client.id);
@@ -94,4 +96,4 @@ passport.deserializeUser(async (id, done) => {
 });
  */
 
-export default passport
+export default passport;

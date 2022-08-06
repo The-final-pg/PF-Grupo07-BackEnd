@@ -26,12 +26,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const proposalController_1 = require("../controllers/proposalController");
 const proposal = express_1.default.Router();
-proposal.post('/', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+proposal.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const _a = req.body, { idOffer } = _a, proposal = __rest(_a, ["idOffer"]);
     try {
         let response;
         response = yield (0, proposalController_1.postNewProposal)(proposal, idOffer);
         res.json(response);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
+proposal.put("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id, state } = req.body;
+    try {
+        if (id && state) {
+            const proposalState = yield (0, proposalController_1.putProposalState)(id, state);
+            res.send(proposalState);
+        }
     }
     catch (error) {
         next(error);

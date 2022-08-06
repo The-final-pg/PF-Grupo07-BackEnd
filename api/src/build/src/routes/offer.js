@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const offerController_1 = require("../controllers/offerController");
 const offer = express_1.default.Router();
-offer.get('/', (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+offer.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const offers = yield (0, offerController_1.getAllOffers)();
         res.json(offers);
@@ -35,7 +35,7 @@ offer.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
         next(error);
     }
 }));
-offer.get('/search', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+offer.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const q = req.query.q;
     try {
         const offers = yield (0, offerController_1.getOffersBySearch)(q);
@@ -45,7 +45,7 @@ offer.get('/search', (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         next(error);
     }
 }));
-offer.get("/:idClient", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+offer.get("/:idOffer", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { idOffer } = req.params;
     try {
         if (idOffer) {
@@ -54,6 +54,18 @@ offer.get("/:idClient", (req, res, next) => __awaiter(void 0, void 0, void 0, fu
         }
         else {
             throw new Error("id was not found");
+        }
+    }
+    catch (error) {
+        next(error);
+    }
+}));
+offer.put("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id, state } = req.body;
+    try {
+        if (id && state) {
+            const offerState = yield (0, offerController_1.putOfferState)(id, state);
+            res.send(offerState);
         }
     }
     catch (error) {

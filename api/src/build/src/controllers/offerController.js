@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getOffersBySearch = exports.getOfferById = exports.postOffer = exports.getAllOffers = void 0;
+exports.putOfferState = exports.getOffersBySearch = exports.getOfferById = exports.postOffer = exports.getAllOffers = void 0;
 const sequelize_1 = require("sequelize");
 const { Offer, Proposal, UserClient } = require("../db");
 const getAllOffers = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -33,17 +33,36 @@ const getOffersBySearch = (q) => __awaiter(void 0, void 0, void 0, function* () 
             [sequelize_1.Op.or]: [
                 {
                     title: {
-                        [sequelize_1.Op.substring]: q
-                    }
+                        [sequelize_1.Op.iLike]: `%${q}%`,
+                    },
                 },
                 {
                     offer_description: {
-                        [sequelize_1.Op.substring]: q
-                    }
-                }
-            ]
-        }
+                        [sequelize_1.Op.iLike]: `%${q}%`,
+                    },
+                },
+            ],
+        },
     });
     return offers;
 });
 exports.getOffersBySearch = getOffersBySearch;
+const putOfferState = (id, state) => __awaiter(void 0, void 0, void 0, function* () {
+    const offerState = yield Offer.findAll({
+        where: {
+            id: id,
+        },
+    });
+    if (offerState.state === "cancelled") {
+        return "Flaco la hubieras pensado antes";
+    }
+    else {
+        yield Offer.update({ state: state }, {
+            where: {
+                id: id,
+            },
+        });
+        return "state updated";
+    }
+});
+exports.putOfferState = putOfferState;

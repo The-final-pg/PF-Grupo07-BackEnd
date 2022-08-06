@@ -1,5 +1,4 @@
-import { IntegerDataType } from "sequelize/types"
-
+import { IntegerDataType } from "sequelize/types";
 
 export interface ClientType {
     name:String,
@@ -22,37 +21,38 @@ export interface WorkerType {
     skills:Array[String],
     premium:Boolean,
     photo:String,
+
 }
 
 export interface ReviewType {
-    idReview:String,
-    valoration:Integer, 
-    review_description:String, 
+  idReview: String;
+  valoration: Integer;
+  review_description: String;
 }
 
 export interface OfferType {
-    idOffer: integer,
-    title: String,
-    remuneration: Array[Integer],
-    offer_description: String,
-    post_duration_time: Date,
-    work_duration_time: Date,
-    photo: String,
-    tags: Array[String],
-    state: String
+  idOffer: integer;
+  title: String;
+  remuneration: Array[Integer];
+  offer_description: String;
+  post_duration_time: Date;
+  work_duration_time: Date;
+  photo: String;
+  tags: Array[String];
+  state: String;
 }
 
 export interface PortfolioType {
-    idPortfolio: String,
-    title: String,
-    photo: String,
-    portfolio_description: String
+  idPortfolio: String;
+  title: String;
+  photo: String;
+  portfolio_description: String;
 }
 
 export interface ProposalType {
-    idProposal: String,
-    remuneration: Integer,
-    proposal_description: String,
-    worked_time: String,
-    state:String,
+  idProposal: String;
+  remuneration: Integer;
+  proposal_description: String;
+  worked_time: String;
+  state: String;
 }

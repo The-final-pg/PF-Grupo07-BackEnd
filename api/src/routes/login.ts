@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 const login = express.Router();
 import jwt from "jsonwebtoken";
 const { SECRET_KEY } = process.env;
+
 import passport from '../utils/passport/passportConfig'
 login.use(passport.initialize())
 /* login.use(passport.session()) */
@@ -36,3 +37,4 @@ login.post("/", async (req:Request,res:Response,next:NextFunction) => {
 
 
 export default login
+
