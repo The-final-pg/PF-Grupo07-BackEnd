@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.putOfferState = exports.getOffersBySearch = exports.getOfferById = exports.postOffer = exports.getAllOffers = void 0;
 const sequelize_1 = require("sequelize");
-const { Offer, Proposal, UserClient } = require("../db");
+const { Offer, Proposal, UserClient, UserWorker } = require("../db");
 const getAllOffers = () => __awaiter(void 0, void 0, void 0, function* () {
     let allOffers = yield Offer.findAll({ include: UserClient });
     return allOffers;
@@ -26,7 +26,9 @@ const getOfferById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     let offer = yield Offer.findByPk(id, { include: [{ model: UserClient,
                 include: Offer
             },
-            Proposal]
+            { model: Proposal,
+                include: UserWorker
+            }]
     });
     return offer.toJSON();
 });
