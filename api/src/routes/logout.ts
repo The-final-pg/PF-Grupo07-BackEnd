@@ -4,7 +4,7 @@ import passport from "../utils/passport/passportConfig";
 logout.use(passport.initialize());
 logout.use(passport.session());
 
-logout.get("/out", (req: any, res: Response) => {
+logout.get("/", (req: any, res: Response) => {
   req.logOut();
   req.session = null;
   res.send("Sesión finalizada");
