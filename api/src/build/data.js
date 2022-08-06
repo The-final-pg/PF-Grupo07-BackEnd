@@ -29,7 +29,7 @@ const setData = () => __awaiter(void 0, void 0, void 0, function* () {
                 password: e.Worker.password,
                 profession: e.Worker.profession,
                 skills: e.Worker.skills,
-                rating: e.Worker.rating,
+                rating: ((e.Worker.rating - 1) % 5) + 1,
                 photo: e.Worker.photo,
                 notification: e.Worker.notification,
             });
@@ -38,7 +38,7 @@ const setData = () => __awaiter(void 0, void 0, void 0, function* () {
                 user_mail: e.Client.user_mail,
                 born_date: e.Client.born_date,
                 password: e.Client.password,
-                rating: e.Client.rating,
+                rating: ((e.Client.rating - 1) % 5) + 1,
                 photo: e.Client.photo,
                 notification: e.Client.notification,
             });
@@ -60,7 +60,7 @@ const setOffers = () => __awaiter(void 0, void 0, void 0, function* () {
         responseOffers.data.map((e) => {
             arrayOffers.push({
                 title: e.Offer.title,
-                remuneration: e.Offer.remuneration.map((e) => parseInt(e)),
+                remuneration: e.Offer.remuneration.map((e) => parseInt(e)).sort((a, b) => a - b),
                 offer_description: e.Offer.offer_description,
                 post_duration_time: e.Offer.post_duration_time,
                 work_duration_time: parseInt(e.Offer.work_duration_time),
@@ -133,7 +133,7 @@ const setReview = () => __awaiter(void 0, void 0, void 0, function* () {
         let arrayReview = [];
         responseReview.data.map((e) => {
             arrayReview.push({
-                valoration: parseInt(e.valoration),
+                valoration: ((e.valoration - 1) % 5) + 1,
                 review_description: e.review_description,
             });
         });

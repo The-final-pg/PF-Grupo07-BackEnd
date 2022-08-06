@@ -18,10 +18,10 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const { SECRET_KEY } = process.env;
 const passportConfig_1 = __importDefault(require("../utils/passport/passportConfig"));
 login.use(passportConfig_1.default.initialize());
-login.use(passportConfig_1.default.session());
+/* login.use(passport.session()) */
 // el urlencoded es para que lo que viene por body lo recibamos como string o array
 login.use(express_1.default.urlencoded({ extended: true }));
-login.post("/in", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+login.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     passportConfig_1.default.authenticate("local", { session: false }, (error, user) => __awaiter(void 0, void 0, void 0, function* () {
         if (error)
             return next(error);
@@ -33,8 +33,7 @@ login.post("/in", (req, res, next) => __awaiter(void 0, void 0, void 0, function
                 id: user.id,
                 user_mail: user.user_mail,
                 isAdmin: user.isAdmin,
-                isWorker: user.isWorker,
-
+                isWorker: user.isWorker
             }, SECRET_KEY, { expiresIn: "24hr" }));
         }
     }))(req, res, next);
