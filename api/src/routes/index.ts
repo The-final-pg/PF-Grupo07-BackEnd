@@ -8,6 +8,7 @@ import register from "./register";
 import login from "./login";
 import logout from "./logout";
 import profession from './profession';
+import skills from './skills';
 
 const router = express.Router();
 
@@ -20,5 +21,6 @@ router.use("/register", register);
 router.use("/login", login);
 router.use("/logout", logout);
 router.use('/profession', profession);
+router.use('/skills', skills);
 
-module.exports = router;
+export default router;
