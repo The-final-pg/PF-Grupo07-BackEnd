@@ -57,7 +57,8 @@ export const setOffers = async () => {
     responseOffers.data.map((e) => {
       arrayOffers.push({
         title: e.Offer.title,
-        remuneration: e.Offer.remuneration.map((e: string) => parseInt(e)).sort((a: number, b: number) => a - b),
+        max_remuneration: Math.floor(e.Offer.remuneration),
+        min_remuneration: Math.floor(e.Offer.remuneration / 2),
         offer_description: e.Offer.offer_description,
         post_duration_time: e.Offer.post_duration_time,
         work_duration_time: parseInt(e.Offer.work_duration_time),
@@ -146,7 +147,7 @@ export const setReview = async () => {
     let arrayReview = [];
     responseReview.data.map((e) => {
       arrayReview.push({
-        valoration: ((e.valoration- 1) % 5) + 1,
+        valoration: ((e.valoration - 1) % 5) + 1,
         review_description: e.review_description,
       });
     });
