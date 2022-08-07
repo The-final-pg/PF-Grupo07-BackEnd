@@ -45,17 +45,13 @@ offer.get(
       let offers: OfferType[];
       if (q && !p && !r && !max && !min) {
         offers = await getOffersBySearch(q);
-      }
-      else if (q && p && !r && !max && !min) {
+      } else if (q && p && !r && !max && !min) {
         offers = await offerFilteredByProfession(q, p);
-      }
-      else if (q && !p && r && !max && !min) {
+      } else if (q && !p && r && !max && !min) {
         offers = await offerFilteredByRating(q, r);
-      }
-      else if (q && !p && !r && max && min) {
+      } else if (q && !p && !r && max && min) {
         offers = await offerFilteredByRemuneration(q, max, min);
-      }
-      else {
+      } else {
         offers = await offerAllFiltersOn(q, p, r, max, min);
       }
       res.json(offers);

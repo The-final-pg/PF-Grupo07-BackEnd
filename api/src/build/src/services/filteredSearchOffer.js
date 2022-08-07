@@ -79,12 +79,16 @@ const offerFilteredByRemuneration = (input, remMax, remMin) => __awaiter(void 0,
                     },
                 },
             ],
+            max_remuneration: {
+                [sequelize_1.Op.lte]: parseInt(remMax),
+            },
+            min_remuneration: {
+                [sequelize_1.Op.gte]: parseInt(remMin),
+            },
         },
         include: UserClient,
     });
-    const filteredByRemuneration = findedByName.filter((offer) => offer.dataValues.remuneration[0] >= remMin &&
-        offer.dataValues.remuneration[1] <= remMax);
-    return filteredByRemuneration;
+    return findedByName;
 });
 exports.offerFilteredByRemuneration = offerFilteredByRemuneration;
 const offerAllFiltersOn = (input, profession, rating, remMax, remMin) => __awaiter(void 0, void 0, void 0, function* () {
@@ -107,6 +111,12 @@ const offerAllFiltersOn = (input, profession, rating, remMax, remMin) => __await
                 profession: {
                     [sequelize_1.Op.contains]: [profession],
                 },
+                max_remuneration: {
+                    [sequelize_1.Op.lte]: parseInt(remMax),
+                },
+                min_remuneration: {
+                    [sequelize_1.Op.gte]: parseInt(remMin),
+                },
             },
             include: {
                 model: UserClient,
@@ -117,10 +127,7 @@ const offerAllFiltersOn = (input, profession, rating, remMax, remMin) => __await
                 },
             },
         });
-        console.log('allFiltersOn ', allFiltersOn);
-        const filteredByRemuneration = allFiltersOn.filter((offer) => offer.dataValues.remuneration[0] >= remMin &&
-            offer.dataValues.remuneration[1] <= remMax);
-        return filteredByRemuneration;
+        return allFiltersOn;
     }
     if (input && !profession && rating && remMax && remMin) {
         const allFiltersOn = yield Offer.findAll({
@@ -137,6 +144,12 @@ const offerAllFiltersOn = (input, profession, rating, remMax, remMin) => __await
                         },
                     },
                 ],
+                max_remuneration: {
+                    [sequelize_1.Op.lte]: parseInt(remMax),
+                },
+                min_remuneration: {
+                    [sequelize_1.Op.gte]: parseInt(remMin),
+                },
             },
             include: {
                 model: UserClient,
@@ -147,10 +160,7 @@ const offerAllFiltersOn = (input, profession, rating, remMax, remMin) => __await
                 },
             },
         });
-        console.log("profession ", allFiltersOn);
-        const filteredByRemuneration = allFiltersOn.filter((offer) => offer.dataValues.remuneration[0] >= remMin &&
-            offer.dataValues.remuneration[1] <= remMax);
-        return filteredByRemuneration;
+        return allFiltersOn;
     }
     if (input && profession && !rating && remMax && remMin) {
         const allFiltersOn = yield Offer.findAll({
@@ -170,15 +180,18 @@ const offerAllFiltersOn = (input, profession, rating, remMax, remMin) => __await
                 profession: {
                     [sequelize_1.Op.contains]: [profession],
                 },
+                max_remuneration: {
+                    [sequelize_1.Op.lte]: parseInt(remMax),
+                },
+                min_remuneration: {
+                    [sequelize_1.Op.gte]: parseInt(remMin),
+                },
             },
             include: {
                 model: UserClient,
             },
         });
-        console.log("rating ", allFiltersOn);
-        const filteredByRemuneration = allFiltersOn.filter((offer) => offer.dataValues.remuneration[0] >= remMin &&
-            offer.dataValues.remuneration[1] <= remMax);
-        return filteredByRemuneration;
+        return allFiltersOn;
     }
     if (input && profession && rating && !remMax && !remMin) {
         const allFiltersOn = yield Offer.findAll({
@@ -208,7 +221,6 @@ const offerAllFiltersOn = (input, profession, rating, remMax, remMin) => __await
                 },
             },
         });
-        console.log('remuneration ', allFiltersOn);
         return allFiltersOn;
     }
 });

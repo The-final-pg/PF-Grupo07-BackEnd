@@ -13,8 +13,12 @@ module.exports = (sequelize: any) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      remuneration: {
-        type: DataTypes.ARRAY(DataTypes.INTEGER),
+      max_remuneration: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      min_remuneration: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       offer_description: {
@@ -26,7 +30,7 @@ module.exports = (sequelize: any) => {
         allowNull: false,
       },
       work_duration_time: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
       },
       photo: {
         type: DataTypes.STRING,
