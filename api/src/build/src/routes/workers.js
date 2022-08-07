@@ -16,9 +16,10 @@ const express_1 = __importDefault(require("express"));
 const worker = express_1.default.Router();
 const workerController_1 = require("../controllers/workerController");
 const filteredSearchWorker_1 = require("../services/filteredSearchWorker");
-worker.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+worker.get("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const multiplier = req.body.multiplier;
     try {
-        const worker = yield (0, workerController_1.getAllWorkers)();
+        const worker = yield (0, workerController_1.getAllWorkers)(multiplier);
         res.send(worker);
     }
     catch (error) {
@@ -27,19 +28,26 @@ worker.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function*
 }));
 worker.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { q, p, r } = req.query;
+    const multiplier = req.body.multiplier;
     try {
         let worker;
         if (q && !p && !r) {
-            worker = yield (0, workerController_1.getWorkerByName)(q);
+            worker = yield (0, workerController_1.getWorkerByName)(q, multiplier);
         }
-        if (q && p && !r) {
-            worker = yield (0, filteredSearchWorker_1.workerFilteredByProfession)(q, p);
+        else if (q && p && !r) {
+            worker = yield (0, filteredSearchWorker_1.workerFilteredByProfession)(q, p, multiplier);
         }
-        if (q && !p && r) {
-            worker = yield (0, filteredSearchWorker_1.workerFilteredByRating)(q, r);
+        else if (!q && p && !r) {
+            worker = yield (0, filteredSearchWorker_1.workerFilteredByProfession)(q, p, multiplier);
         }
-        if (q && p && r) {
-            worker = yield (0, filteredSearchWorker_1.workerAllfiltersOn)(q, p, r);
+        else if (q && !p && r) {
+            worker = yield (0, filteredSearchWorker_1.workerFilteredByRating)(q, r, multiplier);
+        }
+        else if (!q && !p && r) {
+            worker = yield (0, filteredSearchWorker_1.workerFilteredByRating)(q, r, multiplier);
+        }
+        else {
+            worker = yield (0, filteredSearchWorker_1.workerAllfiltersOn)(q, p, r, multiplier);
         }
         res.send(worker);
     }
