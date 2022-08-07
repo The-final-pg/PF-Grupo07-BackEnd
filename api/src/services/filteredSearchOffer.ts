@@ -5,9 +5,11 @@ const { Offer, UserClient } = require("../db");
 
 export const offerFilteredByProfession = async (
   input,
-  profession
+  profession,
+  multiplier: number = 0
 ): Promise<OfferType[]> => {
   const filteredByProfession = await Offer.findAll({
+    limit: 8 + 5 * multiplier,
     where: {
       [Op.or]: [
         {
@@ -32,9 +34,11 @@ export const offerFilteredByProfession = async (
 
 export const offerFilteredByRating = async (
   input,
-  rating
+  rating,
+  multiplier: number = 0
 ): Promise<OfferType[]> => {
   const filteredByRating = await Offer.findAll({
+    limit: 8 + 5 * multiplier,
     where: {
       [Op.or]: [
         {
@@ -64,9 +68,11 @@ export const offerFilteredByRating = async (
 export const offerFilteredByRemuneration = async (
   input,
   remMax,
-  remMin
+  remMin,
+  multiplier: number = 0
 ): Promise<OfferType[]> => {
   const findedByName = await Offer.findAll({
+    limit: 8 + 5 * multiplier,
     where: {
       [Op.or]: [
         {
@@ -98,11 +104,13 @@ export const offerAllFiltersOn = async (
   profession,
   rating,
   remMax,
-  remMin
+  remMin,
+  multiplier: number = 0
 ): Promise<OfferType[]> => {
   console.log(input, profession, rating, remMax, remMin);
   if (input && profession && rating && remMax && remMin) {
     const allFiltersOn = await Offer.findAll({
+      limit: 8 + 5 * multiplier,
       where: {
         [Op.or]: [
           {
@@ -140,6 +148,7 @@ export const offerAllFiltersOn = async (
   }
   if (input && !profession && rating && remMax && remMin) {
     const allFiltersOn = await Offer.findAll({
+      limit: 8 + 5 * multiplier,
       where: {
         [Op.or]: [
           {
@@ -174,6 +183,7 @@ export const offerAllFiltersOn = async (
   }
   if (input && profession && !rating && remMax && remMin) {
     const allFiltersOn = await Offer.findAll({
+      limit: 8 + 5 * multiplier,
       where: {
         [Op.or]: [
           {
@@ -206,6 +216,7 @@ export const offerAllFiltersOn = async (
   }
   if (input && profession && rating && !remMax && !remMin) {
     const allFiltersOn = await Offer.findAll({
+      limit: 8 + 5 * multiplier,
       where: {
         [Op.or]: [
           {

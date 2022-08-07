@@ -16,9 +16,10 @@ import {
 
 const offer = express.Router();
 
-offer.get("/", async (_req: Request, res: Response, next: NextFunction) => {
+offer.get("/", async (req: Request, res: Response, next: NextFunction) => {
+  const multiplier: number = req.body.multiplier;
   try {
-    const offers: Array<OfferType> = await getAllOffers();
+    const offers: Array<OfferType> = await getAllOffers(multiplier);
     res.json(offers);
   } catch (error) {
     next(error);
@@ -40,19 +41,19 @@ offer.get(
   "/search",
   async (req: Request, res: Response, next: NextFunction) => {
     const { q, p, r, max, min } = req.query;
-
+    const multiplier: number = req.body.multiplier;
     try {
       let offers: OfferType[];
       if (q && !p && !r && !max && !min) {
-        offers = await getOffersBySearch(q);
+        offers = await getOffersBySearch(q, multiplier);
       } else if (q && p && !r && !max && !min) {
-        offers = await offerFilteredByProfession(q, p);
+        offers = await offerFilteredByProfession(q, p, multiplier);
       } else if (q && !p && r && !max && !min) {
-        offers = await offerFilteredByRating(q, r);
+        offers = await offerFilteredByRating(q, r, multiplier);
       } else if (q && !p && !r && max && min) {
-        offers = await offerFilteredByRemuneration(q, max, min);
+        offers = await offerFilteredByRemuneration(q, max, min, multiplier);
       } else {
-        offers = await offerAllFiltersOn(q, p, r, max, min);
+        offers = await offerAllFiltersOn(q, p, r, max, min, multiplier);
       }
       res.json(offers);
     } catch (error) {

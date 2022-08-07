@@ -8,9 +8,10 @@ import {
 } from "../controllers/workerController";
 import { workerAllfiltersOn, workerFilteredByProfession, workerFilteredByRating } from "../services/filteredSearchWorker";
 
-worker.get("/", async (_req: Request, res: Response, next: NextFunction) => {
+worker.get("/", async (req: Request, res: Response, next: NextFunction) => {
+  const multiplier: number = req.body.multiplier;
   try {
-    const worker: WorkerType[] = await getAllWorkers();
+    const worker: WorkerType[] = await getAllWorkers(multiplier);
     res.send(worker);
   } catch (error) {
     next(error);
@@ -21,19 +22,20 @@ worker.get(
   "/search",
   async (req: Request, res: Response, next: NextFunction) => {
     const {q, p, r} = req.query;
+    const multiplier: number = req.body.multiplier;
     try {
       let worker: WorkerType[]; 
       if (q && !p && !r){
-        worker = await getWorkerByName(q);
+        worker = await getWorkerByName(q, multiplier);
       }
       if(q && p && !r){
-        worker = await workerFilteredByProfession(q, p);
+        worker = await workerFilteredByProfession(q, p, multiplier);
       }
       if (q && !p && r){
-        worker = await workerFilteredByRating(q, r);
+        worker = await workerFilteredByRating(q, r, multiplier);
       }
       if (q && p && r) {
-        worker = await workerAllfiltersOn(q, p, r);
+        worker = await workerAllfiltersOn(q, p, r, multiplier);
       }
       res.send(worker);
     } catch (error) {
