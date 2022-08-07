@@ -98,38 +98,140 @@ export const offerAllFiltersOn = async (
   remMax,
   remMin
 ): Promise<OfferType[]> => {
-  const allFiltersOn = await Offer.findAll({
-    where: {
-      [Op.or]: [
-        {
-          title: {
-            [Op.iLike]: `%${input}%`,
-          },
-        },
-        {
-          offer_description: {
-            [Op.iLike]: `%${input}%`,
-          },
-        },
-      ],
-      profession: {
-        [Op.contains]: [profession],
-      }
-    },
-    include: {
-      model: UserClient,
+  console.log(input,
+    profession,
+    rating,
+    remMax,
+    remMin)
+  if (input && profession && rating && remMax && remMin) {
+    const allFiltersOn = await Offer.findAll({
       where: {
-        rating: {
-          [Op.gte]: parseInt(rating),
+        [Op.or]: [
+          {
+            title: {
+              [Op.iLike]: `%${input}%`,
+            },
+          },
+          {
+            offer_description: {
+              [Op.iLike]: `%${input}%`,
+            },
+          },
+        ],
+        profession: {
+          [Op.contains]: [profession],
         },
       },
-    },
-  });
-
-  const filteredByRemuneration = allFiltersOn.filter(
-    (offer) =>
-      offer.dataValues.remuneration[0] >= remMin &&
-      offer.dataValues.remuneration[1] <= remMax
-  );
-  return filteredByRemuneration;
+      include: {
+        model: UserClient,
+        where: {
+          rating: {
+            [Op.gte]: parseInt(rating),
+          },
+        },
+      },
+    });
+    console.log('allFiltersOn ',allFiltersOn)
+    const filteredByRemuneration = allFiltersOn.filter(
+      (offer) =>
+        offer.dataValues.remuneration[0] >= remMin &&
+        offer.dataValues.remuneration[1] <= remMax
+    );
+    return filteredByRemuneration;
+      }
+  if (input && !profession && rating && remMax && remMin) {
+    const allFiltersOn = await Offer.findAll({
+      where: {
+        [Op.or]: [
+          {
+            title: {
+              [Op.iLike]: `%${input}%`,
+            },
+          },
+          {
+            offer_description: {
+              [Op.iLike]: `%${input}%`,
+            },
+          },
+        ],
+      },
+      include: {
+        model: UserClient,
+        where: {
+          rating: {
+            [Op.gte]: parseInt(rating),
+          },
+        },
+      },
+    });
+    console.log("profession ", allFiltersOn)
+    const filteredByRemuneration = allFiltersOn.filter(
+      (offer) =>
+        offer.dataValues.remuneration[0] >= remMin &&
+        offer.dataValues.remuneration[1] <= remMax
+    );
+    return filteredByRemuneration;
+  }
+  if (input && profession && !rating && remMax && remMin) {
+    const allFiltersOn = await Offer.findAll({
+      where: {
+        [Op.or]: [
+          {
+            title: {
+              [Op.iLike]: `%${input}%`,
+            },
+          },
+          {
+            offer_description: {
+              [Op.iLike]: `%${input}%`,
+            },
+          },
+        ],
+        profession: {
+          [Op.contains]: [profession],
+        },
+      },
+      include: {
+        model: UserClient,
+      },
+    });
+    console.log("rating ",allFiltersOn)
+    const filteredByRemuneration = allFiltersOn.filter(
+      (offer) =>
+        offer.dataValues.remuneration[0] >= remMin &&
+        offer.dataValues.remuneration[1] <= remMax
+    );
+    return filteredByRemuneration;
+  }
+  if (input && profession && rating && !remMax && !remMin) {
+    const allFiltersOn = await Offer.findAll({
+      where: {
+        [Op.or]: [
+          {
+            title: {
+              [Op.iLike]: `%${input}%`,
+            },
+          },
+          {
+            offer_description: {
+              [Op.iLike]: `%${input}%`,
+            },
+          },
+        ],
+        profession: {
+          [Op.contains]: [profession],
+        },
+      },
+      include: {
+        model: UserClient,
+        where: {
+          rating: {
+            [Op.gte]: parseInt(rating),
+          },
+        },
+      },
+    });
+    console.log('remuneration ',allFiltersOn)
+    return allFiltersOn;
+  }
 };

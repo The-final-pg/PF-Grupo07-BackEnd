@@ -38,22 +38,21 @@ offer.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
 }));
 offer.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { q, p, r, max, min } = req.query;
-    console.log(max, min);
     try {
         let offers;
         if (q && !p && !r && !max && !min) {
             offers = yield (0, offerController_1.getOffersBySearch)(q);
         }
-        if (q && p && !r && !max && !min) {
+        else if (q && p && !r && !max && !min) {
             offers = yield (0, filteredSearchOffer_1.offerFilteredByProfession)(q, p);
         }
-        if (q && !p && r && !max && !min) {
+        else if (q && !p && r && !max && !min) {
             offers = yield (0, filteredSearchOffer_1.offerFilteredByRating)(q, r);
         }
-        if (q && !p && !r && max && min) {
+        else if (q && !p && !r && max && min) {
             offers = yield (0, filteredSearchOffer_1.offerFilteredByRemuneration)(q, max, min);
         }
-        if (q && p && r && max && min) {
+        else {
             offers = yield (0, filteredSearchOffer_1.offerAllFiltersOn)(q, p, r, max, min);
         }
         res.json(offers);

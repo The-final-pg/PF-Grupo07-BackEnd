@@ -41,22 +41,21 @@ offer.get(
   async (req: Request, res: Response, next: NextFunction) => {
     const { q, p, r, max, min } = req.query;
 
-    console.log(max, min);
     try {
       let offers: OfferType[];
       if (q && !p && !r && !max && !min) {
         offers = await getOffersBySearch(q);
       }
-      if (q && p && !r && !max && !min) {
+      else if (q && p && !r && !max && !min) {
         offers = await offerFilteredByProfession(q, p);
       }
-      if (q && !p && r && !max && !min) {
+      else if (q && !p && r && !max && !min) {
         offers = await offerFilteredByRating(q, r);
       }
-      if (q && !p && !r && max && min) {
+      else if (q && !p && !r && max && min) {
         offers = await offerFilteredByRemuneration(q, max, min);
       }
-      if (q && p && r && max && min) {
+      else {
         offers = await offerAllFiltersOn(q, p, r, max, min);
       }
       res.json(offers);
