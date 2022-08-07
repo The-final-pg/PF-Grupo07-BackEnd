@@ -22,7 +22,7 @@ export const offerFilteredByProfession = async (
     return filteredByProfession;
   }
   else {
-    console.log('Estoy aca 2')
+
     const filteredByProfession = await Offer.findAll({
       limit: 8 + 5 * multiplier,
       where: {

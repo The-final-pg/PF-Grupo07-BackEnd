@@ -34,13 +34,19 @@ worker.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, func
         if (q && !p && !r) {
             worker = yield (0, workerController_1.getWorkerByName)(q, multiplier);
         }
-        if (q && p && !r) {
+        else if (q && p && !r) {
             worker = yield (0, filteredSearchWorker_1.workerFilteredByProfession)(q, p, multiplier);
         }
-        if (q && !p && r) {
+        else if (!q && p && !r) {
+            worker = yield (0, filteredSearchWorker_1.workerFilteredByProfession)(q, p, multiplier);
+        }
+        else if (q && !p && r) {
             worker = yield (0, filteredSearchWorker_1.workerFilteredByRating)(q, r, multiplier);
         }
-        if (q && p && r) {
+        else if (!q && !p && r) {
+            worker = yield (0, filteredSearchWorker_1.workerFilteredByRating)(q, r, multiplier);
+        }
+        else {
             worker = yield (0, filteredSearchWorker_1.workerAllfiltersOn)(q, p, r, multiplier);
         }
         res.send(worker);
