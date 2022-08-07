@@ -73,10 +73,11 @@ offer.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     }
 }));
 offer.get("/:idOffer", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     const { idOffer } = req.params;
     try {
         const offer = yield (0, offerController_1.getOfferById)(idOffer);
-        let result = Object.assign(Object.assign({}, offer), { offersCount: offer.userClient.offers.length, workerName: offer.proposals[0].userWorker.name });
+        let result = Object.assign(Object.assign({}, offer), { offersCount: offer.userClient.offers.length, workerName: (_a = offer.proposals[0]) === null || _a === void 0 ? void 0 : _a.userWorker.name });
         return res.json(result);
     }
     catch (error) {
