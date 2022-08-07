@@ -3,6 +3,7 @@ import { Op } from "sequelize";
 const { Offer, Proposal, UserClient, UserWorker } = require("../db");
 
 export const getAllOffers = async (multiplier: number = 0): Promise<OfferType[]> => {
+  console.log('Estoy aca')
   let allOffers = await Offer.findAll({ 
     limit: 8 + 5 * multiplier,
     include: UserClient });
@@ -15,6 +16,7 @@ export const postOffer = async (offer: OfferType): Promise<string> => {
 };
 
 export const getOfferById = async (id: String): Promise<OfferType> => {
+
   let offer = await Offer.findByPk(id, {
     include: [
       { model: UserClient, include: Offer },
@@ -25,6 +27,7 @@ export const getOfferById = async (id: String): Promise<OfferType> => {
 };
 
 export const getOffersBySearch = async (q, multiplier: number = 0): Promise<OfferType[]> => {
+
   let offers = await Offer.findAll({
     limit: 8 + 5 * multiplier,
     where: {

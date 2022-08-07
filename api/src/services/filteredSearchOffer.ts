@@ -8,28 +8,44 @@ export const offerFilteredByProfession = async (
   profession,
   multiplier: number = 0
 ): Promise<OfferType[]> => {
-  const filteredByProfession = await Offer.findAll({
-    limit: 8 + 5 * multiplier,
-    where: {
-      [Op.or]: [
-        {
-          title: {
-            [Op.iLike]: `%${input}%`,
-          },
+  if (!input && profession){
+    console.log('Estoy aca 1')
+    const filteredByProfession = await Offer.findAll({
+      limit: 8 + 5 * multiplier,
+      where: {
+        profession: {
+          [Op.contains]: [profession],
         },
-        {
-          offer_description: {
-            [Op.iLike]: `%${input}%`,
-          },
-        },
-      ],
-      profession: {
-        [Op.contains]: [profession],
       },
-    },
-    include: UserClient,
-  });
-  return filteredByProfession;
+      include: UserClient,
+    });
+    return filteredByProfession;
+  }
+  else {
+    console.log('Estoy aca 2')
+    const filteredByProfession = await Offer.findAll({
+      limit: 8 + 5 * multiplier,
+      where: {
+        [Op.or]: [
+          {
+            title: {
+              [Op.iLike]: `%${input}%`,
+            },
+          },
+          {
+            offer_description: {
+              [Op.iLike]: `%${input}%`,
+            },
+          },
+        ],
+        profession: {
+          [Op.contains]: [profession],
+        },
+      },
+      include: UserClient,
+    });
+    return filteredByProfession;
+  }
 };
 
 export const offerFilteredByRating = async (
@@ -37,32 +53,48 @@ export const offerFilteredByRating = async (
   rating,
   multiplier: number = 0
 ): Promise<OfferType[]> => {
-  const filteredByRating = await Offer.findAll({
-    limit: 8 + 5 * multiplier,
-    where: {
-      [Op.or]: [
-        {
-          title: {
-            [Op.iLike]: `%${input}%`,
+  if (!input && rating){
+    const filteredByRating = await Offer.findAll({
+      limit: 8 + 5 * multiplier,
+      include: {
+        model: UserClient,
+        where: {
+          rating: {
+            [Op.gte]: parseInt(rating),
           },
-        },
-        {
-          offer_description: {
-            [Op.iLike]: `%${input}%`,
-          },
-        },
-      ],
-    },
-    include: {
-      model: UserClient,
-      where: {
-        rating: {
-          [Op.gte]: parseInt(rating),
         },
       },
-    },
-  });
-  return filteredByRating;
+    });
+    return filteredByRating;
+  }
+  else {
+    const filteredByRating = await Offer.findAll({
+      limit: 8 + 5 * multiplier,
+      where: {
+        [Op.or]: [
+          {
+            title: {
+              [Op.iLike]: `%${input}%`,
+            },
+          },
+          {
+            offer_description: {
+              [Op.iLike]: `%${input}%`,
+            },
+          },
+        ],
+      },
+      include: {
+        model: UserClient,
+        where: {
+          rating: {
+            [Op.gte]: parseInt(rating),
+          },
+        },
+      },
+    });
+    return filteredByRating;
+  }
 };
 
 export const offerFilteredByRemuneration = async (
@@ -71,21 +103,10 @@ export const offerFilteredByRemuneration = async (
   remMin,
   multiplier: number = 0
 ): Promise<OfferType[]> => {
+  if (!input && remMax && remMin) {
   const findedByName = await Offer.findAll({
     limit: 8 + 5 * multiplier,
     where: {
-      [Op.or]: [
-        {
-          title: {
-            [Op.iLike]: `%${input}%`,
-          },
-        },
-        {
-          offer_description: {
-            [Op.iLike]: `%${input}%`,
-          },
-        },
-      ],
       max_remuneration: {
         [Op.lte]: parseInt(remMax),
       },
@@ -97,6 +118,35 @@ export const offerFilteredByRemuneration = async (
   });
 
   return findedByName;
+  }
+  else {
+    const findedByName = await Offer.findAll({
+      limit: 8 + 5 * multiplier,
+      where: {
+        [Op.or]: [
+          {
+            title: {
+              [Op.iLike]: `%${input}%`,
+            },
+          },
+          {
+            offer_description: {
+              [Op.iLike]: `%${input}%`,
+            },
+          },
+        ],
+        max_remuneration: {
+          [Op.lte]: parseInt(remMax),
+        },
+        min_remuneration: {
+          [Op.gte]: parseInt(remMin),
+        },
+      },
+      include: UserClient,
+    });
+  
+    return findedByName;
+  }
 };
 
 export const offerAllFiltersOn = async (
@@ -107,7 +157,6 @@ export const offerAllFiltersOn = async (
   remMin,
   multiplier: number = 0
 ): Promise<OfferType[]> => {
-  console.log(input, profession, rating, remMax, remMin);
   if (input && profession && rating && remMax && remMin) {
     const allFiltersOn = await Offer.findAll({
       limit: 8 + 5 * multiplier,
@@ -214,6 +263,7 @@ export const offerAllFiltersOn = async (
 
     return allFiltersOn;
   }
+  
   if (input && profession && rating && !remMax && !remMin) {
     const allFiltersOn = await Offer.findAll({
       limit: 8 + 5 * multiplier,
@@ -230,6 +280,101 @@ export const offerAllFiltersOn = async (
             },
           },
         ],
+        profession: {
+          [Op.contains]: [profession],
+        },
+      },
+      include: {
+        model: UserClient,
+        where: {
+          rating: {
+            [Op.gte]: parseInt(rating),
+          },
+        },
+      },
+    });
+
+    return allFiltersOn;
+  }
+
+  if (!input && profession && rating && remMax && remMin) {
+    const allFiltersOn = await Offer.findAll({
+      limit: 8 + 5 * multiplier,
+      where: {
+        profession: {
+          [Op.contains]: [profession],
+        },
+        max_remuneration: {
+          [Op.lte]: parseInt(remMax),
+        },
+        min_remuneration: {
+          [Op.gte]: parseInt(remMin),
+        },
+      },
+      include: {
+        model: UserClient,
+        where: {
+          rating: {
+            [Op.gte]: parseInt(rating),
+          },
+        },
+      },
+    });
+
+    return allFiltersOn;
+  }
+
+  if (!input && !profession && rating && remMax && remMin) {
+    const allFiltersOn = await Offer.findAll({
+      limit: 8 + 5 * multiplier,
+      where: {
+        max_remuneration: {
+          [Op.lte]: parseInt(remMax),
+        },
+        min_remuneration: {
+          [Op.gte]: parseInt(remMin),
+        },
+      },
+      include: {
+        model: UserClient,
+        where: {
+          rating: {
+            [Op.gte]: parseInt(rating),
+          },
+        },
+      },
+    });
+
+    return allFiltersOn;
+  }
+
+  if (!input && profession && !rating && remMax && remMin) {
+    const allFiltersOn = await Offer.findAll({
+      limit: 8 + 5 * multiplier,
+      where: {
+        profession: {
+          [Op.contains]: [profession],
+        },
+        max_remuneration: {
+          [Op.lte]: parseInt(remMax),
+        },
+        min_remuneration: {
+          [Op.gte]: parseInt(remMin),
+        },
+      },
+      include: {
+        model: UserClient,
+      },
+    });
+
+    return allFiltersOn;
+  }
+
+  if (!input && profession && rating && !remMax && !remMin) {
+    const allFiltersOn = await Offer.findAll({
+      limit: 8 + 5 * multiplier,
+      where: {
+        
         profession: {
           [Op.contains]: [profession],
         },
