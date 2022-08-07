@@ -7,7 +7,7 @@ export const getAllWorkers = async (): Promise<WorkerType[]> => {
   return allWorkers;
 };
 
-export const getWorkerByName = async (name: string): Promise<WorkerType[]> => {
+export const getWorkerByName = async (name): Promise<WorkerType[]> => {
   const worker: WorkerType[] = await UserWorker.findAll({
     where: {
       name: {

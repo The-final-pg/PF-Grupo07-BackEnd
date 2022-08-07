@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const worker = express_1.default.Router();
 const workerController_1 = require("../controllers/workerController");
+const filteredSearchWorker_1 = require("../services/filteredSearchWorker");
 worker.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const worker = yield (0, workerController_1.getAllWorkers)();
@@ -25,9 +26,21 @@ worker.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function*
     }
 }));
 worker.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const q = req.query.q;
+    const { q, p, r } = req.query;
     try {
-        const worker = yield (0, workerController_1.getWorkerByName)(q);
+        let worker;
+        if (q && !p && !r) {
+            worker = yield (0, workerController_1.getWorkerByName)(q);
+        }
+        if (q && p && !r) {
+            worker = yield (0, filteredSearchWorker_1.workerFilteredByProfession)(q, p);
+        }
+        if (q && !p && r) {
+            worker = yield (0, filteredSearchWorker_1.workerFilteredByRating)(q, r);
+        }
+        if (q && p && r) {
+            worker = yield (0, filteredSearchWorker_1.workerAllfiltersOn)(q, p, r);
+        }
         res.send(worker);
     }
     catch (error) {

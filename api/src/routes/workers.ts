@@ -6,6 +6,7 @@ import {
   getWorkerById,
   getWorkerByName,
 } from "../controllers/workerController";
+import { workerAllfiltersOn, workerFilteredByProfession, workerFilteredByRating } from "../services/filteredSearchWorker";
 
 worker.get("/", async (_req: Request, res: Response, next: NextFunction) => {
   try {
@@ -19,9 +20,21 @@ worker.get("/", async (_req: Request, res: Response, next: NextFunction) => {
 worker.get(
   "/search",
   async (req: Request, res: Response, next: NextFunction) => {
-    const q: string = req.query.q as string;
+    const {q, p, r} = req.query;
     try {
-      const worker: WorkerType[] = await getWorkerByName(q);
+      let worker: WorkerType[]; 
+      if (q && !p && !r){
+        worker = await getWorkerByName(q);
+      }
+      if(q && p && !r){
+        worker = await workerFilteredByProfession(q, p);
+      }
+      if (q && !p && r){
+        worker = await workerFilteredByRating(q, r);
+      }
+      if (q && p && r) {
+        worker = await workerAllfiltersOn(q, p, r);
+      }
       res.send(worker);
     } catch (error) {
       next(error instanceof Error);

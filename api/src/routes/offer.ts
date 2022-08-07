@@ -7,6 +7,12 @@ import {
   getOffersBySearch,
   putOfferState,
 } from "../controllers/offerController";
+import {
+  offerFilteredByProfession,
+  offerAllFiltersOn,
+  offerFilteredByRating,
+  offerFilteredByRemuneration,
+} from "../services/filteredSearchOffer";
 
 const offer = express.Router();
 
@@ -33,9 +39,26 @@ offer.post("/", async (req: Request, res: Response, next: NextFunction) => {
 offer.get(
   "/search",
   async (req: Request, res: Response, next: NextFunction) => {
-    const q: string = req.query.q as string;
+    const { q, p, r, max, min } = req.query;
+
+    console.log(max, min);
     try {
-      const offers: Array<OfferType> = await getOffersBySearch(q);
+      let offers: OfferType[];
+      if (q && !p && !r && !max && !min) {
+        offers = await getOffersBySearch(q);
+      }
+      if (q && p && !r && !max && !min) {
+        offers = await offerFilteredByProfession(q, p);
+      }
+      if (q && !p && r && !max && !min) {
+        offers = await offerFilteredByRating(q, r);
+      }
+      if (q && !p && !r && max && min) {
+        offers = await offerFilteredByRemuneration(q, max, min);
+      }
+      if (q && p && r && max && min) {
+        offers = await offerAllFiltersOn(q, p, r, max, min);
+      }
       res.json(offers);
     } catch (error) {
       next(error);
@@ -71,6 +94,6 @@ offer.put("/", async (req: Request, res: Response, next: NextFunction) => {
   } catch (error) {
     next(error);
   }
-});;
+});
 
 export default offer;
