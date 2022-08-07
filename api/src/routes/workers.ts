@@ -28,13 +28,19 @@ worker.get(
       if (q && !p && !r){
         worker = await getWorkerByName(q, multiplier);
       }
-      if(q && p && !r){
+      else if(q && p && !r){
         worker = await workerFilteredByProfession(q, p, multiplier);
       }
-      if (q && !p && r){
+      else if(!q && p && !r){
+        worker = await workerFilteredByProfession(q, p, multiplier);
+      }
+      else if (q && !p && r){
         worker = await workerFilteredByRating(q, r, multiplier);
       }
-      if (q && p && r) {
+      else if (!q && !p && r){
+        worker = await workerFilteredByRating(q, r, multiplier);
+      }
+      else {
         worker = await workerAllfiltersOn(q, p, r, multiplier);
       }
       res.send(worker);

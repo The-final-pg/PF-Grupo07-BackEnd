@@ -27,7 +27,6 @@ const offerFilteredByProfession = (input, profession, multiplier = 0) => __await
         return filteredByProfession;
     }
     else {
-        console.log('Estoy aca 2');
         const filteredByProfession = yield Offer.findAll({
             limit: 8 + 5 * multiplier,
             where: {

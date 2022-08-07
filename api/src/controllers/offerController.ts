@@ -3,7 +3,6 @@ import { Op } from "sequelize";
 const { Offer, Proposal, UserClient, UserWorker } = require("../db");
 
 export const getAllOffers = async (multiplier: number = 0): Promise<OfferType[]> => {
-  console.log('Estoy aca')
   let allOffers = await Offer.findAll({ 
     limit: 8 + 5 * multiplier,
     include: UserClient });
