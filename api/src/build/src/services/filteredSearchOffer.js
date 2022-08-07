@@ -13,89 +13,137 @@ exports.offerAllFiltersOn = exports.offerFilteredByRemuneration = exports.offerF
 const sequelize_1 = require("sequelize");
 const { Offer, UserClient } = require("../db");
 const offerFilteredByProfession = (input, profession, multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
-    const filteredByProfession = yield Offer.findAll({
-        limit: 8 + 5 * multiplier,
-        where: {
-            [sequelize_1.Op.or]: [
-                {
-                    title: {
-                        [sequelize_1.Op.iLike]: `%${input}%`,
-                    },
+    if (!input && profession) {
+        console.log('Estoy aca 1');
+        const filteredByProfession = yield Offer.findAll({
+            limit: 8 + 5 * multiplier,
+            where: {
+                profession: {
+                    [sequelize_1.Op.contains]: [profession],
                 },
-                {
-                    offer_description: {
-                        [sequelize_1.Op.iLike]: `%${input}%`,
-                    },
-                },
-            ],
-            profession: {
-                [sequelize_1.Op.contains]: [profession],
             },
-        },
-        include: UserClient,
-    });
-    return filteredByProfession;
+            include: UserClient,
+        });
+        return filteredByProfession;
+    }
+    else {
+        console.log('Estoy aca 2');
+        const filteredByProfession = yield Offer.findAll({
+            limit: 8 + 5 * multiplier,
+            where: {
+                [sequelize_1.Op.or]: [
+                    {
+                        title: {
+                            [sequelize_1.Op.iLike]: `%${input}%`,
+                        },
+                    },
+                    {
+                        offer_description: {
+                            [sequelize_1.Op.iLike]: `%${input}%`,
+                        },
+                    },
+                ],
+                profession: {
+                    [sequelize_1.Op.contains]: [profession],
+                },
+            },
+            include: UserClient,
+        });
+        return filteredByProfession;
+    }
 });
 exports.offerFilteredByProfession = offerFilteredByProfession;
 const offerFilteredByRating = (input, rating, multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
-    const filteredByRating = yield Offer.findAll({
-        limit: 8 + 5 * multiplier,
-        where: {
-            [sequelize_1.Op.or]: [
-                {
-                    title: {
-                        [sequelize_1.Op.iLike]: `%${input}%`,
+    if (!input && rating) {
+        const filteredByRating = yield Offer.findAll({
+            limit: 8 + 5 * multiplier,
+            include: {
+                model: UserClient,
+                where: {
+                    rating: {
+                        [sequelize_1.Op.gte]: parseInt(rating),
                     },
-                },
-                {
-                    offer_description: {
-                        [sequelize_1.Op.iLike]: `%${input}%`,
-                    },
-                },
-            ],
-        },
-        include: {
-            model: UserClient,
-            where: {
-                rating: {
-                    [sequelize_1.Op.gte]: parseInt(rating),
                 },
             },
-        },
-    });
-    return filteredByRating;
+        });
+        return filteredByRating;
+    }
+    else {
+        const filteredByRating = yield Offer.findAll({
+            limit: 8 + 5 * multiplier,
+            where: {
+                [sequelize_1.Op.or]: [
+                    {
+                        title: {
+                            [sequelize_1.Op.iLike]: `%${input}%`,
+                        },
+                    },
+                    {
+                        offer_description: {
+                            [sequelize_1.Op.iLike]: `%${input}%`,
+                        },
+                    },
+                ],
+            },
+            include: {
+                model: UserClient,
+                where: {
+                    rating: {
+                        [sequelize_1.Op.gte]: parseInt(rating),
+                    },
+                },
+            },
+        });
+        return filteredByRating;
+    }
 });
 exports.offerFilteredByRating = offerFilteredByRating;
 const offerFilteredByRemuneration = (input, remMax, remMin, multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
-    const findedByName = yield Offer.findAll({
-        limit: 8 + 5 * multiplier,
-        where: {
-            [sequelize_1.Op.or]: [
-                {
-                    title: {
-                        [sequelize_1.Op.iLike]: `%${input}%`,
-                    },
+    if (!input && remMax && remMin) {
+        const findedByName = yield Offer.findAll({
+            limit: 8 + 5 * multiplier,
+            where: {
+                max_remuneration: {
+                    [sequelize_1.Op.lte]: parseInt(remMax),
                 },
-                {
-                    offer_description: {
-                        [sequelize_1.Op.iLike]: `%${input}%`,
-                    },
+                min_remuneration: {
+                    [sequelize_1.Op.gte]: parseInt(remMin),
                 },
-            ],
-            max_remuneration: {
-                [sequelize_1.Op.lte]: parseInt(remMax),
             },
-            min_remuneration: {
-                [sequelize_1.Op.gte]: parseInt(remMin),
+            include: UserClient,
+        });
+        return findedByName;
+    }
+    else {
+        const findedByName = yield Offer.findAll({
+            limit: 8 + 5 * multiplier,
+            where: {
+                [sequelize_1.Op.or]: [
+                    {
+                        title: {
+                            [sequelize_1.Op.iLike]: `%${input}%`,
+                        },
+                    },
+                    {
+                        offer_description: {
+                            [sequelize_1.Op.iLike]: `%${input}%`,
+                        },
+                    },
+                ],
+                max_remuneration: {
+                    [sequelize_1.Op.lte]: parseInt(remMax),
+                },
+                min_remuneration: {
+                    [sequelize_1.Op.gte]: parseInt(remMin),
+                },
             },
-        },
-        include: UserClient,
-    });
-    return findedByName;
+            include: UserClient,
+        });
+        return findedByName;
+    }
 });
 exports.offerFilteredByRemuneration = offerFilteredByRemuneration;
 const offerAllFiltersOn = (input, profession, rating, remMax, remMin, multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(input, profession, rating, remMax, remMin);
     if (input && profession && rating && remMax && remMin) {
         const allFiltersOn = yield Offer.findAll({
             limit: 8 + 5 * multiplier,
@@ -215,6 +263,92 @@ const offerAllFiltersOn = (input, profession, rating, remMax, remMin, multiplier
                         },
                     },
                 ],
+                profession: {
+                    [sequelize_1.Op.contains]: [profession],
+                },
+            },
+            include: {
+                model: UserClient,
+                where: {
+                    rating: {
+                        [sequelize_1.Op.gte]: parseInt(rating),
+                    },
+                },
+            },
+        });
+        return allFiltersOn;
+    }
+    if (!input && profession && rating && remMax && remMin) {
+        const allFiltersOn = yield Offer.findAll({
+            limit: 8 + 5 * multiplier,
+            where: {
+                profession: {
+                    [sequelize_1.Op.contains]: [profession],
+                },
+                max_remuneration: {
+                    [sequelize_1.Op.lte]: parseInt(remMax),
+                },
+                min_remuneration: {
+                    [sequelize_1.Op.gte]: parseInt(remMin),
+                },
+            },
+            include: {
+                model: UserClient,
+                where: {
+                    rating: {
+                        [sequelize_1.Op.gte]: parseInt(rating),
+                    },
+                },
+            },
+        });
+        return allFiltersOn;
+    }
+    if (!input && !profession && rating && remMax && remMin) {
+        const allFiltersOn = yield Offer.findAll({
+            limit: 8 + 5 * multiplier,
+            where: {
+                max_remuneration: {
+                    [sequelize_1.Op.lte]: parseInt(remMax),
+                },
+                min_remuneration: {
+                    [sequelize_1.Op.gte]: parseInt(remMin),
+                },
+            },
+            include: {
+                model: UserClient,
+                where: {
+                    rating: {
+                        [sequelize_1.Op.gte]: parseInt(rating),
+                    },
+                },
+            },
+        });
+        return allFiltersOn;
+    }
+    if (!input && profession && !rating && remMax && remMin) {
+        const allFiltersOn = yield Offer.findAll({
+            limit: 8 + 5 * multiplier,
+            where: {
+                profession: {
+                    [sequelize_1.Op.contains]: [profession],
+                },
+                max_remuneration: {
+                    [sequelize_1.Op.lte]: parseInt(remMax),
+                },
+                min_remuneration: {
+                    [sequelize_1.Op.gte]: parseInt(remMin),
+                },
+            },
+            include: {
+                model: UserClient,
+            },
+        });
+        return allFiltersOn;
+    }
+    if (!input && profession && rating && !remMax && !remMin) {
+        const allFiltersOn = yield Offer.findAll({
+            limit: 8 + 5 * multiplier,
+            where: {
                 profession: {
                     [sequelize_1.Op.contains]: [profession],
                 },

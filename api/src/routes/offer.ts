@@ -48,9 +48,15 @@ offer.get(
         offers = await getOffersBySearch(q, multiplier);
       } else if (q && p && !r && !max && !min) {
         offers = await offerFilteredByProfession(q, p, multiplier);
+      } else if (!q && p && !r && !max && !min) {
+        offers = await offerFilteredByProfession(q, p, multiplier);
       } else if (q && !p && r && !max && !min) {
         offers = await offerFilteredByRating(q, r, multiplier);
+      } else if (!q && !p && r && !max && !min) {
+        offers = await offerFilteredByRating(q, r, multiplier);
       } else if (q && !p && !r && max && min) {
+        offers = await offerFilteredByRemuneration(q, max, min, multiplier);
+      } else if (!q && !p && !r && max && min) {
         offers = await offerFilteredByRemuneration(q, max, min, multiplier);
       } else {
         offers = await offerAllFiltersOn(q, p, r, max, min, multiplier);

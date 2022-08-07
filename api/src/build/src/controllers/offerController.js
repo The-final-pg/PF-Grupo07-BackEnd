@@ -13,6 +13,7 @@ exports.putOfferState = exports.getOffersBySearch = exports.getOfferById = expor
 const sequelize_1 = require("sequelize");
 const { Offer, Proposal, UserClient, UserWorker } = require("../db");
 const getAllOffers = (multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('Estoy aca');
     let allOffers = yield Offer.findAll({
         limit: 8 + 5 * multiplier,
         include: UserClient
