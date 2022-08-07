@@ -38,7 +38,6 @@ offer.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
 }));
 offer.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { q, p, r, max, min } = req.query;
-    console.log(max, min);
     try {
         let offers;
         if (q && !p && !r && !max && !min) {

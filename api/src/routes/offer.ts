@@ -41,7 +41,6 @@ offer.get(
   async (req: Request, res: Response, next: NextFunction) => {
     const { q, p, r, max, min } = req.query;
 
-    console.log(max, min);
     try {
       let offers: OfferType[];
       if (q && !p && !r && !max && !min) {
