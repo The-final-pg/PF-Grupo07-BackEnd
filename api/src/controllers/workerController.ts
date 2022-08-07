@@ -2,13 +2,16 @@ import { WorkerType } from "../types";
 import { Op } from "sequelize";
 const { UserWorker , Review, Proposal, Portfolio } = require("../db");
 
-export const getAllWorkers = async (): Promise<WorkerType[]> => {
-  const allWorkers = await UserWorker.findAll();
+export const getAllWorkers = async (multiplier: number = 0): Promise<WorkerType[]> => {
+  const allWorkers = await UserWorker.findAll({
+    limit: 8 + 5 * multiplier,
+  });
   return allWorkers;
 };
 
-export const getWorkerByName = async (name): Promise<WorkerType[]> => {
+export const getWorkerByName = async (name, multiplier: number = 0): Promise<WorkerType[]> => {
   const worker: WorkerType[] = await UserWorker.findAll({
+    limit: 8 + 5 * multiplier,
     where: {
       name: {
         [Op.iLike]: `%${name}%`,

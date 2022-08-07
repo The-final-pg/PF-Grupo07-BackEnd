@@ -18,7 +18,7 @@ const data_1 = require("./data");
 /* const setData =require('./data');
 const setOffersAndProposals =require('./data'); */
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
     app_1.default.listen(3001, () => __awaiter(void 0, void 0, void 0, function* () {
         console.log("%s listening at 3001"); // eslint-disable-line no-console
         yield (0, data_1.setData)();

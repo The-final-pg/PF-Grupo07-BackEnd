@@ -12,8 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.workerAllfiltersOn = exports.workerFilteredByRating = exports.workerFilteredByProfession = void 0;
 const sequelize_1 = require("sequelize");
 const { UserWorker } = require("../db");
-const workerFilteredByProfession = (name, profession) => __awaiter(void 0, void 0, void 0, function* () {
+const workerFilteredByProfession = (name, profession, multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
     const filteredByProfession = yield UserWorker.findAll({
+        limit: 8 + 5 * multiplier,
         where: {
             name: {
                 [sequelize_1.Op.iLike]: `%${name}%`,
@@ -26,8 +27,9 @@ const workerFilteredByProfession = (name, profession) => __awaiter(void 0, void 
     return filteredByProfession;
 });
 exports.workerFilteredByProfession = workerFilteredByProfession;
-const workerFilteredByRating = (name, rating) => __awaiter(void 0, void 0, void 0, function* () {
+const workerFilteredByRating = (name, rating, multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
     const filteredByRating = yield UserWorker.findAll({
+        limit: 8 + 5 * multiplier,
         where: {
             name: {
                 [sequelize_1.Op.iLike]: `%${name}%`,
@@ -40,8 +42,9 @@ const workerFilteredByRating = (name, rating) => __awaiter(void 0, void 0, void 
     return filteredByRating;
 });
 exports.workerFilteredByRating = workerFilteredByRating;
-const workerAllfiltersOn = (name, profession, rating) => __awaiter(void 0, void 0, void 0, function* () {
+const workerAllfiltersOn = (name, profession, rating, multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
     const workerAllfiltersOn = yield UserWorker.findAll({
+        limit: 8 + 5 * multiplier,
         where: {
             name: {
                 [sequelize_1.Op.iLike]: `%${name}%`,
