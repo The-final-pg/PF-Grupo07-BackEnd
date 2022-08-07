@@ -77,7 +77,7 @@ offer.get(
       let result = {
         ...offer,
         offersCount: offer.userClient.offers.length,
-        workerName: offer.proposals[0].userWorker.name,
+        workerName: offer.proposals[0]?.userWorker.name,
       };
       return res.json(result);
     } catch (error) {
