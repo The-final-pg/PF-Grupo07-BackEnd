@@ -48,6 +48,7 @@ const getOffersBySearch = (q) => __awaiter(void 0, void 0, void 0, function* () 
                 },
             ],
         },
+        include: UserClient
     });
     return offers;
 });

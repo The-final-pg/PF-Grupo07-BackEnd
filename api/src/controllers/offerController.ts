@@ -22,7 +22,7 @@ export const getOfferById = async (id: String): Promise<OfferType> => {
   return offer.toJSON();
 };
 
-export const getOffersBySearch = async (q: string): Promise<OfferType[]> => {
+export const getOffersBySearch = async (q): Promise<OfferType[]> => {
   let offers = await Offer.findAll({
     where: {
       [Op.or]: [
@@ -38,6 +38,7 @@ export const getOffersBySearch = async (q: string): Promise<OfferType[]> => {
         },
       ],
     },
+    include:UserClient
   });
   return offers;
 };

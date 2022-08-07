@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const offerController_1 = require("../controllers/offerController");
+const filteredSearchOffer_1 = require("../services/filteredSearchOffer");
 const offer = express_1.default.Router();
 offer.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -36,9 +37,25 @@ offer.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
     }
 }));
 offer.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const q = req.query.q;
+    const { q, p, r, max, min } = req.query;
+    console.log(max, min);
     try {
-        const offers = yield (0, offerController_1.getOffersBySearch)(q);
+        let offers;
+        if (q && !p && !r && !max && !min) {
+            offers = yield (0, offerController_1.getOffersBySearch)(q);
+        }
+        if (q && p && !r && !max && !min) {
+            offers = yield (0, filteredSearchOffer_1.offerFilteredByProfession)(q, p);
+        }
+        if (q && !p && r && !max && !min) {
+            offers = yield (0, filteredSearchOffer_1.offerFilteredByRating)(q, r);
+        }
+        if (q && !p && !r && max && min) {
+            offers = yield (0, filteredSearchOffer_1.offerFilteredByRemuneration)(q, max, min);
+        }
+        if (q && p && r && max && min) {
+            offers = yield (0, filteredSearchOffer_1.offerAllFiltersOn)(q, p, r, max, min);
+        }
         res.json(offers);
     }
     catch (error) {
@@ -68,5 +85,4 @@ offer.put("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
         next(error);
     }
 }));
-;
 exports.default = offer;
