@@ -60,7 +60,8 @@ const setOffers = () => __awaiter(void 0, void 0, void 0, function* () {
         responseOffers.data.map((e) => {
             arrayOffers.push({
                 title: e.Offer.title,
-                remuneration: e.Offer.remuneration.map((e) => parseInt(e)).sort((a, b) => a - b),
+                max_remuneration: Math.floor(e.Offer.remuneration),
+                min_remuneration: Math.floor(e.Offer.remuneration / 2),
                 offer_description: e.Offer.offer_description,
                 post_duration_time: e.Offer.post_duration_time,
                 work_duration_time: parseInt(e.Offer.work_duration_time),

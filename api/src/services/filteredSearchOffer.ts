@@ -80,15 +80,17 @@ export const offerFilteredByRemuneration = async (
           },
         },
       ],
+      max_remuneration: {
+        [Op.lte]: parseInt(remMax),
+      },
+      min_remuneration: {
+        [Op.gte]: parseInt(remMin),
+      },
     },
     include: UserClient,
   });
-  const filteredByRemuneration = findedByName.filter(
-    (offer) =>
-      offer.dataValues.remuneration[0] >= remMin &&
-      offer.dataValues.remuneration[1] <= remMax
-  );
-  return filteredByRemuneration;
+
+  return findedByName;
 };
 
 export const offerAllFiltersOn = async (
@@ -98,11 +100,7 @@ export const offerAllFiltersOn = async (
   remMax,
   remMin
 ): Promise<OfferType[]> => {
-  console.log(input,
-    profession,
-    rating,
-    remMax,
-    remMin)
+  console.log(input, profession, rating, remMax, remMin);
   if (input && profession && rating && remMax && remMin) {
     const allFiltersOn = await Offer.findAll({
       where: {
@@ -121,6 +119,12 @@ export const offerAllFiltersOn = async (
         profession: {
           [Op.contains]: [profession],
         },
+        max_remuneration: {
+          [Op.lte]: parseInt(remMax),
+        },
+        min_remuneration: {
+          [Op.gte]: parseInt(remMin),
+        },
       },
       include: {
         model: UserClient,
@@ -131,14 +135,9 @@ export const offerAllFiltersOn = async (
         },
       },
     });
-    console.log('allFiltersOn ',allFiltersOn)
-    const filteredByRemuneration = allFiltersOn.filter(
-      (offer) =>
-        offer.dataValues.remuneration[0] >= remMin &&
-        offer.dataValues.remuneration[1] <= remMax
-    );
-    return filteredByRemuneration;
-      }
+
+    return allFiltersOn;
+  }
   if (input && !profession && rating && remMax && remMin) {
     const allFiltersOn = await Offer.findAll({
       where: {
@@ -154,6 +153,12 @@ export const offerAllFiltersOn = async (
             },
           },
         ],
+        max_remuneration: {
+          [Op.lte]: parseInt(remMax),
+        },
+        min_remuneration: {
+          [Op.gte]: parseInt(remMin),
+        },
       },
       include: {
         model: UserClient,
@@ -164,13 +169,8 @@ export const offerAllFiltersOn = async (
         },
       },
     });
-    console.log("profession ", allFiltersOn)
-    const filteredByRemuneration = allFiltersOn.filter(
-      (offer) =>
-        offer.dataValues.remuneration[0] >= remMin &&
-        offer.dataValues.remuneration[1] <= remMax
-    );
-    return filteredByRemuneration;
+
+    return allFiltersOn;
   }
   if (input && profession && !rating && remMax && remMin) {
     const allFiltersOn = await Offer.findAll({
@@ -190,18 +190,19 @@ export const offerAllFiltersOn = async (
         profession: {
           [Op.contains]: [profession],
         },
+        max_remuneration: {
+          [Op.lte]: parseInt(remMax),
+        },
+        min_remuneration: {
+          [Op.gte]: parseInt(remMin),
+        },
       },
       include: {
         model: UserClient,
       },
     });
-    console.log("rating ",allFiltersOn)
-    const filteredByRemuneration = allFiltersOn.filter(
-      (offer) =>
-        offer.dataValues.remuneration[0] >= remMin &&
-        offer.dataValues.remuneration[1] <= remMax
-    );
-    return filteredByRemuneration;
+
+    return allFiltersOn;
   }
   if (input && profession && rating && !remMax && !remMin) {
     const allFiltersOn = await Offer.findAll({
@@ -231,7 +232,7 @@ export const offerAllFiltersOn = async (
         },
       },
     });
-    console.log('remuneration ',allFiltersOn)
+
     return allFiltersOn;
   }
 };
