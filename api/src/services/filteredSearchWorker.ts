@@ -3,10 +3,10 @@ import { Op} from 'sequelize';
 
 const { UserWorker } = require("../db");
 
-export const workerFilteredByProfession = async (name, profession, multiplier: number = 0): Promise<WorkerType[]> => {
+export const workerFilteredByProfession = async (name, profession/* , multiplier: number = 0 */): Promise<WorkerType[]> => {
   if (!name && profession) {
     const filteredByProfession = await UserWorker.findAll({
-      limit: 8 + 5 * multiplier,
+/*       limit: 8 + 5 * multiplier, */
       where:{
         profession: {
           [Op.contains]: [profession],
@@ -16,7 +16,7 @@ export const workerFilteredByProfession = async (name, profession, multiplier: n
     return filteredByProfession;
   } else {
     const filteredByProfession = await UserWorker.findAll({
-      limit: 8 + 5 * multiplier,
+/*       limit: 8 + 5 * multiplier, */
       where:{
         name: {
           [Op.iLike]: `%${name}%`,
@@ -30,10 +30,10 @@ export const workerFilteredByProfession = async (name, profession, multiplier: n
   }
 }
 
-export const workerFilteredByRating = async (name, rating, multiplier: number = 0): Promise<WorkerType[]> => {
+export const workerFilteredByRating = async (name, rating/* , multiplier: number = 0 */): Promise<WorkerType[]> => {
   if (!name && rating) {
     const filteredByRating = await UserWorker.findAll({
-      limit: 8 + 5 * multiplier,
+/*       limit: 8 + 5 * multiplier, */
       where:{
         rating: {
           [Op.gte]: parseInt(rating)
@@ -43,7 +43,7 @@ export const workerFilteredByRating = async (name, rating, multiplier: number = 
     return filteredByRating;
   } else {
     const filteredByRating = await UserWorker.findAll({
-      limit: 8 + 5 * multiplier,
+/*       limit: 8 + 5 * multiplier, */
       where:{
         name: {
           [Op.iLike]: `%${name}%`,
@@ -57,10 +57,10 @@ export const workerFilteredByRating = async (name, rating, multiplier: number = 
   }
 };
 
-export const workerAllfiltersOn = async (name, profession, rating, multiplier: number = 0): Promise<WorkerType[]> => {
+export const workerAllfiltersOn = async (name, profession, rating/* , multiplier: number = 0 */): Promise<WorkerType[]> => {
   if (!name && profession && rating) {
     const workerAllfiltersOn = await UserWorker.findAll({
-      limit: 8 + 5 * multiplier,
+/*       limit: 8 + 5 * multiplier, */
       where:{
         profession: {
           [Op.contains]: [profession],
@@ -73,7 +73,7 @@ export const workerAllfiltersOn = async (name, profession, rating, multiplier: n
     return workerAllfiltersOn;
   } else {
     const workerAllfiltersOn = await UserWorker.findAll({
-      limit: 8 + 5 * multiplier,
+/*       limit: 8 + 5 * multiplier, */
       where:{
         name: {
           [Op.iLike]: `%${name}%`,
@@ -89,7 +89,7 @@ export const workerAllfiltersOn = async (name, profession, rating, multiplier: n
     return workerAllfiltersOn;
   }
   const workerAllfiltersOn = await UserWorker.findAll({
-    limit: 8 + 5 * multiplier,
+/*     limit: 8 + 5 * multiplier, */
     where:{
       name: {
         [Op.iLike]: `%${name}%`,
