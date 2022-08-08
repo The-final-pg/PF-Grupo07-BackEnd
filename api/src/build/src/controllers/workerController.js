@@ -12,16 +12,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getWorkerById = exports.getWorkerByName = exports.getAllWorkers = void 0;
 const sequelize_1 = require("sequelize");
 const { UserWorker, Review, Proposal, Portfolio } = require("../db");
-const getAllWorkers = (multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllWorkers = ( /* multiplier: number = 0 */) => __awaiter(void 0, void 0, void 0, function* () {
     const allWorkers = yield UserWorker.findAll({
-        limit: 8 + 5 * multiplier,
+    /*     limit: 8 + 5 * multiplier, */
     });
     return allWorkers;
 });
 exports.getAllWorkers = getAllWorkers;
-const getWorkerByName = (name, multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
+const getWorkerByName = (name /* , multiplier: number = 0 */) => __awaiter(void 0, void 0, void 0, function* () {
     const worker = yield UserWorker.findAll({
-        limit: 8 + 5 * multiplier,
+        /*     limit: 8 + 5 * multiplier, */
         where: {
             name: {
                 [sequelize_1.Op.iLike]: `%${name}%`,
