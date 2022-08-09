@@ -16,10 +16,10 @@ const express_1 = __importDefault(require("express"));
 const offerController_1 = require("../controllers/offerController");
 const filteredSearchOffer_1 = require("../services/filteredSearchOffer");
 const offer = express_1.default.Router();
-offer.get("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const multiplier = req.body.multiplier;
+offer.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    /*   const multiplier: number = req.body.multiplier; */
     try {
-        const offers = yield (0, offerController_1.getAllOffers)(multiplier);
+        const offers = yield (0, offerController_1.getAllOffers)( /* multiplier */);
         res.json(offers);
     }
     catch (error) {
@@ -39,32 +39,32 @@ offer.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
 }));
 offer.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { q, p, r, max, min } = req.query;
-    const multiplier = req.body.multiplier;
+    /*   const multiplier: number = req.body.multiplier; */
     try {
         let offers;
         if (q && !p && !r && !max && !min) {
-            offers = yield (0, offerController_1.getOffersBySearch)(q, multiplier);
+            offers = yield (0, offerController_1.getOffersBySearch)(q /* , multiplier */);
         }
         else if (q && p && !r && !max && !min) {
-            offers = yield (0, filteredSearchOffer_1.offerFilteredByProfession)(q, p, multiplier);
+            offers = yield (0, filteredSearchOffer_1.offerFilteredByProfession)(q, p /* , multiplier */);
         }
         else if (!q && p && !r && !max && !min) {
-            offers = yield (0, filteredSearchOffer_1.offerFilteredByProfession)(q, p, multiplier);
+            offers = yield (0, filteredSearchOffer_1.offerFilteredByProfession)(q, p /* , multiplier */);
         }
         else if (q && !p && r && !max && !min) {
-            offers = yield (0, filteredSearchOffer_1.offerFilteredByRating)(q, r, multiplier);
+            offers = yield (0, filteredSearchOffer_1.offerFilteredByRating)(q, r /* , multiplier */);
         }
         else if (!q && !p && r && !max && !min) {
-            offers = yield (0, filteredSearchOffer_1.offerFilteredByRating)(q, r, multiplier);
+            offers = yield (0, filteredSearchOffer_1.offerFilteredByRating)(q, r /* , multiplier */);
         }
         else if (q && !p && !r && max && min) {
-            offers = yield (0, filteredSearchOffer_1.offerFilteredByRemuneration)(q, max, min, multiplier);
+            offers = yield (0, filteredSearchOffer_1.offerFilteredByRemuneration)(q, max, min /* , multiplier */);
         }
         else if (!q && !p && !r && max && min) {
-            offers = yield (0, filteredSearchOffer_1.offerFilteredByRemuneration)(q, max, min, multiplier);
+            offers = yield (0, filteredSearchOffer_1.offerFilteredByRemuneration)(q, max, min /* , multiplier */);
         }
         else {
-            offers = yield (0, filteredSearchOffer_1.offerAllFiltersOn)(q, p, r, max, min, multiplier);
+            offers = yield (0, filteredSearchOffer_1.offerAllFiltersOn)(q, p, r, max, min /* , multiplier */);
         }
         res.json(offers);
     }

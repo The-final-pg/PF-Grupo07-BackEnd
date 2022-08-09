@@ -12,11 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.offerAllFiltersOn = exports.offerFilteredByRemuneration = exports.offerFilteredByRating = exports.offerFilteredByProfession = void 0;
 const sequelize_1 = require("sequelize");
 const { Offer, UserClient } = require("../db");
-const offerFilteredByProfession = (input, profession, multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
+const offerFilteredByProfession = (input, profession) => __awaiter(void 0, void 0, void 0, function* () {
     if (!input && profession) {
         console.log('Estoy aca 1');
         const filteredByProfession = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
+            /*       limit: 8 + 5 * multiplier , */
             where: {
                 profession: {
                     [sequelize_1.Op.contains]: [profession],
@@ -28,7 +28,7 @@ const offerFilteredByProfession = (input, profession, multiplier = 0) => __await
     }
     else {
         const filteredByProfession = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
+            /*       limit: 8 + 5 * multiplier, */
             where: {
                 [sequelize_1.Op.or]: [
                     {
@@ -52,10 +52,10 @@ const offerFilteredByProfession = (input, profession, multiplier = 0) => __await
     }
 });
 exports.offerFilteredByProfession = offerFilteredByProfession;
-const offerFilteredByRating = (input, rating, multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
+const offerFilteredByRating = (input, rating) => __awaiter(void 0, void 0, void 0, function* () {
     if (!input && rating) {
         const filteredByRating = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
+            /*       limit: 8 + 5 * multiplier, */
             include: {
                 model: UserClient,
                 where: {
@@ -69,7 +69,7 @@ const offerFilteredByRating = (input, rating, multiplier = 0) => __awaiter(void 
     }
     else {
         const filteredByRating = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
+            /*      limit: 8 + 5 * multiplier, */
             where: {
                 [sequelize_1.Op.or]: [
                     {
@@ -97,10 +97,10 @@ const offerFilteredByRating = (input, rating, multiplier = 0) => __awaiter(void 
     }
 });
 exports.offerFilteredByRating = offerFilteredByRating;
-const offerFilteredByRemuneration = (input, remMax, remMin, multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
+const offerFilteredByRemuneration = (input, remMax, remMin) => __awaiter(void 0, void 0, void 0, function* () {
     if (!input && remMax && remMin) {
         const findedByName = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
+            /*     limit: 8 + 5 * multiplier, */
             where: {
                 max_remuneration: {
                     [sequelize_1.Op.lte]: parseInt(remMax),
@@ -115,7 +115,7 @@ const offerFilteredByRemuneration = (input, remMax, remMin, multiplier = 0) => _
     }
     else {
         const findedByName = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
+            /*       limit: 8 + 5 * multiplier, */
             where: {
                 [sequelize_1.Op.or]: [
                     {
@@ -142,10 +142,10 @@ const offerFilteredByRemuneration = (input, remMax, remMin, multiplier = 0) => _
     }
 });
 exports.offerFilteredByRemuneration = offerFilteredByRemuneration;
-const offerAllFiltersOn = (input, profession, rating, remMax, remMin, multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
+const offerAllFiltersOn = (input, profession, rating, remMax, remMin) => __awaiter(void 0, void 0, void 0, function* () {
     if (input && profession && rating && remMax && remMin) {
         const allFiltersOn = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
+            /*       limit: 8 + 5 * multiplier, */
             where: {
                 [sequelize_1.Op.or]: [
                     {
@@ -182,7 +182,7 @@ const offerAllFiltersOn = (input, profession, rating, remMax, remMin, multiplier
     }
     if (input && !profession && rating && remMax && remMin) {
         const allFiltersOn = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
+            /*       limit: 8 + 5 * multiplier, */
             where: {
                 [sequelize_1.Op.or]: [
                     {
@@ -216,7 +216,7 @@ const offerAllFiltersOn = (input, profession, rating, remMax, remMin, multiplier
     }
     if (input && profession && !rating && remMax && remMin) {
         const allFiltersOn = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
+            /*       limit: 8 + 5 * multiplier, */
             where: {
                 [sequelize_1.Op.or]: [
                     {
@@ -248,7 +248,7 @@ const offerAllFiltersOn = (input, profession, rating, remMax, remMin, multiplier
     }
     if (input && profession && rating && !remMax && !remMin) {
         const allFiltersOn = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
+            /*       limit: 8 + 5 * multiplier, */
             where: {
                 [sequelize_1.Op.or]: [
                     {
@@ -279,7 +279,7 @@ const offerAllFiltersOn = (input, profession, rating, remMax, remMin, multiplier
     }
     if (!input && profession && rating && remMax && remMin) {
         const allFiltersOn = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
+            /*     limit: 8 + 5 * multiplier, */
             where: {
                 profession: {
                     [sequelize_1.Op.contains]: [profession],
@@ -304,7 +304,7 @@ const offerAllFiltersOn = (input, profession, rating, remMax, remMin, multiplier
     }
     if (!input && !profession && rating && remMax && remMin) {
         const allFiltersOn = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
+            /*     limit: 8 + 5 * multiplier, */
             where: {
                 max_remuneration: {
                     [sequelize_1.Op.lte]: parseInt(remMax),
@@ -326,7 +326,7 @@ const offerAllFiltersOn = (input, profession, rating, remMax, remMin, multiplier
     }
     if (!input && profession && !rating && remMax && remMin) {
         const allFiltersOn = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
+            /*       limit: 8 + 5 * multiplier, */
             where: {
                 profession: {
                     [sequelize_1.Op.contains]: [profession],
@@ -346,7 +346,7 @@ const offerAllFiltersOn = (input, profession, rating, remMax, remMin, multiplier
     }
     if (!input && profession && rating && !remMax && !remMin) {
         const allFiltersOn = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
+            /*       limit: 8 + 5 * multiplier, */
             where: {
                 profession: {
                     [sequelize_1.Op.contains]: [profession],
