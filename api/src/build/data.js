@@ -71,7 +71,7 @@ const setOffers = () => __awaiter(void 0, void 0, void 0, function* () {
         });
         arrayOffers = arrayOffers.map((e) => {
             let x = clientsId.pop();
-            return Object.assign(Object.assign({}, e), { userClientIdClient: x.dataValues.idClient });
+            return Object.assign(Object.assign({}, e), { userClientId: x.dataValues.id });
         });
         let arrayOffersDb = yield (arrayOffers === null || arrayOffers === void 0 ? void 0 : arrayOffers.filter((c) => c));
         yield Offer.bulkCreate(arrayOffersDb);
@@ -95,7 +95,7 @@ const setProposals = () => __awaiter(void 0, void 0, void 0, function* () {
         arrayProposal = arrayProposal.map((e) => {
             let x = workersId.pop();
             let y = offersId.pop();
-            return Object.assign(Object.assign({}, e), { userWorkerIdWorker: x.dataValues.idWorker, offerIdOffer: y.dataValues.idOffer });
+            return Object.assign(Object.assign({}, e), { userWorkerId: x.dataValues.id, offerIdOffer: y.dataValues.idOffer });
         });
         let arrayProposalDb = yield (arrayProposal === null || arrayProposal === void 0 ? void 0 : arrayProposal.filter((c) => c));
         yield Proposal.bulkCreate(arrayProposalDb);
@@ -117,7 +117,7 @@ const setPortfolios = () => __awaiter(void 0, void 0, void 0, function* () {
         });
         arrayPortfolio = arrayPortfolio.map((e) => {
             let x = workersId.pop();
-            return Object.assign(Object.assign({}, e), { userWorkerIdWorker: x.dataValues.idWorker });
+            return Object.assign(Object.assign({}, e), { userWorkerId: x.dataValues.id });
         });
         let arrayPortfolioDb = yield (arrayPortfolio === null || arrayPortfolio === void 0 ? void 0 : arrayPortfolio.filter((c) => c));
         yield Portfolio.bulkCreate(arrayPortfolioDb);
@@ -142,7 +142,7 @@ const setReview = () => __awaiter(void 0, void 0, void 0, function* () {
             let x = workersId.pop();
             let y = clientsId.pop();
             let z = offersId.pop();
-            return Object.assign(Object.assign({}, e), { userWorkerIdWorker: x.dataValues.idWorker, userClientIdClient: y.dataValues.idClient, offerIdOffer: z.dataValues.idOffer });
+            return Object.assign(Object.assign({}, e), { userWorkerId: x.dataValues.id, userClientId: y.dataValues.id, offerIdOffer: z.dataValues.idOffer });
         });
         let arrayReviewDb = yield (arrayReview === null || arrayReview === void 0 ? void 0 : arrayReview.filter((c) => c));
         yield Review.bulkCreate(arrayReviewDb);

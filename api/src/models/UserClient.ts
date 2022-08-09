@@ -29,7 +29,7 @@ module.exports = (sequelize: any) => {
       type: DataTypes.ARRAY(DataTypes.JSONB),
       allowNull: true,
     },
-    idClient: {
+    id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,

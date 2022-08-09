@@ -55,7 +55,8 @@ passport_1.default.use(new passport_local_1.Strategy({
 })));
 // serialización: toma el id y lo almacena en la session (para requerirla: req.session.passport.user)
 passport_1.default.serializeUser((user, done) => {
-    done(null, user._id);
+    console.log("entre a serialize");
+    done(null, user.id);
 });
 // deserialización: a partir del id serializado, cierra la session 
 passport_1.default.deserializeUser((id, done) => __awaiter(void 0, void 0, void 0, function* () {

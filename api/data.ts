@@ -70,7 +70,7 @@ export const setOffers = async () => {
       let x = clientsId.pop();
       return {
         ...e,
-        userClientIdClient: x.dataValues.idClient,
+        userClientId: x.dataValues.id,
       };
     });
     let arrayOffersDb = await arrayOffers?.filter((c) => c);
@@ -99,7 +99,7 @@ export const setProposals = async () => {
       let y = offersId.pop();
       return {
         ...e,
-        userWorkerIdWorker: x.dataValues.idWorker,
+        userWorkerId: x.dataValues.id,
         offerIdOffer: y.dataValues.idOffer,
       };
     });
@@ -127,7 +127,7 @@ export const setPortfolios = async () => {
       let x = workersId.pop();
       return {
         ...e,
-        userWorkerIdWorker: x.dataValues.idWorker,
+        userWorkerId: x.dataValues.id,
       };
     });
     let arrayPortfolioDb = await arrayPortfolio?.filter((c) => c);
@@ -157,8 +157,8 @@ export const setReview = async () => {
       let z = offersId.pop();
       return {
         ...e,
-        userWorkerIdWorker: x.dataValues.idWorker,
-        userClientIdClient: y.dataValues.idClient,
+        userWorkerId: x.dataValues.id,
+        userClientId: y.dataValues.id,
         offerIdOffer: z.dataValues.idOffer,
       };
     });

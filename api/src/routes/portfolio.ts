@@ -5,11 +5,11 @@ import { postNewPortfolio } from "../controllers/portfolioController";
 const portfolio = express.Router();
 
 portfolio.post("/", async (req: Request, res: Response, next: NextFunction) => {
-  const idWorker: string = req.params.idWorker;
+  const id: string = req.params.id;
   const portfolio: PortfolioType = req.body;
   try {
     let response: string;
-    response = await postNewPortfolio(portfolio, idWorker);
+    response = await postNewPortfolio(portfolio, id);
     res.send(response);
   } catch (error) {
     next(error);

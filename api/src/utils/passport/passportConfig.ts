@@ -45,7 +45,8 @@ passport.use(
 
 // serialización: toma el id y lo almacena en la session (para requerirla: req.session.passport.user)
 passport.serializeUser((user: any, done) => { // user = client || user = worker
-    done(null, user._id);
+    console.log("entre a serialize")
+    done(null, user.id);
 });
 
 

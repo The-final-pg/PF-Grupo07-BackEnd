@@ -7,7 +7,7 @@ export interface ClientType {
   password: string;
   rating: Integer;
   notification: Array[String];
-  idClient: String;
+  id: String;
 }
 
 export interface WorkerType {

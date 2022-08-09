@@ -55,10 +55,10 @@ worker.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, func
         next(error instanceof Error);
     }
 }));
-worker.get("/:idWorker", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { idWorker } = req.params;
+worker.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
     try {
-        const workerById = yield (0, workerController_1.getWorkerById)(idWorker);
+        const workerById = yield (0, workerController_1.getWorkerById)(id);
         return res.json(workerById);
     }
     catch (error) {
