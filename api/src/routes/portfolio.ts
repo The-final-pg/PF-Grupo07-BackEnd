@@ -4,7 +4,7 @@ import { postNewPortfolio } from "../controllers/portfolioController";
 
 const portfolio = express.Router();
 
-portfolio.post("/", async (req: Request, res: Response, next: NextFunction) => {
+portfolio.post("/idWorker", async (req: Request, res: Response, next: NextFunction) => {
   const idWorker: string = req.params.idWorker;
   const portfolio: PortfolioType = req.body;
   try {

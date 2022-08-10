@@ -5,7 +5,7 @@ export const postNewPortfolio = async (
   portfolio: PortfolioType,
   idWorker: string
 ): Promise<string> => {
-  const worker = UserWorker.findByPk(idWorker);
+  const worker = await UserWorker.findByPk(idWorker);
   const newPortfolio = await Portfolio.create(portfolio);
   await worker.addPortfolio(newPortfolio);
   return "Portfolio agregado con éxito";

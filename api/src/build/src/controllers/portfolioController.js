@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.postNewPortfolio = void 0;
 const { Portfolio, UserWorker } = require("../db");
 const postNewPortfolio = (portfolio, idWorker) => __awaiter(void 0, void 0, void 0, function* () {
-    const worker = UserWorker.findByPk(idWorker);
+    const worker = yield UserWorker.findByPk(idWorker);
     const newPortfolio = yield Portfolio.create(portfolio);
     yield worker.addPortfolio(newPortfolio);
     return "Portfolio agregado con éxito";

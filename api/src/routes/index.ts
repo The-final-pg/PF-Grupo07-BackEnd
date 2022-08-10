@@ -9,6 +9,7 @@ import login from "./login";
 import logout from "./logout";
 import profession from './profession';
 import skills from './skills';
+import review from './review';
 
 const router = express.Router();
 
@@ -22,6 +23,6 @@ router.use("/login", login);
 router.use("/logout", logout);
 router.use('/profession', profession);
 router.use('/skills', skills);
-
+router.use('/review', review);
 
 export default router;
