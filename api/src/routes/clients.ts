@@ -32,6 +32,6 @@ router.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
   } catch (error) {
     next(error);
   };
-
 });
+
 export default router;

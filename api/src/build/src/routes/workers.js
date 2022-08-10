@@ -65,4 +65,15 @@ worker.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         next(error);
     }
 }));
+worker.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const { name, born_date, photo, profession, skills, } = req.body;
+    try {
+        const workerUpdate = yield (0, workerController_1.updateWorkerProfile)(id, name, born_date, photo, profession, skills);
+        res.json(workerUpdate);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
 exports.default = worker;
