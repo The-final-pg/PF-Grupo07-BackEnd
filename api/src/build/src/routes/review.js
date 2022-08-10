@@ -26,11 +26,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const reviewController_1 = require("../controllers/reviewController");
 const review = express_1.default.Router();
-review.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const _a = req.body, { idClient, idWorker, idOffer } = _a, review = __rest(_a, ["idClient", "idWorker", "idOffer"]);
+review.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    //recibe id del client que es destinatario de la review
+    const _a = req.body, { id, idOffer } = _a, review = __rest(_a, ["id", "idOffer"]);
     try {
         let response;
-        response = yield (0, reviewController_1.postReview)(idClient, idWorker, idOffer, review);
+        //si la review va dirigida al Client, de ejecuta la funcion de review para clients
+        response = yield (0, reviewController_1.postReviewClient)(id, idOffer, review);
+        res.json(response);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
+review.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    //recibe id del worker qeu es destinatario de la review
+    const _b = req.body, { id, idOffer } = _b, review = __rest(_b, ["id", "idOffer"]);
+    try {
+        let response;
+        //si la review va dirigida al Worker, de ejecuta la funcion de review para workers
+        response = yield (0, reviewController_1.postReviewWorker)(id, idOffer, review);
         res.json(response);
     }
     catch (error) {
