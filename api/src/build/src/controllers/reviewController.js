@@ -9,19 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createWorker = exports.createClient = void 0;
-const { UserWorker, UserClient } = require("../db");
-function createClient(client, hashedPassword) {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield UserClient.create(Object.assign(Object.assign({}, client), { password: hashedPassword }));
-        return "Cliente creado con exito";
-    });
-}
-exports.createClient = createClient;
-function createWorker(worker, hashedPassword) {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield UserWorker.create(Object.assign(Object.assign({}, worker), { password: hashedPassword }));
-        return "Trabajador creado con exito";
-    });
-}
-exports.createWorker = createWorker;
+exports.postReview = void 0;
+const { Review, UserClient, Offer, UserWorker } = require("../db");
+const postReview = (idClient, idWorker, idOffer, review) => __awaiter(void 0, void 0, void 0, function* () {
+    const newReview = yield Review.create(review);
+    const client = yield UserClient.findByPk(idClient);
+    const worker = yield UserWorker.findByPk(idWorker);
+    const offer = yield Offer.findByPk(idOffer);
+    yield client.addReview(newReview);
+    yield worker.addReview(newReview);
+    yield offer.addReview(newReview);
+    return "Valoración creada con éxito";
+});
+exports.postReview = postReview;

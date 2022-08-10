@@ -22,15 +22,18 @@ passport.use(
                 let user: any
                 if (worker){ 
                     user = worker//dependiendo del usuario realiza diferentes acciones
-                }  else {
+                } else if (client) {
                     user = client
-                } 
-                console.log("estos en config", user.dataValues)
+                } else {
+                    return "Usuario o contraseña no validos"
+                }
+                console.log("esto es el client", client)
                 console.log("esto es el worker", worker)
+                console.log("esto es la pw", user.password)
                 bcrypt.compare(password, user.password, (error, result) => {
                     if (error) return done(error)
                     if (!result) {
-                        return done(null, false)
+                        return done (null, false)
                     } else {
                         return done (null, user.dataValues)
                     }
@@ -71,7 +74,7 @@ passport.use(
     new BearerStrategy((token, done) => {
       jwt.verify(token, SECRET_KEY, function (err, user) {
         if (err) return done(err);
-        console.log('Estoy ene l verify', token )
+        console.log('Estoy en e l verify', token )
         return done(null, user ? user : false);
       });
     })

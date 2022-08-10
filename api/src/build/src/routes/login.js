@@ -25,10 +25,9 @@ login.use(express_1.default.urlencoded({ extended: true }));
 // usa express session para alojarla en la consola en application Session storage
 login.use((0, express_session_1.default)({
     secret: SECRET_KEY,
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false
 }));
-//login.use(passport.authenticate("session"))
 // autenticación: verifica si el usuario es correcto. Lo busca en la base de datos en passportConfig. Si lo encuentra, genera el token con la info que nos importa para autorizar,
 // osea si es worker o no y si es admin o no.
 login.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -43,8 +42,9 @@ login.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
                 id: user.id,
                 user_mail: user.user_mail,
                 isAdmin: user.isAdmin,
-                isWorker: user.isWorker
-            }, SECRET_KEY, { expiresIn: "2hr" }));
+                isWorker: user.isWorker,
+                isActive: user.isActive
+            }, SECRET_KEY, { expiresIn: "4hr" }));
         }
     }))(req, res, next);
 }));

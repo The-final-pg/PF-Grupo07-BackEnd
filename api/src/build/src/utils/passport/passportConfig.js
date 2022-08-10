@@ -33,11 +33,15 @@ passport_1.default.use(new passport_local_1.Strategy({
         if (worker) {
             user = worker; //dependiendo del usuario realiza diferentes acciones
         }
-        else {
+        else if (client) {
             user = client;
         }
-        console.log("estos en config", user.dataValues);
+        else {
+            return "Usuario o contraseña no validos";
+        }
+        console.log("esto es el client", client);
         console.log("esto es el worker", worker);
+        console.log("esto es la pw", user.password);
         bcrypt_1.default.compare(password, user.password, (error, result) => {
             if (error)
                 return done(error);
@@ -80,7 +84,7 @@ passport_1.default.use(new passport_http_bearer_1.Strategy((token, done) => {
     jsonwebtoken_1.default.verify(token, SECRET_KEY, function (err, user) {
         if (err)
             return done(err);
-        console.log('Estoy ene l verify', token);
+        console.log('Estoy en e l verify', token);
         return done(null, user ? user : false);
     });
 }));

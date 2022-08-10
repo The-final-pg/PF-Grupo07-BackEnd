@@ -14,12 +14,9 @@ login.use(express.urlencoded({ extended: true }))
 // usa express session para alojarla en la consola en application Session storage
 login.use(session({
     secret: SECRET_KEY,
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false
 }));
-
-
-//login.use(passport.authenticate("session"))
 
 
 // autenticación: verifica si el usuario es correcto. Lo busca en la base de datos en passportConfig. Si lo encuentra, genera el token con la info que nos importa para autorizar,
@@ -39,10 +36,11 @@ login.post("/", async (req:Request,res:Response,next:NextFunction) => {
                             id: user.id,
                             user_mail: user.user_mail,
                             isAdmin: user.isAdmin,
-                            isWorker: user.isWorker
+                            isWorker: user.isWorker,
+                            isActive: user.isActive
                         },
                         SECRET_KEY,
-                        { expiresIn: "2hr" }
+                        { expiresIn: "4hr" }
                     )
                 )
             }

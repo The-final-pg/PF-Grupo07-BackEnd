@@ -11,30 +11,34 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllSkills = exports.getAllProfessions = void 0;
 const { Offer, UserWorker } = require('../db');
-const getAllProfessions = () => __awaiter(void 0, void 0, void 0, function* () {
-    const offers = yield Offer.findAll({
-        attributes: ['profession']
+function getAllProfessions() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const offers = yield Offer.findAll({
+            attributes: ['profession']
+        });
+        const workers = yield UserWorker.findAll({
+            attributes: ['profession']
+        });
+        let profession = [];
+        offers.forEach(e => profession = [...profession, ...e.dataValues.profession]);
+        workers.forEach(e => profession = [...profession, ...e.dataValues.profession]);
+        const professionSet = new Set(profession);
+        // profession = profession.filter((e, i) => profession.indexOf(e) === i).sort()
+        return [...professionSet];
     });
-    const workers = yield UserWorker.findAll({
-        attributes: ['profession']
-    });
-    let profession = [];
-    offers.forEach(e => profession = [...profession, ...e.dataValues.profession]);
-    workers.forEach(e => profession = [...profession, ...e.dataValues.profession]);
-    const professionSet = new Set(profession);
-    // profession = profession.filter((e, i) => profession.indexOf(e) === i).sort()
-    return [...professionSet];
-});
+}
 exports.getAllProfessions = getAllProfessions;
-const getAllSkills = () => __awaiter(void 0, void 0, void 0, function* () {
-    const workers = yield UserWorker.findAll({
-        attributes: ['skills']
+function getAllSkills() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const workers = yield UserWorker.findAll({
+            attributes: ['skills']
+        });
+        let skills = [];
+        workers.forEach(e => skills = [...skills, ...e.dataValues.skills]);
+        /*     const skillsSet = new Set(skills);
+            console.log(skillsSet); */
+        skills = skills.filter((e, i) => skills.indexOf(e) === i).sort();
+        return skills;
     });
-    let skills = [];
-    workers.forEach(e => skills = [...skills, ...e.dataValues.skills]);
-    /*     const skillsSet = new Set(skills);
-        console.log(skillsSet); */
-    skills = skills.filter((e, i) => skills.indexOf(e) === i).sort();
-    return skills;
-});
+}
 exports.getAllSkills = getAllSkills;
