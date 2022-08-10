@@ -12,17 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.putOfferState = exports.getOffersBySearch = exports.getOfferById = exports.postOffer = exports.getAllOffers = void 0;
 const sequelize_1 = require("sequelize");
 const { Offer, Proposal, UserClient, UserWorker } = require("../db");
-<<<<<<< HEAD
-function getAllOffers( /* multiplier: number = 0 */) {
-    return __awaiter(this, void 0, void 0, function* () {
-        let allOffers = yield Offer.findAll({
-            /*    limit: 8 + 5 * multiplier, */
-=======
 function getAllOffers(multiplier = 0) {
     return __awaiter(this, void 0, void 0, function* () {
         let allOffers = yield Offer.findAll({
             limit: 8 + 5 * multiplier,
->>>>>>> 707266edd67172ce2b7f36f2b5f67c9667ca0352
             include: UserClient
         });
         return allOffers;
@@ -48,17 +41,10 @@ function getOfferById(id) {
     });
 }
 exports.getOfferById = getOfferById;
-<<<<<<< HEAD
-function getOffersBySearch(q /* , multiplier: number = 0 */) {
-    return __awaiter(this, void 0, void 0, function* () {
-        let offers = yield Offer.findAll({
-            /* limit: 8 + 5 * multiplier, */
-=======
 function getOffersBySearch(q, multiplier = 0) {
     return __awaiter(this, void 0, void 0, function* () {
         let offers = yield Offer.findAll({
             limit: 8 + 5 * multiplier,
->>>>>>> 707266edd67172ce2b7f36f2b5f67c9667ca0352
             where: {
                 [sequelize_1.Op.or]: [
                     {

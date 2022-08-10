@@ -51,11 +51,11 @@ worker.get(
 );
 
 worker.get(
-  "/:idWorker",
+  "/:id",
   async (req: Request, res: Response, next: NextFunction) => {
-    const { idWorker } = req.params;
+    const { id } = req.params;
     try {
-        const workerById: WorkerType = await getWorkerById(idWorker);
+        const workerById: WorkerType = await getWorkerById(id);
         return res.json(workerById);
     } catch (error) {
       next(error);
