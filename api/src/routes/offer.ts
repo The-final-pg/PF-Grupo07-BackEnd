@@ -69,11 +69,11 @@ offer.get(
 );
 
 offer.get(
-  "/:idOffer",
+  "/:id",
   async (req: Request, res: Response, next: NextFunction) => {
-    const { idOffer } = req.params;
+    const { id } = req.params;
     try {
-      const offer: any = await getOfferById(idOffer);
+      const offer: any = await getOfferById(id);
       let result = {
         ...offer,
         offersCount: offer.userClient.offers.length,

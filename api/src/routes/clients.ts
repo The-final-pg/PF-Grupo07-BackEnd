@@ -12,10 +12,10 @@ router.get("/", async (_req: Request, res: Response, next: NextFunction) => {
   }
 });
 
-router.get(  "/:idClient",  async (req: Request, res: Response, next: NextFunction) => {
-    const { idClient } = req.params;
+router.get(  "/:id",  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
     try {
-      const client: ClientType = await getClientById(idClient);
+      const client: ClientType = await getClientById(id);
       return res.json(client);
     } catch (error) {
       next(error);
