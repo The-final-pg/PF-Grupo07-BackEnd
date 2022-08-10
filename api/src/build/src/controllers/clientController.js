@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getClientById = exports.getAllClients = void 0;
+exports.updateClientProfile = exports.getClientById = exports.getAllClients = void 0;
 const { UserClient, Offer, Review } = require("../db");
 function getAllClients() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -20,8 +20,26 @@ function getAllClients() {
 exports.getAllClients = getAllClients;
 function getClientById(id) {
     return __awaiter(this, void 0, void 0, function* () {
-        let client = yield UserClient.findByPk(id, { include: [Offer, Review] });
+        let client = yield UserClient.findByPk(id, {
+            include: [Offer, Review],
+        });
         return client;
     });
 }
 exports.getClientById = getClientById;
+function updateClientProfile(id, name, born_date, photo) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const data = { name, born_date, photo };
+        const client = yield UserClient.findByPk(id);
+        if (!name || data.name === client.name)
+            delete data.name;
+        if (!born_date || data.born_date === client.born_date)
+            delete data.born_date;
+        if (!photo || data.photo === client.photo)
+            delete data.photo;
+        yield client.set(data);
+        yield client.save();
+        return client;
+    });
+}
+exports.updateClientProfile = updateClientProfile;
