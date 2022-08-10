@@ -6,11 +6,9 @@ const { UserWorker } = require("../db");
 export async function workerFilteredByProfession(
   name,
   profession,
-  multiplier: number = 0
 ): Promise<WorkerType[]> {
   if (!name && profession) {
     const filteredByProfession = await UserWorker.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         profession: {
           [Op.contains]: [profession],
@@ -20,7 +18,6 @@ export async function workerFilteredByProfession(
     return filteredByProfession;
   } else {
     const filteredByProfession = await UserWorker.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         name: {
           [Op.iLike]: `%${name}%`,
@@ -37,11 +34,9 @@ export async function workerFilteredByProfession(
 export async function workerFilteredByRating(
   name,
   rating,
-  multiplier: number = 0
 ): Promise<WorkerType[]> {
   if (!name && rating) {
     const filteredByRating = await UserWorker.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         rating: {
           [Op.gte]: parseInt(rating),
@@ -51,7 +46,6 @@ export async function workerFilteredByRating(
     return filteredByRating;
   } else {
     const filteredByRating = await UserWorker.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         name: {
           [Op.iLike]: `%${name}%`,
@@ -69,11 +63,9 @@ export async function workerAllfiltersOn(
   name,
   profession,
   rating,
-  multiplier: number = 0
 ): Promise<WorkerType[]> {
   if (!name && profession && rating) {
     const workerAllfiltersOn = await UserWorker.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         profession: {
           [Op.contains]: [profession],
@@ -86,7 +78,6 @@ export async function workerAllfiltersOn(
     return workerAllfiltersOn;
   } else {
     const workerAllfiltersOn = await UserWorker.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         name: {
           [Op.iLike]: `%${name}%`,

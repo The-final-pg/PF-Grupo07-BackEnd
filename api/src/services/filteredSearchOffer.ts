@@ -6,12 +6,10 @@ const { Offer, UserClient } = require("../db");
 export async function offerFilteredByProfession(
   input,
   profession,
-  multiplier: number = 0
 ): Promise<OfferType[]> {
   if (!input && profession) {
     console.log("Estoy aca 1");
     const filteredByProfession = await Offer.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         profession: {
           [Op.contains]: [profession],
@@ -22,7 +20,6 @@ export async function offerFilteredByProfession(
     return filteredByProfession;
   } else {
     const filteredByProfession = await Offer.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         [Op.or]: [
           {
@@ -49,11 +46,9 @@ export async function offerFilteredByProfession(
 export async function offerFilteredByRating(
   input,
   rating,
-  multiplier: number = 0
 ): Promise<OfferType[]> {
   if (!input && rating) {
     const filteredByRating = await Offer.findAll({
-      limit: 8 + 5 * multiplier,
       include: {
         model: UserClient,
         where: {
@@ -66,7 +61,6 @@ export async function offerFilteredByRating(
     return filteredByRating;
   } else {
     const filteredByRating = await Offer.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         [Op.or]: [
           {
@@ -98,11 +92,9 @@ export async function offerFilteredByRemuneration(
   input,
   remMax,
   remMin,
-  multiplier: number = 0
 ): Promise<OfferType[]> {
   if (!input && remMax && remMin) {
     const findedByName = await Offer.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         max_remuneration: {
           [Op.lte]: parseInt(remMax),
@@ -117,7 +109,6 @@ export async function offerFilteredByRemuneration(
     return findedByName;
   } else {
     const findedByName = await Offer.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         [Op.or]: [
           {
@@ -151,11 +142,9 @@ export async function offerAllFiltersOn(
   rating,
   remMax,
   remMin,
-  multiplier: number = 0
 ): Promise<OfferType[]> {
   if (input && profession && rating && remMax && remMin) {
     const allFiltersOn = await Offer.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         [Op.or]: [
           {
@@ -193,7 +182,6 @@ export async function offerAllFiltersOn(
   }
   if (input && !profession && rating && remMax && remMin) {
     const allFiltersOn = await Offer.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         [Op.or]: [
           {
@@ -228,7 +216,6 @@ export async function offerAllFiltersOn(
   }
   if (input && profession && !rating && remMax && remMin) {
     const allFiltersOn = await Offer.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         [Op.or]: [
           {
@@ -262,7 +249,6 @@ export async function offerAllFiltersOn(
 
   if (input && profession && rating && !remMax && !remMin) {
     const allFiltersOn = await Offer.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         [Op.or]: [
           {
@@ -295,7 +281,6 @@ export async function offerAllFiltersOn(
 
   if (!input && profession && rating && remMax && remMin) {
     const allFiltersOn = await Offer.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         profession: {
           [Op.contains]: [profession],
@@ -322,7 +307,6 @@ export async function offerAllFiltersOn(
 
   if (!input && !profession && rating && remMax && remMin) {
     const allFiltersOn = await Offer.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         max_remuneration: {
           [Op.lte]: parseInt(remMax),
@@ -346,7 +330,6 @@ export async function offerAllFiltersOn(
 
   if (!input && profession && !rating && remMax && remMin) {
     const allFiltersOn = await Offer.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         profession: {
           [Op.contains]: [profession],
@@ -368,7 +351,6 @@ export async function offerAllFiltersOn(
 
   if (!input && profession && rating && !remMax && !remMin) {
     const allFiltersOn = await Offer.findAll({
-      limit: 8 + 5 * multiplier,
       where: {
         profession: {
           [Op.contains]: [profession],

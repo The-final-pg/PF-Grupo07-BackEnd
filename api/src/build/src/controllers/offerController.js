@@ -12,10 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.putOfferState = exports.getOffersBySearch = exports.getOfferById = exports.postOffer = exports.getAllOffers = void 0;
 const sequelize_1 = require("sequelize");
 const { Offer, Proposal, UserClient, UserWorker } = require("../db");
-function getAllOffers(multiplier = 0) {
+function getAllOffers( /* multiplier: number = 0 */) {
     return __awaiter(this, void 0, void 0, function* () {
         let allOffers = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
+            /*    limit: 8 + 5 * multiplier, */
             include: UserClient
         });
         return allOffers;
@@ -41,10 +41,10 @@ function getOfferById(id) {
     });
 }
 exports.getOfferById = getOfferById;
-function getOffersBySearch(q, multiplier = 0) {
+function getOffersBySearch(q /* , multiplier: number = 0 */) {
     return __awaiter(this, void 0, void 0, function* () {
         let offers = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
+            /* limit: 8 + 5 * multiplier, */
             where: {
                 [sequelize_1.Op.or]: [
                     {
