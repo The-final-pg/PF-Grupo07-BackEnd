@@ -2,19 +2,20 @@ import { OfferType } from "../types";
 import { Op } from "sequelize";
 const { Offer, Proposal, UserClient, UserWorker } = require("../db");
 
-export const getAllOffers = async (multiplier: number = 0): Promise<OfferType[]> => {
-  let allOffers = await Offer.findAll({ 
+export async function getAllOffers(multiplier: number = 0): Promise<OfferType[]> {
+  let allOffers = await Offer.findAll({
     limit: 8 + 5 * multiplier,
-    include: UserClient });
+    include: UserClient
+  });
   return allOffers;
-};
+}
 
-export const postOffer = async (offer: OfferType): Promise<string> => {
+export async function postOffer(offer: OfferType): Promise<string> {
   await Offer.create(offer);
   return "Propuesta creado con exito";
-};
+}
 
-export const getOfferById = async (id: String): Promise<OfferType> => {
+export async function getOfferById(id: String): Promise<OfferType> {
 
   let offer = await Offer.findByPk(id, {
     include: [
@@ -23,9 +24,9 @@ export const getOfferById = async (id: String): Promise<OfferType> => {
     ],
   });
   return offer.toJSON();
-};
+}
 
-export const getOffersBySearch = async (q, multiplier: number = 0): Promise<OfferType[]> => {
+export async function getOffersBySearch(q, multiplier: number = 0): Promise<OfferType[]> {
 
   let offers = await Offer.findAll({
     limit: 8 + 5 * multiplier,
@@ -43,15 +44,13 @@ export const getOffersBySearch = async (q, multiplier: number = 0): Promise<Offe
         },
       ],
     },
-    include:UserClient
+    include: UserClient
   });
   return offers;
-};
+}
 
-export const putOfferState = async (
-  id: String,
-  state: String
-): Promise<string> => {
+export async function putOfferState(id: String,
+  state: String): Promise<string> {
   const offerState: OfferType = await Offer.findAll({
     where: {
       id: id,
@@ -70,4 +69,4 @@ export const putOfferState = async (
     );
     return "state updated";
   }
-};
+}

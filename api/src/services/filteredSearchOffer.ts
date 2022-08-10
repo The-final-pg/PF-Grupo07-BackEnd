@@ -3,13 +3,13 @@ import { Op } from "sequelize";
 
 const { Offer, UserClient } = require("../db");
 
-export const offerFilteredByProfession = async (
+export async function offerFilteredByProfession(
   input,
   profession,
   multiplier: number = 0
-): Promise<OfferType[]> => {
-  if (!input && profession){
-    console.log('Estoy aca 1')
+): Promise<OfferType[]> {
+  if (!input && profession) {
+    console.log("Estoy aca 1");
     const filteredByProfession = await Offer.findAll({
       limit: 8 + 5 * multiplier,
       where: {
@@ -20,9 +20,7 @@ export const offerFilteredByProfession = async (
       include: UserClient,
     });
     return filteredByProfession;
-  }
-  else {
-
+  } else {
     const filteredByProfession = await Offer.findAll({
       limit: 8 + 5 * multiplier,
       where: {
@@ -46,14 +44,14 @@ export const offerFilteredByProfession = async (
     });
     return filteredByProfession;
   }
-};
+}
 
-export const offerFilteredByRating = async (
+export async function offerFilteredByRating(
   input,
   rating,
   multiplier: number = 0
-): Promise<OfferType[]> => {
-  if (!input && rating){
+): Promise<OfferType[]> {
+  if (!input && rating) {
     const filteredByRating = await Offer.findAll({
       limit: 8 + 5 * multiplier,
       include: {
@@ -66,8 +64,7 @@ export const offerFilteredByRating = async (
       },
     });
     return filteredByRating;
-  }
-  else {
+  } else {
     const filteredByRating = await Offer.findAll({
       limit: 8 + 5 * multiplier,
       where: {
@@ -95,31 +92,30 @@ export const offerFilteredByRating = async (
     });
     return filteredByRating;
   }
-};
+}
 
-export const offerFilteredByRemuneration = async (
+export async function offerFilteredByRemuneration(
   input,
   remMax,
   remMin,
   multiplier: number = 0
-): Promise<OfferType[]> => {
+): Promise<OfferType[]> {
   if (!input && remMax && remMin) {
-  const findedByName = await Offer.findAll({
-    limit: 8 + 5 * multiplier,
-    where: {
-      max_remuneration: {
-        [Op.lte]: parseInt(remMax),
+    const findedByName = await Offer.findAll({
+      limit: 8 + 5 * multiplier,
+      where: {
+        max_remuneration: {
+          [Op.lte]: parseInt(remMax),
+        },
+        min_remuneration: {
+          [Op.gte]: parseInt(remMin),
+        },
       },
-      min_remuneration: {
-        [Op.gte]: parseInt(remMin),
-      },
-    },
-    include: UserClient,
-  });
+      include: UserClient,
+    });
 
-  return findedByName;
-  }
-  else {
+    return findedByName;
+  } else {
     const findedByName = await Offer.findAll({
       limit: 8 + 5 * multiplier,
       where: {
@@ -144,19 +140,19 @@ export const offerFilteredByRemuneration = async (
       },
       include: UserClient,
     });
-  
+
     return findedByName;
   }
-};
+}
 
-export const offerAllFiltersOn = async (
+export async function offerAllFiltersOn(
   input,
   profession,
   rating,
   remMax,
   remMin,
   multiplier: number = 0
-): Promise<OfferType[]> => {
+): Promise<OfferType[]> {
   if (input && profession && rating && remMax && remMin) {
     const allFiltersOn = await Offer.findAll({
       limit: 8 + 5 * multiplier,
@@ -263,7 +259,7 @@ export const offerAllFiltersOn = async (
 
     return allFiltersOn;
   }
-  
+
   if (input && profession && rating && !remMax && !remMin) {
     const allFiltersOn = await Offer.findAll({
       limit: 8 + 5 * multiplier,
@@ -374,7 +370,6 @@ export const offerAllFiltersOn = async (
     const allFiltersOn = await Offer.findAll({
       limit: 8 + 5 * multiplier,
       where: {
-        
         profession: {
           [Op.contains]: [profession],
         },
@@ -391,4 +386,4 @@ export const offerAllFiltersOn = async (
 
     return allFiltersOn;
   }
-};
+}

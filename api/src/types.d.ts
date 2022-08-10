@@ -43,10 +43,9 @@ export interface OfferType {
 }
 
 export interface PortfolioType {
-  idPortfolio: String;
   title: String;
-  photo: String;
-  portfolio_description: String;
+  photo: Text;
+  portfolio_description: Text;
 }
 
 export interface ProposalType {

@@ -12,108 +12,99 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.workerAllfiltersOn = exports.workerFilteredByRating = exports.workerFilteredByProfession = void 0;
 const sequelize_1 = require("sequelize");
 const { UserWorker } = require("../db");
-const workerFilteredByProfession = (name, profession, multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!name && profession) {
-        const filteredByProfession = yield UserWorker.findAll({
-            limit: 8 + 5 * multiplier,
-            where: {
-                profession: {
-                    [sequelize_1.Op.contains]: [profession],
-                }
-            }
-        });
-        return filteredByProfession;
-    }
-    else {
-        const filteredByProfession = yield UserWorker.findAll({
-            limit: 8 + 5 * multiplier,
-            where: {
-                name: {
-                    [sequelize_1.Op.iLike]: `%${name}%`,
+function workerFilteredByProfession(name, profession, multiplier = 0) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (!name && profession) {
+            const filteredByProfession = yield UserWorker.findAll({
+                limit: 8 + 5 * multiplier,
+                where: {
+                    profession: {
+                        [sequelize_1.Op.contains]: [profession],
+                    },
                 },
-                profession: {
-                    [sequelize_1.Op.contains]: [profession],
-                }
-            }
-        });
-        return filteredByProfession;
-    }
-});
-exports.workerFilteredByProfession = workerFilteredByProfession;
-const workerFilteredByRating = (name, rating, multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!name && rating) {
-        const filteredByRating = yield UserWorker.findAll({
-            limit: 8 + 5 * multiplier,
-            where: {
-                rating: {
-                    [sequelize_1.Op.gte]: parseInt(rating)
-                }
-            }
-        });
-        return filteredByRating;
-    }
-    else {
-        const filteredByRating = yield UserWorker.findAll({
-            limit: 8 + 5 * multiplier,
-            where: {
-                name: {
-                    [sequelize_1.Op.iLike]: `%${name}%`,
+            });
+            return filteredByProfession;
+        }
+        else {
+            const filteredByProfession = yield UserWorker.findAll({
+                limit: 8 + 5 * multiplier,
+                where: {
+                    name: {
+                        [sequelize_1.Op.iLike]: `%${name}%`,
+                    },
+                    profession: {
+                        [sequelize_1.Op.contains]: [profession],
+                    },
                 },
-                rating: {
-                    [sequelize_1.Op.gte]: parseInt(rating)
-                }
-            }
-        });
-        return filteredByRating;
-    }
-});
-exports.workerFilteredByRating = workerFilteredByRating;
-const workerAllfiltersOn = (name, profession, rating, multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!name && profession && rating) {
-        const workerAllfiltersOn = yield UserWorker.findAll({
-            limit: 8 + 5 * multiplier,
-            where: {
-                profession: {
-                    [sequelize_1.Op.contains]: [profession],
-                },
-                rating: {
-                    [sequelize_1.Op.gte]: parseInt(rating)
-                }
-            }
-        });
-        return workerAllfiltersOn;
-    }
-    else {
-        const workerAllfiltersOn = yield UserWorker.findAll({
-            limit: 8 + 5 * multiplier,
-            where: {
-                name: {
-                    [sequelize_1.Op.iLike]: `%${name}%`,
-                },
-                profession: {
-                    [sequelize_1.Op.contains]: [profession],
-                },
-                rating: {
-                    [sequelize_1.Op.gte]: parseInt(rating)
-                }
-            }
-        });
-        return workerAllfiltersOn;
-    }
-    const workerAllfiltersOn = yield UserWorker.findAll({
-        limit: 8 + 5 * multiplier,
-        where: {
-            name: {
-                [sequelize_1.Op.iLike]: `%${name}%`,
-            },
-            profession: {
-                [sequelize_1.Op.contains]: [profession],
-            },
-            rating: {
-                [sequelize_1.Op.gte]: parseInt(rating)
-            }
+            });
+            return filteredByProfession;
         }
     });
-    return workerAllfiltersOn;
-});
+}
+exports.workerFilteredByProfession = workerFilteredByProfession;
+function workerFilteredByRating(name, rating, multiplier = 0) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (!name && rating) {
+            const filteredByRating = yield UserWorker.findAll({
+                limit: 8 + 5 * multiplier,
+                where: {
+                    rating: {
+                        [sequelize_1.Op.gte]: parseInt(rating),
+                    },
+                },
+            });
+            return filteredByRating;
+        }
+        else {
+            const filteredByRating = yield UserWorker.findAll({
+                limit: 8 + 5 * multiplier,
+                where: {
+                    name: {
+                        [sequelize_1.Op.iLike]: `%${name}%`,
+                    },
+                    rating: {
+                        [sequelize_1.Op.gte]: parseInt(rating),
+                    },
+                },
+            });
+            return filteredByRating;
+        }
+    });
+}
+exports.workerFilteredByRating = workerFilteredByRating;
+function workerAllfiltersOn(name, profession, rating, multiplier = 0) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (!name && profession && rating) {
+            const workerAllfiltersOn = yield UserWorker.findAll({
+                limit: 8 + 5 * multiplier,
+                where: {
+                    profession: {
+                        [sequelize_1.Op.contains]: [profession],
+                    },
+                    rating: {
+                        [sequelize_1.Op.gte]: parseInt(rating),
+                    },
+                },
+            });
+            return workerAllfiltersOn;
+        }
+        else {
+            const workerAllfiltersOn = yield UserWorker.findAll({
+                limit: 8 + 5 * multiplier,
+                where: {
+                    name: {
+                        [sequelize_1.Op.iLike]: `%${name}%`,
+                    },
+                    profession: {
+                        [sequelize_1.Op.contains]: [profession],
+                    },
+                    rating: {
+                        [sequelize_1.Op.gte]: parseInt(rating),
+                    },
+                },
+            });
+            return workerAllfiltersOn;
+        }
+    });
+}
 exports.workerAllfiltersOn = workerAllfiltersOn;

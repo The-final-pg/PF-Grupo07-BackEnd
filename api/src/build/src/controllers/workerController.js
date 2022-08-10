@@ -12,29 +12,35 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getWorkerById = exports.getWorkerByName = exports.getAllWorkers = void 0;
 const sequelize_1 = require("sequelize");
 const { UserWorker, Review, Proposal, Portfolio } = require("../db");
-const getAllWorkers = (multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
-    const allWorkers = yield UserWorker.findAll({
-        limit: 8 + 5 * multiplier,
+function getAllWorkers(multiplier = 0) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const allWorkers = yield UserWorker.findAll({
+            limit: 8 + 5 * multiplier,
+        });
+        return allWorkers;
     });
-    return allWorkers;
-});
+}
 exports.getAllWorkers = getAllWorkers;
-const getWorkerByName = (name, multiplier = 0) => __awaiter(void 0, void 0, void 0, function* () {
-    const worker = yield UserWorker.findAll({
-        limit: 8 + 5 * multiplier,
-        where: {
-            name: {
-                [sequelize_1.Op.iLike]: `%${name}%`,
+function getWorkerByName(name, multiplier = 0) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const worker = yield UserWorker.findAll({
+            limit: 8 + 5 * multiplier,
+            where: {
+                name: {
+                    [sequelize_1.Op.iLike]: `%${name}%`,
+                },
             },
-        },
+        });
+        return worker;
     });
-    return worker;
-});
+}
 exports.getWorkerByName = getWorkerByName;
-const getWorkerById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const workerById = yield UserWorker.findByPk(id, {
-        include: [Review, Proposal, Portfolio]
+function getWorkerById(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const workerById = yield UserWorker.findByPk(id, {
+            include: [Review, Proposal, Portfolio]
+        });
+        return workerById;
     });
-    return workerById;
-});
+}
 exports.getWorkerById = getWorkerById;

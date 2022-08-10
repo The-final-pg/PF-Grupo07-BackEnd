@@ -78,74 +78,80 @@ const setOffers = () => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.setOffers = setOffers;
-const setProposals = () => __awaiter(void 0, void 0, void 0, function* () {
-    const proposals = yield Proposal.findAll();
-    if (!proposals.length) {
-        let workersId = yield UserWorker.findAll();
-        let offersId = yield Offer.findAll();
-        const responseProposal = yield axios_1.default.get("https://62ec493c818ab252b6fa39a4.mockapi.io/api/v1/Offer");
-        let arrayProposal = [];
-        responseProposal.data.map((e) => {
-            arrayProposal.push({
-                remuneration: parseInt(e.Proposal.remuneration),
-                proposal_description: e.Proposal.proposal_description,
-                worked_time: parseInt(e.Proposal.worked_time),
+function setProposals() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const proposals = yield Proposal.findAll();
+        if (!proposals.length) {
+            let workersId = yield UserWorker.findAll();
+            let offersId = yield Offer.findAll();
+            const responseProposal = yield axios_1.default.get("https://62ec493c818ab252b6fa39a4.mockapi.io/api/v1/Offer");
+            let arrayProposal = [];
+            responseProposal.data.map((e) => {
+                arrayProposal.push({
+                    remuneration: parseInt(e.Proposal.remuneration),
+                    proposal_description: e.Proposal.proposal_description,
+                    worked_time: parseInt(e.Proposal.worked_time),
+                });
             });
-        });
-        arrayProposal = arrayProposal.map((e) => {
-            let x = workersId.pop();
-            let y = offersId.pop();
-            return Object.assign(Object.assign({}, e), { userWorkerIdWorker: x.dataValues.idWorker, offerIdOffer: y.dataValues.idOffer });
-        });
-        let arrayProposalDb = yield (arrayProposal === null || arrayProposal === void 0 ? void 0 : arrayProposal.filter((c) => c));
-        yield Proposal.bulkCreate(arrayProposalDb);
-    }
-});
+            arrayProposal = arrayProposal.map((e) => {
+                let x = workersId.pop();
+                let y = offersId.pop();
+                return Object.assign(Object.assign({}, e), { userWorkerIdWorker: x.dataValues.idWorker, offerIdOffer: y.dataValues.idOffer });
+            });
+            let arrayProposalDb = yield (arrayProposal === null || arrayProposal === void 0 ? void 0 : arrayProposal.filter((c) => c));
+            yield Proposal.bulkCreate(arrayProposalDb);
+        }
+    });
+}
 exports.setProposals = setProposals;
-const setPortfolios = () => __awaiter(void 0, void 0, void 0, function* () {
-    const portfolios = yield Portfolio.findAll();
-    if (!portfolios.length) {
-        let workersId = yield UserWorker.findAll();
-        const responsePortfolio = yield axios_1.default.get("https://62ec493c818ab252b6fa39a4.mockapi.io/api/v1/Portfolio");
-        let arrayPortfolio = [];
-        responsePortfolio.data.map((e) => {
-            arrayPortfolio.push({
-                title: e.title,
-                photo: e.photo,
-                portfolio_description: e.portfolio_description,
+function setPortfolios() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const portfolios = yield Portfolio.findAll();
+        if (!portfolios.length) {
+            let workersId = yield UserWorker.findAll();
+            const responsePortfolio = yield axios_1.default.get("https://62ec493c818ab252b6fa39a4.mockapi.io/api/v1/Portfolio");
+            let arrayPortfolio = [];
+            responsePortfolio.data.map((e) => {
+                arrayPortfolio.push({
+                    title: e.title,
+                    photo: e.photo,
+                    portfolio_description: e.portfolio_description,
+                });
             });
-        });
-        arrayPortfolio = arrayPortfolio.map((e) => {
-            let x = workersId.pop();
-            return Object.assign(Object.assign({}, e), { userWorkerIdWorker: x.dataValues.idWorker });
-        });
-        let arrayPortfolioDb = yield (arrayPortfolio === null || arrayPortfolio === void 0 ? void 0 : arrayPortfolio.filter((c) => c));
-        yield Portfolio.bulkCreate(arrayPortfolioDb);
-    }
-});
+            arrayPortfolio = arrayPortfolio.map((e) => {
+                let x = workersId.pop();
+                return Object.assign(Object.assign({}, e), { userWorkerIdWorker: x.dataValues.idWorker });
+            });
+            let arrayPortfolioDb = yield (arrayPortfolio === null || arrayPortfolio === void 0 ? void 0 : arrayPortfolio.filter((c) => c));
+            yield Portfolio.bulkCreate(arrayPortfolioDb);
+        }
+    });
+}
 exports.setPortfolios = setPortfolios;
-const setReview = () => __awaiter(void 0, void 0, void 0, function* () {
-    const reviews = yield Review.findAll();
-    if (!reviews.length) {
-        let workersId = yield UserWorker.findAll();
-        let clientsId = yield UserClient.findAll();
-        let offersId = yield Offer.findAll();
-        const responseReview = yield axios_1.default.get("https://62ec493c818ab252b6fa39a4.mockapi.io/api/v1/Review");
-        let arrayReview = [];
-        responseReview.data.map((e) => {
-            arrayReview.push({
-                valoration: ((e.valoration - 1) % 5) + 1,
-                review_description: e.review_description,
+function setReview() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const reviews = yield Review.findAll();
+        if (!reviews.length) {
+            let workersId = yield UserWorker.findAll();
+            let clientsId = yield UserClient.findAll();
+            let offersId = yield Offer.findAll();
+            const responseReview = yield axios_1.default.get("https://62ec493c818ab252b6fa39a4.mockapi.io/api/v1/Review");
+            let arrayReview = [];
+            responseReview.data.map((e) => {
+                arrayReview.push({
+                    valoration: ((e.valoration - 1) % 5) + 1,
+                    review_description: e.review_description,
+                });
             });
-        });
-        arrayReview = arrayReview.map((e) => {
-            let x = workersId.pop();
-            let y = clientsId.pop();
-            let z = offersId.pop();
-            return Object.assign(Object.assign({}, e), { userWorkerIdWorker: x.dataValues.idWorker, userClientIdClient: y.dataValues.idClient, offerIdOffer: z.dataValues.idOffer });
-        });
-        let arrayReviewDb = yield (arrayReview === null || arrayReview === void 0 ? void 0 : arrayReview.filter((c) => c));
-        yield Review.bulkCreate(arrayReviewDb);
-    }
-});
+            arrayReview = arrayReview.map((e) => {
+                let x = workersId.pop();
+                let y = clientsId.pop();
+                let z = offersId.pop();
+                return Object.assign(Object.assign({}, e), { userWorkerIdWorker: x.dataValues.idWorker, userClientIdClient: y.dataValues.idClient, offerIdOffer: z.dataValues.idOffer });
+            });
+            let arrayReviewDb = yield (arrayReview === null || arrayReview === void 0 ? void 0 : arrayReview.filter((c) => c));
+            yield Review.bulkCreate(arrayReviewDb);
+        }
+    });
+}
 exports.setReview = setReview;
