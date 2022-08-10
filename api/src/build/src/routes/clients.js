@@ -24,10 +24,10 @@ router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function*
         next(error);
     }
 }));
-router.get("/:idClient", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { idClient } = req.params;
+router.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
     try {
-        const client = yield (0, clientController_1.getClientById)(idClient);
+        const client = yield (0, clientController_1.getClientById)(id);
         return res.json(client);
     }
     catch (error) {

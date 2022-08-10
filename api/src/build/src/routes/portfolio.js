@@ -15,12 +15,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const portfolioController_1 = require("../controllers/portfolioController");
 const portfolio = express_1.default.Router();
-portfolio.post("/:idWorker", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const idWorker = req.params.idWorker;
+portfolio.post("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
     const portfolio = req.body;
     try {
         let response;
-        response = yield (0, portfolioController_1.postNewPortfolio)(portfolio, idWorker);
+        response = yield (0, portfolioController_1.postNewPortfolio)(portfolio, id);
         res.send(response);
     }
     catch (error) {
