@@ -31,10 +31,12 @@ const getWorkerByName = (name /* , multiplier: number = 0 */) => __awaiter(void 
     return worker;
 });
 exports.getWorkerByName = getWorkerByName;
-const getWorkerById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const workerById = yield UserWorker.findByPk(id, {
-        include: [Review, Proposal, Portfolio]
+function getWorkerById(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const workerById = yield UserWorker.findByPk(id, {
+            include: [Review, Proposal, Portfolio]
+        });
+        return workerById;
     });
-    return workerById;
-});
+}
 exports.getWorkerById = getWorkerById;
