@@ -9,9 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getWorkerById = exports.getWorkerByName = exports.getAllWorkers = void 0;
+exports.updateWorkerProfile = exports.getWorkerById = exports.getWorkerByName = exports.getAllWorkers = void 0;
 const sequelize_1 = require("sequelize");
 const { UserWorker, Review, Proposal, Portfolio } = require("../db");
+const CompareArraysEquality_1 = require("../services/CompareArraysEquality");
 function getAllWorkers() {
     return __awaiter(this, void 0, void 0, function* () {
         const allWorkers = yield UserWorker.findAll();
@@ -41,3 +42,23 @@ function getWorkerById(id) {
     });
 }
 exports.getWorkerById = getWorkerById;
+function updateWorkerProfile(id, name, born_date, photo, profession, skills) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const data = { name, born_date, photo, profession, skills };
+        const worker = yield UserWorker.findByPk(id);
+        if (!name || data.name === worker.name)
+            delete data.name;
+        if (!born_date || data.born_date === worker.born_date)
+            delete data.born_date;
+        if (!photo || data.photo === worker.photo)
+            delete data.photo;
+        if (!profession || (0, CompareArraysEquality_1.compareArrays)(data.profession, worker.profession))
+            delete data.profession;
+        if (!skills || (0, CompareArraysEquality_1.compareArrays)(data.skills, worker.skills))
+            delete data.skills;
+        yield worker.set(data);
+        yield worker.save();
+        return worker;
+    });
+}
+exports.updateWorkerProfile = updateWorkerProfile;

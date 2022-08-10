@@ -5,8 +5,13 @@ import {
   getAllWorkers,
   getWorkerById,
   getWorkerByName,
+  updateWorkerProfile
 } from "../controllers/workerController";
-import { workerAllfiltersOn, workerFilteredByProfession, workerFilteredByRating } from "../services/filteredSearchWorker";
+import {
+  workerAllfiltersOn,
+  workerFilteredByProfession,
+  workerFilteredByRating
+} from "../services/filteredSearchWorker";
 
 worker.get("/", async (_req: Request, res: Response, next: NextFunction) => {
   /* const multiplier: number = req.body.multiplier; */
@@ -21,27 +26,22 @@ worker.get("/", async (_req: Request, res: Response, next: NextFunction) => {
 worker.get(
   "/search",
   async (req: Request, res: Response, next: NextFunction) => {
-    const {q, p, r} = req.query;
-/*     const multiplier: number = req.body.multiplier; */
+    const { q, p, r } = req.query;
+    /*     const multiplier: number = req.body.multiplier; */
     try {
-      let worker: WorkerType[]; 
-      if (q && !p && !r){
-        worker = await getWorkerByName(q/* , multiplier */);
-      }
-      else if(q && p && !r){
-        worker = await workerFilteredByProfession(q, p/* , multiplier */);
-      }
-      else if(!q && p && !r){
-        worker = await workerFilteredByProfession(q, p/* , multiplier */);
-      }
-      else if (q && !p && r){
-        worker = await workerFilteredByRating(q, r/* , multiplier */);
-      }
-      else if (!q && !p && r){
-        worker = await workerFilteredByRating(q, r/* , multiplier */);
-      }
-      else {
-        worker = await workerAllfiltersOn(q, p, r/* , multiplier */);
+      let worker: WorkerType[];
+      if (q && !p && !r) {
+        worker = await getWorkerByName(q /* , multiplier */);
+      } else if (q && p && !r) {
+        worker = await workerFilteredByProfession(q, p /* , multiplier */);
+      } else if (!q && p && !r) {
+        worker = await workerFilteredByProfession(q, p /* , multiplier */);
+      } else if (q && !p && r) {
+        worker = await workerFilteredByRating(q, r /* , multiplier */);
+      } else if (!q && !p && r) {
+        worker = await workerFilteredByRating(q, r /* , multiplier */);
+      } else {
+        worker = await workerAllfiltersOn(q, p, r /* , multiplier */);
       }
       res.send(worker);
     } catch (error) {
@@ -50,17 +50,44 @@ worker.get(
   }
 );
 
-worker.get(
-  "/:id",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
-    try {
-        const workerById: WorkerType = await getWorkerById(id);
-        return res.json(workerById);
-    } catch (error) {
-      next(error);
-    }
+worker.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params;
+  try {
+    const workerById: WorkerType = await getWorkerById(id);
+    return res.json(workerById);
+  } catch (error) {
+    next(error);
   }
-);
+});
+
+worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
+  const id: string = req.params.id;
+  const {
+    name,
+    born_date,
+    photo,
+    profession,
+    skills,
+  }: {
+    name: string;
+    born_date: Date;
+    photo: string;
+    profession: string[];
+    skills: string[];
+  } = req.body;
+  try {
+    const workerUpdate: WorkerType = await updateWorkerProfile(
+      id,
+      name,
+      born_date,
+      photo,
+      profession,
+      skills
+    );
+    res.json(workerUpdate);
+  } catch (error) {
+    next(error);
+  }
+});
 
 export default worker;
