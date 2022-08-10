@@ -1,62 +1,63 @@
 "use strict";
-const { DataTypes } = require("sequelize");
+Object.defineProperty(exports, "__esModule", { value: true });
+const sequelize_1 = require("sequelize");
 module.exports = (sequelize) => {
     sequelize.define("userWorker", {
         idWorker: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
+            type: sequelize_1.DataTypes.UUID,
+            defaultValue: sequelize_1.DataTypes.UUIDV4,
             primaryKey: true,
         },
         name: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: false,
         },
         user_mail: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: false,
         },
         born_date: {
-            type: DataTypes.DATE,
+            type: sequelize_1.DataTypes.DATE,
             allowNull: false,
         },
         password: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: false,
         },
         profession: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
+            type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING),
         },
         skills: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
+            type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING),
         },
         rating: {
-            type: DataTypes.INTEGER,
+            type: sequelize_1.DataTypes.INTEGER,
             validate: {
                 max: 5,
                 min: 1,
             },
         },
         premium: {
-            type: DataTypes.BOOLEAN,
+            type: sequelize_1.DataTypes.BOOLEAN,
             defaultValue: false,
         },
         photo: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.TEXT,
             allowNull: true,
         },
         notification: {
-            type: DataTypes.ARRAY(DataTypes.JSONB),
+            type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSONB),
         },
         isAdmin: {
-            type: DataTypes.BOOLEAN,
+            type: sequelize_1.DataTypes.BOOLEAN,
             defaultValue: false,
         },
         isActive: {
-            type: DataTypes.BOOLEAN,
+            type: sequelize_1.DataTypes.BOOLEAN,
             defaultValue: true,
         },
         isWorker: {
-            type: DataTypes.BOOLEAN,
+            type: sequelize_1.DataTypes.BOOLEAN,
             defaultValue: true,
         },
     }, {

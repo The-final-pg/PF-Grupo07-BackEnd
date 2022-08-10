@@ -33,7 +33,7 @@ module.exports = (sequelize: any) => {
         type: DataTypes.STRING,
       },
       photo: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
       },
       profession: {
         type: DataTypes.ARRAY(DataTypes.STRING),

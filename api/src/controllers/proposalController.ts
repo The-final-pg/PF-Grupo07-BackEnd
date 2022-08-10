@@ -1,4 +1,4 @@
-import { ProposalType } from "../types";
+import { ProposalType} from "../types";
 const { Proposal, Offer } = require("../db");
 
 export async function postNewProposal(proposal: ProposalType,
@@ -6,7 +6,6 @@ export async function postNewProposal(proposal: ProposalType,
   const offer = await Offer.findByPk(idOffer);
   const newProposal = await Proposal.create(proposal);
   await offer.addProposal(newProposal);
-  /*     await newProposal.addOffer(offer); */
   return "Propuesta publicada exitosamente";
 }
 
