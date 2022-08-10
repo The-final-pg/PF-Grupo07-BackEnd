@@ -23,6 +23,7 @@ router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function*
     catch (error) {
         next(error);
     }
+    ;
 }));
 router.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
@@ -33,5 +34,18 @@ router.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     catch (error) {
         next(error);
     }
+    ;
+}));
+router.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const { name, born_date, photo } = req.body;
+    try {
+        const clientUpdate = yield (0, clientController_1.updateClientProfile)(id, name, born_date, photo);
+        res.json(clientUpdate);
+    }
+    catch (error) {
+        next(error);
+    }
+    ;
 }));
 exports.default = router;

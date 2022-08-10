@@ -8,6 +8,7 @@ export interface ClientType {
   rating: Integer;
   notification: Array[String];
   id: String;
+  photo: String;
 }
 
 export interface WorkerType {
