@@ -8,23 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const portfolioController_1 = require("../controllers/portfolioController");
-const portfolio = express_1.default.Router();
-portfolio.post("/:idWorker", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const idWorker = req.params.idWorker;
-    const portfolio = req.body;
-    try {
-        let response;
-        response = yield (0, portfolioController_1.postNewPortfolio)(portfolio, idWorker);
-        res.send(response);
-    }
-    catch (error) {
-        next(error);
-    }
-}));
-exports.default = portfolio;
+exports.postReview = void 0;
+const { Review, UserClient, Offer, UserWorker } = require("../db");
+const postReview = (idClient, idWorker, idOffer, review) => __awaiter(void 0, void 0, void 0, function* () {
+    const newReview = yield Review.create(review);
+    const client = yield UserClient.findByPk(idClient);
+    const worker = yield UserWorker.findByPk(idWorker);
+    const offer = yield Offer.findByPk(idOffer);
+    yield client.addReview(newReview);
+    yield worker.addReview(newReview);
+    yield offer.addReview(newReview);
+    return "Valoración creada con éxito";
+});
+exports.postReview = postReview;
