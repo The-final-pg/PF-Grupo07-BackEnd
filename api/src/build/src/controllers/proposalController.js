@@ -16,7 +16,6 @@ function postNewProposal(proposal, idOffer) {
         const offer = yield Offer.findByPk(idOffer);
         const newProposal = yield Proposal.create(proposal);
         yield offer.addProposal(newProposal);
-        /*     await newProposal.addOffer(offer); */
         return "Propuesta publicada exitosamente";
     });
 }

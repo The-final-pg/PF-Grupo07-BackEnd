@@ -8,23 +8,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const portfolioController_1 = require("../controllers/portfolioController");
-const portfolio = express_1.default.Router();
-portfolio.post("/:idWorker", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const idWorker = req.params.idWorker;
-    const portfolio = req.body;
+const reviewController_1 = require("../controllers/reviewController");
+const review = express_1.default.Router();
+review.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const _a = req.body, { idClient, idWorker, idOffer } = _a, review = __rest(_a, ["idClient", "idWorker", "idOffer"]);
     try {
         let response;
-        response = yield (0, portfolioController_1.postNewPortfolio)(portfolio, idWorker);
-        res.send(response);
+        response = yield (0, reviewController_1.postReview)(idClient, idWorker, idOffer, review);
+        res.json(response);
     }
     catch (error) {
         next(error);
     }
 }));
-exports.default = portfolio;
+exports.default = review;

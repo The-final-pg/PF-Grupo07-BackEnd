@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postNewPortfolio = void 0;
 const { Portfolio, UserWorker } = require("../db");
+<<<<<<< HEAD
 function postNewPortfolio(portfolio, idWorker) {
     return __awaiter(this, void 0, void 0, function* () {
         const worker = UserWorker.findByPk(idWorker);
@@ -19,4 +20,12 @@ function postNewPortfolio(portfolio, idWorker) {
         return "Portfolio agregado con éxito";
     });
 }
+=======
+const postNewPortfolio = (portfolio, idWorker) => __awaiter(void 0, void 0, void 0, function* () {
+    const worker = yield UserWorker.findByPk(idWorker);
+    const newPortfolio = yield Portfolio.create(portfolio);
+    yield worker.addPortfolio(newPortfolio);
+    return "Portfolio agregado con éxito";
+});
+>>>>>>> 707266edd67172ce2b7f36f2b5f67c9667ca0352
 exports.postNewPortfolio = postNewPortfolio;
