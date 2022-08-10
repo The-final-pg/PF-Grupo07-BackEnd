@@ -12,67 +12,77 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.putOfferState = exports.getOffersBySearch = exports.getOfferById = exports.postOffer = exports.getAllOffers = void 0;
 const sequelize_1 = require("sequelize");
 const { Offer, Proposal, UserClient, UserWorker } = require("../db");
-const getAllOffers = ( /* multiplier: number = 0 */) => __awaiter(void 0, void 0, void 0, function* () {
-    let allOffers = yield Offer.findAll({
-        /*    limit: 8 + 5 * multiplier, */
-        include: UserClient
+function getAllOffers( /* multiplier: number = 0 */) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let allOffers = yield Offer.findAll({
+            /*    limit: 8 + 5 * multiplier, */
+            include: UserClient
+        });
+        return allOffers;
     });
-    return allOffers;
-});
+}
 exports.getAllOffers = getAllOffers;
-const postOffer = (offer) => __awaiter(void 0, void 0, void 0, function* () {
-    yield Offer.create(offer);
-    return "Propuesta creado con exito";
-});
+function postOffer(offer) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield Offer.create(offer);
+        return "Propuesta creado con exito";
+    });
+}
 exports.postOffer = postOffer;
-const getOfferById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    let offer = yield Offer.findByPk(id, {
-        include: [
-            { model: UserClient, include: Offer },
-            { model: Proposal, include: UserWorker },
-        ],
-    });
-    return offer.toJSON();
-});
-exports.getOfferById = getOfferById;
-const getOffersBySearch = (q /* , multiplier: number = 0 */) => __awaiter(void 0, void 0, void 0, function* () {
-    let offers = yield Offer.findAll({
-        /* limit: 8 + 5 * multiplier, */
-        where: {
-            [sequelize_1.Op.or]: [
-                {
-                    title: {
-                        [sequelize_1.Op.iLike]: `%${q}%`,
-                    },
-                },
-                {
-                    offer_description: {
-                        [sequelize_1.Op.iLike]: `%${q}%`,
-                    },
-                },
+function getOfferById(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let offer = yield Offer.findByPk(id, {
+            include: [
+                { model: UserClient, include: Offer },
+                { model: Proposal, include: UserWorker },
             ],
-        },
-        include: UserClient
+        });
+        return offer.toJSON();
     });
-    return offers;
-});
+}
+exports.getOfferById = getOfferById;
+function getOffersBySearch(q /* , multiplier: number = 0 */) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let offers = yield Offer.findAll({
+            /* limit: 8 + 5 * multiplier, */
+            where: {
+                [sequelize_1.Op.or]: [
+                    {
+                        title: {
+                            [sequelize_1.Op.iLike]: `%${q}%`,
+                        },
+                    },
+                    {
+                        offer_description: {
+                            [sequelize_1.Op.iLike]: `%${q}%`,
+                        },
+                    },
+                ],
+            },
+            include: UserClient
+        });
+        return offers;
+    });
+}
 exports.getOffersBySearch = getOffersBySearch;
-const putOfferState = (id, state) => __awaiter(void 0, void 0, void 0, function* () {
-    const offerState = yield Offer.findAll({
-        where: {
-            id: id,
-        },
-    });
-    if (offerState.state === "cancelled") {
-        return "Flaco la hubieras pensado antes";
-    }
-    else {
-        yield Offer.update({ state: state }, {
+function putOfferState(id, state) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const offerState = yield Offer.findAll({
             where: {
                 id: id,
             },
         });
-        return "state updated";
-    }
-});
+        if (offerState.state === "cancelled") {
+            return "Flaco la hubieras pensado antes";
+        }
+        else {
+            yield Offer.update({ state: state }, {
+                where: {
+                    id: id,
+                },
+            });
+            return "state updated";
+        }
+    });
+}
 exports.putOfferState = putOfferState;
