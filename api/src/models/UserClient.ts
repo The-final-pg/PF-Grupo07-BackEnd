@@ -18,7 +18,7 @@ module.exports = (sequelize: any) => {
       allowNull: false,
     },
     photo: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     rating: {

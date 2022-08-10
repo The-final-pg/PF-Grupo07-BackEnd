@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         photo: {
-            type: sequelize_1.DataTypes.STRING,
+            type: sequelize_1.DataTypes.TEXT,
             allowNull: true,
         },
         rating: {

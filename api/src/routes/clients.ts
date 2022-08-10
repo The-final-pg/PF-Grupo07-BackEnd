@@ -12,9 +12,7 @@ router.get("/", async (_req: Request, res: Response, next: NextFunction) => {
   }
 });
 
-router.get(
-  "/:idClient",
-  async (req: Request, res: Response, next: NextFunction) => {
+router.get(  "/:idClient",  async (req: Request, res: Response, next: NextFunction) => {
     const { idClient } = req.params;
     try {
       const client: ClientType = await getClientById(idClient);

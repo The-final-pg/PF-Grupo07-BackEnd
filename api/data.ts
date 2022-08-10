@@ -78,7 +78,7 @@ export const setOffers = async () => {
   }
 };
 
-export const setProposals = async () => {
+export async function setProposals() {
   const proposals = await Proposal.findAll();
   if (!proposals.length) {
     let workersId = await UserWorker.findAll();
@@ -106,9 +106,9 @@ export const setProposals = async () => {
     let arrayProposalDb = await arrayProposal?.filter((c) => c);
     await Proposal.bulkCreate(arrayProposalDb);
   }
-};
+}
 
-export const setPortfolios = async () => {
+export async function setPortfolios() {
   const portfolios = await Portfolio.findAll();
   if (!portfolios.length) {
     let workersId = await UserWorker.findAll();
@@ -133,9 +133,9 @@ export const setPortfolios = async () => {
     let arrayPortfolioDb = await arrayPortfolio?.filter((c) => c);
     await Portfolio.bulkCreate(arrayPortfolioDb);
   }
-};
+}
 
-export const setReview = async () => {
+export async function setReview() {
   const reviews = await Review.findAll();
   if (!reviews.length) {
     let workersId = await UserWorker.findAll();
@@ -165,4 +165,4 @@ export const setReview = async () => {
     let arrayReviewDb = await arrayReview?.filter((c) => c);
     await Review.bulkCreate(arrayReviewDb);
   }
-};
+}

@@ -1,4 +1,4 @@
-const { DataTypes } = require("sequelize");
+import { DataTypes } from "sequelize";
 
 module.exports = (sequelize: any) => {
   sequelize.define(
@@ -43,7 +43,7 @@ module.exports = (sequelize: any) => {
         defaultValue: false,
       },
       photo: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true,
       },
       notification: {

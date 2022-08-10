@@ -11,13 +11,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getClientById = exports.getAllClients = void 0;
 const { UserClient, Offer, Review } = require("../db");
-const getAllClients = () => __awaiter(void 0, void 0, void 0, function* () {
-    let allClients = yield UserClient.findAll();
-    return allClients;
-});
+function getAllClients() {
+    return __awaiter(this, void 0, void 0, function* () {
+        let allClients = yield UserClient.findAll();
+        return allClients;
+    });
+}
 exports.getAllClients = getAllClients;
-const getClientById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    let client = yield UserClient.findByPk(id, { include: [Offer, Review] });
-    return client;
-});
+function getClientById(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let client = yield UserClient.findByPk(id, { include: [Offer, Review] });
+        return client;
+    });
+}
 exports.getClientById = getClientById;

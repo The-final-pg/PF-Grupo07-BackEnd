@@ -11,30 +11,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.putProposalState = exports.postNewProposal = void 0;
 const { Proposal, Offer } = require("../db");
-const postNewProposal = (proposal, idOffer) => __awaiter(void 0, void 0, void 0, function* () {
-    const offer = yield Offer.findByPk(idOffer);
-    const newProposal = yield Proposal.create(proposal);
-    yield offer.addProposal(newProposal);
-    /*     await newProposal.addOffer(offer); */
-    return "Propuesta publicada exitosamente";
-});
-exports.postNewProposal = postNewProposal;
-const putProposalState = (id, state) => __awaiter(void 0, void 0, void 0, function* () {
-    const proposalState = yield Proposal.findAll({
-        where: {
-            id: id,
-        },
+function postNewProposal(proposal, idOffer) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const offer = yield Offer.findByPk(idOffer);
+        const newProposal = yield Proposal.create(proposal);
+        yield offer.addProposal(newProposal);
+        return "Propuesta publicada exitosamente";
     });
-    if (proposalState.state === "rejected") {
-        return "Flaco la quedaste";
-    }
-    else {
-        yield Proposal.update({ state: state }, {
+}
+exports.postNewProposal = postNewProposal;
+function putProposalState(id, state) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const proposalState = yield Proposal.findAll({
             where: {
                 id: id,
             },
         });
-        return "state updated";
-    }
-});
+        if (proposalState.state === "rejected") {
+            return "Flaco la quedaste";
+        }
+        else {
+            yield Proposal.update({ state: state }, {
+                where: {
+                    id: id,
+                },
+            });
+            return "state updated";
+        }
+    });
+}
 exports.putProposalState = putProposalState;
