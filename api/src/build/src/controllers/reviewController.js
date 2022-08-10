@@ -9,16 +9,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postReview = void 0;
+exports.postReviewWorker = exports.postReviewClient = void 0;
 const { Review, UserClient, Offer, UserWorker } = require("../db");
-const postReview = (idClient, idWorker, idOffer, review) => __awaiter(void 0, void 0, void 0, function* () {
+//la funcion ReviewClient toma el valor de id de ofer y client y la review
+const postReviewClient = (id, idOffer, review) => __awaiter(void 0, void 0, void 0, function* () {
+    //crea una nueva review con el objeto que llega por parametros
     const newReview = yield Review.create(review);
-    const client = yield UserClient.findByPk(idClient);
-    const worker = yield UserWorker.findByPk(idWorker);
+    //busca al cliente por la ID recibida
+    const client = yield UserClient.findByPk(id);
+    //busca la Offer por la id recibida
     const offer = yield Offer.findByPk(idOffer);
+    //relaciona al client y la offer con la nueva review
     yield client.addReview(newReview);
+    yield offer.addReview(newReview);
+    return "Valoración creada con éxito";
+});
+exports.postReviewClient = postReviewClient;
+const postReviewWorker = (id, idOffer, review) => __awaiter(void 0, void 0, void 0, function* () {
+    const newReview = yield Review.create(review);
+    const worker = yield UserWorker.findByPk(id);
+    const offer = yield Offer.findByPk(idOffer);
     yield worker.addReview(newReview);
     yield offer.addReview(newReview);
     return "Valoración creada con éxito";
 });
-exports.postReview = postReview;
+exports.postReviewWorker = postReviewWorker;
