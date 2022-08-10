@@ -56,3 +56,8 @@ export interface ProposalType {
   worked_time: String;
   state: String;
 }
+
+export interface ReviewType {
+  valoration: Number;
+  review_description: String;
+}
