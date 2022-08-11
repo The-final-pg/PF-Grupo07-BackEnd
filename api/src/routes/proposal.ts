@@ -24,7 +24,7 @@ proposal.put("/", async (req: Request, res: Response, next: NextFunction) => {
   } catch (error) {
     next(error);
   }
-})
+});
 
 
 export default proposal;
