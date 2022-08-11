@@ -22,18 +22,21 @@ function postNewProposal(proposal, idOffer) {
 exports.postNewProposal = postNewProposal;
 function putProposalState(id, state) {
     return __awaiter(this, void 0, void 0, function* () {
-        const proposalState = yield Proposal.findAll({
+        const proposalState = yield Proposal.findOne({
             where: {
-                id: id,
+                idProposal: id,
             },
         });
+        if (!proposalState) {
+            throw new Error(`La propuesta ${id} no existe en la base de datos`);
+        }
         if (proposalState.state === "rejected") {
-            return "Flaco la quedaste";
+            return "La propuesta fue rechazada y no puede cambiar de estado";
         }
         else {
             yield Proposal.update({ state: state }, {
                 where: {
-                    id: id,
+                    idProposal: id,
                 },
             });
             return "state updated";

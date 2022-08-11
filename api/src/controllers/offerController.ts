@@ -51,11 +51,12 @@ export async function getOffersBySearch(q, multiplier: number = 0): Promise<Offe
 
 export async function putOfferState(id: String,
   state: String): Promise<string> {
-  const offerState: OfferType = await Offer.findAll({
+  const offerState: OfferType = await Offer.findOne({
     where: {
-      id: id,
+      idOffer: id,
     },
   });
+
   if (offerState.state === "cancelled") {
     return "Flaco la hubieras pensado antes";
   } else {
@@ -63,7 +64,7 @@ export async function putOfferState(id: String,
       { state: state },
       {
         where: {
-          id: id,
+          idOffer: id,
         },
       }
     );
