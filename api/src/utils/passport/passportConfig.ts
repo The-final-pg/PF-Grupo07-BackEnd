@@ -7,8 +7,6 @@ import { WorkerType, ClientType  } from "../../types";
 const { UserWorker, UserClient } = require ("../../db");
 import jwt from "jsonwebtoken";
 const { SECRET_KEY } = process.env;
-import transporter from "../nodemailer/nodemailerConfig"
-const { REWORK_MAIL } = process.env
 
 //Verificacion de usuario para log in
 passport.use(
@@ -36,14 +34,7 @@ passport.use(
                     } else {
                         return done (null, user.dataValues)
                     }
-                })  
-                
-                transporter.sendMail({
-                    from: `"REWork" <${REWORK_MAIL}>`,
-                    to: user.dataValues.user_mail,
-                    subject: "Bienvenido a REWork",
-                    html: `<b>Ir a <a href="localhost:3000/login"> REWork </a> </b>`
-                })
+                })        
             } catch (e){
                 return done(e, false) //si no encontró ningún usuario, devuelve result en false y el error que corresponda
             }

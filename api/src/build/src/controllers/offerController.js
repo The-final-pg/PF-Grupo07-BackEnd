@@ -9,13 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.putOfferState = exports.getOffersBySearch = exports.getOfferById = exports.postOffer = exports.getAllOffers = void 0;
+exports.putOfferIsActive = exports.putOfferState = exports.getOffersBySearch = exports.getOfferById = exports.postOffer = exports.getAllOffers = void 0;
 const sequelize_1 = require("sequelize");
 const { Offer, Proposal, UserClient, UserWorker } = require("../db");
-function getAllOffers(multiplier = 0) {
+function getAllOffers() {
     return __awaiter(this, void 0, void 0, function* () {
         let allOffers = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
             include: UserClient
         });
         return allOffers;
@@ -41,10 +40,9 @@ function getOfferById(id) {
     });
 }
 exports.getOfferById = getOfferById;
-function getOffersBySearch(q, multiplier = 0) {
+function getOffersBySearch(q) {
     return __awaiter(this, void 0, void 0, function* () {
         let offers = yield Offer.findAll({
-            limit: 8 + 5 * multiplier,
             where: {
                 [sequelize_1.Op.or]: [
                     {
@@ -67,18 +65,21 @@ function getOffersBySearch(q, multiplier = 0) {
 exports.getOffersBySearch = getOffersBySearch;
 function putOfferState(id, state) {
     return __awaiter(this, void 0, void 0, function* () {
-        const offerState = yield Offer.findAll({
+        const offerState = yield Offer.findOne({
             where: {
-                id: id,
+                idOffer: id,
             },
         });
+        if (!offerState) {
+            throw new Error("`La oferta ${id} no existe en la base de datos`");
+        }
         if (offerState.state === "cancelled") {
-            return "Flaco la hubieras pensado antes";
+            return "La oferta fue cancelada y no puede cambiar de estado";
         }
         else {
             yield Offer.update({ state: state }, {
                 where: {
-                    id: id,
+                    idOffer: id,
                 },
             });
             return "state updated";
@@ -86,3 +87,25 @@ function putOfferState(id, state) {
     });
 }
 exports.putOfferState = putOfferState;
+function putOfferIsActive(id, isActive) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const offerState = yield Offer.findOne({
+            where: {
+                idOffer: id,
+            },
+        });
+        if (!offerState) {
+            throw new Error(`La oferta ${id} no existe en la base de datos`);
+        }
+        else {
+            yield Offer.update({ isActive: isActive }, {
+                where: {
+                    idOffer: id,
+                },
+            });
+            return "isActive updated";
+        }
+    });
+}
+exports.putOfferIsActive = putOfferIsActive;
+;

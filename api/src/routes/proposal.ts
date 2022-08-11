@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from "express";
-import { postNewProposal, putProposalState } from "../controllers/proposalController";
+import { postNewProposal, putProposalIsActive, putProposalState } from "../controllers/proposalController";
 
 const proposal = express.Router();
 
@@ -14,17 +14,24 @@ proposal.post("/", async (req: Request, res: Response, next: NextFunction) => {
   }
 });
 
-proposal.put("/", async (req: Request, res: Response, next: NextFunction) => {
+proposal.put("/state", async (req: Request, res: Response, next: NextFunction) => {
   const { id, state } = req.body;
   try {
-    if (id && state) {
       const proposalState: String = await putProposalState(id, state);
       res.send(proposalState);
-    }
   } catch (error) {
     next(error);
   }
-})
+});
 
+proposal.put("/isActive", async (req: Request, res: Response, next: NextFunction) => {
+  const { id, isActive } = req.body;
+  try {
+      const proposalState: String = await putProposalIsActive(id, isActive);
+      res.send(proposalState);
+  } catch (error) {
+    next(error);
+  }
+});
 
 export default proposal;
