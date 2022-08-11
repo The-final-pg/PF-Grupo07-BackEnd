@@ -64,7 +64,7 @@ const setOffers = () => __awaiter(void 0, void 0, void 0, function* () {
                 min_remuneration: Math.floor(e.Offer.remuneration / 2),
                 offer_description: e.Offer.offer_description,
                 post_duration_time: e.Offer.post_duration_time,
-                work_duration_time: parseInt(e.Offer.work_duration_time),
+                work_duration_time: e.Offer.work_duration_time[e.Offer.work_duration_time[4] % 4],
                 photo: e.Offer.photo,
                 profession: e.Offer.profession,
             });
