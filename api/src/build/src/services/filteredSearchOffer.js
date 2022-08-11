@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.offerAllFiltersOn = exports.offerFilteredByRemuneration = exports.offerFilteredByRating = exports.offerFilteredByProfession = void 0;
+exports.offerAllFiltersOn = exports.offerFilteredByWorDurationTime = exports.offerFilteredByRemuneration = exports.offerFilteredByRating = exports.offerFilteredByProfession = void 0;
 const sequelize_1 = require("sequelize");
 const { Offer, UserClient } = require("../db");
 function offerFilteredByProfession(input, profession) {
@@ -142,6 +142,47 @@ function offerFilteredByRemuneration(input, remMax, remMin) {
     });
 }
 exports.offerFilteredByRemuneration = offerFilteredByRemuneration;
+;
+function offerFilteredByWorDurationTime(input, work_duration_time) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (!input && work_duration_time) {
+            const findedByWorkDurationTime = yield Offer.findAll({
+                where: {
+                    work_duration_time: {
+                        [sequelize_1.Op.eq]: work_duration_time,
+                    },
+                },
+                include: UserClient,
+            });
+            return findedByWorkDurationTime;
+        }
+        else {
+            const findedByWorkDurationTime = yield Offer.findAll({
+                where: {
+                    [sequelize_1.Op.or]: [
+                        {
+                            title: {
+                                [sequelize_1.Op.iLike]: `%${input}%`,
+                            },
+                        },
+                        {
+                            offer_description: {
+                                [sequelize_1.Op.iLike]: `%${input}%`,
+                            },
+                        },
+                    ],
+                    work_duration_time: {
+                        [sequelize_1.Op.eq]: work_duration_time,
+                    },
+                },
+                include: UserClient,
+            });
+            return findedByWorkDurationTime;
+        }
+    });
+}
+exports.offerFilteredByWorDurationTime = offerFilteredByWorDurationTime;
+;
 function offerAllFiltersOn(input, profession, rating, remMax, remMin) {
     return __awaiter(this, void 0, void 0, function* () {
         if (input && profession && rating && remMax && remMin) {
