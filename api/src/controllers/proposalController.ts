@@ -32,4 +32,25 @@ export async function putProposalState(id: String,
     );
     return "state updated";
   }
+};
+
+export async function putProposalIsActive(id: String,
+  isActive: Boolean): Promise<string> {
+  const proposalState: ProposalType = await Proposal.findOne({
+    where: {
+      idProposal: id,
+    },
+  });
+  if (!proposalState) {
+    throw new Error(`La propuesta ${id} no existe en la base de datos`)
+  }
+  await Proposal.update(
+    { isActive: isActive },
+    {
+      where: {
+        idProposal: id,
+      },
+    }
+  );
+  return "state updated";
 }

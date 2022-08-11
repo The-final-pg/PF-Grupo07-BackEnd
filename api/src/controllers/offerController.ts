@@ -56,9 +56,12 @@ export async function putOfferState(id: String,
       idOffer: id,
     },
   });
+  if (!offerState) {
+    throw new Error("`La oferta ${id} no existe en la base de datos`")
+  }
 
   if (offerState.state === "cancelled") {
-    return "Flaco la hubieras pensado antes";
+    return "La oferta fue cancelada y no puede cambiar de estado";
   } else {
     await Offer.update(
       { state: state },
@@ -71,3 +74,25 @@ export async function putOfferState(id: String,
     return "state updated";
   }
 }
+
+export async function putOfferIsActive(id: String,
+  isActive: Boolean): Promise<string> {
+  const offerState: OfferType = await Offer.findOne({
+    where: {
+      idOffer: id,
+    },
+  });
+  if (!offerState) {
+    throw new Error(`La oferta ${id} no existe en la base de datos`)
+  } else {
+    await Offer.update(
+      { isActive: isActive },
+      {
+        where: {
+          idOffer: id,
+        },
+      }
+    );
+    return "isActive updated";
+  }
+};
