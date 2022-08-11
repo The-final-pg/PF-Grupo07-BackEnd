@@ -2,9 +2,8 @@ import { OfferType } from "../types";
 import { Op } from "sequelize";
 const { Offer, Proposal, UserClient, UserWorker } = require("../db");
 
-export async function getAllOffers(multiplier: number = 0): Promise<OfferType[]> {
+export async function getAllOffers(): Promise<OfferType[]> {
   let allOffers = await Offer.findAll({
-    limit: 8 + 5 * multiplier,
     include: UserClient
   });
   return allOffers;
@@ -26,10 +25,9 @@ export async function getOfferById(id: String): Promise<OfferType> {
   return offer.toJSON();
 }
 
-export async function getOffersBySearch(q, multiplier: number = 0): Promise<OfferType[]> {
+export async function getOffersBySearch(q): Promise<OfferType[]> {
 
   let offers = await Offer.findAll({
-    limit: 8 + 5 * multiplier,
     where: {
       [Op.or]: [
         {
