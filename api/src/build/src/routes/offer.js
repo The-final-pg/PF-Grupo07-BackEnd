@@ -26,29 +26,35 @@ offer.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* 
     }
 }));
 offer.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { q, p, r, max, min } = req.query;
+    const { q, p, r, max, min, wdt } = req.query;
     try {
         let offers;
-        if (q && !p && !r && !max && !min) {
+        if (q && !p && !r && !max && !min && !wdt) {
             offers = yield (0, offerController_1.getOffersBySearch)(q);
         }
-        else if (q && p && !r && !max && !min) {
+        else if (q && p && !r && !max && !min && !wdt) {
             offers = yield (0, filteredSearchOffer_1.offerFilteredByProfession)(q, p);
         }
-        else if (!q && p && !r && !max && !min) {
+        else if (!q && p && !r && !max && !min && !wdt) {
             offers = yield (0, filteredSearchOffer_1.offerFilteredByProfession)(q, p);
         }
-        else if (q && !p && r && !max && !min) {
+        else if (q && !p && r && !max && !min && !wdt) {
             offers = yield (0, filteredSearchOffer_1.offerFilteredByRating)(q, r);
         }
-        else if (!q && !p && r && !max && !min) {
+        else if (!q && !p && r && !max && !min && !wdt) {
             offers = yield (0, filteredSearchOffer_1.offerFilteredByRating)(q, r);
         }
-        else if (q && !p && !r && max && min) {
+        else if (q && !p && !r && max && min && !wdt) {
             offers = yield (0, filteredSearchOffer_1.offerFilteredByRemuneration)(q, max, min);
         }
-        else if (!q && !p && !r && max && min) {
+        else if (!q && !p && !r && max && min && !wdt) {
             offers = yield (0, filteredSearchOffer_1.offerFilteredByRemuneration)(q, max, min);
+        }
+        else if (q && !p && !r && !max && !min && wdt) {
+            offers = yield (0, filteredSearchOffer_1.offerFilteredByWorDurationTime)(q, wdt);
+        }
+        else if (!q && !p && !r && !max && !min && wdt) {
+            offers = yield (0, filteredSearchOffer_1.offerFilteredByWorDurationTime)(q, wdt);
         }
         else {
             offers = yield (0, filteredSearchOffer_1.offerAllFiltersOn)(q, p, r, max, min);

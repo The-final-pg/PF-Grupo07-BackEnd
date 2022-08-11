@@ -134,7 +134,46 @@ export async function offerFilteredByRemuneration(
 
     return findedByName;
   }
-}
+};
+
+export async function offerFilteredByWorDurationTime(
+  input: string,
+  work_duration_time: string
+): Promise<OfferType[]> {
+  if (!input && work_duration_time) {
+    const findedByWorkDurationTime: OfferType[] = await Offer.findAll({
+      where: {
+        work_duration_time: {
+          [Op.eq]: work_duration_time,
+        },
+      },
+      include: UserClient,
+    });
+    return findedByWorkDurationTime;
+  } else {
+      const findedByWorkDurationTime: OfferType[] = await Offer.findAll({
+        where: {
+          [Op.or]: [
+            {
+              title: {
+                [Op.iLike]: `%${input}%`,
+              },
+            },
+            {
+              offer_description: {
+                [Op.iLike]: `%${input}%`,
+              },
+            },
+          ],
+          work_duration_time: {
+            [Op.eq]: work_duration_time,
+          },
+        },
+        include: UserClient,
+      });
+      return findedByWorkDurationTime;
+  }
+};
 
 export async function offerAllFiltersOn(
   input,
