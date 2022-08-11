@@ -67,18 +67,21 @@ function getOffersBySearch(q, multiplier = 0) {
 exports.getOffersBySearch = getOffersBySearch;
 function putOfferState(id, state) {
     return __awaiter(this, void 0, void 0, function* () {
-        const offerState = yield Offer.findAll({
+        const offerState = yield Offer.findOne({
             where: {
-                id: id,
+                idOffer: id,
             },
         });
+        if (!offerState) {
+            throw new Error(`La oferta ${id} no existe en la base de datos`);
+        }
         if (offerState.state === "cancelled") {
-            return "Flaco la hubieras pensado antes";
+            return "La oferta fue cancelada y no puede cambiar de estado";
         }
         else {
             yield Offer.update({ state: state }, {
                 where: {
-                    id: id,
+                    idOffer: id,
                 },
             });
             return "state updated";

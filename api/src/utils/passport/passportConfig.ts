@@ -8,7 +8,6 @@ const { UserWorker, UserClient } = require ("../../db");
 import jwt from "jsonwebtoken";
 const { SECRET_KEY } = process.env;
 
-
 //Verificacion de usuario para log in
 passport.use(
     new LocalStrategy(
@@ -35,9 +34,7 @@ passport.use(
                     } else {
                         return done (null, user.dataValues)
                     }
-                })  
-                
-                
+                })        
             } catch (e){
                 return done(e, false) //si no encontró ningún usuario, devuelve result en false y el error que corresponda
             }

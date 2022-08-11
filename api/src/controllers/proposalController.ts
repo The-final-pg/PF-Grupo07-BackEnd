@@ -11,19 +11,22 @@ export async function postNewProposal(proposal: ProposalType,
 
 export async function putProposalState(id: String,
   state: String): Promise<string> {
-  const proposalState: ProposalType = await Proposal.findAll({
+  const proposalState: ProposalType = await Proposal.findOne({
     where: {
-      id: id,
+      idProposal: id,
     },
   });
+  if (!proposalState) {
+    throw new Error(`La propuesta ${id} no existe en la base de datos`)
+  }
   if (proposalState.state === "rejected") {
-    return "Flaco la quedaste";
+    return "La propuesta fue rechazada y no puede cambiar de estado";
   } else {
     await Proposal.update(
       { state: state },
       {
         where: {
-          id: id,
+          idProposal: id,
         },
       }
     );
