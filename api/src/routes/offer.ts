@@ -13,6 +13,7 @@ import {
   offerAllFiltersOn,
   offerFilteredByRating,
   offerFilteredByRemuneration,
+  offerFilteredByWorDurationTime
 } from "../services/filteredSearchOffer";
 
 const offer = express.Router();
@@ -29,31 +30,35 @@ offer.get("/", async (_req: Request, res: Response, next: NextFunction) => {
 offer.get(
   "/search",
   async (req: Request, res: Response, next: NextFunction) => {
-    const { q, p, r, max, min } = req.query;
+    const { q, p, r, max, min, wdt } = req.query;
     try {
       let offers: OfferType[];
-      if (q && !p && !r && !max && !min) {
+      if (q && !p && !r && !max && !min && !wdt) {
         offers = await getOffersBySearch(q);
-      } else if (q && p && !r && !max && !min) {
+      } else if (q && p && !r && !max && !min && !wdt) {
         offers = await offerFilteredByProfession(q, p);
-      } else if (!q && p && !r && !max && !min) {
+      } else if (!q && p && !r && !max && !min && !wdt) {
         offers = await offerFilteredByProfession(q, p);
-      } else if (q && !p && r && !max && !min) {
+      } else if (q && !p && r && !max && !min && !wdt) {
         offers = await offerFilteredByRating(q, r);
-      } else if (!q && !p && r && !max && !min) {
+      } else if (!q && !p && r && !max && !min && !wdt) {
         offers = await offerFilteredByRating(q, r);
-      } else if (q && !p && !r && max && min) {
+      } else if (q && !p && !r && max && min && !wdt) {
         offers = await offerFilteredByRemuneration(
           q,
           max,
           min
         );
-      } else if (!q && !p && !r && max && min) {
+      } else if (!q && !p && !r && max && min && !wdt) {
         offers = await offerFilteredByRemuneration(
           q,
           max,
           min
         );
+      } else if (q && !p && !r && !max && !min && wdt) {
+        offers = await offerFilteredByWorDurationTime(q as string, wdt as string);
+      } else if (!q && !p && !r && !max && !min && wdt) {
+        offers = await offerFilteredByWorDurationTime(q as string, wdt as string);
       } else {
         offers = await offerAllFiltersOn(q, p, r, max, min);
       }

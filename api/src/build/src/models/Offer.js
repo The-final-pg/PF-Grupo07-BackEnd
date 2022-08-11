@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         work_duration_time: {
-            type: sequelize_1.DataTypes.STRING,
+            type: sequelize_1.DataTypes.ENUM("Menos de 1 mes", "1 a 3 meses", "4 a 6 meses", "Más de 6 meses"),
         },
         photo: {
             type: sequelize_1.DataTypes.TEXT,
