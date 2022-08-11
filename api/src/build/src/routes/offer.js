@@ -17,21 +17,9 @@ const offerController_1 = require("../controllers/offerController");
 const filteredSearchOffer_1 = require("../services/filteredSearchOffer");
 const offer = express_1.default.Router();
 offer.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    /*   const multiplier: number = req.body.multiplier; */
     try {
-        const offers = yield (0, offerController_1.getAllOffers)( /* multiplier */);
+        const offers = yield (0, offerController_1.getAllOffers)();
         res.json(offers);
-    }
-    catch (error) {
-        next(error);
-    }
-}));
-offer.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = req.body;
-    try {
-        let newOffer;
-        newOffer = yield (0, offerController_1.postOffer)(data);
-        res.send(newOffer);
     }
     catch (error) {
         next(error);
@@ -39,32 +27,31 @@ offer.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
 }));
 offer.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { q, p, r, max, min } = req.query;
-    /*   const multiplier: number = req.body.multiplier; */
     try {
         let offers;
         if (q && !p && !r && !max && !min) {
-            offers = yield (0, offerController_1.getOffersBySearch)(q /* , multiplier */);
+            offers = yield (0, offerController_1.getOffersBySearch)(q);
         }
         else if (q && p && !r && !max && !min) {
-            offers = yield (0, filteredSearchOffer_1.offerFilteredByProfession)(q, p /* , multiplier */);
+            offers = yield (0, filteredSearchOffer_1.offerFilteredByProfession)(q, p);
         }
         else if (!q && p && !r && !max && !min) {
-            offers = yield (0, filteredSearchOffer_1.offerFilteredByProfession)(q, p /* , multiplier */);
+            offers = yield (0, filteredSearchOffer_1.offerFilteredByProfession)(q, p);
         }
         else if (q && !p && r && !max && !min) {
-            offers = yield (0, filteredSearchOffer_1.offerFilteredByRating)(q, r /* , multiplier */);
+            offers = yield (0, filteredSearchOffer_1.offerFilteredByRating)(q, r);
         }
         else if (!q && !p && r && !max && !min) {
-            offers = yield (0, filteredSearchOffer_1.offerFilteredByRating)(q, r /* , multiplier */);
+            offers = yield (0, filteredSearchOffer_1.offerFilteredByRating)(q, r);
         }
         else if (q && !p && !r && max && min) {
-            offers = yield (0, filteredSearchOffer_1.offerFilteredByRemuneration)(q, max, min /* , multiplier */);
+            offers = yield (0, filteredSearchOffer_1.offerFilteredByRemuneration)(q, max, min);
         }
         else if (!q && !p && !r && max && min) {
-            offers = yield (0, filteredSearchOffer_1.offerFilteredByRemuneration)(q, max, min /* , multiplier */);
+            offers = yield (0, filteredSearchOffer_1.offerFilteredByRemuneration)(q, max, min);
         }
         else {
-            offers = yield (0, filteredSearchOffer_1.offerAllFiltersOn)(q, p, r, max, min /* , multiplier */);
+            offers = yield (0, filteredSearchOffer_1.offerAllFiltersOn)(q, p, r, max, min);
         }
         res.json(offers);
     }
@@ -84,13 +71,32 @@ offer.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function
         next(error);
     }
 }));
-offer.put("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+offer.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = req.body;
+    try {
+        let newOffer;
+        newOffer = yield (0, offerController_1.postOffer)(data);
+        res.send(newOffer);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
+offer.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id, state } = req.body;
     try {
-        if (id && state) {
-            const offerState = yield (0, offerController_1.putOfferState)(id, state);
-            res.send(offerState);
-        }
+        const offerState = yield (0, offerController_1.putOfferState)(id, state);
+        res.send(offerState);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
+offer.put("/isActive", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id, isActive } = req.body;
+    try {
+        const offerState = yield (0, offerController_1.putOfferIsActive)(id, isActive);
+        res.send(offerState);
     }
     catch (error) {
         next(error);

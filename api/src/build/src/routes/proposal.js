@@ -37,13 +37,21 @@ proposal.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         next(error);
     }
 }));
-proposal.put("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id, state } = req.body;
     try {
-        if (id && state) {
-            const proposalState = yield (0, proposalController_1.putProposalState)(id, state);
-            res.send(proposalState);
-        }
+        const proposalState = yield (0, proposalController_1.putProposalState)(id, state);
+        res.send(proposalState);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
+proposal.put("/isActive", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id, isActive } = req.body;
+    try {
+        const proposalState = yield (0, proposalController_1.putProposalIsActive)(id, isActive);
+        res.send(proposalState);
     }
     catch (error) {
         next(error);

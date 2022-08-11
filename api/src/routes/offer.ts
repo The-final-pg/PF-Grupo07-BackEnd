@@ -6,6 +6,7 @@ import {
   getOfferById,
   getOffersBySearch,
   putOfferState,
+  putOfferIsActive,
 } from "../controllers/offerController";
 import {
   offerFilteredByProfession,
@@ -17,10 +18,62 @@ import {
 const offer = express.Router();
 
 offer.get("/", async (_req: Request, res: Response, next: NextFunction) => {
-/*   const multiplier: number = req.body.multiplier; */
   try {
-    const offers: Array<OfferType> = await getAllOffers(/* multiplier */);
+    const offers: Array<OfferType> = await getAllOffers();
     res.json(offers);
+  } catch (error) {
+    next(error);
+  }
+});
+
+offer.get(
+  "/search",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { q, p, r, max, min } = req.query;
+    try {
+      let offers: OfferType[];
+      if (q && !p && !r && !max && !min) {
+        offers = await getOffersBySearch(q);
+      } else if (q && p && !r && !max && !min) {
+        offers = await offerFilteredByProfession(q, p);
+      } else if (!q && p && !r && !max && !min) {
+        offers = await offerFilteredByProfession(q, p);
+      } else if (q && !p && r && !max && !min) {
+        offers = await offerFilteredByRating(q, r);
+      } else if (!q && !p && r && !max && !min) {
+        offers = await offerFilteredByRating(q, r);
+      } else if (q && !p && !r && max && min) {
+        offers = await offerFilteredByRemuneration(
+          q,
+          max,
+          min
+        );
+      } else if (!q && !p && !r && max && min) {
+        offers = await offerFilteredByRemuneration(
+          q,
+          max,
+          min
+        );
+      } else {
+        offers = await offerAllFiltersOn(q, p, r, max, min);
+      }
+      res.json(offers);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+offer.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params;
+  try {
+    const offer: any = await getOfferById(id);
+    let result = {
+      ...offer,
+      offersCount: offer.userClient.offers.length,
+      workerName: offer.proposals[0]?.userWorker.name, //trae el nombre del trabajador de la primer proposal, no es util asi
+    };
+    return res.json(result);
   } catch (error) {
     next(error);
   }
@@ -37,65 +90,27 @@ offer.post("/", async (req: Request, res: Response, next: NextFunction) => {
   }
 });
 
-offer.get(
-  "/search",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { q, p, r, max, min } = req.query;
-  /*   const multiplier: number = req.body.multiplier; */
-    try {
-      let offers: OfferType[];
-      if (q && !p && !r && !max && !min) {
-        offers = await getOffersBySearch(q/* , multiplier */);
-      } else if (q && p && !r && !max && !min) {
-        offers = await offerFilteredByProfession(q, p/* , multiplier */);
-      } else if (!q && p && !r && !max && !min) {
-        offers = await offerFilteredByProfession(q, p/* , multiplier */);
-      } else if (q && !p && r && !max && !min) {
-        offers = await offerFilteredByRating(q, r/* , multiplier */);
-      } else if (!q && !p && r && !max && !min) {
-        offers = await offerFilteredByRating(q, r/* , multiplier */);
-      } else if (q && !p && !r && max && min) {
-        offers = await offerFilteredByRemuneration(q, max, min/* , multiplier */);
-      } else if (!q && !p && !r && max && min) {
-        offers = await offerFilteredByRemuneration(q, max, min/* , multiplier */);
-      } else {
-        offers = await offerAllFiltersOn(q, p, r, max, min/* , multiplier */);
-      }
-      res.json(offers);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
-
-offer.get(
-  "/:id",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
-    try {
-      const offer: any = await getOfferById(id);
-      let result = {
-        ...offer,
-        offersCount: offer.userClient.offers.length,
-        workerName: offer.proposals[0]?.userWorker.name, //trae el nombre del trabajador de la primer proposal, no es util asi
-      };
-      return res.json(result);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
-
-offer.put("/", async (req: Request, res: Response, next: NextFunction) => {
+offer.put("/state", async (req: Request, res: Response, next: NextFunction) => {
   const { id, state } = req.body;
   try {
-    if (id && state) {
       const offerState: String = await putOfferState(id, state);
       res.send(offerState);
-    }
   } catch (error) {
     next(error);
   }
 });
+
+offer.put(
+  "/isActive",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id, isActive } = req.body;
+    try {
+        const offerState: string = await putOfferIsActive(id, isActive);
+        res.send(offerState);  
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 export default offer;
