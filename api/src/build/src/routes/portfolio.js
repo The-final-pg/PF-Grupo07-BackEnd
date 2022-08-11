@@ -27,4 +27,15 @@ portfolio.post("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         next(error);
     }
 }));
+portfolio.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const { title, photo, portfolio_description, } = req.body;
+    try {
+        const portfolioUpdate = yield (0, portfolioController_1.updatePortfolio)(id, title, photo, portfolio_description);
+        res.json(portfolioUpdate);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
 exports.default = portfolio;
