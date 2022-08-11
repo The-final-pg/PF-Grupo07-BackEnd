@@ -55,7 +55,7 @@ module.exports = (sequelize: any) => {
       },
       isActive: {
         type: DataTypes.BOOLEAN,
-        defaultValue: true,
+        defaultValue: false,
       },
       isWorker: {
         type: DataTypes.BOOLEAN,
