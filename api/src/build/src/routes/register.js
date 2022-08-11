@@ -16,6 +16,8 @@ const express_1 = __importDefault(require("express"));
 const register = express_1.default.Router();
 const bcrypt = require("bcrypt");
 const registerController_1 = require("../controllers/registerController");
+const nodemailerConfig_1 = __importDefault(require("../utils/nodemailer/nodemailerConfig"));
+const { REWORK_MAIL } = process.env;
 //Segun la ruta, ejecuta un post distinto: en '/register/client' es la siguiente:
 register.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const newClient = req.body;
@@ -27,6 +29,13 @@ register.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, f
         // guardamos en response todo lo que viene de body y la password hasheada,
         //que la va a recibir la funcion createClient en el controller.
         response = yield (0, registerController_1.createClient)(newClient, hashedPassword);
+        nodemailerConfig_1.default.sendMail({
+            from: `"REWork" <${REWORK_MAIL}>`,
+            to: newClient.user_mail,
+            subject: "Bienvenido a REWork",
+            html: `<span>Más de 1000 freelancers disponibles para concretar tus proyectos, ¿qué estás esperando?</span>
+              <b>Ir a <a href="http://localhost:3000/login"> REWork </a> </b>`
+        });
         res.send(response);
     }
     catch (error) {
@@ -40,6 +49,13 @@ register.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, f
         const hashedPassword = yield bcrypt.hash(worker.password, 8);
         let response;
         response = yield (0, registerController_1.createWorker)(worker, hashedPassword);
+        nodemailerConfig_1.default.sendMail({
+            from: `"REWork" <${REWORK_MAIL}>`,
+            to: worker.user_mail,
+            subject: "Bienvenido a REWork",
+            text: "Más de 1000 proyectos esperando ser concretados, ¿qué esperás para postularte?",
+            html: `<b>Ir a <a href="http://localhost:3000/login"> REWork </a> </b>`
+        });
         res.send(response);
     }
     catch (error) {

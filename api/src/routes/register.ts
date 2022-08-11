@@ -2,6 +2,8 @@ import express, { NextFunction, Request, Response } from "express";
 const register = express.Router();
 const bcrypt = require("bcrypt");
 import { createWorker, createClient } from "../controllers/registerController";
+import transporter from "../utils/nodemailer/nodemailerConfig"
+const { REWORK_MAIL } = process.env
 
 //Segun la ruta, ejecuta un post distinto: en '/register/client' es la siguiente:
 register.post(
@@ -16,6 +18,13 @@ register.post(
       // guardamos en response todo lo que viene de body y la password hasheada,
       //que la va a recibir la funcion createClient en el controller.
       response = await createClient(newClient, hashedPassword);
+      transporter.sendMail({
+        from: `"REWork" <${REWORK_MAIL}>`,
+        to: newClient.user_mail,
+        subject: "Bienvenido a REWork",
+        html: `<span>Más de 1000 freelancers disponibles para concretar tus proyectos, ¿qué estás esperando?</span>
+              <b>Ir a <a href="http://localhost:3000/login"> REWork </a> </b>`
+    })
       res.send(response);
     } catch (error) {
       next(error);
@@ -32,6 +41,13 @@ register.post(
       const hashedPassword = await bcrypt.hash(worker.password, 8);
       let response: String;
       response = await createWorker(worker, hashedPassword);
+      transporter.sendMail({
+        from: `"REWork" <${REWORK_MAIL}>`,
+        to: worker.user_mail,
+        subject: "Bienvenido a REWork",
+        text: "Más de 1000 proyectos esperando ser concretados, ¿qué esperás para postularte?",
+        html: `<b>Ir a <a href="http://localhost:3000/login"> REWork </a> </b>`
+    })
       res.send(response);
     } catch (error) {
       next(error);
