@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.putOfferState = exports.getOffersBySearch = exports.getOfferById = exports.postOffer = exports.getAllOffers = void 0;
+exports.putOfferIsActive = exports.putOfferState = exports.getOffersBySearch = exports.getOfferById = exports.postOffer = exports.getAllOffers = void 0;
 const sequelize_1 = require("sequelize");
 const { Offer, Proposal, UserClient, UserWorker } = require("../db");
 function getAllOffers(multiplier = 0) {
@@ -73,7 +73,7 @@ function putOfferState(id, state) {
             },
         });
         if (!offerState) {
-            throw new Error(`La oferta ${id} no existe en la base de datos`);
+            throw new Error("`La oferta ${id} no existe en la base de datos`");
         }
         if (offerState.state === "cancelled") {
             return "La oferta fue cancelada y no puede cambiar de estado";
@@ -89,3 +89,25 @@ function putOfferState(id, state) {
     });
 }
 exports.putOfferState = putOfferState;
+function putOfferIsActive(id, isActive) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const offerState = yield Offer.findOne({
+            where: {
+                idOffer: id,
+            },
+        });
+        if (!offerState) {
+            throw new Error(`La oferta ${id} no existe en la base de datos`);
+        }
+        else {
+            yield Offer.update({ isActive: isActive }, {
+                where: {
+                    idOffer: id,
+                },
+            });
+            return "isActive updated";
+        }
+    });
+}
+exports.putOfferIsActive = putOfferIsActive;
+;

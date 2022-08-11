@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.putProposalState = exports.postNewProposal = void 0;
+exports.putProposalIsActive = exports.putProposalState = exports.postNewProposal = void 0;
 const { Proposal, Offer } = require("../db");
 function postNewProposal(proposal, idOffer) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -44,3 +44,23 @@ function putProposalState(id, state) {
     });
 }
 exports.putProposalState = putProposalState;
+;
+function putProposalIsActive(id, isActive) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const proposalState = yield Proposal.findOne({
+            where: {
+                idProposal: id,
+            },
+        });
+        if (!proposalState) {
+            throw new Error(`La propuesta ${id} no existe en la base de datos`);
+        }
+        yield Proposal.update({ isActive: isActive }, {
+            where: {
+                idProposal: id,
+            },
+        });
+        return "state updated";
+    });
+}
+exports.putProposalIsActive = putProposalIsActive;
