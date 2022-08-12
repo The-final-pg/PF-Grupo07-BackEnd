@@ -55,15 +55,15 @@ module.exports = (sequelize: any) => {
       },
       isActive: {
         type: DataTypes.BOOLEAN,
-        defaultValue: true,
+        defaultValue: false,
       },
       isWorker: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
-    },
-    {
-      timestamps: false,
+      favorites: {
+        type: DataTypes.ARRAY(DataTypes.JSONB),
+      },
     }
   );
 };

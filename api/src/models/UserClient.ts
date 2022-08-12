@@ -41,11 +41,18 @@ module.exports = (sequelize: any) => {
     },
     isActive: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true,
+      defaultValue: false,
     },
     isWorker: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
+    },
+    premium: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    favorites: {
+      type: DataTypes.ARRAY(DataTypes.JSONB),
     },
   });
 };
