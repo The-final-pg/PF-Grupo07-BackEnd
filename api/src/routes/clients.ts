@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 const router = express.Router();
-import { ClientType } from "../types";
+import { ClientType, OfferType } from "../types";
 import { getAllClients, getClientById, updateClientProfile } from "../controllers/clientController";
 
 router.get("/", async (_req: Request, res: Response, next: NextFunction) => {
@@ -25,9 +25,9 @@ router.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
 
 router.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
   const id: string = req.params.id;
-  const { name, born_date, photo }: { name: string; born_date: string, photo: string } = req.body;
+  const { name, born_date, photo, favorites }: { name: string; born_date: string, photo: string, favorites: OfferType[] } = req.body;
   try {
-    const clientUpdate: ClientType = await updateClientProfile(id, name, born_date, photo);
+    const clientUpdate: ClientType = await updateClientProfile(id, name, born_date, photo, favorites);
     res.json(clientUpdate);
   } catch (error) {
     next(error);

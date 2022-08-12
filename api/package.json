@@ -12,7 +12,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "tsc": "tsc *.ts -w",
+    "tsc": "tsc",
     "dev": "ts-node-dev src/build/index.js",
     "start": "nodemon src/build/index.js",
     "build": "tsc --build -w",

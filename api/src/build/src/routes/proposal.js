@@ -27,10 +27,11 @@ const express_1 = __importDefault(require("express"));
 const proposalController_1 = require("../controllers/proposalController");
 const proposal = express_1.default.Router();
 proposal.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const _a = req.body, { idOffer } = _a, proposal = __rest(_a, ["idOffer"]);
+    const _a = req.body, { idWorker, idOffer } = _a, proposal = __rest(_a, ["idWorker", "idOffer"]);
+    console.log(idWorker, idOffer, proposal);
     try {
         let response;
-        response = yield (0, proposalController_1.postNewProposal)(proposal, idOffer);
+        response = yield (0, proposalController_1.postNewProposal)(proposal, idOffer, idWorker);
         res.json(response);
     }
     catch (error) {

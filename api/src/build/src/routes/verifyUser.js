@@ -13,39 +13,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const router = express_1.default.Router();
-const clientController_1 = require("../controllers/clientController");
-router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const clients = yield (0, clientController_1.getAllClients)();
-        res.json(clients);
-    }
-    catch (error) {
-        next(error);
-    }
-    ;
-}));
-router.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
-    try {
-        const client = yield (0, clientController_1.getClientById)(id);
-        return res.json(client);
-    }
-    catch (error) {
-        next(error);
-    }
-    ;
-}));
-router.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const verifyUser = express_1.default.Router();
+const verifyUserController_1 = require("../controllers/verifyUserController");
+verifyUser.put("/client/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
-    const { name, born_date, photo, favorites } = req.body;
     try {
-        const clientUpdate = yield (0, clientController_1.updateClientProfile)(id, name, born_date, photo, favorites);
-        res.json(clientUpdate);
+        const clientVerified = yield (0, verifyUserController_1.updateClientStatus)(id);
+        console.log("clientVerified", clientVerified);
+        res.json(clientVerified);
     }
     catch (error) {
         next(error);
     }
-    ;
 }));
-exports.default = router;
+verifyUser.put("/worker/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    try {
+        const workerVerified = yield (0, verifyUserController_1.updateWorkerStatus)(id);
+        res.json(workerVerified);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
+exports.default = verifyUser;
