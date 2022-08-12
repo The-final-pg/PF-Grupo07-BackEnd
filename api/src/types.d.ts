@@ -9,6 +9,7 @@ export interface ClientType {
   notification: Array[String];
   id: String;
   photo: String;
+  isActive: boolean;
 }
 
 export interface WorkerType {
@@ -23,6 +24,7 @@ export interface WorkerType {
   premium: Boolean;
   photo: String;
   favorites: OfferType[];
+  isActive: boolean;
 }
 
 export interface ReviewType {

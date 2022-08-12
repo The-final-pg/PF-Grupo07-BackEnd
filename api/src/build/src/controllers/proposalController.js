@@ -41,9 +41,12 @@ function putProposalState(id, state) {
                     idProposal: id,
                 },
             });
-            console.log(proposalState);
             if (state === "finalized") {
-                yield UserWorker.update({ counter_jobs: +1 }, {
+                let worker = yield (UserWorker.findByPk(proposalState.userWorkerId, {
+                    attributes: ['counter_jobs']
+                }));
+                let counter = worker.counter_jobs + 1;
+                yield UserWorker.update({ counter_jobs: counter }, {
                     where: {
                         id: proposalState.userWorkerId,
                     }
