@@ -37,6 +37,9 @@ login.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
             return next(error);
         else if (!user)
             return res.json("Inserte un token válido");
+        else if (user.isActive !== true) {
+            return res.status(401).send({ message: "Debes confirmar tu cuenta. Por favor verifica tu casilla de correo." });
+        }
         else {
             console.log("esto esta en log", user);
             return res.send(yield jsonwebtoken_1.default.sign({

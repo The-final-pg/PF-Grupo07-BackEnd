@@ -18,6 +18,6 @@ conn.sync({ force: false }).then(() => {
     await setOffers();
     await setProposals();
     await setPortfolios();
-    await setReview();
+    await setReview(); 
   });
 });

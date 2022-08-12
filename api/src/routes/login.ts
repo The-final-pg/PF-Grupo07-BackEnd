@@ -31,6 +31,9 @@ login.post("/", async (req:Request,res:Response,next:NextFunction) => {
         async (error, user) => {
             if(error) return next(error);
             else if(!user) return res.json("Inserte un token válido");
+            else if(user.isActive !== true){
+                return res.status(401).send({message: "Debes confirmar tu cuenta. Por favor verifica tu casilla de correo."})
+            }
             else {
                 console.log("esto esta en log",user)
                 return res.send(
@@ -49,7 +52,6 @@ login.post("/", async (req:Request,res:Response,next:NextFunction) => {
         }
     )(req, res, next)
 })
-
 
 export default login
 
