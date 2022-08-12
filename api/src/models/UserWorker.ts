@@ -32,7 +32,7 @@ module.exports = (sequelize: any) => {
         type: DataTypes.ARRAY(DataTypes.STRING),
       },
       rating: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         validate: {
           max: 5,
           min: 1,
