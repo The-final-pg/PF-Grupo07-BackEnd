@@ -22,8 +22,12 @@ module.exports = (sequelize: any) => {
       allowNull: true,
     },
     rating: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       allowNull: true,
+      validate: {
+        max: 5,
+        min: 1,
+      },
     },
     notification: {
       type: DataTypes.ARRAY(DataTypes.JSONB),
