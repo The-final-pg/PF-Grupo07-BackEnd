@@ -32,10 +32,16 @@ export async function putProposalState(id: String,
         },
       }
     );
-    console.log(proposalState)
+
     if (state === "finalized"){
+      let worker = await (UserWorker.findByPk(proposalState.userWorkerId,{
+        attributes: ['counter_jobs']
+      }));
+      
+      let counter = worker.counter_jobs + 1;
+      
       await UserWorker.update(
-        {counter_jobs : + 1},
+        {counter_jobs : counter},
         {
         where: {
           id: proposalState.userWorkerId,
