@@ -42,9 +42,9 @@ function getWorkerById(id) {
     });
 }
 exports.getWorkerById = getWorkerById;
-function updateWorkerProfile(id, name, born_date, photo, profession, skills) {
+function updateWorkerProfile(id, name, born_date, photo, profession, skills, favorites) {
     return __awaiter(this, void 0, void 0, function* () {
-        const data = { name, born_date, photo, profession, skills };
+        const data = { name, born_date, photo, profession, skills, favorites };
         const worker = yield UserWorker.findByPk(id);
         if (!name || data.name === worker.name)
             delete data.name;

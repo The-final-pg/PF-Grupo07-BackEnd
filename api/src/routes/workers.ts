@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 const worker = express.Router();
-import { WorkerType } from "../types";
+import { WorkerType, OfferType } from "../types";
 import {
   getAllWorkers,
   getWorkerById,
@@ -14,9 +14,9 @@ import {
 } from "../services/filteredSearchWorker";
 
 worker.get("/", async (_req: Request, res: Response, next: NextFunction) => {
-  /* const multiplier: number = req.body.multiplier; */
+
   try {
-    const worker: WorkerType[] = await getAllWorkers(/* multiplier */);
+    const worker: WorkerType[] = await getAllWorkers();
     res.send(worker);
   } catch (error) {
     next(error);
@@ -27,21 +27,20 @@ worker.get(
   "/search",
   async (req: Request, res: Response, next: NextFunction) => {
     const { q, p, r } = req.query;
-    /*     const multiplier: number = req.body.multiplier; */
     try {
       let worker: WorkerType[];
       if (q && !p && !r) {
-        worker = await getWorkerByName(q /* , multiplier */);
+        worker = await getWorkerByName(q );
       } else if (q && p && !r) {
-        worker = await workerFilteredByProfession(q, p /* , multiplier */);
+        worker = await workerFilteredByProfession(q, p );
       } else if (!q && p && !r) {
-        worker = await workerFilteredByProfession(q, p /* , multiplier */);
+        worker = await workerFilteredByProfession(q, p );
       } else if (q && !p && r) {
-        worker = await workerFilteredByRating(q, r /* , multiplier */);
+        worker = await workerFilteredByRating(q, r );
       } else if (!q && !p && r) {
-        worker = await workerFilteredByRating(q, r /* , multiplier */);
+        worker = await workerFilteredByRating(q, r );
       } else {
-        worker = await workerAllfiltersOn(q, p, r /* , multiplier */);
+        worker = await workerAllfiltersOn(q, p, r );
       }
       res.send(worker);
     } catch (error) {
@@ -68,12 +67,14 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     photo,
     profession,
     skills,
+    favorites
   }: {
     name: string;
     born_date: Date;
     photo: string;
     profession: string[];
     skills: string[];
+    favorites: OfferType[];
   } = req.body;
   try {
     const workerUpdate: WorkerType = await updateWorkerProfile(
@@ -82,7 +83,8 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
       born_date,
       photo,
       profession,
-      skills
+      skills,
+      favorites
     );
     res.json(workerUpdate);
   } catch (error) {

@@ -4,10 +4,10 @@ import { postNewProposal, putProposalIsActive, putProposalState } from "../contr
 const proposal = express.Router();
 
 proposal.post("/", async (req: Request, res: Response, next: NextFunction) => {
-  const { idOffer, ...proposal } = req.body;
+  const {id, idOffer, ...proposal } = req.body;
   try {
     let response: string;
-    response = await postNewProposal(proposal, idOffer);
+    response = await postNewProposal(id, idOffer, proposal);
     res.json(response);
   } catch (error) {
     next(error);
