@@ -9,19 +9,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createWorker = exports.createClient = void 0;
-const { UserWorker, UserClient } = require("../db");
-function createClient(client, hashedPassword) {
+exports.updateWorkerStatus = exports.updateClientStatus = void 0;
+const { UserClient, UserWorker } = require("../db");
+function updateClientStatus(id) {
     return __awaiter(this, void 0, void 0, function* () {
-        const newClient = yield UserClient.create(Object.assign(Object.assign({}, client), { password: hashedPassword }));
-        return newClient;
+        const clientVerified = yield UserClient.findByPk(id);
+        yield clientVerified.set({ isActive: true });
+        yield clientVerified.save();
+        return clientVerified;
     });
 }
-exports.createClient = createClient;
-function createWorker(worker, hashedPassword) {
+exports.updateClientStatus = updateClientStatus;
+function updateWorkerStatus(id) {
     return __awaiter(this, void 0, void 0, function* () {
-        const newWorker = yield UserWorker.create(Object.assign(Object.assign({}, worker), { password: hashedPassword }));
-        return newWorker;
+        const workerVerified = yield UserWorker.findByPk(id);
+        yield workerVerified.set({ isActive: true });
+        yield workerVerified.save();
+        return workerVerified;
     });
 }
-exports.createWorker = createWorker;
+exports.updateWorkerStatus = updateWorkerStatus;

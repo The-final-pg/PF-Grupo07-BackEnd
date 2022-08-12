@@ -14,23 +14,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./src/app"));
 const { conn } = require("./src/db");
-/*import {
-  setData,
-  setOffers,
-  setProposals,
-  setPortfolios,
-  setReview,
-} from "./data"; */
+const data_1 = require("./data");
 /* const setData =require('./data');
 const setOffersAndProposals =require('./data'); */
 // Syncing all the models at once.
 conn.sync({ force: false }).then(() => {
     app_1.default.listen(3001, () => __awaiter(void 0, void 0, void 0, function* () {
         console.log("%s listening at 3001"); // eslint-disable-line no-console
-        /* await setData();
-        await setOffers();
-        await setProposals();
-        await setPortfolios();
-        await setReview(); */
+        yield (0, data_1.setData)();
+        yield (0, data_1.setOffers)();
+        yield (0, data_1.setProposals)();
+        yield (0, data_1.setPortfolios)();
+        yield (0, data_1.setReview)();
     }));
 });
