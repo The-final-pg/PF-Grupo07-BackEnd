@@ -48,6 +48,10 @@ module.exports = (sequelize) => {
         notification: {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSONB),
         },
+        counter_jobs: {
+            type: sequelize_1.DataTypes.INTEGER,
+            defaultValue: 0,
+        },
         isAdmin: {
             type: sequelize_1.DataTypes.BOOLEAN,
             defaultValue: false,

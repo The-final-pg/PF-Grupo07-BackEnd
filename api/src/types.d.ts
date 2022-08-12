@@ -55,6 +55,8 @@ export interface ProposalType {
   proposal_description: String;
   worked_time: String;
   state: String;
+  userWorkerId: String;
+  offerIdOffer: String;
 }
 
 export interface ReviewType {
