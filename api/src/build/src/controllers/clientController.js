@@ -27,9 +27,9 @@ function getClientById(id) {
     });
 }
 exports.getClientById = getClientById;
-function updateClientProfile(id, name, born_date, photo) {
+function updateClientProfile(id, name, born_date, photo, favorites) {
     return __awaiter(this, void 0, void 0, function* () {
-        const data = { name, born_date, photo };
+        const data = { name, born_date, photo, favorites };
         const client = yield UserClient.findByPk(id);
         if (!name || data.name === client.name)
             delete data.name;

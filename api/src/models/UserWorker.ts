@@ -49,6 +49,10 @@ module.exports = (sequelize: any) => {
       notification: {
         type: DataTypes.ARRAY(DataTypes.JSONB),
       },
+      counter_jobs: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
       isAdmin: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
@@ -61,9 +65,9 @@ module.exports = (sequelize: any) => {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
-    },
-    {
-      timestamps: false,
+      favorites: {
+        type: DataTypes.ARRAY(DataTypes.JSONB),
+      },
     }
   );
 };

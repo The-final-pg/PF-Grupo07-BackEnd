@@ -10,12 +10,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.putProposalIsActive = exports.putProposalState = exports.postNewProposal = void 0;
-const { Proposal, Offer } = require("../db");
-function postNewProposal(proposal, idOffer) {
+const { Proposal, Offer, UserWorker } = require("../db");
+function postNewProposal(proposal, idOffer, idWorker) {
     return __awaiter(this, void 0, void 0, function* () {
         const offer = yield Offer.findByPk(idOffer);
+        const worker = yield UserWorker.findByPk(idWorker);
         const newProposal = yield Proposal.create(proposal);
         yield offer.addProposal(newProposal);
+        yield worker.addProposal(newProposal);
         return "Propuesta publicada exitosamente";
     });
 }
@@ -39,6 +41,14 @@ function putProposalState(id, state) {
                     idProposal: id,
                 },
             });
+            console.log(proposalState);
+            if (state === "finalized") {
+                yield UserWorker.update({ counter_jobs: +1 }, {
+                    where: {
+                        id: proposalState.userWorkerId,
+                    }
+                });
+            }
             return "state updated";
         }
     });

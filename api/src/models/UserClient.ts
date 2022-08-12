@@ -47,5 +47,12 @@ module.exports = (sequelize: any) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    premium: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    favorites: {
+      type: DataTypes.ARRAY(DataTypes.JSONB),
+    },
   });
 };

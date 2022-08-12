@@ -1,11 +1,13 @@
 import { ProposalType} from "../types";
-const { Proposal, Offer } = require("../db");
+const { Proposal, Offer, UserWorker } = require("../db");
 
 export async function postNewProposal(proposal: ProposalType,
-  idOffer: string): Promise<string> {
+  idOffer: string, idWorker: String): Promise<string> {
   const offer = await Offer.findByPk(idOffer);
+  const worker = await UserWorker.findByPk(idWorker);
   const newProposal = await Proposal.create(proposal);
   await offer.addProposal(newProposal);
+  await worker.addProposal(newProposal);
   return "Propuesta publicada exitosamente";
 }
 
@@ -30,6 +32,17 @@ export async function putProposalState(id: String,
         },
       }
     );
+    console.log(proposalState)
+    if (state === "finalized"){
+      await UserWorker.update(
+        {counter_jobs : + 1},
+        {
+        where: {
+          id: proposalState.userWorkerId,
+        }
+      })
+    }
+    
     return "state updated";
   }
 };
