@@ -57,7 +57,7 @@ offer.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
             offers = yield (0, filteredSearchOffer_1.offerFilteredByWorDurationTime)(q, wdt);
         }
         else {
-            offers = yield (0, filteredSearchOffer_1.offerAllFiltersOn)(q, p, r, max, min);
+            offers = yield (0, filteredSearchOffer_1.offerAllFiltersOn)(q, p, r, max, min, wdt);
         }
         res.json(offers);
     }
