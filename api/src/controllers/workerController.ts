@@ -1,4 +1,4 @@
-import { WorkerType } from "../types";
+import { WorkerType, OfferType } from "../types";
 import { Op } from "sequelize";
 const { UserWorker , Review, Proposal, Portfolio } = require("../db");
 import { compareArrays } from "../services/CompareArraysEquality"
@@ -34,9 +34,10 @@ export async function updateWorkerProfile(
   born_date: Date,
   photo: string,
   profession: string[],
-  skills: string[]
+  skills: string[],
+  favorites: OfferType[]
 ): Promise<WorkerType> {
-  const data = { name, born_date, photo, profession, skills };
+  const data = { name, born_date, photo, profession, skills, favorites };
   const worker = await UserWorker.findByPk(id);
   if (!name || data.name === worker.name) delete data.name;
   if (!born_date || data.born_date === worker.born_date) delete data.born_date;

@@ -22,6 +22,7 @@ export interface WorkerType {
   skills: Array[String];
   premium: Boolean;
   photo: String;
+  favorites: OfferType[];
 }
 
 export interface ReviewType {
