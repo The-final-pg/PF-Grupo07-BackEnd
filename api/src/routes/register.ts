@@ -11,6 +11,7 @@ register.post(
   "/client",
   async (req: Request, res: Response, next: NextFunction) => {
     const newClient = req.body;
+    if (newClient.photo === '') delete newClient.photo;
     console.log("newclient", newClient)
     /* const token = jwt.sign({email: newClient.user_mail}, SECRET_KEY) */
     try {
@@ -41,6 +42,7 @@ register.post(
   "/worker",
   async (req: Request, res: Response, next: NextFunction) => {
     const newWorker = req.body;
+    if (newWorker.photo === '') delete newWorker.photo;
     try {
       const hashedPassword = await bcrypt.hash(newWorker.password, 8);
       let workerCreated : any
