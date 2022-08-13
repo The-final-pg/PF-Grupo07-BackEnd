@@ -25,15 +25,15 @@ tokenVerify.get("/:expDate", async (req: Request, res: Response, next: NextFunct
         //se genera en date la fecha actual en segundos
         const date = new Date().getTime()/1000
 //si la fecha actual es mayor a la de expiracion por mas de 30 minutos O si fecha expiracion mayor a fecha actual por menos de 15 minutos
-        if (date >= expDate && (expDate - date ) <= 1800 || expDate >= date && (expDate - date) <= 900 ) {
+        if (date < expDate && (expDate - date ) < 570 || expDate < date && (date - expDate) < 900 ) {
             //devuelve 'renew' al front para renovar el token
             res.send('renew')
-        //si la fecha de expiracion es mayor a la actual por más de 15 minutos
-        } else if ( expDate < date && date > (expDate + 900)){
+        //si la fecha de expiracion es mayor    a la actual por más de 15 minutos
+        } else if ( expDate < date && date - expDate > 900){
             //devuelve 'destroy' al front para destruir el token
             res.send('destroy')
         //si la fecha de expiracion es menor a la actual por mas de 30 minutos
-        } else if ( expDate > (date + 1800)){
+        } else if ( date < expDate && (expDate - date ) > 570){
             //devuelve 'valid' al front para no modificar el token
             res.send('valid')
         }
@@ -42,10 +42,9 @@ tokenVerify.get("/:expDate", async (req: Request, res: Response, next: NextFunct
     }
 })
 
-tokenVerify.post("/renew/", async (req: Request, res: Response, next: NextFunction) =>{
+tokenVerify.post("/renew", async (req: Request, res: Response, next: NextFunction) =>{
     try {
-        const newToken: any = req.body.newToken
-        console.log('entre a la async funct', newToken)
+        const newToken = req.body
         const renewedToken = await jwt.sign(
                 {
                     id: newToken.id,
@@ -61,39 +60,5 @@ tokenVerify.post("/renew/", async (req: Request, res: Response, next: NextFuncti
         next(error);
     }
 })
-
-
-
-/* tokenVerify.post("/renew/:newToken", async (req: Request, res: Response, next: NextFunction) =>{
-    passport.authenticate(
-        "local",
-        { session: false },
-        async (error, token) => {
-            const newToken: any = req.params.newToken
-            console.log('entre a la async funct', newToken)
-            console.log('AAAAAAAAAAAAAA -> ', token)
-            if(error) return next(error);
-            else if(newToken.isActive !== true){
-                return res.status(401).send({message: "Debes confirmar tu cuenta. Por favor verifica tu casilla de correo."})
-            }
-            else {
-                console.log("me fui al else")
-                return res.send(
-                    await jwt.sign(
-                        {
-                            id: newToken.id,
-                            user_mail: newToken.user_mail,
-                            isAdmin: newToken.isAdmin,
-                            isWorker: newToken.isWorker,
-                            exp: newToken.exp
-                        },
-                        SECRET_KEY
-                    )
-                )
-            }
-        }
-    )(req, res, next)
-})
- */
 
 export default tokenVerify
