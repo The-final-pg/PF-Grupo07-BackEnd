@@ -59,6 +59,7 @@ module.exports = (sequelize) => {
         },
         favorites: {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSONB),
+            defaultValue: [],
         },
     });
 };
