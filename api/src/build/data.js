@@ -32,6 +32,7 @@ const setData = () => __awaiter(void 0, void 0, void 0, function* () {
                 rating: ((e.Worker.rating - 1) % 5) + 1,
                 photo: e.Worker.photo,
                 notification: e.Worker.notification,
+                isActive: true
             });
             arrayClient.push({
                 name: e.Client.name,
@@ -41,6 +42,7 @@ const setData = () => __awaiter(void 0, void 0, void 0, function* () {
                 rating: ((e.Client.rating - 1) % 5) + 1,
                 photo: e.Client.photo,
                 notification: e.Client.notification,
+                isActive: true
             });
         });
         let arrayClientDb = yield (arrayClient === null || arrayClient === void 0 ? void 0 : arrayClient.filter((c) => c));
