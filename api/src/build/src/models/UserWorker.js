@@ -31,7 +31,7 @@ module.exports = (sequelize) => {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING),
         },
         rating: {
-            type: sequelize_1.DataTypes.INTEGER,
+            type: sequelize_1.DataTypes.FLOAT,
             validate: {
                 max: 5,
                 min: 1,
@@ -43,7 +43,7 @@ module.exports = (sequelize) => {
         },
         photo: {
             type: sequelize_1.DataTypes.TEXT,
-            allowNull: true,
+            defaultValue: 'https://i.pinimg.com/564x/b2/04/25/b20425da884ef2173895d2f334a44147.jpg',
         },
         notification: {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSONB),
@@ -66,6 +66,7 @@ module.exports = (sequelize) => {
         },
         favorites: {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSONB),
+            defaultValue: [],
         },
     });
 };

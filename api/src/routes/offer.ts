@@ -34,33 +34,33 @@ offer.get(
     try {
       let offers: OfferType[];
       if (q && !p && !r && !max && !min && !wdt) {
-        offers = await getOffersBySearch(q);
+        offers = await getOffersBySearch(q as string);
       } else if (q && p && !r && !max && !min && !wdt) {
-        offers = await offerFilteredByProfession(q, p);
+        offers = await offerFilteredByProfession(q as string, p as string);
       } else if (!q && p && !r && !max && !min && !wdt) {
-        offers = await offerFilteredByProfession(q, p);
+        offers = await offerFilteredByProfession(q as string, p as string);
       } else if (q && !p && r && !max && !min && !wdt) {
-        offers = await offerFilteredByRating(q, r);
+        offers = await offerFilteredByRating(q as string, r as string);
       } else if (!q && !p && r && !max && !min && !wdt) {
-        offers = await offerFilteredByRating(q, r);
+        offers = await offerFilteredByRating(q as string, r as string);
       } else if (q && !p && !r && max && min && !wdt) {
         offers = await offerFilteredByRemuneration(
-          q,
-          max,
-          min
+          q as string,
+          max as string,
+          min as string
         );
       } else if (!q && !p && !r && max && min && !wdt) {
         offers = await offerFilteredByRemuneration(
-          q,
-          max,
-          min
+          q as string,
+          max as string,
+          min as string
         );
       } else if (q && !p && !r && !max && !min && wdt) {
         offers = await offerFilteredByWorDurationTime(q as string, wdt as string);
       } else if (!q && !p && !r && !max && !min && wdt) {
         offers = await offerFilteredByWorDurationTime(q as string, wdt as string);
       } else {
-        offers = await offerAllFiltersOn(q, p, r, max, min);
+        offers = await offerAllFiltersOn(q as string, p as string, r as string, max as string, min as string, wdt as string);
       }
       res.json(offers);
     } catch (error) {

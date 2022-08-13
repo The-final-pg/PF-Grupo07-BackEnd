@@ -32,7 +32,7 @@ module.exports = (sequelize: any) => {
         type: DataTypes.ARRAY(DataTypes.STRING),
       },
       rating: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         validate: {
           max: 5,
           min: 1,
@@ -44,7 +44,7 @@ module.exports = (sequelize: any) => {
       },
       photo: {
         type: DataTypes.TEXT,
-        allowNull: true,
+        defaultValue: 'https://i.pinimg.com/564x/b2/04/25/b20425da884ef2173895d2f334a44147.jpg',
       },
       notification: {
         type: DataTypes.ARRAY(DataTypes.JSONB),
@@ -67,6 +67,7 @@ module.exports = (sequelize: any) => {
       },
       favorites: {
         type: DataTypes.ARRAY(DataTypes.JSONB),
+        defaultValue: [],
       },
     }
   );
