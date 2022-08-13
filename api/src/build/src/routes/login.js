@@ -47,7 +47,7 @@ login.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
                 user_mail: user.user_mail,
                 isAdmin: user.isAdmin,
                 isWorker: user.isWorker
-            }, SECRET_KEY, { expiresIn: "2hr" }));
+            }, SECRET_KEY, { expiresIn: "10m" }));
         }
     }))(req, res, next);
 }));

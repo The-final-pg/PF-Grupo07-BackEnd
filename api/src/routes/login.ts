@@ -17,8 +17,6 @@ login.use(session({
     resave: true,
     saveUninitialized: true
 }));
-
-
 //login.use(passport.authenticate("session"))
 
 
@@ -45,7 +43,7 @@ login.post("/", async (req:Request,res:Response,next:NextFunction) => {
                             isWorker: user.isWorker
                         },
                         SECRET_KEY,
-                        { expiresIn: "2hr" }
+                        { expiresIn: "10m" }
                     )
                 )
             }
