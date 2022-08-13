@@ -11,6 +11,7 @@ import profession from "./profession";
 import skills from "./skills";
 import review from "./review";
 import verifyUser from "./verifyUser";
+import tokenVerify from "./tokenVerify";
 
 const router = express.Router();
 
@@ -26,5 +27,6 @@ router.use("/profession", profession);
 router.use("/skills", skills);
 router.use("/review", review);
 router.use("/confirm", verifyUser);
+router.use("/tokenVerify", tokenVerify)
 
 export default router;
