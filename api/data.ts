@@ -27,6 +27,7 @@ export const setData = async () => {
         rating: ((e.Worker.rating - 1) % 5) + 1,
         photo: e.Worker.photo,
         notification: e.Worker.notification,
+        isActive: true,
       });
       arrayClient.push({
         name: e.Client.name,
@@ -36,6 +37,7 @@ export const setData = async () => {
         rating: ((e.Client.rating - 1) % 5) + 1,
         photo: e.Client.photo,
         notification: e.Client.notification,
+        isActive: true,
       });
     });
     let arrayClientDb = await arrayClient?.filter((c) => c);

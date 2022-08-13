@@ -21,6 +21,8 @@ const { REWORK_MAIL } = process.env;
 //Segun la ruta, ejecuta un post distinto: en '/register/client' es la siguiente:
 register.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const newClient = req.body;
+    if (newClient.photo === '')
+        delete newClient.photo;
     console.log("newclient", newClient);
     /* const token = jwt.sign({email: newClient.user_mail}, SECRET_KEY) */
     try {
@@ -48,6 +50,8 @@ register.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, f
 //y en '/register/worker' la siguiente.
 register.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const newWorker = req.body;
+    if (newWorker.photo === '')
+        delete newWorker.photo;
     try {
         const hashedPassword = yield bcrypt.hash(newWorker.password, 8);
         let workerCreated;
