@@ -40,7 +40,8 @@ login.post("/", async (req:Request,res:Response,next:NextFunction) => {
                             id: user.id,
                             user_mail: user.user_mail,
                             isAdmin: user.isAdmin,
-                            isWorker: user.isWorker
+                            isWorker: user.isWorker,
+                            premium: user.premium
                         },
                         SECRET_KEY,
                         { expiresIn: "10m" }

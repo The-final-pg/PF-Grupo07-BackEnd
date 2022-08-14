@@ -51,6 +51,7 @@ tokenVerify.post("/renew", async (req: Request, res: Response, next: NextFunctio
                     user_mail: newToken.user_mail,
                     isAdmin: newToken.isAdmin,
                     isWorker: newToken.isWorker,
+                    premium: newToken.premium,
                     exp: newToken.exp
                 },
                 SECRET_KEY
