@@ -24,6 +24,7 @@ const setData = () => __awaiter(void 0, void 0, void 0, function* () {
         responseUsers.data.map((e) => {
             arrayWorker.push({
                 name: e.Worker.name,
+                lastname: e.Worker.lastname,
                 user_mail: e.Worker.user_mail,
                 born_date: e.Worker.born_date,
                 password: e.Worker.password,
@@ -36,6 +37,7 @@ const setData = () => __awaiter(void 0, void 0, void 0, function* () {
             });
             arrayClient.push({
                 name: e.Client.name,
+                lastname: e.Worker.lastname,
                 user_mail: e.Client.user_mail,
                 born_date: e.Client.born_date,
                 password: e.Client.password,
