@@ -2,7 +2,7 @@ import { IntegerDataType } from "sequelize/types";
 
 export interface ClientType {
   name: String;
-  lastname: String;
+  lastName: String;
   user_mail: String;
   born_date: String;
   password: string;
@@ -16,7 +16,7 @@ export interface ClientType {
 export interface WorkerType {
   id: String;
   name: String;
-  lastname: String;
+  lastName: String;
   user_mail: String;
   born_date: Date;
   password: string;
