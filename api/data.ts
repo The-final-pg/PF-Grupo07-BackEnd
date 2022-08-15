@@ -19,6 +19,7 @@ export const setData = async () => {
     responseUsers.data.map((e) => {
       arrayWorker.push({
         name: e.Worker.name,
+        lastName: e.Worker.lastname,
         user_mail: e.Worker.user_mail,
         born_date: e.Worker.born_date,
         password: e.Worker.password,
@@ -27,15 +28,18 @@ export const setData = async () => {
         rating: ((e.Worker.rating - 1) % 5) + 1,
         photo: e.Worker.photo,
         notification: e.Worker.notification,
+        isActive: true,
       });
       arrayClient.push({
         name: e.Client.name,
+        lastName: e.Worker.lastname,
         user_mail: e.Client.user_mail,
         born_date: e.Client.born_date,
         password: e.Client.password,
         rating: ((e.Client.rating - 1) % 5) + 1,
         photo: e.Client.photo,
         notification: e.Client.notification,
+        isActive: true,
       });
     });
     let arrayClientDb = await arrayClient?.filter((c) => c);
@@ -61,7 +65,7 @@ export const setOffers = async () => {
         min_remuneration: Math.floor(e.Offer.remuneration / 2),
         offer_description: e.Offer.offer_description,
         post_duration_time: e.Offer.post_duration_time,
-        work_duration_time: parseInt(e.Offer.work_duration_time),
+        work_duration_time: e.Offer.work_duration_time[e.Offer.work_duration_time[4] % 4],
         photo: e.Offer.photo,
         profession: e.Offer.profession,
       });
@@ -70,7 +74,7 @@ export const setOffers = async () => {
       let x = clientsId.pop();
       return {
         ...e,
-        userClientIdClient: x.dataValues.idClient,
+        userClientId: x.dataValues.id,
       };
     });
     let arrayOffersDb = await arrayOffers?.filter((c) => c);
@@ -78,7 +82,7 @@ export const setOffers = async () => {
   }
 };
 
-export const setProposals = async () => {
+export async function setProposals() {
   const proposals = await Proposal.findAll();
   if (!proposals.length) {
     let workersId = await UserWorker.findAll();
@@ -99,16 +103,16 @@ export const setProposals = async () => {
       let y = offersId.pop();
       return {
         ...e,
-        userWorkerIdWorker: x.dataValues.idWorker,
+        userWorkerId: x.dataValues.id,
         offerIdOffer: y.dataValues.idOffer,
       };
     });
     let arrayProposalDb = await arrayProposal?.filter((c) => c);
     await Proposal.bulkCreate(arrayProposalDb);
   }
-};
+}
 
-export const setPortfolios = async () => {
+export async function setPortfolios() {
   const portfolios = await Portfolio.findAll();
   if (!portfolios.length) {
     let workersId = await UserWorker.findAll();
@@ -127,15 +131,15 @@ export const setPortfolios = async () => {
       let x = workersId.pop();
       return {
         ...e,
-        userWorkerIdWorker: x.dataValues.idWorker,
+        userWorkerId: x.dataValues.id,
       };
     });
     let arrayPortfolioDb = await arrayPortfolio?.filter((c) => c);
     await Portfolio.bulkCreate(arrayPortfolioDb);
   }
-};
+}
 
-export const setReview = async () => {
+export async function setReview() {
   const reviews = await Review.findAll();
   if (!reviews.length) {
     let workersId = await UserWorker.findAll();
@@ -157,12 +161,12 @@ export const setReview = async () => {
       let z = offersId.pop();
       return {
         ...e,
-        userWorkerIdWorker: x.dataValues.idWorker,
-        userClientIdClient: y.dataValues.idClient,
+        userWorkerId: x.dataValues.id,
+        userClientId: y.dataValues.id,
         offerIdOffer: z.dataValues.idOffer,
       };
     });
     let arrayReviewDb = await arrayReview?.filter((c) => c);
     await Review.bulkCreate(arrayReviewDb);
   }
-};
+}

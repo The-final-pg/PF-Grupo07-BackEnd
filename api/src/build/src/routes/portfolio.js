@@ -15,16 +15,39 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const portfolioController_1 = require("../controllers/portfolioController");
 const portfolio = express_1.default.Router();
+<<<<<<< HEAD
 portfolio.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const idWorker = req.params.idWorker;
     const portfolio = req.body;
     try {
         let response;
         response = yield (0, portfolioController_1.postNewPortfolio)(portfolio, idWorker);
+=======
+portfolio.post("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const portfolio = req.body;
+    try {
+        let response;
+        response = yield (0, portfolioController_1.postNewPortfolio)(portfolio, id);
+>>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
         res.send(response);
     }
     catch (error) {
         next(error);
     }
 }));
+<<<<<<< HEAD
+=======
+portfolio.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const { title, photo, portfolio_description, } = req.body;
+    try {
+        const portfolioUpdate = yield (0, portfolioController_1.updatePortfolio)(id, title, photo, portfolio_description);
+        res.json(portfolioUpdate);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
+>>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
 exports.default = portfolio;

@@ -27,16 +27,25 @@ const express_1 = __importDefault(require("express"));
 const proposalController_1 = require("../controllers/proposalController");
 const proposal = express_1.default.Router();
 proposal.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+<<<<<<< HEAD
     const _a = req.body, { idOffer } = _a, proposal = __rest(_a, ["idOffer"]);
     try {
         let response;
         response = yield (0, proposalController_1.postNewProposal)(proposal, idOffer);
+=======
+    const _a = req.body, { idWorker, idOffer } = _a, proposal = __rest(_a, ["idWorker", "idOffer"]);
+    console.log(idWorker, idOffer, proposal);
+    try {
+        let response;
+        response = yield (0, proposalController_1.postNewProposal)(proposal, idOffer, idWorker);
+>>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
         res.json(response);
     }
     catch (error) {
         next(error);
     }
 }));
+<<<<<<< HEAD
 proposal.put("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id, state } = req.body;
     try {
@@ -44,6 +53,23 @@ proposal.put("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function
             const proposalState = yield (0, proposalController_1.putProposalState)(id, state);
             res.send(proposalState);
         }
+=======
+proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id, state } = req.body;
+    try {
+        const proposalState = yield (0, proposalController_1.putProposalState)(id, state);
+        res.send(proposalState);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
+proposal.put("/isActive", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id, isActive } = req.body;
+    try {
+        const proposalState = yield (0, proposalController_1.putProposalIsActive)(id, isActive);
+        res.send(proposalState);
+>>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
     }
     catch (error) {
         next(error);

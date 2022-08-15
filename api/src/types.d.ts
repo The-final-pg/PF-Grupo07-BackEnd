@@ -2,17 +2,21 @@ import { IntegerDataType } from "sequelize/types";
 
 export interface ClientType {
   name: String;
+  lastName: String;
   user_mail: String;
   born_date: String;
   password: string;
   rating: Integer;
   notification: Array[String];
-  idClient: String;
+  id: String;
+  photo: String;
+  isActive: boolean;
 }
 
 export interface WorkerType {
   id: String;
   name: String;
+  lastName: String;
   user_mail: String;
   born_date: Date;
   password: string;
@@ -21,6 +25,8 @@ export interface WorkerType {
   skills: Array[String];
   premium: Boolean;
   photo: String;
+  favorites: OfferType[];
+  isActive: boolean;
 }
 
 export interface ReviewType {
@@ -43,10 +49,9 @@ export interface OfferType {
 }
 
 export interface PortfolioType {
-  idPortfolio: String;
   title: String;
-  photo: String;
-  portfolio_description: String;
+  photo: Text;
+  portfolio_description: Text;
 }
 
 export interface ProposalType {
@@ -55,4 +60,11 @@ export interface ProposalType {
   proposal_description: String;
   worked_time: String;
   state: String;
+  userWorkerId: String;
+  offerIdOffer: String;
+}
+
+export interface ReviewType {
+  valoration: Number;
+  review_description: String;
 }
