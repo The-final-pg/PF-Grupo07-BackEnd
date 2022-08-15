@@ -55,7 +55,7 @@ const { PORT } = process.env
 const setOffersAndProposals =require('./data'); */
 
 // Syncing all the models at once.
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(PORT, async () => {
     console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
     await setData();
