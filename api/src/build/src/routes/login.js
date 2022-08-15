@@ -36,15 +36,28 @@ login.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
         if (error)
             return next(error);
         else if (!user)
+<<<<<<< HEAD
             return res.json("Inserte un token válido");
+=======
+            return res.json("invalid");
+        else if (user.isActive !== true) {
+            return res.status(401).send({ message: "Debes confirmar tu cuenta. Por favor verifica tu casilla de correo." });
+        }
+>>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
         else {
             console.log("esto esta en log", user);
             return res.send(yield jsonwebtoken_1.default.sign({
                 id: user.id,
                 user_mail: user.user_mail,
                 isAdmin: user.isAdmin,
+<<<<<<< HEAD
                 isWorker: user.isWorker
             }, SECRET_KEY, { expiresIn: "2hr" }));
+=======
+                isWorker: user.isWorker,
+                premium: user.premium
+            }, SECRET_KEY, { expiresIn: "10m" }));
+>>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
         }
     }))(req, res, next);
 }));

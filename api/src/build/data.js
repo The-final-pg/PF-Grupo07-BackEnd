@@ -24,6 +24,7 @@ const setData = () => __awaiter(void 0, void 0, void 0, function* () {
         responseUsers.data.map((e) => {
             arrayWorker.push({
                 name: e.Worker.name,
+                lastName: e.Worker.lastname,
                 user_mail: e.Worker.user_mail,
                 born_date: e.Worker.born_date,
                 password: e.Worker.password,
@@ -32,15 +33,18 @@ const setData = () => __awaiter(void 0, void 0, void 0, function* () {
                 rating: ((e.Worker.rating - 1) % 5) + 1,
                 photo: e.Worker.photo,
                 notification: e.Worker.notification,
+                isActive: true,
             });
             arrayClient.push({
                 name: e.Client.name,
+                lastName: e.Worker.lastname,
                 user_mail: e.Client.user_mail,
                 born_date: e.Client.born_date,
                 password: e.Client.password,
                 rating: ((e.Client.rating - 1) % 5) + 1,
                 photo: e.Client.photo,
                 notification: e.Client.notification,
+                isActive: true,
             });
         });
         let arrayClientDb = yield (arrayClient === null || arrayClient === void 0 ? void 0 : arrayClient.filter((c) => c));
@@ -64,88 +68,94 @@ const setOffers = () => __awaiter(void 0, void 0, void 0, function* () {
                 min_remuneration: Math.floor(e.Offer.remuneration / 2),
                 offer_description: e.Offer.offer_description,
                 post_duration_time: e.Offer.post_duration_time,
-                work_duration_time: parseInt(e.Offer.work_duration_time),
+                work_duration_time: e.Offer.work_duration_time[e.Offer.work_duration_time[4] % 4],
                 photo: e.Offer.photo,
                 profession: e.Offer.profession,
             });
         });
         arrayOffers = arrayOffers.map((e) => {
             let x = clientsId.pop();
-            return Object.assign(Object.assign({}, e), { userClientIdClient: x.dataValues.idClient });
+            return Object.assign(Object.assign({}, e), { userClientId: x.dataValues.id });
         });
         let arrayOffersDb = yield (arrayOffers === null || arrayOffers === void 0 ? void 0 : arrayOffers.filter((c) => c));
         yield Offer.bulkCreate(arrayOffersDb);
     }
 });
 exports.setOffers = setOffers;
-const setProposals = () => __awaiter(void 0, void 0, void 0, function* () {
-    const proposals = yield Proposal.findAll();
-    if (!proposals.length) {
-        let workersId = yield UserWorker.findAll();
-        let offersId = yield Offer.findAll();
-        const responseProposal = yield axios_1.default.get("https://62ec493c818ab252b6fa39a4.mockapi.io/api/v1/Offer");
-        let arrayProposal = [];
-        responseProposal.data.map((e) => {
-            arrayProposal.push({
-                remuneration: parseInt(e.Proposal.remuneration),
-                proposal_description: e.Proposal.proposal_description,
-                worked_time: parseInt(e.Proposal.worked_time),
+function setProposals() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const proposals = yield Proposal.findAll();
+        if (!proposals.length) {
+            let workersId = yield UserWorker.findAll();
+            let offersId = yield Offer.findAll();
+            const responseProposal = yield axios_1.default.get("https://62ec493c818ab252b6fa39a4.mockapi.io/api/v1/Offer");
+            let arrayProposal = [];
+            responseProposal.data.map((e) => {
+                arrayProposal.push({
+                    remuneration: parseInt(e.Proposal.remuneration),
+                    proposal_description: e.Proposal.proposal_description,
+                    worked_time: parseInt(e.Proposal.worked_time),
+                });
             });
-        });
-        arrayProposal = arrayProposal.map((e) => {
-            let x = workersId.pop();
-            let y = offersId.pop();
-            return Object.assign(Object.assign({}, e), { userWorkerIdWorker: x.dataValues.idWorker, offerIdOffer: y.dataValues.idOffer });
-        });
-        let arrayProposalDb = yield (arrayProposal === null || arrayProposal === void 0 ? void 0 : arrayProposal.filter((c) => c));
-        yield Proposal.bulkCreate(arrayProposalDb);
-    }
-});
+            arrayProposal = arrayProposal.map((e) => {
+                let x = workersId.pop();
+                let y = offersId.pop();
+                return Object.assign(Object.assign({}, e), { userWorkerId: x.dataValues.id, offerIdOffer: y.dataValues.idOffer });
+            });
+            let arrayProposalDb = yield (arrayProposal === null || arrayProposal === void 0 ? void 0 : arrayProposal.filter((c) => c));
+            yield Proposal.bulkCreate(arrayProposalDb);
+        }
+    });
+}
 exports.setProposals = setProposals;
-const setPortfolios = () => __awaiter(void 0, void 0, void 0, function* () {
-    const portfolios = yield Portfolio.findAll();
-    if (!portfolios.length) {
-        let workersId = yield UserWorker.findAll();
-        const responsePortfolio = yield axios_1.default.get("https://62ec493c818ab252b6fa39a4.mockapi.io/api/v1/Portfolio");
-        let arrayPortfolio = [];
-        responsePortfolio.data.map((e) => {
-            arrayPortfolio.push({
-                title: e.title,
-                photo: e.photo,
-                portfolio_description: e.portfolio_description,
+function setPortfolios() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const portfolios = yield Portfolio.findAll();
+        if (!portfolios.length) {
+            let workersId = yield UserWorker.findAll();
+            const responsePortfolio = yield axios_1.default.get("https://62ec493c818ab252b6fa39a4.mockapi.io/api/v1/Portfolio");
+            let arrayPortfolio = [];
+            responsePortfolio.data.map((e) => {
+                arrayPortfolio.push({
+                    title: e.title,
+                    photo: e.photo,
+                    portfolio_description: e.portfolio_description,
+                });
             });
-        });
-        arrayPortfolio = arrayPortfolio.map((e) => {
-            let x = workersId.pop();
-            return Object.assign(Object.assign({}, e), { userWorkerIdWorker: x.dataValues.idWorker });
-        });
-        let arrayPortfolioDb = yield (arrayPortfolio === null || arrayPortfolio === void 0 ? void 0 : arrayPortfolio.filter((c) => c));
-        yield Portfolio.bulkCreate(arrayPortfolioDb);
-    }
-});
+            arrayPortfolio = arrayPortfolio.map((e) => {
+                let x = workersId.pop();
+                return Object.assign(Object.assign({}, e), { userWorkerId: x.dataValues.id });
+            });
+            let arrayPortfolioDb = yield (arrayPortfolio === null || arrayPortfolio === void 0 ? void 0 : arrayPortfolio.filter((c) => c));
+            yield Portfolio.bulkCreate(arrayPortfolioDb);
+        }
+    });
+}
 exports.setPortfolios = setPortfolios;
-const setReview = () => __awaiter(void 0, void 0, void 0, function* () {
-    const reviews = yield Review.findAll();
-    if (!reviews.length) {
-        let workersId = yield UserWorker.findAll();
-        let clientsId = yield UserClient.findAll();
-        let offersId = yield Offer.findAll();
-        const responseReview = yield axios_1.default.get("https://62ec493c818ab252b6fa39a4.mockapi.io/api/v1/Review");
-        let arrayReview = [];
-        responseReview.data.map((e) => {
-            arrayReview.push({
-                valoration: ((e.valoration - 1) % 5) + 1,
-                review_description: e.review_description,
+function setReview() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const reviews = yield Review.findAll();
+        if (!reviews.length) {
+            let workersId = yield UserWorker.findAll();
+            let clientsId = yield UserClient.findAll();
+            let offersId = yield Offer.findAll();
+            const responseReview = yield axios_1.default.get("https://62ec493c818ab252b6fa39a4.mockapi.io/api/v1/Review");
+            let arrayReview = [];
+            responseReview.data.map((e) => {
+                arrayReview.push({
+                    valoration: ((e.valoration - 1) % 5) + 1,
+                    review_description: e.review_description,
+                });
             });
-        });
-        arrayReview = arrayReview.map((e) => {
-            let x = workersId.pop();
-            let y = clientsId.pop();
-            let z = offersId.pop();
-            return Object.assign(Object.assign({}, e), { userWorkerIdWorker: x.dataValues.idWorker, userClientIdClient: y.dataValues.idClient, offerIdOffer: z.dataValues.idOffer });
-        });
-        let arrayReviewDb = yield (arrayReview === null || arrayReview === void 0 ? void 0 : arrayReview.filter((c) => c));
-        yield Review.bulkCreate(arrayReviewDb);
-    }
-});
+            arrayReview = arrayReview.map((e) => {
+                let x = workersId.pop();
+                let y = clientsId.pop();
+                let z = offersId.pop();
+                return Object.assign(Object.assign({}, e), { userWorkerId: x.dataValues.id, userClientId: y.dataValues.id, offerIdOffer: z.dataValues.idOffer });
+            });
+            let arrayReviewDb = yield (arrayReview === null || arrayReview === void 0 ? void 0 : arrayReview.filter((c) => c));
+            yield Review.bulkCreate(arrayReviewDb);
+        }
+    });
+}
 exports.setReview = setReview;
