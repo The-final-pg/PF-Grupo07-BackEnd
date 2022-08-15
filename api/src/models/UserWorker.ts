@@ -13,6 +13,10 @@ module.exports = (sequelize: any) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       user_mail: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -44,7 +48,7 @@ module.exports = (sequelize: any) => {
       },
       photo: {
         type: DataTypes.TEXT,
-        allowNull: true,
+        defaultValue: 'https://i.pinimg.com/564x/b2/04/25/b20425da884ef2173895d2f334a44147.jpg',
       },
       notification: {
         type: DataTypes.ARRAY(DataTypes.JSONB),
@@ -67,6 +71,7 @@ module.exports = (sequelize: any) => {
       },
       favorites: {
         type: DataTypes.ARRAY(DataTypes.JSONB),
+        defaultValue: [],
       },
     }
   );

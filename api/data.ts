@@ -19,6 +19,7 @@ export const setData = async () => {
     responseUsers.data.map((e) => {
       arrayWorker.push({
         name: e.Worker.name,
+        lastName: e.Worker.lastname,
         user_mail: e.Worker.user_mail,
         born_date: e.Worker.born_date,
         password: e.Worker.password,
@@ -27,17 +28,18 @@ export const setData = async () => {
         rating: ((e.Worker.rating - 1) % 5) + 1,
         photo: e.Worker.photo,
         notification: e.Worker.notification,
-        isActive: true
+        isActive: true,
       });
       arrayClient.push({
         name: e.Client.name,
+        lastName: e.Worker.lastname,
         user_mail: e.Client.user_mail,
         born_date: e.Client.born_date,
         password: e.Client.password,
         rating: ((e.Client.rating - 1) % 5) + 1,
         photo: e.Client.photo,
         notification: e.Client.notification,
-        isActive: true
+        isActive: true,
       });
     });
     let arrayClientDb = await arrayClient?.filter((c) => c);
