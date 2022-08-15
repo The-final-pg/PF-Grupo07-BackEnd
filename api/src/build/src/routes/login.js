@@ -18,6 +18,8 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const { SECRET_KEY } = process.env;
 const express_session_1 = __importDefault(require("express-session")); //middleware
 const passportConfig_1 = __importDefault(require("../utils/passport/passportConfig"));
+const googleClientConfig_1 = __importDefault(require("../utils/passport/googleClientConfig"));
+const googleWorkerConfig_1 = __importDefault(require("../utils/passport/googleWorkerConfig"));
 // inicializamos passport
 login.use(passportConfig_1.default.initialize());
 // el urlencoded es para que lo que viene por body lo recibamos como string o array
@@ -50,5 +52,52 @@ login.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
             }, SECRET_KEY, { expiresIn: "10m" }));
         }
     }))(req, res, next);
+}));
+login.get("/successClient", (req, res) => {
+    if (req.user) {
+        return res.status(200).json({
+            success: true,
+            message: "success",
+            client: req.user,
+            token: jsonwebtoken_1.default.sign({
+                id: req.user.id,
+                user_mail: req.user.user_mail,
+                isAdmin: false,
+                isWorker: false
+            }, SECRET_KEY, { expiresIn: "10m" })
+        });
+    }
+});
+login.get("/successWorker", (req, res) => {
+    if (req.user) {
+        return res.status(200).json({
+            success: true,
+            message: "success",
+            worker: req.user,
+            token: jsonwebtoken_1.default.sign({
+                id: req.user.id,
+                user_mail: req.user.user_mail,
+                isAdmin: false,
+                isWorker: true
+            }, SECRET_KEY, { expiresIn: "10m" })
+        });
+    }
+});
+login.get("/failure", (req, res) => {
+    console.log("failure", req.user);
+    res.status(401).json({
+        success: false,
+        message: "failure"
+    });
+});
+login.post("/google/worker", googleWorkerConfig_1.default.authenticate("google", { scope: ["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email"] }));
+login.post("/google/client", googleClientConfig_1.default.authenticate("google", { scope: ["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email"] }));
+login.get("/google/worker/callback", googleWorkerConfig_1.default.authenticate("google", {
+    successRedirect: "/successWorker",
+    failureRedirect: "/failure"
+}));
+login.get("/google/client/callback", googleClientConfig_1.default.authenticate("google", {
+    successRedirect: "/successClient",
+    failureRedirect: "/failure"
 }));
 exports.default = login;
