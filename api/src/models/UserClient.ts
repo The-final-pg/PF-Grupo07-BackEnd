@@ -34,7 +34,7 @@ module.exports = (sequelize: any) => {
       allowNull: true,
 =======
       type: DataTypes.TEXT,
-      defaultValue: 'https://i.pinimg.com/564x/b2/04/25/b20425da884ef2173895d2f334a44147.jpg',
+      defaultValue: 'https://res.cloudinary.com/luis-tourn/image/upload/v1660523062/b20425da884ef2173895d2f334a44147_fz6xjf.jpg',
     },
     rating: {
       type: DataTypes.FLOAT,
