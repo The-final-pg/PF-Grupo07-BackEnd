@@ -19,9 +19,18 @@ export async function workerFilteredByProfession(
   } else {
     const filteredByProfession = await UserWorker.findAll({
       where: {
-        name: {
-          [Op.iLike]: `%${name}%`,
-        },
+        [Op.or]: [
+          {
+            name: {
+              [Op.iLike]: `%${name}%`,
+            },
+          },
+          {
+            lastName: {
+              [Op.iLike]: `%${name}%`,
+            },
+          },
+        ],
         profession: {
           [Op.contains]: [profession],
         },
@@ -47,9 +56,18 @@ export async function workerFilteredByRating(
   } else {
     const filteredByRating = await UserWorker.findAll({
       where: {
-        name: {
-          [Op.iLike]: `%${name}%`,
-        },
+        [Op.or]: [
+          {
+            name: {
+              [Op.iLike]: `%${name}%`,
+            },
+          },
+          {
+            lastName: {
+              [Op.iLike]: `%${name}%`,
+            },
+          },
+        ],
         rating: {
           [Op.gte]: parseInt(rating),
         },
@@ -79,9 +97,18 @@ export async function workerAllfiltersOn(
   } else {
     const workerAllfiltersOn = await UserWorker.findAll({
       where: {
-        name: {
-          [Op.iLike]: `%${name}%`,
-        },
+        [Op.or]: [
+          {
+            name: {
+              [Op.iLike]: `%${name}%`,
+            },
+          },
+          {
+            lastName: {
+              [Op.iLike]: `%${name}%`,
+            },
+          },
+        ],
         profession: {
           [Op.contains]: [profession],
         },

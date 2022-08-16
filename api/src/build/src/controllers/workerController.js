@@ -24,9 +24,18 @@ function getWorkerByName(name) {
     return __awaiter(this, void 0, void 0, function* () {
         const worker = yield UserWorker.findAll({
             where: {
-                name: {
-                    [sequelize_1.Op.iLike]: `%${name}%`,
-                },
+                [sequelize_1.Op.or]: [
+                    {
+                        name: {
+                            [sequelize_1.Op.iLike]: `%${name}%`,
+                        },
+                    },
+                    {
+                        lastName: {
+                            [sequelize_1.Op.iLike]: `%${name}%`,
+                        },
+                    },
+                ],
             },
         });
         return worker;
@@ -36,18 +45,28 @@ exports.getWorkerByName = getWorkerByName;
 function getWorkerById(id) {
     return __awaiter(this, void 0, void 0, function* () {
         const workerById = yield UserWorker.findByPk(id, {
-            include: [Review, Proposal, Portfolio]
+            include: [Review, Proposal, Portfolio],
         });
         return workerById;
     });
 }
 exports.getWorkerById = getWorkerById;
-function updateWorkerProfile(id, name, born_date, photo, profession, skills, favorites) {
+function updateWorkerProfile(id, name, lastName, born_date, photo, profession, skills, favorites) {
     return __awaiter(this, void 0, void 0, function* () {
-        const data = { name, born_date, photo, profession, skills, favorites };
+        const data = {
+            name,
+            lastName,
+            born_date,
+            photo,
+            profession,
+            skills,
+            favorites,
+        };
         const worker = yield UserWorker.findByPk(id);
         if (!name || data.name === worker.name)
             delete data.name;
+        if (!lastName || data.lastName === worker.lastName)
+            delete data.lastName;
         if (!born_date || data.born_date === worker.born_date)
             delete data.born_date;
         if (!photo || data.photo === worker.photo)

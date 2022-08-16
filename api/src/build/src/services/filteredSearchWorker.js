@@ -27,9 +27,18 @@ function workerFilteredByProfession(name, profession) {
         else {
             const filteredByProfession = yield UserWorker.findAll({
                 where: {
-                    name: {
-                        [sequelize_1.Op.iLike]: `%${name}%`,
-                    },
+                    [sequelize_1.Op.or]: [
+                        {
+                            name: {
+                                [sequelize_1.Op.iLike]: `%${name}%`,
+                            },
+                        },
+                        {
+                            lastName: {
+                                [sequelize_1.Op.iLike]: `%${name}%`,
+                            },
+                        },
+                    ],
                     profession: {
                         [sequelize_1.Op.contains]: [profession],
                     },
@@ -55,9 +64,18 @@ function workerFilteredByRating(name, rating) {
         else {
             const filteredByRating = yield UserWorker.findAll({
                 where: {
-                    name: {
-                        [sequelize_1.Op.iLike]: `%${name}%`,
-                    },
+                    [sequelize_1.Op.or]: [
+                        {
+                            name: {
+                                [sequelize_1.Op.iLike]: `%${name}%`,
+                            },
+                        },
+                        {
+                            lastName: {
+                                [sequelize_1.Op.iLike]: `%${name}%`,
+                            },
+                        },
+                    ],
                     rating: {
                         [sequelize_1.Op.gte]: parseInt(rating),
                     },
@@ -86,9 +104,18 @@ function workerAllfiltersOn(name, profession, rating) {
         else {
             const workerAllfiltersOn = yield UserWorker.findAll({
                 where: {
-                    name: {
-                        [sequelize_1.Op.iLike]: `%${name}%`,
-                    },
+                    [sequelize_1.Op.or]: [
+                        {
+                            name: {
+                                [sequelize_1.Op.iLike]: `%${name}%`,
+                            },
+                        },
+                        {
+                            lastName: {
+                                [sequelize_1.Op.iLike]: `%${name}%`,
+                            },
+                        },
+                    ],
                     profession: {
                         [sequelize_1.Op.contains]: [profession],
                     },
