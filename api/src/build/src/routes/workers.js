@@ -65,9 +65,9 @@ worker.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 }));
 worker.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
-    const { name, born_date, photo, profession, skills, favorites } = req.body;
+    const { name, lastName, born_date, photo, profession, skills, favorites } = req.body;
     try {
-        const workerUpdate = yield (0, workerController_1.updateWorkerProfile)(id, name, born_date, photo, profession, skills, favorites);
+        const workerUpdate = yield (0, workerController_1.updateWorkerProfile)(id, name, lastName, born_date, photo, profession, skills, favorites);
         res.json(workerUpdate);
     }
     catch (error) {
