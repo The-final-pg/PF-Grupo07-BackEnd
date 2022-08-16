@@ -28,7 +28,7 @@ register.post(
         to: clientCreated.dataValues.user_mail,
         subject: "Bienvenido a REWork",
         html: `<span>Más de 1000 freelancers disponibles para concretar tus proyectos, ¿qué estás esperando?</span>
-              <b>Confirma tu cuenta <a href="http://localhost:3000/confirm/client/${id}"> AQUÍ </a> </b>`   
+              <b>Confirma tu cuenta <a href="https://rework.up.railway.app/confirm/client/${id}"> AQUÍ </a> </b>`   
     })
       res.send({message: "Usuario registrado exitosamente! Por favor, verifica tu casilla de correo."});
     } catch (error) {
@@ -53,7 +53,7 @@ register.post(
         to: workerCreated.dataValues.user_mail,
         subject: "Bienvenido a REWork",
         html: `<span>Más de 1000 proyectos esperando ser concretados, ¿qué esperás para postularte?</span>
-              <b>Confirma tu cuenta <a href="http://localhost:3000/confirm/worker/${id}"> AQUÍ </a> </b>`
+              <b>Confirma tu cuenta <a href="https://rework.up.railway.app/confirm/worker/${id}"> AQUÍ </a> </b>`
     })
       res.send({message: "Usuario registrado exitosamente! Por favor, verifica tu casilla de correo."});
     } catch (error) {
