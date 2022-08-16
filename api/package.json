@@ -13,7 +13,7 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "start": "nodemon src/build/index.js",
+    "start": "node src/build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
