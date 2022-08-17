@@ -63,6 +63,7 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
   const id: string = req.params.id;
   const {
     name,
+    lastName,
     born_date,
     photo,
     profession,
@@ -70,6 +71,7 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     favorites
   }: {
     name: string;
+    lastName: string;
     born_date: Date;
     photo: string;
     profession: string[];
@@ -80,6 +82,7 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     const workerUpdate: WorkerType = await updateWorkerProfile(
       id,
       name,
+      lastName,
       born_date,
       photo,
       profession,
