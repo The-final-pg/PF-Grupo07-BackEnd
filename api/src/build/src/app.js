@@ -10,8 +10,15 @@ const index_1 = __importDefault(require("./routes/index"));
 const cors = require("cors");
 const morgan = require("morgan");
 const app = express();
+const http_proxy_middleware_1 = require("http-proxy-middleware");
+/* const passport = require("passport")
+
+app.use(passport.initialize()) */
+app.use('/google', (0, http_proxy_middleware_1.createProxyMiddleware)({ target: 'http://localhost:3000', changeOrigin: true }));
 app.use(cors({
-    origin: "http://localhost:3000"
+    origin: true,
+    credentials: true,
+    methods: "GET,POST,PUT,DELETE,OPTIONS"
 }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -20,7 +27,7 @@ app.use(morgan("dev"));
 app.use((_req, res, next) => {
     res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Credentials", true);
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Request-Method");
     res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
     next();
 });

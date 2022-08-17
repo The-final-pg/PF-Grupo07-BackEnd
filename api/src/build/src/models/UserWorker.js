@@ -8,6 +8,10 @@ module.exports = (sequelize) => {
             defaultValue: sequelize_1.DataTypes.UUIDV4,
             primaryKey: true,
         },
+        googleId: {
+            type: sequelize_1.DataTypes.STRING,
+            allowNull: true
+        },
         name: {
             type: sequelize_1.DataTypes.STRING,
             allowNull: false,

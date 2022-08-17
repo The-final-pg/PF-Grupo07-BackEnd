@@ -17,24 +17,25 @@ const { UserClient } = require("../../db");
 passportGoogleClient.use(new passport_google_oauth20_1.Strategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/login/google/client"
-}, (/* accessToken, refreshToken, */ profile, done) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const client = yield UserClient.findOne({ where: { user_mail: profile.user_mail[0].value } });
-        if (client) {
-            done(null, profile);
-        }
-        else {
-            yield UserClient.create({ user_mail: profile.user_mail[0].value });
-            done(null, profile);
-        }
-        /* const client: ClientType = await UserClient.findOrCreate({ where: {user_mail : profile.user_mail[0].value }})
-        console.log("clientgoogle", client)
-        return client   */
+    callbackURL: "http://localhost:3000/google/auth/client/callback",
+    passReqToCallback: true
+}, (accessToken, refreshToken, profile, done) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("refreshToken", refreshToken);
+    console.log("accessToken", accessToken);
+    const clientFound = yield UserClient.findOne({ where: { googleId: profile.id } });
+    if (!clientFound) {
+        const client = yield UserClient.create({
+            googleId: profile.id,
+            user_mail: profile.emails[0].value,
+            name: profile.displayName
+        });
+        if (client)
+            return done(null, client);
     }
-    catch (error) {
-        return error;
+    else {
+        return done(null, clientFound);
     }
+    return done(null, profile);
 })));
 passportGoogleClient.serializeUser((user, done) => {
     done(null, user);
@@ -43,3 +44,38 @@ passportGoogleClient.deserializeUser((user, done) => {
     done(null, user);
 });
 exports.default = passportGoogleClient;
+/* passport.use(new GoogleStrategy({
+    clientID: keys.GOOGLE.clientID,
+    clientSecret: keys.GOOGLE.clientSecret,
+    callbackURL: "/auth/google/callback"
+},
+(accessToken, refreshToken, profile, cb) => {
+    console.log(chalk.blue(JSON.stringify(profile)));
+    user = { ...profile };
+    return cb(null, profile);
+}));
+
+
+
+
+/* console.log("accessToken", accessToken)
+console.log("refreshToken", refreshToken)
+console.log("auth con google", (JSON.stringify(profile)))
+const client = {...profile};
+return done(null, client) */
+/* const client: ClientType = await UserClient.findOne({where : { user_mail : profile.user_mail[0].value }})
+console.log("entre a strategy google client")
+if(client) {
+        done(null, profile)
+    } else {
+        const clientGoogle = await UserClient.create({
+            name: profile.displayName,
+            user_mail : profile.user_mail[0].value,
+            id: profile.id,
+        })
+        UserClient.save(clientGoogle)
+        done(null, profile)
+    } */
+/* const client: ClientType = await UserClient.findOrCreate({ where: {user_mail : profile.user_mail[0].value }})
+console.log("clientgoogle", client)
+return client   */

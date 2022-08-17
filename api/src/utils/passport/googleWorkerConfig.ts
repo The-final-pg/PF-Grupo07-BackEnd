@@ -2,34 +2,30 @@ const passportGoogleWorker = require ("passport");
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 require("dotenv").config();
 const { GOOGLE_CLIENT_ID, GOOGLE_SECRET } = process.env;
-/* import { WorkerType, } from "../../types"; */
+import { WorkerType } from "../../types";
 const { UserWorker } = require ("../../db");
-
 
 passportGoogleWorker.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/login/google/worker",
-    profileFields: ["emails", "name"]
-}, function(accessToken: any, profile: any, done) {
-    UserWorker.findOne(profile.emails[0].value, function(error, user){
-        if(error) return done(error)
-        else if(user){
-            return done(null, user)
-        } else {
-            const newWorker = new UserWorker();
-            newWorker.google_profile_id = profile.id
-            newWorker.access_token = accessToken
-            newWorker.token = UserWorker.Token({token: accessToken});
-            newWorker.name = profile.name.givenName +' '+ profile.name.familyName;
-            newWorker.email = profile.emails[0].value;
-            newWorker.save(function(error: any){
-                if(error) throw error
-                return done(null, newWorker)
-            })
-
-        }
-    })
+    callbackURL: "http://localhost:3000/google/auth/worker/callback",
+    passReqToCallback: true
+    /* response_type: "code" */
+}, async (accessToken: any, refreshToken: any, profile: any, done) => {
+    console.log("refreshToken", refreshToken)
+    console.log("accessToken", accessToken)
+    const workerFound: WorkerType = await UserWorker.findOne({where: {googleId: profile.id}})
+    if(!workerFound){
+        const worker = await UserWorker.create({
+            googleId: profile.id,
+            user_mail: profile.emails[0].value,
+            name: profile.displayName
+        })
+        if(worker) return done(null, worker)
+    } else{
+        return done(null, workerFound)
+    }
+    return done(null, profile)
 }))
 
 
