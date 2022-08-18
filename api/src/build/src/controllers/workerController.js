@@ -15,7 +15,11 @@ const { UserWorker, Review, Proposal, Portfolio } = require("../db");
 const CompareArraysEquality_1 = require("../services/CompareArraysEquality");
 function getAllWorkers() {
     return __awaiter(this, void 0, void 0, function* () {
-        const allWorkers = yield UserWorker.findAll();
+        const allWorkers = yield UserWorker.findAll({
+            where: {
+                isActive: true,
+            }
+        });
         return allWorkers;
     });
 }
@@ -36,6 +40,7 @@ function getWorkerByName(name) {
                         },
                     },
                 ],
+                isActive: true,
             },
         });
         return worker;

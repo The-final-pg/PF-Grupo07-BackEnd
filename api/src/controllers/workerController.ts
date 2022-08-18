@@ -2,7 +2,6 @@ import { WorkerType, OfferType } from "../types";
 import { Op } from "sequelize";
 const { UserWorker, Review, Proposal, Portfolio } = require("../db");
 import { compareArrays } from "../services/CompareArraysEquality";
-import { ParsedQs } from "qs";
 
 export async function getAllWorkers(): Promise<WorkerType[]> {
   const allWorkers = await UserWorker.findAll({
