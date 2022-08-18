@@ -29,6 +29,6 @@ router.use("/skills", skills);
 router.use("/review", review);
 router.use("/confirm", verifyUser);
 router.use("/tokenVerify", tokenVerify);
-router.use("admin", admin);
+router.use("/admin", admin);
 
 export default router;

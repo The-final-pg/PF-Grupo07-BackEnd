@@ -20,6 +20,7 @@ function workerFilteredByProfession(name, profession) {
                     profession: {
                         [sequelize_1.Op.contains]: [profession],
                     },
+                    isActive: true,
                 },
             });
             return filteredByProfession;
@@ -42,6 +43,7 @@ function workerFilteredByProfession(name, profession) {
                     profession: {
                         [sequelize_1.Op.contains]: [profession],
                     },
+                    isActive: true,
                 },
             });
             return filteredByProfession;
@@ -57,6 +59,7 @@ function workerFilteredByRating(name, rating) {
                     rating: {
                         [sequelize_1.Op.gte]: parseInt(rating),
                     },
+                    isActive: true,
                 },
             });
             return filteredByRating;
@@ -79,6 +82,7 @@ function workerFilteredByRating(name, rating) {
                     rating: {
                         [sequelize_1.Op.gte]: parseInt(rating),
                     },
+                    isActive: true,
                 },
             });
             return filteredByRating;
@@ -97,6 +101,7 @@ function workerAllfiltersOn(name, profession, rating) {
                     rating: {
                         [sequelize_1.Op.gte]: parseInt(rating),
                     },
+                    isActive: true,
                 },
             });
             return workerAllfiltersOn;
@@ -122,6 +127,7 @@ function workerAllfiltersOn(name, profession, rating) {
                     rating: {
                         [sequelize_1.Op.gte]: parseInt(rating),
                     },
+                    isActive: true,
                 },
             });
             return workerAllfiltersOn;
