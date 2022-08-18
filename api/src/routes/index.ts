@@ -12,6 +12,7 @@ import skills from "./skills";
 import review from "./review";
 import verifyUser from "./verifyUser";
 import tokenVerify from "./tokenVerify";
+import admin from "./admin";
 
 const router = express.Router();
 
@@ -27,6 +28,7 @@ router.use("/profession", profession);
 router.use("/skills", skills);
 router.use("/review", review);
 router.use("/confirm", verifyUser);
-router.use("/tokenVerify", tokenVerify)
+router.use("/tokenVerify", tokenVerify);
+router.use("admin", admin);
 
 export default router;
