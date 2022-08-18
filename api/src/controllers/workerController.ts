@@ -2,13 +2,18 @@ import { WorkerType, OfferType } from "../types";
 import { Op } from "sequelize";
 const { UserWorker, Review, Proposal, Portfolio } = require("../db");
 import { compareArrays } from "../services/CompareArraysEquality";
+import { ParsedQs } from "qs";
 
 export async function getAllWorkers(): Promise<WorkerType[]> {
-  const allWorkers = await UserWorker.findAll();
+  const allWorkers = await UserWorker.findAll({
+    where: {
+      isActive: true,
+      }
+    });
   return allWorkers;
 }
 
-export async function getWorkerByName(name): Promise<WorkerType[]> {
+export async function getWorkerByName(name: string): Promise<WorkerType[]> {
   const worker: WorkerType[] = await UserWorker.findAll({
     where: {
       [Op.or]: [
@@ -23,6 +28,7 @@ export async function getWorkerByName(name): Promise<WorkerType[]> {
           },
         },
       ],
+      isActive: true,
     },
   });
   return worker;

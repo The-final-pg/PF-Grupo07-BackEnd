@@ -4,6 +4,9 @@ const { Offer, Proposal, UserClient, UserWorker } = require("../db");
 
 export async function getAllOffers(): Promise<OfferType[]> {
   let allOffers = await Offer.findAll({
+    where: {
+      isActive: true,
+    },
     include: UserClient
   });
   return allOffers;
@@ -25,7 +28,7 @@ export async function getOfferById(id: String): Promise<OfferType> {
   return offer.toJSON();
 }
 
-export async function getOffersBySearch(q): Promise<OfferType[]> {
+export async function getOffersBySearch(q: string): Promise<OfferType[]> {
 
   let offers = await Offer.findAll({
     where: {
@@ -41,6 +44,7 @@ export async function getOffersBySearch(q): Promise<OfferType[]> {
           },
         },
       ],
+      isActive: true,
     },
     include: UserClient
   });
