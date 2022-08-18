@@ -58,4 +58,16 @@ proposal.put("/isActive", (req, res, next) => __awaiter(void 0, void 0, void 0, 
         next(error);
     }
 }));
+proposal.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const { remuneration, proposal_description, worked_time } = req.body;
+    try {
+        const proposalUpdate = yield (0, proposalController_1.updateProposalWorkerPremium)(id, remuneration, proposal_description, worked_time);
+        res.json(proposalUpdate);
+    }
+    catch (error) {
+        next(error);
+    }
+    ;
+}));
 exports.default = proposal;
