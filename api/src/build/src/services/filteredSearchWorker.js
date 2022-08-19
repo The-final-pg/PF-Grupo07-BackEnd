@@ -20,6 +20,7 @@ function workerFilteredByProfession(name, profession) {
                     profession: {
                         [sequelize_1.Op.contains]: [profession],
                     },
+                    isActive: true,
                 },
             });
             return filteredByProfession;
@@ -27,12 +28,22 @@ function workerFilteredByProfession(name, profession) {
         else {
             const filteredByProfession = yield UserWorker.findAll({
                 where: {
-                    name: {
-                        [sequelize_1.Op.iLike]: `%${name}%`,
-                    },
+                    [sequelize_1.Op.or]: [
+                        {
+                            name: {
+                                [sequelize_1.Op.iLike]: `%${name}%`,
+                            },
+                        },
+                        {
+                            lastName: {
+                                [sequelize_1.Op.iLike]: `%${name}%`,
+                            },
+                        },
+                    ],
                     profession: {
                         [sequelize_1.Op.contains]: [profession],
                     },
+                    isActive: true,
                 },
             });
             return filteredByProfession;
@@ -48,6 +59,7 @@ function workerFilteredByRating(name, rating) {
                     rating: {
                         [sequelize_1.Op.gte]: parseInt(rating),
                     },
+                    isActive: true,
                 },
             });
             return filteredByRating;
@@ -55,12 +67,22 @@ function workerFilteredByRating(name, rating) {
         else {
             const filteredByRating = yield UserWorker.findAll({
                 where: {
-                    name: {
-                        [sequelize_1.Op.iLike]: `%${name}%`,
-                    },
+                    [sequelize_1.Op.or]: [
+                        {
+                            name: {
+                                [sequelize_1.Op.iLike]: `%${name}%`,
+                            },
+                        },
+                        {
+                            lastName: {
+                                [sequelize_1.Op.iLike]: `%${name}%`,
+                            },
+                        },
+                    ],
                     rating: {
                         [sequelize_1.Op.gte]: parseInt(rating),
                     },
+                    isActive: true,
                 },
             });
             return filteredByRating;
@@ -79,6 +101,7 @@ function workerAllfiltersOn(name, profession, rating) {
                     rating: {
                         [sequelize_1.Op.gte]: parseInt(rating),
                     },
+                    isActive: true,
                 },
             });
             return workerAllfiltersOn;
@@ -86,15 +109,25 @@ function workerAllfiltersOn(name, profession, rating) {
         else {
             const workerAllfiltersOn = yield UserWorker.findAll({
                 where: {
-                    name: {
-                        [sequelize_1.Op.iLike]: `%${name}%`,
-                    },
+                    [sequelize_1.Op.or]: [
+                        {
+                            name: {
+                                [sequelize_1.Op.iLike]: `%${name}%`,
+                            },
+                        },
+                        {
+                            lastName: {
+                                [sequelize_1.Op.iLike]: `%${name}%`,
+                            },
+                        },
+                    ],
                     profession: {
                         [sequelize_1.Op.contains]: [profession],
                     },
                     rating: {
                         [sequelize_1.Op.gte]: parseInt(rating),
                     },
+                    isActive: true,
                 },
             });
             return workerAllfiltersOn;

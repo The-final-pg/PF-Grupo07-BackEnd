@@ -13,6 +13,7 @@ import review from "./review";
 import verifyUser from "./verifyUser";
 import tokenVerify from "./tokenVerify";
 import payment from "./payment";
+import admin from "./admin";
 
 const router = express.Router();
 
@@ -30,5 +31,6 @@ router.use("/review", review);
 router.use("/confirm", verifyUser);
 router.use("/tokenVerify", tokenVerify);
 router.use("/payments", payment);
+router.use("/admin", admin);
 
 export default router;

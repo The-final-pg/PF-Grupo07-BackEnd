@@ -8,12 +8,12 @@ export async function offerFilteredByProfession(
   profession: string,
 ): Promise<OfferType[]> {
   if (!input && profession) {
-    console.log("Estoy aca 1");
     const filteredByProfession = await Offer.findAll({
       where: {
         profession: {
           [Op.contains]: [profession],
         },
+        isActive: true,
       },
       include: UserClient,
     });
@@ -36,6 +36,7 @@ export async function offerFilteredByProfession(
         profession: {
           [Op.contains]: [profession],
         },
+        isActive: true,
       },
       include: UserClient,
     });
@@ -49,6 +50,9 @@ export async function offerFilteredByRating(
 ): Promise<OfferType[]> {
   if (!input && rating) {
     const filteredByRating = await Offer.findAll({
+      where: {
+        isActive: true,
+      },
       include: {
         model: UserClient,
         where: {
@@ -74,6 +78,7 @@ export async function offerFilteredByRating(
             },
           },
         ],
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -102,6 +107,7 @@ export async function offerFilteredByRemuneration(
         min_remuneration: {
           [Op.gte]: parseInt(remMin),
         },
+        isActive: true,
       },
       include: UserClient,
     });
@@ -128,6 +134,7 @@ export async function offerFilteredByRemuneration(
         min_remuneration: {
           [Op.gte]: parseInt(remMin),
         },
+        isActive: true,
       },
       include: UserClient,
     });
@@ -146,6 +153,7 @@ export async function offerFilteredByWorDurationTime(
         work_duration_time: {
           [Op.eq]: work_duration_time,
         },
+        isActive: true,
       },
       include: UserClient,
     });
@@ -168,6 +176,7 @@ export async function offerFilteredByWorDurationTime(
           work_duration_time: {
             [Op.eq]: work_duration_time,
           },
+          isActive: true,
         },
         include: UserClient,
       });
@@ -210,6 +219,7 @@ export async function offerAllFiltersOn(
         work_duration_time: {
           [Op.eq]: work_duration_time,
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -246,6 +256,7 @@ export async function offerAllFiltersOn(
         work_duration_time: {
           [Op.eq]: work_duration_time,
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -285,6 +296,7 @@ export async function offerAllFiltersOn(
         work_duration_time: {
           [Op.eq]: work_duration_time,
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -313,6 +325,7 @@ export async function offerAllFiltersOn(
         work_duration_time: {
           [Op.eq]: work_duration_time,
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -349,6 +362,7 @@ export async function offerAllFiltersOn(
         min_remuneration: {
           [Op.gte]: parseInt(remMin),
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -376,6 +390,7 @@ export async function offerAllFiltersOn(
         work_duration_time: {
           [Op.eq]: work_duration_time,
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -401,6 +416,7 @@ export async function offerAllFiltersOn(
         work_duration_time: {
           [Op.eq]: work_duration_time,
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -428,6 +444,7 @@ export async function offerAllFiltersOn(
         work_duration_time: {
           [Op.eq]: work_duration_time,
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -444,6 +461,7 @@ export async function offerAllFiltersOn(
         work_duration_time: {
           [Op.eq]: work_duration_time,
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -469,6 +487,7 @@ export async function offerAllFiltersOn(
         min_remuneration: {
           [Op.gte]: parseInt(remMin),
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -506,6 +525,7 @@ export async function offerAllFiltersOn(
         work_duration_time: {
           [Op.eq]: work_duration_time,
         },
+        isActive: true,
       },
       include: UserClient,
     });
@@ -529,6 +549,7 @@ export async function offerAllFiltersOn(
         work_duration_time: {
           [Op.eq]: work_duration_time,
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -562,6 +583,7 @@ export async function offerAllFiltersOn(
         min_remuneration: {
           [Op.gte]: parseInt(remMin),
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -595,6 +617,7 @@ export async function offerAllFiltersOn(
         work_duration_time: {
           [Op.eq]: work_duration_time,
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -626,6 +649,7 @@ export async function offerAllFiltersOn(
         min_remuneration: {
           [Op.gte]: parseInt(remMin),
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -651,6 +675,7 @@ export async function offerAllFiltersOn(
         profession: {
           [Op.contains]: [profession],
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -675,6 +700,7 @@ export async function offerAllFiltersOn(
         work_duration_time: {
           [Op.eq]: work_duration_time,
         },
+        isActive: true,
       },
       include:  UserClient,
     });
@@ -686,6 +712,7 @@ export async function offerAllFiltersOn(
         work_duration_time: {
           [Op.eq]: work_duration_time,
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -707,6 +734,7 @@ export async function offerAllFiltersOn(
         min_remuneration: {
           [Op.gte]: parseInt(remMin),
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -728,6 +756,7 @@ export async function offerAllFiltersOn(
         work_duration_time: {
           [Op.eq]: work_duration_time,
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -747,6 +776,7 @@ export async function offerAllFiltersOn(
         min_remuneration: {
           [Op.gte]: parseInt(remMin),
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -760,6 +790,7 @@ export async function offerAllFiltersOn(
         profession: {
           [Op.contains]: [profession],
         },
+        isActive: true,
       },
       include: {
         model: UserClient,
@@ -770,7 +801,6 @@ export async function offerAllFiltersOn(
         },
       },
     });
-
     return allFiltersOn;
   }
 }

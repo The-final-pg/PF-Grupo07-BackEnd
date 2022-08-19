@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
-import { postNewProposal, putProposalIsActive, putProposalState } from "../controllers/proposalController";
+import { postNewProposal, putProposalIsActive, putProposalState, updateProposalWorkerPremium } from "../controllers/proposalController";
+import { ProposalType } from "../types";
 
 const proposal = express.Router();
 
@@ -33,6 +34,17 @@ proposal.put("/isActive", async (req: Request, res: Response, next: NextFunction
   } catch (error) {
     next(error);
   }
+});
+
+proposal.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
+  const id: string = req.params.id;
+  const { remuneration, proposal_description, worked_time }: { remuneration: number, proposal_description: string, worked_time: string } = req.body;
+  try {
+    const proposalUpdate: ProposalType = await updateProposalWorkerPremium(id, remuneration, proposal_description, worked_time);
+    res.json(proposalUpdate);
+  } catch (error) {
+    next(error);
+  };
 });
 
 export default proposal;
