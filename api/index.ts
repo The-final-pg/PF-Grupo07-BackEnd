@@ -7,6 +7,7 @@ import {
   setPortfolios,
   setReview,
 } from "./data";
+import { cleanDataBase } from './src/services/cleanDataBase'
 /* const setData =require('./data');
 const setOffersAndProposals =require('./data'); */
 
@@ -18,6 +19,7 @@ conn.sync({ force: false }).then(() => {
     await setOffers();
     await setProposals();
     await setPortfolios();
-    await setReview(); 
+    await setReview();
+    cleanDataBase();
   });
 });
