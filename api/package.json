@@ -16,7 +16,6 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "dev": "ts-node-dev src/build/index.js",
     "start": "nodemon src/build/index.js",
     "build": "tsc --build -w",
     "test": "echo \"Error: no test specified\" && exit 1"

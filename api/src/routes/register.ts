@@ -128,8 +128,7 @@ register.post(
   async (req: Request, res: Response, next: NextFunction) => {
     const newWorker = req.body;
     if (newWorker.photo === '') delete newWorker.photo;
-    try {
-      const mail = newWorker.user_mail
+    try {const mail = newWorker.user_mail
       const workerFound = await UserClient.findOne({where: {user_mail : mail}})
       if(!workerFound){
         const hashedPassword = await bcrypt.hash(newWorker.password, 8);
