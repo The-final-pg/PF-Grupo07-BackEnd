@@ -14,6 +14,7 @@ import verifyUser from "./verifyUser";
 import tokenVerify from "./tokenVerify";
 import payment from "./payment";
 import admin from "./admin";
+import loginGoogle from "./googleLogin";
 
 const router = express.Router();
 
@@ -32,5 +33,6 @@ router.use("/confirm", verifyUser);
 router.use("/tokenVerify", tokenVerify);
 router.use("/payments", payment);
 router.use("/admin", admin);
+router.use("/auth", loginGoogle);
 
 export default router;

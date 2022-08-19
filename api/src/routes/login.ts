@@ -4,6 +4,9 @@ import jwt from "jsonwebtoken";
 const { SECRET_KEY } = process.env;
 import session from 'express-session' //middleware
 import passport from '../utils/passport/passportConfig'
+/* import passportGoogleClient from "../utils/passport/googleClientConfig"
+import passportGoogleWorker from "../utils/passport/googleWorkerConfig" */
+
 
 // inicializamos passport
 login.use(passport.initialize())
@@ -51,6 +54,10 @@ login.post("/", async (req:Request,res:Response,next:NextFunction) => {
         }
     )(req, res, next)
 })
+
+
+
+
 
 export default login
 
