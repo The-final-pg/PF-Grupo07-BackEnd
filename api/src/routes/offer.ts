@@ -58,6 +58,7 @@ offer.get(
       } else if (q && !p && !r && !max && !min && wdt) {
         offers = await offerFilteredByWorDurationTime(q as string, wdt as string);
       } else if (!q && !p && !r && !max && !min && wdt) {
+        console.log("entre al filtro")
         offers = await offerFilteredByWorDurationTime(q as string, wdt as string);
       } else {
         offers = await offerAllFiltersOn(q as string, p as string, r as string, max as string, min as string, wdt as string);
