@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
         },
         born_date: {
             type: sequelize_1.DataTypes.DATE,
-            allowNull: false,
+            allowNull: true,
         },
         password: {
             type: sequelize_1.DataTypes.STRING,

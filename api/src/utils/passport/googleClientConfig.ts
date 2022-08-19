@@ -1,4 +1,5 @@
 const  passportGoogleClient = require ("passport");
+import { VerifyCallback } from 'passport-google-oauth2';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 require("dotenv").config();
 const { GOOGLE_CLIENT_ID, GOOGLE_SECRET } = process.env;
@@ -8,7 +9,7 @@ const { UserClient } = require ("../../db");
 passportGoogleClient.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_SECRET,
-    callbackURL: "http://localhost:3000/google/auth/client/callback",
+    callbackURL: "http://localhost:3001/auth/client/callback",
     passReqToCallback: true
 }, async (accessToken: any, refreshToken: any, profile: any, done: any) => {
     console.log("refreshToken", refreshToken)
@@ -18,7 +19,10 @@ passportGoogleClient.use(new GoogleStrategy({
         const client = await UserClient.create({
             googleId: profile.id,
             user_mail: profile.emails[0].value,
-            name: profile.displayName
+            name: profile.name.givenName,
+            lastName: profile.name.familyName,
+            photo: profile.photos[0].value,
+            password: "Rework22"
         })
         if(client) return done(null, client)
     } else{
@@ -30,12 +34,12 @@ passportGoogleClient.use(new GoogleStrategy({
     ));
     
     
-    passportGoogleClient.serializeUser((user: any, done) => {
+    passportGoogleClient.serializeUser((user: any, done: VerifyCallback) => {
         done(null, user);
     });
     
     
-    passportGoogleClient.deserializeUser((user: any, done) => {
+    passportGoogleClient.deserializeUser((user: any, done: VerifyCallback) => {
         done(null, user);
     });               
     

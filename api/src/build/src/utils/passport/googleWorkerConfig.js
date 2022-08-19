@@ -17,45 +17,39 @@ const { UserWorker } = require("../../db");
 passportGoogleWorker.use(new passport_google_oauth20_1.Strategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_SECRET,
-    callbackURL: "http://localhost:3000/google/auth/worker/callback",
+    callbackURL: "http://localhost:3001/auth/worker/callback",
     passReqToCallback: true
     /* response_type: "code" */
-}, (accessToken, refreshToken, profile, done) => __awaiter(void 0, void 0, void 0, function* () {
+}, (_req, accessToken, refreshToken, profile, done) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("refreshToken", refreshToken);
     console.log("accessToken", accessToken);
+    /* const providerData = profile._json;
+    providerData.accessToken = accessToken;
+    providerData.refreshToken = refreshToken; */
     const workerFound = yield UserWorker.findOne({ where: { googleId: profile.id } });
+    // agregar autenticacion de que si lo encuentra en client lo mande al login normal.
+    console.log("workerFound", workerFound);
     if (!workerFound) {
         const worker = yield UserWorker.create({
             googleId: profile.id,
             user_mail: profile.emails[0].value,
-            name: profile.displayName
+            name: profile.name.givenName,
+            lastName: profile.name.familyName,
+            photo: profile.photos[0].value,
+            password: "Rework22",
+            profession: ["Facilitator"],
+            skills: ["Central"]
         });
+        console.log("workercreated", worker);
         if (worker)
             return done(null, worker);
     }
     else {
+        console.log("workerFoundultimo", workerFound);
         return done(null, workerFound);
     }
-    return done(null, profile);
+    /* return done(null, profile) */
 })));
-/* passportGoogleWorker.use(new GoogleStrategy({
-    clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/login/google/worker",
-    profileFields: ["email", "name"]
-  }, async (accessToken, refreshToken, profile:any, done:any) => {
-    try {
-        const worker: WorkerType  = await UserWorker.findOrCreate({where : {user_mail : profile.user_mail[0].value}}, (error:any, user:any) => {
-            return done(error, user)
-        })
-        console.log("workergoogle", worker)
-        return worker
-    } catch(error){
-        return error
-    }
-  }
-));
- */
 passportGoogleWorker.serializeUser((user, done) => {
     done(null, user);
 });
@@ -63,39 +57,3 @@ passportGoogleWorker.deserializeUser((user, done) => {
     done(null, user);
 });
 exports.default = passportGoogleWorker;
-//ORIGINAL
-/* passport.use(new GoogleStrategy({
-    clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_SECRET,
-    callbackURL: "https://rework.up.railway.app/auth/google/callback"
-  }, async (accessToken, refreshToken, profile, done) => {
-    try {
-        //busca en ambas tablas el usuario
-        const worker: WorkerType  = await UserWorker.findOrCreate({googleId: profile.id}, (err, user) => {
-            return done(err, user)
-        })
-        const client: ClientType = await UserClient.findOrCreate({googleId: profile.id }, (err, user) => {
-            return done(err, user)
-        })
-        let user: any
-        if (worker){
-            user = worker//dependiendo del usuario realiza diferentes acciones
-        }  else {
-            user = client
-        }
-        
-    } catch(error){
-        return error
-    }
-  }
-));
-
-
-passport.serializeUser((user: any, done) => {
-    done(null, user);
-});
-
-
-passport.deserializeUser((user: any, done) => {
-    done(null, user);
-});                */ 

@@ -4,8 +4,8 @@ import jwt from "jsonwebtoken";
 const { SECRET_KEY } = process.env;
 import session from 'express-session' //middleware
 import passport from '../utils/passport/passportConfig'
-import passportGoogleClient from "../utils/passport/googleClientConfig"
-import passportGoogleWorker from "../utils/passport/googleWorkerConfig"
+/* import passportGoogleClient from "../utils/passport/googleClientConfig" */
+import passportGoogleWorker from "../utils/passport/googleWorkerConfig" 
 
 loginGoogle.use(passport.initialize())
 
@@ -16,40 +16,48 @@ loginGoogle.use(session({
 }));
 
 loginGoogle.get("/successClient", (req: any, res: any) => {
-    if(req.user){
-        return res.status(200).json({
+    const user = req.session.passport.user
+    if(user){
+        const newUser = {
             success: true,
             message: "success",
-            client: req.user,
+            worker: user,
             token: jwt.sign({
-                id: req.user.id,
-                user_mail: req.user.user_mail,
+                id: user.id, 
+                user_mail: user.user_mail,
                 isAdmin: false,
-                isWorker: false
-            }, 
-            SECRET_KEY,
+                isWorker: true,
+                premium: false
+            }, SECRET_KEY,
             { expiresIn: "10m" })
-        })
+        }
+        res.status(200).send(newUser)
     }
 })
 
 loginGoogle.get("/successWorker", (req: any, res: any) => {
-    if(req.user){
-        return res.status(200).json({
+    const user = req.session.passport.user
+    console.log("tengo algo?", user)
+    /* console.log("aver esto:", req) */
+    if(user){
+        const newUser = {
             success: true,
             message: "success",
-            worker: req.user,
+            worker: user,
             token: jwt.sign({
-                id: req.user.id, 
-                user_mail: req.user.user_mail,
+                id: user.id, 
+                user_mail: user.user_mail,
                 isAdmin: false,
-                isWorker: true
-            }, 
-            SECRET_KEY,
+                isWorker: true,
+                premium: false
+            }, SECRET_KEY,
             { expiresIn: "10m" })
-        })
+        }
+        res.send(newUser)
     }
 })
+
+
 
 loginGoogle.get("/failure", (req: any, res: any) => {
     console.log("failure", req.user)
@@ -59,25 +67,28 @@ loginGoogle.get("/failure", (req: any, res: any) => {
     })
 })
 
-/* loginGoogle.post("/worker", passportGoogleWorker.authenticate("google", {scope: ["profile", "email"]})
-)
- */
+loginGoogle.post("/worker", passportGoogleWorker.authenticate("google", {scope: ["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email"]}), (req: any, _res: any) => {
+    const {code} = req.query
+    console.log("code", code)
+    return (code)  
+})
 
 
+/* 
 loginGoogle.post("/client", passportGoogleClient.authenticate("google", {scope: ["profile", "email"]})
 )
-
+ */
 loginGoogle.get("/worker/callback", passportGoogleWorker.authenticate("google", {
-    successRedirect: "/successWorker",
-    failureRedirect: "/failure"
+    successRedirect: "http://localhost:3000/google/success",
+    failureRedirect: "/auth/failure"
     }
 ))
 
-loginGoogle.get("/client/callback", passportGoogleClient.authenticate("google", {
+/* loginGoogle.get("/client/callback", passportGoogleClient.authenticate("google", {
     successRedirect: "/successClient",
     failureRedirect: "/failure"
     }
 ))
-
+ */
 
 export default loginGoogle

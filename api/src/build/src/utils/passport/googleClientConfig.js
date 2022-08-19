@@ -17,7 +17,7 @@ const { UserClient } = require("../../db");
 passportGoogleClient.use(new passport_google_oauth20_1.Strategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_SECRET,
-    callbackURL: "http://localhost:3000/google/auth/client/callback",
+    callbackURL: "http://localhost:3001/auth/client/callback",
     passReqToCallback: true
 }, (accessToken, refreshToken, profile, done) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("refreshToken", refreshToken);
@@ -27,7 +27,10 @@ passportGoogleClient.use(new passport_google_oauth20_1.Strategy({
         const client = yield UserClient.create({
             googleId: profile.id,
             user_mail: profile.emails[0].value,
-            name: profile.displayName
+            name: profile.name.givenName,
+            lastName: profile.name.familyName,
+            photo: profile.photos[0].value,
+            password: "Rework22"
         });
         if (client)
             return done(null, client);
