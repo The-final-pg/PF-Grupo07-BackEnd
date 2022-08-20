@@ -28,7 +28,7 @@ const setData = () => __awaiter(void 0, void 0, void 0, function* () {
                 user_mail: e.Worker.user_mail,
                 born_date: e.Worker.born_date,
                 password: e.Worker.password,
-                profession: e.Worker.profession,
+                profession: [randomProfession(), randomProfession(), randomProfession()],
                 skills: e.Worker.skills,
                 rating: ((e.Worker.rating - 1) % 5) + 1,
                 photo: e.Worker.photo,
@@ -70,7 +70,7 @@ const setOffers = () => __awaiter(void 0, void 0, void 0, function* () {
                 post_duration_time: e.Offer.post_duration_time,
                 work_duration_time: e.Offer.work_duration_time[e.Offer.work_duration_time[4] % 4],
                 photo: e.Offer.photo,
-                profession: e.Offer.profession,
+                profession: [randomProfession(), randomProfession(), randomProfession()],
             });
         });
         arrayOffers = arrayOffers.map((e) => {
@@ -159,3 +159,6 @@ function setReview() {
     });
 }
 exports.setReview = setReview;
+let profesiones = "Blogger,Marketing de afiliados,Freelancer,Asistente virtual,Redactor de contenidos o Copywriter,YouTuber,Clases en línea,Coach en línea,Consultor en línea,Representante de servicio al cliente,Programador,Traductor,Editor de video,Servicios de consultoría,Data Entry,Administración de E-Commerce,Voice acting,Corrección de textos y estilo,Fotografía de stock,Tester videojuegos,SEO,Diseño gráfico,Diseño web,UX Design,UX Researcher,Diseño de producto,Website testing,QA Tester,Community Manager,Agente de viajes,Venta de dibujos,Venta de artesanías,Servicios de animación,Teleoperador,Cuidador de mascotas,Realizar encuestas,Creación de podcasts,Trading,Venta de libros,Servicios de reclutamiento y selección,Técnico informático,Gestión de canal de YouTube,Anfitrión de Airbnb,Growth Hacking,Digital Project Management,Coordinación de eventos,Servicios de contabilidad,Trabajos de preparación de impuestos para autónomos,Estilista,Producción musical,Guía local,Nutricionista";
+let arrayProfesiones = profesiones.split(",");
+const randomProfession = () => arrayProfesiones[Math.floor(Math.random() * arrayProfesiones.length)];
