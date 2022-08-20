@@ -57,10 +57,9 @@ const app_1 = __importDefault(require("./src/app"));
 const { conn } = require("./src/db");
 const data_1 = require("./data");
 const { PORT } = process.env;
-/* const setData =require('./data');
-const setOffersAndProposals =require('./data'); */
+const cleanDataBase_1 = require("./src/services/cleanDataBase");
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
     app_1.default.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
         console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
         yield (0, data_1.setData)();
@@ -68,5 +67,6 @@ conn.sync({ force: true }).then(() => {
         yield (0, data_1.setProposals)();
         yield (0, data_1.setPortfolios)();
         yield (0, data_1.setReview)();
+        (0, cleanDataBase_1.cleanDataBase)();
     }));
 });

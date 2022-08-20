@@ -8,6 +8,10 @@ module.exports = (sequelize) => {
             defaultValue: sequelize_1.DataTypes.UUIDV4,
             primaryKey: true,
         },
+        googleId: {
+            type: sequelize_1.DataTypes.STRING,
+            allowNull: true
+        },
         name: {
             type: sequelize_1.DataTypes.STRING,
             allowNull: false,
@@ -22,7 +26,7 @@ module.exports = (sequelize) => {
         },
         born_date: {
             type: sequelize_1.DataTypes.DATE,
-            allowNull: false,
+            allowNull: true,
         },
         password: {
             type: sequelize_1.DataTypes.STRING,

@@ -43,6 +43,10 @@ module.exports = (sequelize: any) => {
       allowNull: false,
       primaryKey: true,
     },
+    googleId: {
+      type: DataTypes.STRING,
+          allowNull:true
+    },
     isAdmin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

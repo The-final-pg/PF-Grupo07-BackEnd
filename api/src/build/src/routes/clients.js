@@ -38,9 +38,9 @@ router.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 }));
 router.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
-    const { name, born_date, photo, favorites } = req.body;
+    const { name, lastName, born_date, photo, favorites } = req.body;
     try {
-        const clientUpdate = yield (0, clientController_1.updateClientProfile)(id, name, born_date, photo, favorites);
+        const clientUpdate = yield (0, clientController_1.updateClientProfile)(id, lastName, name, born_date, photo, favorites);
         res.json(clientUpdate);
     }
     catch (error) {

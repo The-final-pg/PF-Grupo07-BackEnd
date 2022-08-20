@@ -30,17 +30,17 @@ worker.get(
     try {
       let worker: WorkerType[];
       if (q && !p && !r) {
-        worker = await getWorkerByName(q );
+        worker = await getWorkerByName(q as string);
       } else if (q && p && !r) {
-        worker = await workerFilteredByProfession(q, p );
+        worker = await workerFilteredByProfession(q as string, p as string);
       } else if (!q && p && !r) {
-        worker = await workerFilteredByProfession(q, p );
+        worker = await workerFilteredByProfession(q as string, p as string);
       } else if (q && !p && r) {
-        worker = await workerFilteredByRating(q, r );
+        worker = await workerFilteredByRating(q as string, r as string);
       } else if (!q && !p && r) {
-        worker = await workerFilteredByRating(q, r );
+        worker = await workerFilteredByRating(q as string, r as string);
       } else {
-        worker = await workerAllfiltersOn(q, p, r );
+        worker = await workerAllfiltersOn(q as string, p as string, r as string);
       }
       res.send(worker);
     } catch (error) {
@@ -63,6 +63,7 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
   const id: string = req.params.id;
   const {
     name,
+    lastName,
     born_date,
     photo,
     profession,
@@ -70,6 +71,7 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     favorites
   }: {
     name: string;
+    lastName: string;
     born_date: Date;
     photo: string;
     profession: string[];
@@ -80,6 +82,7 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     const workerUpdate: WorkerType = await updateWorkerProfile(
       id,
       name,
+      lastName,
       born_date,
       photo,
       profession,

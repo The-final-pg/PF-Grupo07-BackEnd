@@ -51,8 +51,9 @@ import {
   setReview,
 } from "./data";
 const { PORT } = process.env
-/* const setData =require('./data');
-const setOffersAndProposals =require('./data'); */
+import { cleanDataBase } from './src/services/cleanDataBase'
+
+
 
 // Syncing all the models at once.
 conn.sync({ force: false }).then(() => {
@@ -62,6 +63,7 @@ conn.sync({ force: false }).then(() => {
     await setOffers();
     await setProposals();
     await setPortfolios();
-    await setReview(); 
+    await setReview();
+    cleanDataBase();
   });
 });

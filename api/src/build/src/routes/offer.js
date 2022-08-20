@@ -54,6 +54,7 @@ offer.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
             offers = yield (0, filteredSearchOffer_1.offerFilteredByWorDurationTime)(q, wdt);
         }
         else if (!q && !p && !r && !max && !min && wdt) {
+            console.log("entre al filtro");
             offers = yield (0, filteredSearchOffer_1.offerFilteredByWorDurationTime)(q, wdt);
         }
         else {
