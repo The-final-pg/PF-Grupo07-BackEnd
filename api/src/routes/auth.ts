@@ -5,10 +5,13 @@ const { SECRET_KEY } = process.env;
 const { UserWorker, UserClient } = require("../db");
 
 auth.post("/", async(req: Request, res: Response, next: NextFunction) => {
-    const googleUser = req.body.googleUser
+    const googleUser = req.body
     try {
-        const clientFound = await UserClient.findOne({where: {user_mail: googleUser.user_mail}})
-        const workerFound = await UserWorker.findOne({where: {user_mail: googleUser.user_mail}})
+        console.log(googleUser)
+        const clientFound = await UserClient.findOne({where: {user_mail: googleUser?.user_mail}})
+        const workerFound = await UserWorker.findOne({where: {user_mail: googleUser?.user_mail}})
+        console.log("clien", clientFound)
+        console.log("worker", workerFound)
         if(clientFound){
             return res.send(jwt.sign(
                 {
@@ -37,7 +40,7 @@ auth.post("/", async(req: Request, res: Response, next: NextFunction) => {
             /* res.status(200).json(workerFound) */
         } else {
             // llevar a la ruta que lo hace elegir entre worker y client y despues crearlo
-            // null 
+            res.send ('usuario no encontrado' )
         }
 
 

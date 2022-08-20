@@ -18,10 +18,13 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const { SECRET_KEY } = process.env;
 const { UserWorker, UserClient } = require("../db");
 auth.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const googleUser = req.body.googleUser;
+    const googleUser = req.body;
     try {
-        const clientFound = yield UserClient.findOne({ where: { user_mail: googleUser.user_mail } });
-        const workerFound = yield UserWorker.findOne({ where: { user_mail: googleUser.user_mail } });
+        console.log(googleUser);
+        const clientFound = yield UserClient.findOne({ where: { user_mail: googleUser === null || googleUser === void 0 ? void 0 : googleUser.user_mail } });
+        const workerFound = yield UserWorker.findOne({ where: { user_mail: googleUser === null || googleUser === void 0 ? void 0 : googleUser.user_mail } });
+        console.log("clien", clientFound);
+        console.log("worker", workerFound);
         if (clientFound) {
             return res.send(jsonwebtoken_1.default.sign({
                 id: clientFound.id,
@@ -44,7 +47,7 @@ auth.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
         }
         else {
             // llevar a la ruta que lo hace elegir entre worker y client y despues crearlo
-            // null 
+            res.send('usuario no encontrado');
         }
     }
     catch (error) {

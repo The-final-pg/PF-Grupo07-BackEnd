@@ -4,7 +4,7 @@ import {
   setData,
   setOffers,
   setProposals,
-  setPortfolio,
+  setPortfolios,
   setReview,
 } from "./data";
 import { cleanDataBase } from './src/services/cleanDataBase'
