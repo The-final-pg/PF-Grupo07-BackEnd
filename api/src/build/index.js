@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./src/app"));
 const { conn } = require("./src/db");
 const data_1 = require("./data");
+const cleanDataBase_1 = require("./src/services/cleanDataBase");
 /* const setData =require('./data');
 const setOffersAndProposals =require('./data'); */
 // Syncing all the models at once.
@@ -26,5 +27,6 @@ conn.sync({ force: false }).then(() => {
         yield (0, data_1.setProposals)();
         yield (0, data_1.setPortfolios)();
         yield (0, data_1.setReview)();
+        (0, cleanDataBase_1.cleanDataBase)();
     }));
 });
