@@ -176,3 +176,4 @@ let profesiones: string = "Blogger,Marketing de afiliados,Freelancer,Asistente v
 let arrayProfesiones: string[]= profesiones.split(",")
 
 const randomProfession = () => arrayProfesiones[Math.floor(Math.random() * arrayProfesiones.length)]
+
