@@ -51,14 +51,14 @@ import {
   setReview,
 } from "./data";
 import { cleanDataBase } from './src/services/cleanDataBase'
-
+const { PORT } = process.env
 
 
 
 // Syncing all the models at once.
-conn.sync({ force: false }).then(() => {
-  server.listen(3001, async () => {
-    console.log(`%s listening at 3001`); // eslint-disable-line no-console
+conn.sync({ force: true }).then(() => {
+  server.listen(PORT, async () => {
+    console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
     await setData();
     await setOffers();
     await setProposals();
