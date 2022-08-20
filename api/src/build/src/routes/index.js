@@ -22,6 +22,7 @@ const admin_1 = __importDefault(require("./admin"));
 const loginGoogle_1 = __importDefault(require("./loginGoogle"));
 const passport_1 = __importDefault(require("passport"));
 const googleUse_1 = require("./googleUse");
+const auth_1 = __importDefault(require("./auth"));
 const router = express_1.default.Router();
 router.use("/client", clients_1.default);
 router.use("/worker", workers_1.default);
@@ -38,7 +39,8 @@ router.use("/confirm", verifyUser_1.default);
 router.use("/tokenVerify", tokenVerify_1.default);
 router.use("/payments", payment_1.default);
 router.use("/admin", admin_1.default);
-router.use("/auth", loginGoogle_1.default);
+router.use("/auth", auth_1.default);
+router.use("/loginGoogle", loginGoogle_1.default); // antes auth con google strategy
 router.get("/google", passport_1.default.authenticate("auth-google", {
     scope: [
         "https://www.googleapis.com/auth/userinfo.profile",

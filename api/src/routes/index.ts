@@ -17,6 +17,7 @@ import admin from "./admin";
 import loginGoogle from "./loginGoogle";
 import passport from "passport";
 import { loginRouter } from "./googleUse";
+import auth from "./auth"
 
 const router = express.Router();
 
@@ -35,7 +36,8 @@ router.use("/confirm", verifyUser);
 router.use("/tokenVerify", tokenVerify);
 router.use("/payments", payment);
 router.use("/admin", admin);
-router.use("/auth", loginGoogle);
+router.use("/auth", auth)
+router.use("/loginGoogle", loginGoogle); // antes auth con google strategy
 router.get("/google", 
 passport.authenticate("auth-google", {
   scope: [
