@@ -1,6 +1,7 @@
 const  passportGoogleClient = require ("passport");
-import { VerifyCallback } from 'passport-google-oauth2';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import { Request } from "express"
+import { Profile } from 'passport';
+import { Strategy as GoogleStrategy, VerifyCallback} from 'passport-google-oauth20';
 require("dotenv").config();
 const { GOOGLE_CLIENT_ID, GOOGLE_SECRET } = process.env;
 import { ClientType  } from "../../types";
@@ -11,10 +12,12 @@ passportGoogleClient.use(new GoogleStrategy({
     clientSecret: GOOGLE_SECRET,
     callbackURL: "http://localhost:3001/auth/client/callback",
     passReqToCallback: true
-}, async (accessToken: any, refreshToken: any, profile: any, done: any) => {
+}, async (_req: Request, accessToken: string, refreshToken: string, profile: Profile, done: VerifyCallback) => {
     console.log("refreshToken", refreshToken)
     console.log("accessToken", accessToken)
     const clientFound: ClientType = await UserClient.findOne({where: {googleId: profile.id}})
+    
+    console.log("Client Found", clientFound)
     if(!clientFound){
         const client = await UserClient.create({
             googleId: profile.id,
@@ -24,6 +27,7 @@ passportGoogleClient.use(new GoogleStrategy({
             photo: profile.photos[0].value,
             password: "Rework22"
         })
+        console.log("clientcreated", client)
         if(client) return done(null, client)
     } else{
         return done(null, clientFound)
