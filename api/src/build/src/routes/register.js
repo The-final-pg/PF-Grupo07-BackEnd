@@ -29,7 +29,11 @@ register.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, f
     try {
         const mail = newClient.user_mail;
         const clientFound = yield UserClient.findOne({ where: { user_mail: mail } });
-        if (!clientFound) {
+        const workerFound = yield UserWorker.findOne({ where: { user_mail: mail } });
+        if (workerFound) {
+            res.send({ message: "El correo electrónico ya pertenece a una cuenta de freelancer. Por favor, utiliza otra cuenta de correo o inicia sesión como freelancer." });
+        }
+        else if (!clientFound && !workerFound) {
             // de toda la info que viene por body, tomamos la password y la hasheamos con el método hash de bcrypt
             const hashedPassword = yield bcrypt.hash(newClient.password, 8);
             // el 8 es para el tiempo de las iteraciones, mientras más tiempo más segura, pero con 8 es suficiente.
@@ -126,7 +130,7 @@ register.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, f
             });
             res.send({ message: "Usuario registrado exitosamente! Por favor, verifica tu casilla de correo." });
         }
-        else {
+        else if (clientFound) {
             res.send({ message: "Usuario existente. Por favor inicia sesión." });
         }
     }
@@ -142,7 +146,11 @@ register.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, f
     try {
         const mail = newWorker.user_mail;
         const workerFound = yield UserWorker.findOne({ where: { user_mail: mail } });
-        if (!workerFound) {
+        const clientFound = yield UserClient.findOne({ where: { user_mail: mail } });
+        if (clientFound) {
+            res.send({ message: "El correo electrónico ya pertenece a una cuenta de cliente. Por favor, utiliza otra cuenta de correo o inicia sesión como cliente." });
+        }
+        else if (!workerFound && !clientFound) {
             const hashedPassword = yield bcrypt.hash(newWorker.password, 8);
             let workerCreated;
             workerCreated = yield (0, registerController_1.createWorker)(newWorker, hashedPassword);
@@ -235,7 +243,7 @@ register.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, f
             });
             res.send({ message: "Usuario registrado exitosamente! Por favor, verifica tu casilla de correo." });
         }
-        else {
+        else if (workerFound) {
             res.send({ message: "Usuario existente. Por favor inicia sesión." });
         }
     }

@@ -17,7 +17,10 @@ register.post(
     try {
       const mail = newClient.user_mail
       const clientFound = await UserClient.findOne({where: {user_mail : mail}})
-      if(!clientFound){
+      const workerFound = await UserWorker.findOne({where: {user_mail: mail}})
+      if(workerFound){
+        res.send({message: "El correo electrónico ya pertenece a una cuenta de freelancer. Por favor, utiliza otra cuenta de correo o inicia sesión como freelancer."})
+      } else if(!clientFound && !workerFound){
         // de toda la info que viene por body, tomamos la password y la hasheamos con el método hash de bcrypt
         const hashedPassword = await bcrypt.hash(newClient.password, 8);
         // el 8 es para el tiempo de las iteraciones, mientras más tiempo más segura, pero con 8 es suficiente.
@@ -113,7 +116,7 @@ register.post(
                 <b>Confirma tu cuenta <a href="http://localhost:3000/confirm/client/${id}"> AQUÍ </a> </b>` */   
       })
         res.send({message: "Usuario registrado exitosamente! Por favor, verifica tu casilla de correo."});
-      } else {
+      } else if(clientFound){
         res.send({message: "Usuario existente. Por favor inicia sesión."})
       }
     } catch (error) {
@@ -129,8 +132,11 @@ register.post(
     const newWorker = req.body;
     if (newWorker.photo === '') delete newWorker.photo;
     try {const mail = newWorker.user_mail
-      const workerFound = await UserWorker.findOne({where: {user_mail : mail}})
-      if(!workerFound){
+      const workerFound = await UserWorker.findOne({where: {user_mail: mail}})
+      const clientFound = await UserClient.findOne({where: {user_mail: mail}})
+      if(clientFound){
+        res.send({message: "El correo electrónico ya pertenece a una cuenta de cliente. Por favor, utiliza otra cuenta de correo o inicia sesión como cliente."})
+      } else if(!workerFound && !clientFound){
         const hashedPassword = await bcrypt.hash(newWorker.password, 8);
         let workerCreated : any
         workerCreated = await createWorker(newWorker, hashedPassword);
@@ -222,7 +228,7 @@ register.post(
                 <b>Confirma tu cuenta <a href="http://localhost:3000/confirm/worker/${id}"> AQUÍ </a> </b>` */
       })
         res.send({message: "Usuario registrado exitosamente! Por favor, verifica tu casilla de correo."});
-      } else {
+      } else if(workerFound){
         res.send({message: "Usuario existente. Por favor inicia sesión."})
       }
     } catch (error) {
