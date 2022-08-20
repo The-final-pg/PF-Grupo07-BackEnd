@@ -19,7 +19,9 @@ const verifyUser_1 = __importDefault(require("./verifyUser"));
 const tokenVerify_1 = __importDefault(require("./tokenVerify"));
 const payment_1 = __importDefault(require("./payment"));
 const admin_1 = __importDefault(require("./admin"));
-const googleLogin_1 = __importDefault(require("./googleLogin"));
+const loginGoogle_1 = __importDefault(require("./loginGoogle"));
+const passport_1 = __importDefault(require("passport"));
+const googleUse_1 = require("./googleUse");
 const router = express_1.default.Router();
 router.use("/client", clients_1.default);
 router.use("/worker", workers_1.default);
@@ -36,5 +38,12 @@ router.use("/confirm", verifyUser_1.default);
 router.use("/tokenVerify", tokenVerify_1.default);
 router.use("/payments", payment_1.default);
 router.use("/admin", admin_1.default);
-router.use("/auth", googleLogin_1.default);
+router.use("/auth", loginGoogle_1.default);
+router.get("/google", passport_1.default.authenticate("auth-google", {
+    scope: [
+        "https://www.googleapis.com/auth/userinfo.profile",
+        "https://www.googleapis.com/auth/userinfo.email",
+    ],
+    session: false,
+}), googleUse_1.loginRouter);
 exports.default = router;

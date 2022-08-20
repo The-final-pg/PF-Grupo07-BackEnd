@@ -19,10 +19,11 @@ passportGoogleClient.use(new passport_google_oauth20_1.Strategy({
     clientSecret: GOOGLE_SECRET,
     callbackURL: "http://localhost:3001/auth/client/callback",
     passReqToCallback: true
-}, (accessToken, refreshToken, profile, done) => __awaiter(void 0, void 0, void 0, function* () {
+}, (_req, accessToken, refreshToken, profile, done) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("refreshToken", refreshToken);
     console.log("accessToken", accessToken);
     const clientFound = yield UserClient.findOne({ where: { googleId: profile.id } });
+    console.log("Client Found", clientFound);
     if (!clientFound) {
         const client = yield UserClient.create({
             googleId: profile.id,
@@ -32,6 +33,7 @@ passportGoogleClient.use(new passport_google_oauth20_1.Strategy({
             photo: profile.photos[0].value,
             password: "Rework22"
         });
+        console.log("clientcreated", client);
         if (client)
             return done(null, client);
     }

@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 import { createWorker, createClient } from "../controllers/registerController";
 import transporter from "../utils/nodemailer/nodemailerConfig";
 const { REWORK_MAIL } = process.env;
-
+const { UserWorker, UserClient } = require("../db");
 
 //Segun la ruta, ejecuta un post distinto: en '/register/client' es la siguiente:
 register.post(
@@ -91,7 +91,7 @@ register.post(
                           <p>Confirma tu correo electrónico</p>
           
                           <!-- Botón -->
-                          <a class="claseBoton" href="http://localhost:3000/confirm/client/${id}">AQUÍ</a>
+                          <a class="claseBoton" href="http://localhost:3000/confirm/client/${id} || https://rework-xi.vercel.app/confirm/client/${id}">AQUÍ</a>
                       </div>
                       <!-- Contenido principal -->
           
@@ -129,7 +129,7 @@ register.post(
     const newWorker = req.body;
     if (newWorker.photo === '') delete newWorker.photo;
     try {const mail = newWorker.user_mail
-      const workerFound = await UserClient.findOne({where: {user_mail : mail}})
+      const workerFound = await UserWorker.findOne({where: {user_mail : mail}})
       if(!workerFound){
         const hashedPassword = await bcrypt.hash(newWorker.password, 8);
         let workerCreated : any
@@ -200,7 +200,7 @@ register.post(
                           <p>Confirma tu correo electrónico</p>
           
                           <!-- Botón -->
-                          <a class="claseBoton" href="http://localhost:3000/confirm/worker/${id}">AQUÍ</a>
+                          <a class="claseBoton" href="http://localhost:3000/confirm/worker/${id} || https://rework-xi.vercel.app/confirm/worker/${id}">AQUÍ</a>
                       </div>
                       <!-- Contenido principal -->
           

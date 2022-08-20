@@ -18,6 +18,7 @@ const bcrypt = require("bcrypt");
 const registerController_1 = require("../controllers/registerController");
 const nodemailerConfig_1 = __importDefault(require("../utils/nodemailer/nodemailerConfig"));
 const { REWORK_MAIL } = process.env;
+const { UserWorker, UserClient } = require("../db");
 //Segun la ruta, ejecuta un post distinto: en '/register/client' es la siguiente:
 register.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const newClient = req.body;
@@ -102,7 +103,7 @@ register.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, f
                           <p>Confirma tu correo electrónico</p>
           
                           <!-- Botón -->
-                          <a class="claseBoton" href="http://localhost:3000/confirm/client/${id}">AQUÍ</a>
+                          <a class="claseBoton" href="http://localhost:3000/confirm/client/${id} || https://rework-xi.vercel.app/confirm/client/${id}">AQUÍ</a>
                       </div>
                       <!-- Contenido principal -->
           
@@ -140,7 +141,7 @@ register.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, f
         delete newWorker.photo;
     try {
         const mail = newWorker.user_mail;
-        const workerFound = yield UserClient.findOne({ where: { user_mail: mail } });
+        const workerFound = yield UserWorker.findOne({ where: { user_mail: mail } });
         if (!workerFound) {
             const hashedPassword = yield bcrypt.hash(newWorker.password, 8);
             let workerCreated;
@@ -211,7 +212,7 @@ register.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, f
                           <p>Confirma tu correo electrónico</p>
           
                           <!-- Botón -->
-                          <a class="claseBoton" href="http://localhost:3000/confirm/worker/${id}">AQUÍ</a>
+                          <a class="claseBoton" href="http://localhost:3000/confirm/worker/${id} || https://rework-xi.vercel.app/confirm/worker/${id}">AQUÍ</a>
                       </div>
                       <!-- Contenido principal -->
           
@@ -237,7 +238,8 @@ register.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, f
         else {
             res.send({ message: "Usuario existente. Por favor inicia sesión." });
         }
-    }catch (error) {
+    }
+    catch (error) {
         next(error);
     }
 }));
