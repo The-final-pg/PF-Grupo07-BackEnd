@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 const payment = express.Router();
 //const { SECRET_KEY, ACCESS_TOKEN } = process.env;
-import PaymentController from "../controllers/PaymentController";
+import PaymentController from "../controllers/PaymentController"
 import PaymentService from "../services/PaymentService";
 
 const paymentInstance = new PaymentController(new PaymentService());

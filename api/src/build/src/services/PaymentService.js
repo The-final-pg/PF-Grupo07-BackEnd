@@ -8,11 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const axios = require("axios");
+const axios_1 = __importDefault(require("axios"));
 const { ACCESS_TOKEN } = process.env;
-const mercadopago = require("mercadopago");
-mercadopago.configure({
+const mercadopago_1 = __importDefault(require("mercadopago"));
+mercadopago_1.default.configure({
     access_token: ACCESS_TOKEN
 });
 class PaymentService {
@@ -38,7 +41,7 @@ class PaymentService {
                     success: "/success"
                 }
             };
-            const response = yield mercadopago.preferences.create(preference);
+            const response = yield mercadopago_1.default.preferences.create(preference);
             const preferenceId = response.body.id;
             return preferenceId;
             //     mercadopago.preferences
@@ -69,7 +72,7 @@ class PaymentService {
                 back_url: "https://google.com.ar",
                 payer_email: "test_user_66888897@testuser.com"
             };
-            const subscription = yield axios.post(url, body, {
+            const subscription = yield axios_1.default.post(url, body, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
