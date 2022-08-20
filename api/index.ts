@@ -52,7 +52,6 @@ import {
 } from "./data";
 import { cleanDataBase } from './src/services/cleanDataBase'
 const { PORT } = process.env
-import { cleanDataBase } from './src/services/cleanDataBase'
 
 
 
