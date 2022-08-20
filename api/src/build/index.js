@@ -56,6 +56,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./src/app"));
 const { conn } = require("./src/db");
 const data_1 = require("./data");
+const cleanDataBase_1 = require("./src/services/cleanDataBase");
 const { PORT } = process.env;
 const cleanDataBase_1 = require("./src/services/cleanDataBase");
 // Syncing all the models at once.
