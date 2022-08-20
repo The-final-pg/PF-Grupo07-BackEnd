@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const payment = express_1.default.Router();
 //const { SECRET_KEY, ACCESS_TOKEN } = process.env;
-const PaymentController = require("../controllers/paymentController");
-const PaymentService = require("../services/PaymentService");
-const paymentInstance = new PaymentController(new PaymentService());
+const PaymentController_1 = __importDefault(require("../controllers/PaymentController"));
+const PaymentService_1 = __importDefault(require("../services/PaymentService"));
+const paymentInstance = new PaymentController_1.default(new PaymentService_1.default());
 // autenticación: verifica si el usuario es correcto. Lo busca en la base de datos en passportConfig. Si lo encuentra, genera el token con la info que nos importa para autorizar,
 // osea si es worker o no y si es admin o no.
 payment.get("/", (_req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -27,9 +27,9 @@ payment.get("/", (_req, res, _next) => __awaiter(void 0, void 0, void 0, functio
     });
 }));
 payment.post("/payment", (req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
-    paymentInstance.getPaymentLink(req, res);
+    paymentInstance.getPaymentLink(req, res, _next);
 }));
 payment.post("/subscription", (req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
-    paymentInstance.getSubscriptionLink(req, res);
+    paymentInstance.getSubscriptionLink(req, res, _next);
 }));
 exports.default = payment;
