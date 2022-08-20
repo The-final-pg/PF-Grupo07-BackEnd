@@ -24,7 +24,7 @@ export const setData = async () => {
         born_date: e.Worker.born_date,
         password: e.Worker.password,
         profession: [randomProfession(), randomProfession(), randomProfession()],
-        skills: e.Worker.skills,
+        skills: [randomSkills(), randomSkills(), randomSkills(), randomSkills(), randomSkills(), randomSkills()],
         rating: ((e.Worker.rating - 1) % 5) + 1,
         photo: e.Worker.photo,
         notification: e.Worker.notification,
@@ -177,3 +177,9 @@ let arrayProfesiones: string[]= profesiones.split(",")
 
 const randomProfession = () => arrayProfesiones[Math.floor(Math.random() * arrayProfesiones.length)]
 
+
+let skills:string = "Presentación de datos,Manejo de bases de datos,Diagnóstico,Investigación,Interpretación de datos y métricas,Gestión de bases de datos,HTML,CSS,JavaScript,Typescript,C#,Java,C++,Plataformas CRM,Investigación,Creación de prototipos,Desarrollo de flujos de trabajo,Correos electrónicos,Paquete de Microsoft,Google Drive,Redes sociales,Atención a los detalles,Personalización de la interacción,Conocimiento de productos y servicios,Investigación,Manejo de datos,Comunicación visual,Análisis de datos,Investigación,Diseño gráfico,Negociación,Finanzas,Conocimiento empresariales,Contratación,Logística,Seguimiento de rendimiento,Manejo de presupuesto,Modelado financiero,Manejo de software,Gestión de SCRUM,SEO,SEM,Redacción,Herramientas de Google Analytics,Search Console,Tag Manager,Email marketing,Gestión de embudos,Redes sociales,PPC,Redacción básica,Storytelling,Edición,Periodismo,Copywriting,Escritura académica,Visualización de datos,Photoshop,Illustrator,InDesign,UX research,Sketching,Data visualization,Curiosidad,Trabajo en equipo,Comunicación,Empatía,Manejo del tiempo,Dominio de lenguajes de programación,Conocimiento en paradigmas de programación,Bilingüe,Comunicación efectiva,Pensamiento crítico,Capacidad de negociación,Manejo del tiempo,Dominio del inglés,Inteligencia emocional,Colaboración,Positivismo,Conocimiento del mercado,Capacidad de organización";
+
+let arraySkills: string[]= skills.split(",")
+
+const randomSkills = () => arraySkills[Math.floor(Math.random() * arraySkills.length)]
