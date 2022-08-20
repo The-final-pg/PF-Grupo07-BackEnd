@@ -1,6 +1,6 @@
-const axios = require("axios");
+import axios from "axios";
 const { ACCESS_TOKEN } = process.env;
-const mercadopago = require("mercadopago")
+import mercadopago from "mercadopago";
 
 mercadopago.configure({
     access_token: ACCESS_TOKEN
@@ -75,4 +75,4 @@ class PaymentService {
   }
 }
 
-module.exports = PaymentService;
+export default PaymentService;

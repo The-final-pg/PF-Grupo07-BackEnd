@@ -16,12 +16,10 @@ const app_1 = __importDefault(require("./src/app"));
 const { conn } = require("./src/db");
 const data_1 = require("./data");
 const cleanDataBase_1 = require("./src/services/cleanDataBase");
-/* const setData =require('./data');
-const setOffersAndProposals =require('./data'); */
 // Syncing all the models at once.
 conn.sync({ force: false }).then(() => {
     app_1.default.listen(3001, () => __awaiter(void 0, void 0, void 0, function* () {
-        console.log("%s listening at 3001"); // eslint-disable-line no-console
+        console.log(`%s listening at 3001`); // eslint-disable-line no-console
         yield (0, data_1.setData)();
         yield (0, data_1.setOffers)();
         yield (0, data_1.setProposals)();

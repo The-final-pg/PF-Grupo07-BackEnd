@@ -4,17 +4,18 @@ import {
   setData,
   setOffers,
   setProposals,
-  setPortfolios,
+  setPortfolio,
   setReview,
 } from "./data";
 import { cleanDataBase } from './src/services/cleanDataBase'
-/* const setData =require('./data');
-const setOffersAndProposals =require('./data'); */
+
+
+
 
 // Syncing all the models at once.
 conn.sync({ force: false }).then(() => {
   server.listen(3001, async () => {
-    console.log("%s listening at 3001"); // eslint-disable-line no-console
+    console.log(`%s listening at 3001`); // eslint-disable-line no-console
     await setData();
     await setOffers();
     await setProposals();

@@ -237,7 +237,8 @@ register.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, f
         else {
             res.send({ message: "Usuario existente. Por favor inicia sesión." });
         }
-    }catch (error) {
+    }
+    catch (error) {
         next(error);
     }
 }));
