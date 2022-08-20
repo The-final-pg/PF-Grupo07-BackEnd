@@ -50,6 +50,7 @@ import {
   setPortfolios,
   setReview,
 } from "./data";
+import { cleanDataBase } from './src/services/cleanDataBase'
 const { PORT } = process.env
 /* const setData =require('./data');
 const setOffersAndProposals =require('./data'); */
@@ -62,6 +63,7 @@ conn.sync({ force: true }).then(() => {
     await setOffers();
     await setProposals();
     await setPortfolios();
-    await setReview(); 
+    await setReview();
+    cleanDataBase();
   });
 });

@@ -12,6 +12,9 @@ import skills from "./skills";
 import review from "./review";
 import verifyUser from "./verifyUser";
 import tokenVerify from "./tokenVerify";
+import payment from "./payment";
+import admin from "./admin";
+import loginGoogle from "./googleLogin";
 
 const router = express.Router();
 
@@ -27,6 +30,9 @@ router.use("/profession", profession);
 router.use("/skills", skills);
 router.use("/review", review);
 router.use("/confirm", verifyUser);
-router.use("/tokenVerify", tokenVerify)
+router.use("/tokenVerify", tokenVerify);
+router.use("/payments", payment);
+router.use("/admin", admin);
+router.use("/auth", loginGoogle);
 
 export default router;

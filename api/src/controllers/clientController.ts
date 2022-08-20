@@ -16,13 +16,15 @@ export async function getClientById(id: string): Promise<ClientType> {
 export async function updateClientProfile(
   id: string,
   name: string,
+  lastName: string,
   born_date: string,
   photo: string, 
   favorites: OfferType[]
 ): Promise<ClientType> {
-  const data = { name, born_date, photo, favorites };
+  const data = { name,lastName, born_date, photo, favorites };
   const client = await UserClient.findByPk(id);
   if (!name || data.name === client.name) delete data.name;
+  if (!lastName || data.lastName === client.lastName) delete data.lastName;
   if (!born_date || data.born_date === client.born_date) delete data.born_date;
   if (!photo || data.photo === client.photo) delete data.photo;
   await client.set(data);

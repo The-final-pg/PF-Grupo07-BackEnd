@@ -4,8 +4,8 @@ import { Op } from "sequelize";
 const { UserWorker } = require("../db");
 
 export async function workerFilteredByProfession(
-  name,
-  profession,
+  name: string,
+  profession: string,
 ): Promise<WorkerType[]> {
   if (!name && profession) {
     const filteredByProfession = await UserWorker.findAll({
@@ -13,18 +13,29 @@ export async function workerFilteredByProfession(
         profession: {
           [Op.contains]: [profession],
         },
+        isActive: true,
       },
     });
     return filteredByProfession;
   } else {
     const filteredByProfession = await UserWorker.findAll({
       where: {
-        name: {
-          [Op.iLike]: `%${name}%`,
-        },
+        [Op.or]: [
+          {
+            name: {
+              [Op.iLike]: `%${name}%`,
+            },
+          },
+          {
+            lastName: {
+              [Op.iLike]: `%${name}%`,
+            },
+          },
+        ],
         profession: {
           [Op.contains]: [profession],
         },
+        isActive: true,
       },
     });
     return filteredByProfession;
@@ -32,8 +43,8 @@ export async function workerFilteredByProfession(
 }
 
 export async function workerFilteredByRating(
-  name,
-  rating,
+  name: string,
+  rating: string,
 ): Promise<WorkerType[]> {
   if (!name && rating) {
     const filteredByRating = await UserWorker.findAll({
@@ -41,18 +52,29 @@ export async function workerFilteredByRating(
         rating: {
           [Op.gte]: parseInt(rating),
         },
+        isActive: true,
       },
     });
     return filteredByRating;
   } else {
     const filteredByRating = await UserWorker.findAll({
       where: {
-        name: {
-          [Op.iLike]: `%${name}%`,
-        },
+        [Op.or]: [
+          {
+            name: {
+              [Op.iLike]: `%${name}%`,
+            },
+          },
+          {
+            lastName: {
+              [Op.iLike]: `%${name}%`,
+            },
+          },
+        ],
         rating: {
           [Op.gte]: parseInt(rating),
         },
+        isActive: true,
       },
     });
     return filteredByRating;
@@ -60,9 +82,9 @@ export async function workerFilteredByRating(
 }
 
 export async function workerAllfiltersOn(
-  name,
-  profession,
-  rating,
+  name: string,
+  profession: string,
+  rating: string,
 ): Promise<WorkerType[]> {
   if (!name && profession && rating) {
     const workerAllfiltersOn = await UserWorker.findAll({
@@ -73,21 +95,32 @@ export async function workerAllfiltersOn(
         rating: {
           [Op.gte]: parseInt(rating),
         },
+        isActive: true,
       },
     });
     return workerAllfiltersOn;
   } else {
     const workerAllfiltersOn = await UserWorker.findAll({
       where: {
-        name: {
-          [Op.iLike]: `%${name}%`,
-        },
+        [Op.or]: [
+          {
+            name: {
+              [Op.iLike]: `%${name}%`,
+            },
+          },
+          {
+            lastName: {
+              [Op.iLike]: `%${name}%`,
+            },
+          },
+        ],
         profession: {
           [Op.contains]: [profession],
         },
         rating: {
           [Op.gte]: parseInt(rating),
         },
+        isActive: true,
       },
     });
     return workerAllfiltersOn;

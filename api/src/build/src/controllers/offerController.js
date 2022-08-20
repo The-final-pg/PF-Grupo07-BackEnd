@@ -15,6 +15,9 @@ const { Offer, Proposal, UserClient, UserWorker } = require("../db");
 function getAllOffers() {
     return __awaiter(this, void 0, void 0, function* () {
         let allOffers = yield Offer.findAll({
+            where: {
+                isActive: true,
+            },
             include: UserClient
         });
         return allOffers;
@@ -56,6 +59,7 @@ function getOffersBySearch(q) {
                         },
                     },
                 ],
+                isActive: true,
             },
             include: UserClient
         });

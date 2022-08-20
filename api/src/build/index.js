@@ -56,6 +56,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./src/app"));
 const { conn } = require("./src/db");
 const data_1 = require("./data");
+const cleanDataBase_1 = require("./src/services/cleanDataBase");
 const { PORT } = process.env;
 /* const setData =require('./data');
 const setOffersAndProposals =require('./data'); */
@@ -68,5 +69,6 @@ conn.sync({ force: true }).then(() => {
         yield (0, data_1.setProposals)();
         yield (0, data_1.setPortfolios)();
         yield (0, data_1.setReview)();
+        (0, cleanDataBase_1.cleanDataBase)();
     }));
 });

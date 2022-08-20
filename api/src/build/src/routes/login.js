@@ -18,6 +18,8 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const { SECRET_KEY } = process.env;
 const express_session_1 = __importDefault(require("express-session")); //middleware
 const passportConfig_1 = __importDefault(require("../utils/passport/passportConfig"));
+/* import passportGoogleClient from "../utils/passport/googleClientConfig"
+import passportGoogleWorker from "../utils/passport/googleWorkerConfig" */
 // inicializamos passport
 login.use(passportConfig_1.default.initialize());
 // el urlencoded es para que lo que viene por body lo recibamos como string o array
