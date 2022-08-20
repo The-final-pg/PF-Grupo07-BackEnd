@@ -44,4 +44,4 @@ class PaymentController {
         });
     }
 }
-module.exports = PaymentController;
+exports.default = PaymentController;

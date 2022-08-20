@@ -1,8 +1,8 @@
 import express, { NextFunction, Request, Response } from "express";
 const payment = express.Router();
 //const { SECRET_KEY, ACCESS_TOKEN } = process.env;
-const PaymentController = require("../controllers/paymentController");
-const PaymentService = require("../services/PaymentService");
+import PaymentController from "../controllers/PaymentController";
+import PaymentService from "../services/PaymentService";
 
 const paymentInstance = new PaymentController(new PaymentService());
 
@@ -16,11 +16,11 @@ payment.get("/", async (_req:Request,res:Response,_next:NextFunction) => {
 });
 
 payment.post("/payment", async (req:Request,res:Response,_next:NextFunction) => {
-    paymentInstance.getPaymentLink(req, res);
+    paymentInstance.getPaymentLink(req, res, _next);
 });
 
 payment.post("/subscription", async (req:Request,res:Response,_next:NextFunction) => {
-    paymentInstance.getSubscriptionLink(req, res);
+    paymentInstance.getSubscriptionLink(req, res, _next);
 });
 
 export default payment

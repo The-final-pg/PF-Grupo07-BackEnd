@@ -36,4 +36,4 @@ class PaymentController {
     }
   }
   
-  module.exports = PaymentController;
+export default PaymentController;
