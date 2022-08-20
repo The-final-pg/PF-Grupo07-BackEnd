@@ -58,7 +58,6 @@ const { conn } = require("./src/db");
 const data_1 = require("./data");
 const cleanDataBase_1 = require("./src/services/cleanDataBase");
 const { PORT } = process.env;
-const cleanDataBase_1 = require("./src/services/cleanDataBase");
 // Syncing all the models at once.
 conn.sync({ force: false }).then(() => {
     app_1.default.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
