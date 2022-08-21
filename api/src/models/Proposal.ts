@@ -16,8 +16,10 @@ module.exports = (sequelize: any) => {
     state: {
       type: DataTypes.ENUM(
         "posted",
+        "cancelled",
         "rejected",
         "accepted",
+        "contract accepted",
         "contract started",
         "finalized",
         "released payment"
