@@ -27,7 +27,7 @@ router.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
   const id: string = req.params.id;
   const { name, lastName, born_date, photo, favorites }: { name: string, lastName: string, born_date: string, photo: string, favorites: OfferType[] } = req.body;
   try {
-    const clientUpdate: ClientType = await updateClientProfile(id,lastName, name, born_date, photo, favorites);
+    const clientUpdate: ClientType = await updateClientProfile(id, name, lastName, born_date, photo, favorites);
     res.json(clientUpdate);
   } catch (error) {
     next(error);
