@@ -9,38 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-<<<<<<< HEAD
-exports.putProposalState = exports.postNewProposal = void 0;
-const { Proposal, Offer } = require("../db");
-const postNewProposal = (proposal, idOffer) => __awaiter(void 0, void 0, void 0, function* () {
-    const offer = yield Offer.findByPk(idOffer);
-    const newProposal = yield Proposal.create(proposal);
-    yield offer.addProposal(newProposal);
-    /*     await newProposal.addOffer(offer); */
-    return "Propuesta publicada exitosamente";
-});
-exports.postNewProposal = postNewProposal;
-const putProposalState = (id, state) => __awaiter(void 0, void 0, void 0, function* () {
-    const proposalState = yield Proposal.findAll({
-        where: {
-            id: id,
-        },
-    });
-    if (proposalState.state === "rejected") {
-        return "Flaco la quedaste";
-    }
-    else {
-        yield Proposal.update({ state: state }, {
-            where: {
-                id: id,
-            },
-        });
-        return "state updated";
-    }
-});
-exports.putProposalState = putProposalState;
-=======
-exports.putProposalIsActive = exports.putProposalState = exports.postNewProposal = void 0;
+exports.updateProposalWorkerPremium = exports.putProposalIsActive = exports.putProposalState = exports.postNewProposal = void 0;
 const { Proposal, Offer, UserWorker } = require("../db");
 function postNewProposal(proposal, idOffer, idWorker) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -108,4 +77,19 @@ function putProposalIsActive(id, isActive) {
     });
 }
 exports.putProposalIsActive = putProposalIsActive;
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
+function updateProposalWorkerPremium(id, remuneration, proposal_description, worked_time) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const data = { remuneration, proposal_description, worked_time };
+        const proposal = yield Proposal.findByPk(id);
+        if (!remuneration || data.remuneration === proposal.remuneration)
+            delete data.remuneration;
+        if (!proposal_description || data.proposal_description === proposal.proposal_description)
+            delete data.proposal_description;
+        if (!worked_time || data.worked_time === proposal.worked_time)
+            delete data.worked_time;
+        yield proposal.set(data);
+        yield proposal.save();
+        return proposal;
+    });
+}
+exports.updateProposalWorkerPremium = updateProposalWorkerPremium;

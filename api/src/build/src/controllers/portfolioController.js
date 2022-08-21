@@ -9,17 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-<<<<<<< HEAD
-exports.postNewPortfolio = void 0;
-const { Portfolio, UserWorker } = require("../db");
-const postNewPortfolio = (portfolio, idWorker) => __awaiter(void 0, void 0, void 0, function* () {
-    const worker = UserWorker.findByPk(idWorker);
-    const newPortfolio = yield Portfolio.create(portfolio);
-    yield worker.addPortfolio(newPortfolio);
-    return "Portfolio agregado con éxito";
-});
-exports.postNewPortfolio = postNewPortfolio;
-=======
 exports.updatePortfolio = exports.postNewPortfolio = void 0;
 const { Portfolio, UserWorker } = require("../db");
 function postNewPortfolio(portfolio, id) {
@@ -47,4 +36,3 @@ function updatePortfolio(idPortfolio, title, photo, portfolio_description) {
     });
 }
 exports.updatePortfolio = updatePortfolio;
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50

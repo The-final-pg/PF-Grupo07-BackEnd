@@ -8,11 +8,7 @@ module.exports = (sequelize) => {
             allowNull: true,
         },
         photo: {
-<<<<<<< HEAD
-            type: sequelize_1.DataTypes.STRING,
-=======
             type: sequelize_1.DataTypes.TEXT,
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
             allowNull: false,
         },
         portfolio_description: {

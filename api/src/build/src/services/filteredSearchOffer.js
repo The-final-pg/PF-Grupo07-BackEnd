@@ -9,375 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-<<<<<<< HEAD
-exports.offerAllFiltersOn = exports.offerFilteredByRemuneration = exports.offerFilteredByRating = exports.offerFilteredByProfession = void 0;
-const sequelize_1 = require("sequelize");
-const { Offer, UserClient } = require("../db");
-const offerFilteredByProfession = (input, profession) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!input && profession) {
-        console.log('Estoy aca 1');
-        const filteredByProfession = yield Offer.findAll({
-            /*       limit: 8 + 5 * multiplier , */
-            where: {
-                profession: {
-                    [sequelize_1.Op.contains]: [profession],
-                },
-            },
-            include: UserClient,
-        });
-        return filteredByProfession;
-    }
-    else {
-        const filteredByProfession = yield Offer.findAll({
-            /*       limit: 8 + 5 * multiplier, */
-            where: {
-                [sequelize_1.Op.or]: [
-                    {
-                        title: {
-                            [sequelize_1.Op.iLike]: `%${input}%`,
-                        },
-                    },
-                    {
-                        offer_description: {
-                            [sequelize_1.Op.iLike]: `%${input}%`,
-                        },
-                    },
-                ],
-                profession: {
-                    [sequelize_1.Op.contains]: [profession],
-                },
-            },
-            include: UserClient,
-        });
-        return filteredByProfession;
-    }
-});
-exports.offerFilteredByProfession = offerFilteredByProfession;
-const offerFilteredByRating = (input, rating) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!input && rating) {
-        const filteredByRating = yield Offer.findAll({
-            /*       limit: 8 + 5 * multiplier, */
-            include: {
-                model: UserClient,
-                where: {
-                    rating: {
-                        [sequelize_1.Op.gte]: parseInt(rating),
-                    },
-                },
-            },
-        });
-        return filteredByRating;
-    }
-    else {
-        const filteredByRating = yield Offer.findAll({
-            /*      limit: 8 + 5 * multiplier, */
-            where: {
-                [sequelize_1.Op.or]: [
-                    {
-                        title: {
-                            [sequelize_1.Op.iLike]: `%${input}%`,
-                        },
-                    },
-                    {
-                        offer_description: {
-                            [sequelize_1.Op.iLike]: `%${input}%`,
-                        },
-                    },
-                ],
-            },
-            include: {
-                model: UserClient,
-                where: {
-                    rating: {
-                        [sequelize_1.Op.gte]: parseInt(rating),
-                    },
-                },
-            },
-        });
-        return filteredByRating;
-    }
-});
-exports.offerFilteredByRating = offerFilteredByRating;
-const offerFilteredByRemuneration = (input, remMax, remMin) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!input && remMax && remMin) {
-        const findedByName = yield Offer.findAll({
-            /*     limit: 8 + 5 * multiplier, */
-            where: {
-                max_remuneration: {
-                    [sequelize_1.Op.lte]: parseInt(remMax),
-                },
-                min_remuneration: {
-                    [sequelize_1.Op.gte]: parseInt(remMin),
-                },
-            },
-            include: UserClient,
-        });
-        return findedByName;
-    }
-    else {
-        const findedByName = yield Offer.findAll({
-            /*       limit: 8 + 5 * multiplier, */
-            where: {
-                [sequelize_1.Op.or]: [
-                    {
-                        title: {
-                            [sequelize_1.Op.iLike]: `%${input}%`,
-                        },
-                    },
-                    {
-                        offer_description: {
-                            [sequelize_1.Op.iLike]: `%${input}%`,
-                        },
-                    },
-                ],
-                max_remuneration: {
-                    [sequelize_1.Op.lte]: parseInt(remMax),
-                },
-                min_remuneration: {
-                    [sequelize_1.Op.gte]: parseInt(remMin),
-                },
-            },
-            include: UserClient,
-        });
-        return findedByName;
-    }
-});
-exports.offerFilteredByRemuneration = offerFilteredByRemuneration;
-const offerAllFiltersOn = (input, profession, rating, remMax, remMin) => __awaiter(void 0, void 0, void 0, function* () {
-    if (input && profession && rating && remMax && remMin) {
-        const allFiltersOn = yield Offer.findAll({
-            /*       limit: 8 + 5 * multiplier, */
-            where: {
-                [sequelize_1.Op.or]: [
-                    {
-                        title: {
-                            [sequelize_1.Op.iLike]: `%${input}%`,
-                        },
-                    },
-                    {
-                        offer_description: {
-                            [sequelize_1.Op.iLike]: `%${input}%`,
-                        },
-                    },
-                ],
-                profession: {
-                    [sequelize_1.Op.contains]: [profession],
-                },
-                max_remuneration: {
-                    [sequelize_1.Op.lte]: parseInt(remMax),
-                },
-                min_remuneration: {
-                    [sequelize_1.Op.gte]: parseInt(remMin),
-                },
-            },
-            include: {
-                model: UserClient,
-                where: {
-                    rating: {
-                        [sequelize_1.Op.gte]: parseInt(rating),
-                    },
-                },
-            },
-        });
-        return allFiltersOn;
-    }
-    if (input && !profession && rating && remMax && remMin) {
-        const allFiltersOn = yield Offer.findAll({
-            /*       limit: 8 + 5 * multiplier, */
-            where: {
-                [sequelize_1.Op.or]: [
-                    {
-                        title: {
-                            [sequelize_1.Op.iLike]: `%${input}%`,
-                        },
-                    },
-                    {
-                        offer_description: {
-                            [sequelize_1.Op.iLike]: `%${input}%`,
-                        },
-                    },
-                ],
-                max_remuneration: {
-                    [sequelize_1.Op.lte]: parseInt(remMax),
-                },
-                min_remuneration: {
-                    [sequelize_1.Op.gte]: parseInt(remMin),
-                },
-            },
-            include: {
-                model: UserClient,
-                where: {
-                    rating: {
-                        [sequelize_1.Op.gte]: parseInt(rating),
-                    },
-                },
-            },
-        });
-        return allFiltersOn;
-    }
-    if (input && profession && !rating && remMax && remMin) {
-        const allFiltersOn = yield Offer.findAll({
-            /*       limit: 8 + 5 * multiplier, */
-            where: {
-                [sequelize_1.Op.or]: [
-                    {
-                        title: {
-                            [sequelize_1.Op.iLike]: `%${input}%`,
-                        },
-                    },
-                    {
-                        offer_description: {
-                            [sequelize_1.Op.iLike]: `%${input}%`,
-                        },
-                    },
-                ],
-                profession: {
-                    [sequelize_1.Op.contains]: [profession],
-                },
-                max_remuneration: {
-                    [sequelize_1.Op.lte]: parseInt(remMax),
-                },
-                min_remuneration: {
-                    [sequelize_1.Op.gte]: parseInt(remMin),
-                },
-            },
-            include: {
-                model: UserClient,
-            },
-        });
-        return allFiltersOn;
-    }
-    if (input && profession && rating && !remMax && !remMin) {
-        const allFiltersOn = yield Offer.findAll({
-            /*       limit: 8 + 5 * multiplier, */
-            where: {
-                [sequelize_1.Op.or]: [
-                    {
-                        title: {
-                            [sequelize_1.Op.iLike]: `%${input}%`,
-                        },
-                    },
-                    {
-                        offer_description: {
-                            [sequelize_1.Op.iLike]: `%${input}%`,
-                        },
-                    },
-                ],
-                profession: {
-                    [sequelize_1.Op.contains]: [profession],
-                },
-            },
-            include: {
-                model: UserClient,
-                where: {
-                    rating: {
-                        [sequelize_1.Op.gte]: parseInt(rating),
-                    },
-                },
-            },
-        });
-        return allFiltersOn;
-    }
-    if (!input && profession && rating && remMax && remMin) {
-        const allFiltersOn = yield Offer.findAll({
-            /*     limit: 8 + 5 * multiplier, */
-            where: {
-                profession: {
-                    [sequelize_1.Op.contains]: [profession],
-                },
-                max_remuneration: {
-                    [sequelize_1.Op.lte]: parseInt(remMax),
-                },
-                min_remuneration: {
-                    [sequelize_1.Op.gte]: parseInt(remMin),
-                },
-            },
-            include: {
-                model: UserClient,
-                where: {
-                    rating: {
-                        [sequelize_1.Op.gte]: parseInt(rating),
-                    },
-                },
-            },
-        });
-        return allFiltersOn;
-    }
-    if (!input && !profession && rating && remMax && remMin) {
-        const allFiltersOn = yield Offer.findAll({
-            /*     limit: 8 + 5 * multiplier, */
-            where: {
-                max_remuneration: {
-                    [sequelize_1.Op.lte]: parseInt(remMax),
-                },
-                min_remuneration: {
-                    [sequelize_1.Op.gte]: parseInt(remMin),
-                },
-            },
-            include: {
-                model: UserClient,
-                where: {
-                    rating: {
-                        [sequelize_1.Op.gte]: parseInt(rating),
-                    },
-                },
-            },
-        });
-        return allFiltersOn;
-    }
-    if (!input && profession && !rating && remMax && remMin) {
-        const allFiltersOn = yield Offer.findAll({
-            /*       limit: 8 + 5 * multiplier, */
-            where: {
-                profession: {
-                    [sequelize_1.Op.contains]: [profession],
-                },
-                max_remuneration: {
-                    [sequelize_1.Op.lte]: parseInt(remMax),
-                },
-                min_remuneration: {
-                    [sequelize_1.Op.gte]: parseInt(remMin),
-                },
-            },
-            include: {
-                model: UserClient,
-            },
-        });
-        return allFiltersOn;
-    }
-    if (!input && profession && rating && !remMax && !remMin) {
-        const allFiltersOn = yield Offer.findAll({
-            /*       limit: 8 + 5 * multiplier, */
-            where: {
-                profession: {
-                    [sequelize_1.Op.contains]: [profession],
-                },
-            },
-            include: {
-                model: UserClient,
-                where: {
-                    rating: {
-                        [sequelize_1.Op.gte]: parseInt(rating),
-                    },
-                },
-            },
-        });
-        return allFiltersOn;
-    }
-});
-=======
 exports.offerAllFiltersOn = exports.offerFilteredByWorDurationTime = exports.offerFilteredByRemuneration = exports.offerFilteredByRating = exports.offerFilteredByProfession = void 0;
 const sequelize_1 = require("sequelize");
 const { Offer, UserClient } = require("../db");
 function offerFilteredByProfession(input, profession) {
     return __awaiter(this, void 0, void 0, function* () {
         if (!input && profession) {
-            console.log("Estoy aca 1");
             const filteredByProfession = yield Offer.findAll({
                 where: {
                     profession: {
                         [sequelize_1.Op.contains]: [profession],
                     },
+                    isActive: true,
                 },
                 include: UserClient,
             });
@@ -401,6 +44,7 @@ function offerFilteredByProfession(input, profession) {
                     profession: {
                         [sequelize_1.Op.contains]: [profession],
                     },
+                    isActive: true,
                 },
                 include: UserClient,
             });
@@ -413,6 +57,9 @@ function offerFilteredByRating(input, rating) {
     return __awaiter(this, void 0, void 0, function* () {
         if (!input && rating) {
             const filteredByRating = yield Offer.findAll({
+                where: {
+                    isActive: true,
+                },
                 include: {
                     model: UserClient,
                     where: {
@@ -439,6 +86,7 @@ function offerFilteredByRating(input, rating) {
                             },
                         },
                     ],
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -465,6 +113,7 @@ function offerFilteredByRemuneration(input, remMax, remMin) {
                     min_remuneration: {
                         [sequelize_1.Op.gte]: parseInt(remMin),
                     },
+                    isActive: true,
                 },
                 include: UserClient,
             });
@@ -491,6 +140,7 @@ function offerFilteredByRemuneration(input, remMax, remMin) {
                     min_remuneration: {
                         [sequelize_1.Op.gte]: parseInt(remMin),
                     },
+                    isActive: true,
                 },
                 include: UserClient,
             });
@@ -508,6 +158,7 @@ function offerFilteredByWorDurationTime(input, work_duration_time) {
                     work_duration_time: {
                         [sequelize_1.Op.eq]: work_duration_time,
                     },
+                    isActive: true,
                 },
                 include: UserClient,
             });
@@ -531,6 +182,7 @@ function offerFilteredByWorDurationTime(input, work_duration_time) {
                     work_duration_time: {
                         [sequelize_1.Op.eq]: work_duration_time,
                     },
+                    isActive: true,
                 },
                 include: UserClient,
             });
@@ -569,6 +221,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     work_duration_time: {
                         [sequelize_1.Op.eq]: work_duration_time,
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -605,6 +258,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     work_duration_time: {
                         [sequelize_1.Op.eq]: work_duration_time,
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -644,6 +298,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     work_duration_time: {
                         [sequelize_1.Op.eq]: work_duration_time,
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -672,6 +327,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     work_duration_time: {
                         [sequelize_1.Op.eq]: work_duration_time,
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -708,6 +364,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     min_remuneration: {
                         [sequelize_1.Op.gte]: parseInt(remMin),
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -735,6 +392,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     work_duration_time: {
                         [sequelize_1.Op.eq]: work_duration_time,
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -759,6 +417,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     work_duration_time: {
                         [sequelize_1.Op.eq]: work_duration_time,
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -786,6 +445,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     work_duration_time: {
                         [sequelize_1.Op.eq]: work_duration_time,
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -802,6 +462,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     work_duration_time: {
                         [sequelize_1.Op.eq]: work_duration_time,
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -826,6 +487,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     min_remuneration: {
                         [sequelize_1.Op.gte]: parseInt(remMin),
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -862,6 +524,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     work_duration_time: {
                         [sequelize_1.Op.eq]: work_duration_time,
                     },
+                    isActive: true,
                 },
                 include: UserClient,
             });
@@ -885,6 +548,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     work_duration_time: {
                         [sequelize_1.Op.eq]: work_duration_time,
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -918,6 +582,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     min_remuneration: {
                         [sequelize_1.Op.gte]: parseInt(remMin),
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -951,6 +616,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     work_duration_time: {
                         [sequelize_1.Op.eq]: work_duration_time,
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -982,6 +648,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     min_remuneration: {
                         [sequelize_1.Op.gte]: parseInt(remMin),
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -1007,6 +674,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     profession: {
                         [sequelize_1.Op.contains]: [profession],
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -1031,6 +699,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     work_duration_time: {
                         [sequelize_1.Op.eq]: work_duration_time,
                     },
+                    isActive: true,
                 },
                 include: UserClient,
             });
@@ -1042,6 +711,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     work_duration_time: {
                         [sequelize_1.Op.eq]: work_duration_time,
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -1063,6 +733,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     min_remuneration: {
                         [sequelize_1.Op.gte]: parseInt(remMin),
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -1084,6 +755,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     work_duration_time: {
                         [sequelize_1.Op.eq]: work_duration_time,
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -1103,6 +775,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     min_remuneration: {
                         [sequelize_1.Op.gte]: parseInt(remMin),
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -1116,6 +789,7 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
                     profession: {
                         [sequelize_1.Op.contains]: [profession],
                     },
+                    isActive: true,
                 },
                 include: {
                     model: UserClient,
@@ -1130,5 +804,4 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
         }
     });
 }
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
 exports.offerAllFiltersOn = offerAllFiltersOn;

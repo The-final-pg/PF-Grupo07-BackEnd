@@ -23,40 +23,29 @@ router.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function*
     catch (error) {
         next(error);
     }
-<<<<<<< HEAD
-}));
-router.get("/:idClient", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { idClient } = req.params;
-    try {
-        const client = yield (0, clientController_1.getClientById)(idClient);
-=======
     ;
 }));
 router.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
         const client = yield (0, clientController_1.getClientById)(id);
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
         return res.json(client);
     }
     catch (error) {
         next(error);
     }
-<<<<<<< HEAD
-=======
     ;
 }));
 router.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
-    const { name, born_date, photo, favorites } = req.body;
+    const { name, lastName, born_date, photo, favorites } = req.body;
     try {
-        const clientUpdate = yield (0, clientController_1.updateClientProfile)(id, name, born_date, photo, favorites);
+        const clientUpdate = yield (0, clientController_1.updateClientProfile)(id, lastName, name, born_date, photo, favorites);
         res.json(clientUpdate);
     }
     catch (error) {
         next(error);
     }
     ;
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
 }));
 exports.default = router;
