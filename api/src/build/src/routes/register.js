@@ -250,5 +250,3 @@ register.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, f
     }
 }));
 exports.default = register;
-/* || "https://rework-xi.vercel.app/confirm/worker/${id}" */
-/* || https://rework-xi.vercel.app/confirm/client/${id} */ 

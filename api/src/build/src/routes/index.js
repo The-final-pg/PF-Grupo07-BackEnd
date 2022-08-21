@@ -18,10 +18,7 @@ const review_1 = __importDefault(require("./review"));
 const verifyUser_1 = __importDefault(require("./verifyUser"));
 const tokenVerify_1 = __importDefault(require("./tokenVerify"));
 const payment_1 = __importDefault(require("./payment"));
-const admin_1 = __importDefault(require("./admin")); /*
-import loginGoogle from "./loginGoogle";
-import passport from "passport";
-import { loginRouter } from "./googleUse"; */
+const admin_1 = __importDefault(require("./admin"));
 const auth_1 = __importDefault(require("./auth"));
 const router = express_1.default.Router();
 router.use("/client", clients_1.default);
@@ -40,14 +37,4 @@ router.use("/tokenVerify", tokenVerify_1.default);
 router.use("/payments", payment_1.default);
 router.use("/admin", admin_1.default);
 router.use("/auth", auth_1.default);
-/* router.use("/loginGoogle", loginGoogle); // antes auth con google strategy
-router.get("/google",
-passport.authenticate("auth-google", {
-  scope: [
-    "https://www.googleapis.com/auth/userinfo.profile",
-    "https://www.googleapis.com/auth/userinfo.email",
-  ],
-  session: false,
-}),
-loginRouter) */
 exports.default = router;

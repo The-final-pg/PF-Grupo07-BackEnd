@@ -236,6 +236,3 @@ register.post(
 );
 
 export default register;
-
-/* || "https://rework-xi.vercel.app/confirm/worker/${id}" */
-/* || https://rework-xi.vercel.app/confirm/client/${id} */
