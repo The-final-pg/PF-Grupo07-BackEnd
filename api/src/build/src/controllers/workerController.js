@@ -42,14 +42,6 @@ function getWorkerByName(name) {
                 ],
                 isActive: true,
             },
-                    {
-                        lastName: {
-                            [sequelize_1.Op.iLike]: `%${name}%`,
-                        },
-                    },
-                ],
-                isActive: true,
-            },
         });
         return worker;
     });

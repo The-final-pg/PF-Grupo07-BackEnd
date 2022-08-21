@@ -29,14 +29,6 @@ export async function getWorkerByName(name: string): Promise<WorkerType[]> {
       ],
       isActive: true,
     },
-        {
-          lastName: {
-            [Op.iLike]: `%${name}%`,
-          },
-        },
-      ],
-      isActive: true,
-    },
   });
   return worker;
 }
@@ -79,4 +71,3 @@ export async function updateWorkerProfile(
   await worker.save();
   return worker;
 }
-<<<<<<< HEAD
