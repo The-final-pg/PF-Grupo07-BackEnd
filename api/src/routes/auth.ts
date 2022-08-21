@@ -55,33 +55,29 @@ auth.post("/client", async(req: Request, res: Response, next: NextFunction) => {
     const newClient = req.body;
     try {
         console.log("newClient", newClient)
-        const hashedPassword = await bcrypt.hash(newClient.uid, 8)
-        
+        const hashedPassword = await bcrypt.hash(newClient.password, 8)
         const clientGoogle = await UserClient.create({
             name: newClient.name,
-            password: hashedPassword,
             lastName: newClient.lastName,
             user_mail: newClient.user_mail,
             born_date: newClient.born_date,
+            password: hashedPassword,         
             rating: newClient.rating,
             notification: newClient.notification,
             photo: newClient.photo,
             isActive: true,
-            isAdmin: false,
             isWorker: false,
-            premium: false,
+            isAdmin: false,
+            premium: false
         })
 
-        res.send(clientGoogle)
-
-        return res.send(jwt.sign(
+        res.send(jwt.sign(
             {
                 id: clientGoogle.id,
                 user_mail: clientGoogle.user_mail,
                 isAdmin: clientGoogle.isAdmin,
                 isWorker: clientGoogle.isWorker,
-                premium: clientGoogle.premium,
-                isActive: clientGoogle.isActive
+                premium: clientGoogle.premium
             },
             SECRET_KEY,
             { expiresIn: "8h" }
