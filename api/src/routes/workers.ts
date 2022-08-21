@@ -1,23 +1,10 @@
 import express, { NextFunction, Request, Response } from "express";
 const worker = express.Router();
-<<<<<<< HEAD
-import { WorkerType } from "../types";
-=======
 import { WorkerType, OfferType } from "../types";
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
 import {
   getAllWorkers,
   getWorkerById,
   getWorkerByName,
-<<<<<<< HEAD
-} from "../controllers/workerController";
-import { workerAllfiltersOn, workerFilteredByProfession, workerFilteredByRating } from "../services/filteredSearchWorker";
-
-worker.get("/", async (_req: Request, res: Response, next: NextFunction) => {
-  /* const multiplier: number = req.body.multiplier; */
-  try {
-    const worker: WorkerType[] = await getAllWorkers(/* multiplier */);
-=======
   updateWorkerProfile
 } from "../controllers/workerController";
 import {
@@ -30,7 +17,6 @@ worker.get("/", async (_req: Request, res: Response, next: NextFunction) => {
 
   try {
     const worker: WorkerType[] = await getAllWorkers();
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
     res.send(worker);
   } catch (error) {
     next(error);
@@ -40,45 +26,21 @@ worker.get("/", async (_req: Request, res: Response, next: NextFunction) => {
 worker.get(
   "/search",
   async (req: Request, res: Response, next: NextFunction) => {
-<<<<<<< HEAD
-    const {q, p, r} = req.query;
-/*     const multiplier: number = req.body.multiplier; */
-    try {
-      let worker: WorkerType[]; 
-      if (q && !p && !r){
-        worker = await getWorkerByName(q/* , multiplier */);
-      }
-      else if(q && p && !r){
-        worker = await workerFilteredByProfession(q, p/* , multiplier */);
-      }
-      else if(!q && p && !r){
-        worker = await workerFilteredByProfession(q, p/* , multiplier */);
-      }
-      else if (q && !p && r){
-        worker = await workerFilteredByRating(q, r/* , multiplier */);
-      }
-      else if (!q && !p && r){
-        worker = await workerFilteredByRating(q, r/* , multiplier */);
-      }
-      else {
-        worker = await workerAllfiltersOn(q, p, r/* , multiplier */);
-=======
     const { q, p, r } = req.query;
     try {
       let worker: WorkerType[];
       if (q && !p && !r) {
-        worker = await getWorkerByName(q );
+        worker = await getWorkerByName(q as string);
       } else if (q && p && !r) {
-        worker = await workerFilteredByProfession(q, p );
+        worker = await workerFilteredByProfession(q as string, p as string);
       } else if (!q && p && !r) {
-        worker = await workerFilteredByProfession(q, p );
+        worker = await workerFilteredByProfession(q as string, p as string);
       } else if (q && !p && r) {
-        worker = await workerFilteredByRating(q, r );
+        worker = await workerFilteredByRating(q as string, r as string);
       } else if (!q && !p && r) {
-        worker = await workerFilteredByRating(q, r );
+        worker = await workerFilteredByRating(q as string, r as string);
       } else {
-        worker = await workerAllfiltersOn(q, p, r );
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
+        worker = await workerAllfiltersOn(q as string, p as string, r as string);
       }
       res.send(worker);
     } catch (error) {
@@ -87,20 +49,6 @@ worker.get(
   }
 );
 
-<<<<<<< HEAD
-worker.get(
-  "/:idWorker",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { idWorker } = req.params;
-    try {
-        const workerById: WorkerType = await getWorkerById(idWorker);
-        return res.json(workerById);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
-=======
 worker.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   try {
@@ -115,6 +63,7 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
   const id: string = req.params.id;
   const {
     name,
+    lastName,
     born_date,
     photo,
     profession,
@@ -122,6 +71,7 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     favorites
   }: {
     name: string;
+    lastName: string;
     born_date: Date;
     photo: string;
     profession: string[];
@@ -132,6 +82,7 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     const workerUpdate: WorkerType = await updateWorkerProfile(
       id,
       name,
+      lastName,
       born_date,
       photo,
       profession,
@@ -143,6 +94,5 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 });
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
 
 export default worker;

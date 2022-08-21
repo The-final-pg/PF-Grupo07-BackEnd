@@ -6,11 +6,7 @@ module.exports = (sequelize: any) => {
       allowNull: true,
     },
     photo: {
-<<<<<<< HEAD
-      type: DataTypes.STRING,
-=======
       type: DataTypes.TEXT,
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
       allowNull: false,
     },
     portfolio_description: {

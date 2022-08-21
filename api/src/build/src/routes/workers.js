@@ -17,14 +17,8 @@ const worker = express_1.default.Router();
 const workerController_1 = require("../controllers/workerController");
 const filteredSearchWorker_1 = require("../services/filteredSearchWorker");
 worker.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-<<<<<<< HEAD
-    /* const multiplier: number = req.body.multiplier; */
-    try {
-        const worker = yield (0, workerController_1.getAllWorkers)( /* multiplier */);
-=======
     try {
         const worker = yield (0, workerController_1.getAllWorkers)();
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
         res.send(worker);
     }
     catch (error) {
@@ -33,28 +27,6 @@ worker.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function*
 }));
 worker.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { q, p, r } = req.query;
-<<<<<<< HEAD
-    /*     const multiplier: number = req.body.multiplier; */
-    try {
-        let worker;
-        if (q && !p && !r) {
-            worker = yield (0, workerController_1.getWorkerByName)(q /* , multiplier */);
-        }
-        else if (q && p && !r) {
-            worker = yield (0, filteredSearchWorker_1.workerFilteredByProfession)(q, p /* , multiplier */);
-        }
-        else if (!q && p && !r) {
-            worker = yield (0, filteredSearchWorker_1.workerFilteredByProfession)(q, p /* , multiplier */);
-        }
-        else if (q && !p && r) {
-            worker = yield (0, filteredSearchWorker_1.workerFilteredByRating)(q, r /* , multiplier */);
-        }
-        else if (!q && !p && r) {
-            worker = yield (0, filteredSearchWorker_1.workerFilteredByRating)(q, r /* , multiplier */);
-        }
-        else {
-            worker = yield (0, filteredSearchWorker_1.workerAllfiltersOn)(q, p, r /* , multiplier */);
-=======
     try {
         let worker;
         if (q && !p && !r) {
@@ -74,7 +46,6 @@ worker.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, func
         }
         else {
             worker = yield (0, filteredSearchWorker_1.workerAllfiltersOn)(q, p, r);
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
         }
         res.send(worker);
     }
@@ -82,35 +53,25 @@ worker.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, func
         next(error instanceof Error);
     }
 }));
-<<<<<<< HEAD
-worker.get("/:idWorker", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { idWorker } = req.params;
-    try {
-        const workerById = yield (0, workerController_1.getWorkerById)(idWorker);
-=======
 worker.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
         const workerById = yield (0, workerController_1.getWorkerById)(id);
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
         return res.json(workerById);
     }
     catch (error) {
         next(error);
     }
 }));
-<<<<<<< HEAD
-=======
 worker.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
-    const { name, born_date, photo, profession, skills, favorites } = req.body;
+    const { name, lastName, born_date, photo, profession, skills, favorites } = req.body;
     try {
-        const workerUpdate = yield (0, workerController_1.updateWorkerProfile)(id, name, born_date, photo, profession, skills, favorites);
+        const workerUpdate = yield (0, workerController_1.updateWorkerProfile)(id, name, lastName, born_date, photo, profession, skills, favorites);
         res.json(workerUpdate);
     }
     catch (error) {
         next(error);
     }
 }));
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
 exports.default = worker;

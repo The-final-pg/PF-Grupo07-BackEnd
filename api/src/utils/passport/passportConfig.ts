@@ -25,7 +25,6 @@ passport.use(
                 }  else {
                     user = client
                 } 
-                console.log("estos en config", user.dataValues)
                 console.log("esto es el worker", worker)
                 bcrypt.compare(password, user.password, (error, result) => {
                     if (error) return done(error)
@@ -43,10 +42,7 @@ passport.use(
 )
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
 // serialización: toma el id y lo almacena en la session (para requerirla: req.session.passport.user)
 passport.serializeUser((user: any, done) => { // user = client || user = worker
     done(null, user._id);
@@ -82,7 +78,4 @@ passport.use(
 
 
 export default passport;
-<<<<<<< HEAD
-=======
 
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50

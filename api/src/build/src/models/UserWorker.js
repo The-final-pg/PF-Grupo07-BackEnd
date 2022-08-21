@@ -1,38 +1,4 @@
 "use strict";
-<<<<<<< HEAD
-const { DataTypes } = require("sequelize");
-module.exports = (sequelize) => {
-    sequelize.define("userWorker", {
-        idWorker: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
-            primaryKey: true,
-        },
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        user_mail: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        born_date: {
-            type: DataTypes.DATE,
-            allowNull: false,
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        profession: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-        },
-        skills: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-        },
-        rating: {
-            type: DataTypes.INTEGER,
-=======
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 module.exports = (sequelize) => {
@@ -41,6 +7,10 @@ module.exports = (sequelize) => {
             type: sequelize_1.DataTypes.UUID,
             defaultValue: sequelize_1.DataTypes.UUIDV4,
             primaryKey: true,
+        },
+        googleId: {
+            type: sequelize_1.DataTypes.STRING,
+            allowNull: true
         },
         name: {
             type: sequelize_1.DataTypes.STRING,
@@ -56,7 +26,7 @@ module.exports = (sequelize) => {
         },
         born_date: {
             type: sequelize_1.DataTypes.DATE,
-            allowNull: false,
+            allowNull: true,
         },
         password: {
             type: sequelize_1.DataTypes.STRING,
@@ -70,45 +40,18 @@ module.exports = (sequelize) => {
         },
         rating: {
             type: sequelize_1.DataTypes.FLOAT,
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
             validate: {
                 max: 5,
                 min: 1,
             },
         },
         premium: {
-<<<<<<< HEAD
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
-        },
-        photo: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        notification: {
-            type: DataTypes.ARRAY(DataTypes.JSONB),
-        },
-        isAdmin: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
-        },
-        isActive: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: true,
-        },
-        isWorker: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: true,
-        },
-    }, {
-        timestamps: false,
-=======
             type: sequelize_1.DataTypes.BOOLEAN,
             defaultValue: false,
         },
         photo: {
             type: sequelize_1.DataTypes.TEXT,
-            defaultValue: 'https://i.pinimg.com/564x/b2/04/25/b20425da884ef2173895d2f334a44147.jpg',
+            defaultValue: 'https://res.cloudinary.com/luis-tourn/image/upload/v1660523062/b20425da884ef2173895d2f334a44147_fz6xjf.jpg',
         },
         notification: {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSONB),
@@ -133,6 +76,5 @@ module.exports = (sequelize) => {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSONB),
             defaultValue: [],
         },
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
     });
 };

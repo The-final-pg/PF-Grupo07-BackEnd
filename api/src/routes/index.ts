@@ -7,16 +7,14 @@ import portfolioRouter from "./portfolio";
 import register from "./register";
 import login from "./login";
 import logout from "./logout";
-<<<<<<< HEAD
-import profession from './profession';
-import skills from './skills';
-=======
 import profession from "./profession";
 import skills from "./skills";
 import review from "./review";
 import verifyUser from "./verifyUser";
 import tokenVerify from "./tokenVerify";
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
+import payment from "./payment";
+import admin from "./admin";
+import auth from "./auth"
 
 const router = express.Router();
 
@@ -28,18 +26,13 @@ router.use("/portfolio", portfolioRouter);
 router.use("/register", register);
 router.use("/login", login);
 router.use("/logout", logout);
-<<<<<<< HEAD
-router.use('/profession', profession);
-router.use('/skills', skills);
-
-
-export default router;
-=======
 router.use("/profession", profession);
 router.use("/skills", skills);
 router.use("/review", review);
 router.use("/confirm", verifyUser);
-router.use("/tokenVerify", tokenVerify)
+router.use("/tokenVerify", tokenVerify);
+router.use("/payments", payment);
+router.use("/admin", admin);
+router.use("/auth", auth)
 
 export default router;
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50

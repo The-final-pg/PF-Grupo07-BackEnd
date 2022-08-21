@@ -29,17 +29,10 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         work_duration_time: {
-<<<<<<< HEAD
-            type: sequelize_1.DataTypes.STRING,
-        },
-        photo: {
-            type: sequelize_1.DataTypes.STRING,
-=======
             type: sequelize_1.DataTypes.ENUM("Menos de 1 mes", "1 a 3 meses", "4 a 6 meses", "Más de 6 meses"),
         },
         photo: {
             type: sequelize_1.DataTypes.TEXT,
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
         },
         profession: {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING),

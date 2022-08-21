@@ -1,17 +1,6 @@
 import { PortfolioType } from "../types";
 const { Portfolio, UserWorker } = require("../db");
 
-<<<<<<< HEAD
-export const postNewPortfolio = async (
-  portfolio: PortfolioType,
-  idWorker: string
-): Promise<string> => {
-  const worker = UserWorker.findByPk(idWorker);
-  const newPortfolio = await Portfolio.create(portfolio);
-  await worker.addPortfolio(newPortfolio);
-  return "Portfolio agregado con éxito";
-};
-=======
 export async function postNewPortfolio(
   portfolio: PortfolioType,
   id: string
@@ -37,4 +26,3 @@ export async function updatePortfolio(
   await portfolio.save();
   return portfolio;
 }
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50

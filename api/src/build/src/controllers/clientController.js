@@ -27,12 +27,14 @@ function getClientById(id) {
     });
 }
 exports.getClientById = getClientById;
-function updateClientProfile(id, name, born_date, photo, favorites) {
+function updateClientProfile(id, name, lastName, born_date, photo, favorites) {
     return __awaiter(this, void 0, void 0, function* () {
-        const data = { name, born_date, photo, favorites };
+        const data = { name, lastName, born_date, photo, favorites };
         const client = yield UserClient.findByPk(id);
         if (!name || data.name === client.name)
             delete data.name;
+        if (!lastName || data.lastName === client.lastName)
+            delete data.lastName;
         if (!born_date || data.born_date === client.born_date)
             delete data.born_date;
         if (!photo || data.photo === client.photo)

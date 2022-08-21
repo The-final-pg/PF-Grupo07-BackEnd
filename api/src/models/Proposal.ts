@@ -10,11 +10,7 @@ module.exports = (sequelize: any) => {
       allowNull: false,
     },
     worked_time: {
-<<<<<<< HEAD
-      type: DataTypes.INTEGER,
-=======
       type: DataTypes.STRING,
->>>>>>> bb6b88afcb0a9b38ecb012339db351455856ac50
       allowNull: true,
     },
     state: {
