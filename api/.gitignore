@@ -108,3 +108,10 @@ package-lock.json
 
 # package.json
 package.json
+
+# gitignore files
+.gitignore
+
+# db.ts
+src/build/src/db.js
+src/db.ts
