@@ -14,9 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const auth = express_1.default.Router();
+const bcrypt = require("bcrypt");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const { SECRET_KEY } = process.env;
-const { UserWorker, UserClient } = require("../db");
+const { UserWorker, UserClient } = require("../db"); /*
+import { createGoogleClient, createGoogleWorker } from "../controllers/authController";
+import { ClientType } from "../types"; */
 auth.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const googleUser = req.body;
     try {
@@ -46,7 +49,6 @@ auth.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
             /* res.status(200).json(workerFound) */
         }
         else {
-            // llevar a la ruta que lo hace elegir entre worker y client y despues crearlo
             res.send('usuario no encontrado');
         }
     }
@@ -54,6 +56,28 @@ auth.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
         next(error);
     }
 }));
-auth.post("/client");
+auth.post("/client", (req, _res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const newClient = req.body;
+    try {
+        console.log("newClient", newClient);
+        const clientGoogle = yield UserClient.create({
+            id: newClient.uid,
+            name: newClient.name,
+            lastName: newClient.lastName,
+            user_mail: newClient.user_mail,
+            born_date: newClient.born_date,
+            rating: newClient.rating,
+            notification: newClient.notification,
+            photo: newClient.photo,
+            isActive: newClient.isActive
+        });
+        const hashedPassword = yield bcrypt.hash(clientGoogle.id, 8);
+        const completedClient = yield UserClient.create(Object.assign(Object.assign({}, clientGoogle), { password: hashedPassword }));
+        return completedClient;
+    }
+    catch (error) {
+        next(error);
+    }
+}));
 auth.post("/worker");
 exports.default = auth;

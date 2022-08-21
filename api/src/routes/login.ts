@@ -47,7 +47,7 @@ login.post("/", async (req:Request,res:Response,next:NextFunction) => {
                             premium: user.premium
                         },
                         SECRET_KEY,
-                        { expiresIn: "10m" }
+                        { expiresIn: "8h" }
                     )
                 )
             }

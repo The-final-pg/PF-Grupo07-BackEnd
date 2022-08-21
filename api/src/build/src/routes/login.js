@@ -50,7 +50,7 @@ login.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
                 isAdmin: user.isAdmin,
                 isWorker: user.isWorker,
                 premium: user.premium
-            }, SECRET_KEY, { expiresIn: "10m" }));
+            }, SECRET_KEY, { expiresIn: "8h" }));
         }
     }))(req, res, next);
 }));

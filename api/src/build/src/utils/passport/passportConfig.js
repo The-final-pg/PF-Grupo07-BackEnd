@@ -36,7 +36,6 @@ passport_1.default.use(new passport_local_1.Strategy({
         else {
             user = client;
         }
-        console.log("estos en config", user.dataValues);
         console.log("esto es el worker", worker);
         bcrypt_1.default.compare(password, user.password, (error, result) => {
             if (error)
