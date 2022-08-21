@@ -107,7 +107,7 @@ register.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, f
                           <p>Confirma tu correo electrónico</p>
           
                           <!-- Botón -->
-                          <a class="claseBoton" href="http://localhost:3000/confirm/client/${id} || https://rework-xi.vercel.app/confirm/client/${id}">AQUÍ</a>
+                          <a class="claseBoton" href="http://localhost:3000/confirm/client/${id}">AQUÍ</a>  
                       </div>
                       <!-- Contenido principal -->
           
