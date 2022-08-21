@@ -20,6 +20,7 @@ module.exports = (sequelize: any) => {
         "rejected",
         "accepted",
         "contract accepted",
+        "contract rejected",
         "contract started",
         "finalized",
         "released payment"

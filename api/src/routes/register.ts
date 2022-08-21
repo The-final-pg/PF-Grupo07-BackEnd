@@ -94,7 +94,7 @@ register.post(
                           <p>Confirma tu correo electrónico</p>
           
                           <!-- Botón -->
-                          <a class="claseBoton" href="http://localhost:3000/confirm/client/${id}">AQUÍ</a>
+                          <a class="claseBoton" href="http://localhost:3000/confirm/client/${id}">AQUÍ</a>  
                       </div>
                       <!-- Contenido principal -->
           
