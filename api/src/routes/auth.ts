@@ -51,36 +51,84 @@ auth.post("/", async(req: Request, res: Response, next: NextFunction) => {
     }
 })
 
-auth.post("/client", async(req: Request, _res: Response, next: NextFunction) => {
+auth.post("/client", async(req: Request, res: Response, next: NextFunction) => {
     const newClient = req.body;
     try {
         console.log("newClient", newClient)
+        const hashedPassword = await bcrypt.hash(newClient.uid, 8)
+        
         const clientGoogle = await UserClient.create({
-            id: newClient.uid,
             name: newClient.name,
+            password: hashedPassword,
             lastName: newClient.lastName,
             user_mail: newClient.user_mail,
             born_date: newClient.born_date,
             rating: newClient.rating,
             notification: newClient.notification,
             photo: newClient.photo,
-            isActive: newClient.isActive
+            isActive: true,
+            isAdmin: false,
+            isWorker: false,
+            premium: false,
         })
-        const hashedPassword = await bcrypt.hash(clientGoogle.id, 8)
 
-        const completedClient = await UserClient.create({
-            ...clientGoogle,
-            password: hashedPassword
-        }) 
+        res.send(clientGoogle)
 
-        return completedClient
-
+        return res.send(jwt.sign(
+            {
+                id: clientGoogle.id,
+                user_mail: clientGoogle.user_mail,
+                isAdmin: clientGoogle.isAdmin,
+                isWorker: clientGoogle.isWorker,
+                premium: clientGoogle.premium,
+                isActive: clientGoogle.isActive
+            },
+            SECRET_KEY,
+            { expiresIn: "8h" }
+            ))
     } catch(error){
         next(error)
     }
 })
 
-auth.post("/worker")
+auth.post("/worker", async(req: Request, res: Response, next: NextFunction) => {
+    const newWorker = req.body;
+    try {
+        console.log("newWorker", newWorker)
+        const hashedPassword = await bcrypt.hash(newWorker.uid, 8)
+        
+        const workerGoogle = await UserWorker.create({
+            name: newWorker.name,
+            password: hashedPassword,
+            lastName: newWorker.lastName,
+            user_mail: newWorker.user_mail,
+            born_date: newWorker.born_date,
+            rating: newWorker.rating,
+            notification: newWorker.notification,
+            photo: newWorker.photo,
+            isActive: true,
+            isWorker: true,
+            premium: false,
+            isAdmin: true
+        })
+
+        res.send(workerGoogle)
+
+        return res.send(jwt.sign(
+            {
+                id: workerGoogle.id,
+                user_mail: workerGoogle.user_mail,
+                isAdmin: workerGoogle.isAdmin,
+                isWorker: workerGoogle.isWorker,
+                premium: workerGoogle.premium
+            },
+            SECRET_KEY,
+            { expiresIn: "8h" }
+            ))
+    } catch(error){
+        next(error)
+    }
+})
 
 
 
