@@ -56,24 +56,36 @@ auth.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
         next(error);
     }
 }));
-auth.post("/client", (req, _res, next) => __awaiter(void 0, void 0, void 0, function* () {
+auth.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const newClient = req.body;
     try {
         console.log("newClient", newClient);
+        const hashedPassword = yield bcrypt.hash(newClient.password, 8);
         const clientGoogle = yield UserClient.create({
-            id: newClient.uid,
             name: newClient.name,
             lastName: newClient.lastName,
             user_mail: newClient.user_mail,
             born_date: newClient.born_date,
+            password: hashedPassword,
             rating: newClient.rating,
             notification: newClient.notification,
             photo: newClient.photo,
-            isActive: newClient.isActive
+            isActive: true,
+            isWorker: false,
+            isAdmin: false,
+            premium: false
         });
-        const hashedPassword = yield bcrypt.hash(clientGoogle.id, 8);
-        const completedClient = yield UserClient.create(Object.assign(Object.assign({}, clientGoogle), { password: hashedPassword }));
-        return completedClient;
+        /* const completedClient = await UserClient.create({
+            ...clientGoogle,
+            password: hashedPassword
+        })  */
+        res.send(jsonwebtoken_1.default.sign({
+            id: clientGoogle.id,
+            user_mail: clientGoogle.user_mail,
+            isAdmin: clientGoogle.isAdmin,
+            isWorker: clientGoogle.isWorker,
+            premium: clientGoogle.premium
+        }, SECRET_KEY, { expiresIn: "8h" }));
     }
     catch (error) {
         next(error);
