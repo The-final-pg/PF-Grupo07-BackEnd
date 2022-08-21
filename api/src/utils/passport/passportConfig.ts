@@ -25,7 +25,6 @@ passport.use(
                 }  else {
                     user = client
                 } 
-                console.log("estos en config", user.dataValues)
                 console.log("esto es el worker", worker)
                 bcrypt.compare(password, user.password, (error, result) => {
                     if (error) return done(error)
