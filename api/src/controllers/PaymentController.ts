@@ -24,8 +24,8 @@ class PaymentController {
     async getSubscriptionLink(req:Request, res:Response, _next:NextFunction) {
       try {
         const subscription = await this.subscriptionService.createSubscription(req.body);
-  
-        return res.json(subscription);
+        res.json(subscription);
+        return subscription;
       } catch (error) {
         console.log(error);
   
