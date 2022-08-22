@@ -19,14 +19,17 @@ export async function updateClientProfile(
   lastName: string,
   born_date: string,
   photo: string, 
-  favorites: OfferType[]
+  favorites: OfferType[],
+  description: string,
 ): Promise<ClientType> {
-  const data = { name,lastName, born_date, photo, favorites };
+  const data = { name,lastName, born_date, photo, favorites, description };
   const client = await UserClient.findByPk(id);
   if (!name || data.name === client.name) delete data.name;
   if (!lastName || data.lastName === client.lastName) delete data.lastName;
   if (!born_date || data.born_date === client.born_date) delete data.born_date;
   if (!photo || data.photo === client.photo) delete data.photo;
+  if (!favorites) delete data.favorites;
+  if (!description) delete data.description;
   await client.set(data);
   await client.save();
   return client;

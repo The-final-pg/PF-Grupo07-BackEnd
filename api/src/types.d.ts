@@ -11,6 +11,7 @@ export interface ClientType {
   id: String;
   photo: String;
   isActive: boolean;
+  description: String;
 }
 
 export interface WorkerType {
@@ -27,6 +28,7 @@ export interface WorkerType {
   photo: String;
   favorites: OfferType[];
   isActive: boolean;
+  description: String;
 }
 
 export interface ReviewType {

@@ -41,7 +41,6 @@ payment.post("/notificationIPN", async(req:Request,res:Response,_next:NextFuncti
     const response = await axios.get(`https://api.mercadopago.com/v1/payments/${id}`)
 
     res.json({response, topic})
-
 });
 
 export default payment

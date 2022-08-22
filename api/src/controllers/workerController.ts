@@ -48,7 +48,8 @@ export async function updateWorkerProfile(
   photo: string,
   profession: string[],
   skills: string[],
-  favorites: OfferType[]
+  favorites: OfferType[], 
+  description: string
 ): Promise<WorkerType> {
   const data = {
     name,
@@ -58,6 +59,7 @@ export async function updateWorkerProfile(
     profession,
     skills,
     favorites,
+    description
   };
   const worker = await UserWorker.findByPk(id);
   if (!name || data.name === worker.name) delete data.name;
@@ -67,6 +69,8 @@ export async function updateWorkerProfile(
   if (!profession || compareArrays(data.profession, worker.profession))
     delete data.profession;
   if (!skills || compareArrays(data.skills, worker.skills)) delete data.skills;
+  if (!favorites) delete data.favorites;
+  if (!description) delete data.description;
   await worker.set(data);
   await worker.save();
   return worker;
