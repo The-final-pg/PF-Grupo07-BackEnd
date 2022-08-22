@@ -25,4 +25,26 @@ admin.get("/users", (_req, res, next) => __awaiter(void 0, void 0, void 0, funct
     }
     ;
 }));
+admin.put("/profession", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = req.body.profession;
+        const profession = yield (0, adminController_1.addNewProfessions)(data);
+        res.json(profession);
+    }
+    catch (error) {
+        next(error);
+    }
+    ;
+}));
+admin.put("/skills", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = req.body.skills;
+        const skills = yield (0, adminController_1.addNewSkills)(data);
+        res.json(skills);
+    }
+    catch (error) {
+        next(error);
+    }
+    ;
+}));
 exports.default = admin;
