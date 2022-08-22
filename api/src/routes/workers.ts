@@ -84,7 +84,8 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     photo,
     profession,
     skills,
-    favorites
+    favorites,
+    description
   }: {
     name: string;
     lastName: string;
@@ -93,6 +94,7 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     profession: string[];
     skills: string[];
     favorites: OfferType[];
+    description: string;
   } = req.body;
   try {
     const workerUpdate: WorkerType = await updateWorkerProfile(
@@ -103,7 +105,8 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
       photo,
       profession,
       skills,
-      favorites
+      favorites,
+      description
     );
     res.json(workerUpdate);
   } catch (error) {
