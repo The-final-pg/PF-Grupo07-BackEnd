@@ -725,7 +725,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
             nodemailerConfig_1.default.sendMail({
                 from: `"REWork" <${REWORK_MAIL}>`,
                 to: proposalJson.userWorker.user_mail,
-                subject: "¡Trabajo finalizado!",
+                subject: "¡Felicitaciones, el pago a sido liberado!",
                 html: `<!DOCTYPE html>
             <html lang="en">
             <head>
@@ -780,10 +780,9 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                     <div style="padding: 20px 10px 20px 10px;">
                         <!-- Contenido principal -->
                         <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
-                            <h1>¡Felicidades, el cliente ha marcado el trabajo como finalizado!</h1>
-                              <p>El pago ha sido liberado, en breve se reflejará en tu cuenta</p>
-
-                              Sigue aplicando a mas ofertas.
+                            <h1>¡Felicidades, el pago ya ha sido transferido a tu cuenta!</h1>
+                              
+                              <p>Sigue aplicando a mas ofertas.</p>
                             <!-- Gracias -->
             
                             <!-- Botón -->
