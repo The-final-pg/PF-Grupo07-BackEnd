@@ -29,6 +29,7 @@ export const setData = async () => {
         photo: e.Worker.photo,
         notification: e.Worker.notification,
         isActive: true,
+        description: e.Worker.description,
       });
       arrayClient.push({
         name: e.Client.name,
@@ -40,6 +41,7 @@ export const setData = async () => {
         photo: e.Client.photo,
         notification: e.Client.notification,
         isActive: true,
+        description: e.Worker.description,
       });
     });
     await UserWorker.create({
