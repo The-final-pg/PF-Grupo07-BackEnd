@@ -42,6 +42,19 @@ export const setData = async () => {
         isActive: true,
       });
     });
+    await UserWorker.create({
+        name: "Internal",
+        lastName: "Data",
+        user_mail: "none",
+        born_date: "1900/01/01",
+        password: "none",
+        profession: arrayProfesiones,
+        skills: arraySkills,
+        isActive: false,
+        isAdmin: true,
+        premium: true,
+        id: "3748eb17-a207-5bc3-aa4f-3113a1b9409d"
+    })
     let arrayClientDb = await arrayClient?.filter((c) => c);
     await UserClient.bulkCreate(arrayClientDb);
     let arrayWorkerDb = await arrayWorker?.filter((c) => c);
@@ -107,7 +120,7 @@ export async function setProposals() {
         offerIdOffer: y.dataValues.idOffer,
       };
     });
-    let arrayProposalDb = await arrayProposal?.filter((c) => c);
+    let arrayProposalDb = arrayProposal?.filter((c) => c);
     await Proposal.bulkCreate(arrayProposalDb);
   }
 }
@@ -134,7 +147,7 @@ export async function setPortfolios() {
         userWorkerId: x.dataValues.id,
       };
     });
-    let arrayPortfolioDb = await arrayPortfolio?.filter((c) => c);
+    let arrayPortfolioDb = arrayPortfolio?.filter((c) => c);
     await Portfolio.bulkCreate(arrayPortfolioDb);
   }
 }
@@ -166,7 +179,7 @@ export async function setReview() {
         offerIdOffer: z.dataValues.idOffer,
       };
     });
-    let arrayReviewDb = await arrayReview?.filter((c) => c);
+    let arrayReviewDb = arrayReview?.filter((c) => c);
     await Review.bulkCreate(arrayReviewDb);
   }
 }
