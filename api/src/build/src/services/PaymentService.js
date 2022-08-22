@@ -22,7 +22,7 @@ class PaymentService {
     createPayment(form) {
         return __awaiter(this, void 0, void 0, function* () {
             //const url = "https://api.mercadopago.com/checkout/preferences";
-            const { name, lastname, Email, cost } = form;
+            const { name, lastname, Email, cost, currentOffer } = form;
             const preference = {
                 payer_email: Email,
                 items: [
@@ -36,9 +36,9 @@ class PaymentService {
                     }
                 ],
                 back_urls: {
-                    failure: "/failure",
-                    pending: "/pending",
-                    success: "/success"
+                    failure: "http://localhost:3000/failure",
+                    pending: "http://localhost:3000/pending",
+                    success: `http://localhost:3000/success/${currentOffer.idOffer}`
                 }
             };
             const response = yield mercadopago_1.default.preferences.create(preference);
