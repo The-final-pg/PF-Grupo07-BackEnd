@@ -175,7 +175,7 @@ auth.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     const newWorker = req.body;
     try {
         console.log("newWorker", newWorker);
-        const hashedPassword = yield bcrypt.hash(newWorker.uid, 8);
+        const hashedPassword = yield bcrypt.hash(newWorker.password, 8);
         const workerGoogle = yield UserWorker.create({
             name: newWorker.name,
             password: hashedPassword,

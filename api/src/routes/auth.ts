@@ -177,7 +177,7 @@ auth.post("/worker", async(req: Request, res: Response, next: NextFunction) => {
     const newWorker = req.body;
     try {
         console.log("newWorker", newWorker)
-        const hashedPassword = await bcrypt.hash(newWorker.uid, 8)
+        const hashedPassword = await bcrypt.hash(newWorker.password, 8)
         
         const workerGoogle = await UserWorker.create({
             name: newWorker.name,
