@@ -70,4 +70,11 @@ export async function updateWorkerProfile(
   await worker.set(data);
   await worker.save();
   return worker;
+};
+
+export async function putWorkerPremium (id: string, premium: boolean): Promise<string> {
+  const worker: any = await UserWorker.findByPk(id);
+  await worker.set({premium: premium});
+  await worker.save();
+  return "Ya tienes cuenta premium!";
 }
