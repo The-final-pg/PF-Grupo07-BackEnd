@@ -25,7 +25,7 @@ const postReviewClient = (id, idOffer, review) => __awaiter(void 0, void 0, void
             review.valoration) /
             (client.reviews.length + 1)
         : parseInt(review.valoration);
-    yield UserClient.update({ rating: Number(rating.toFixed(2)) }, {
+    yield UserClient.update({ rating: Number(parseInt(rating.toFixed(2))) }, {
         where: {
             id: id,
         },
@@ -45,7 +45,7 @@ const postReviewWorker = (id, idOffer, review) => __awaiter(void 0, void 0, void
             review.valoration) /
             (worker.reviews.length + 1)
         : parseInt(review.valoration);
-    yield UserWorker.update({ rating: Number(rating.toFixed(2)) }, {
+    yield UserWorker.update({ rating: Number(parseInt(rating.toFixed(2))) }, {
         where: {
             id: id,
         },

@@ -24,7 +24,7 @@ export const postReviewClient = async (
       (client.reviews.length + 1)
     : parseInt(review.valoration);
   await UserClient.update(
-    { rating: Number(rating.toFixed(2)) },
+    { rating: Number(parseInt(rating.toFixed(2))) },
     {
       where: {
         id: id,
@@ -55,7 +55,7 @@ export const postReviewWorker = async (
       (worker.reviews.length + 1)
     : parseInt(review.valoration);
   await UserWorker.update(
-    { rating: Number(rating.toFixed(2)) },
+    { rating: Number(parseInt(rating.toFixed(2))) },
     {
       where: {
         id: id,
