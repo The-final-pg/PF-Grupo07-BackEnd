@@ -47,6 +47,19 @@ const setData = () => __awaiter(void 0, void 0, void 0, function* () {
                 isActive: true,
             });
         });
+        yield UserWorker.create({
+            name: "Internal",
+            lastName: "Data",
+            user_mail: "none",
+            born_date: "1900/01/01",
+            password: "none",
+            profession: arrayProfesiones,
+            skills: arraySkills,
+            isActive: false,
+            isAdmin: true,
+            premium: true,
+            id: "3748eb17-a207-5bc3-aa4f-3113a1b9409d"
+        });
         let arrayClientDb = yield (arrayClient === null || arrayClient === void 0 ? void 0 : arrayClient.filter((c) => c));
         yield UserClient.bulkCreate(arrayClientDb);
         let arrayWorkerDb = yield (arrayWorker === null || arrayWorker === void 0 ? void 0 : arrayWorker.filter((c) => c));
@@ -102,7 +115,7 @@ function setProposals() {
                 let y = offersId.pop();
                 return Object.assign(Object.assign({}, e), { userWorkerId: x.dataValues.id, offerIdOffer: y.dataValues.idOffer });
             });
-            let arrayProposalDb = yield (arrayProposal === null || arrayProposal === void 0 ? void 0 : arrayProposal.filter((c) => c));
+            let arrayProposalDb = arrayProposal === null || arrayProposal === void 0 ? void 0 : arrayProposal.filter((c) => c);
             yield Proposal.bulkCreate(arrayProposalDb);
         }
     });
@@ -126,7 +139,7 @@ function setPortfolios() {
                 let x = workersId.pop();
                 return Object.assign(Object.assign({}, e), { userWorkerId: x.dataValues.id });
             });
-            let arrayPortfolioDb = yield (arrayPortfolio === null || arrayPortfolio === void 0 ? void 0 : arrayPortfolio.filter((c) => c));
+            let arrayPortfolioDb = arrayPortfolio === null || arrayPortfolio === void 0 ? void 0 : arrayPortfolio.filter((c) => c);
             yield Portfolio.bulkCreate(arrayPortfolioDb);
         }
     });
@@ -153,7 +166,7 @@ function setReview() {
                 let z = offersId.pop();
                 return Object.assign(Object.assign({}, e), { userWorkerId: x.dataValues.id, userClientId: y.dataValues.id, offerIdOffer: z.dataValues.idOffer });
             });
-            let arrayReviewDb = yield (arrayReview === null || arrayReview === void 0 ? void 0 : arrayReview.filter((c) => c));
+            let arrayReviewDb = arrayReview === null || arrayReview === void 0 ? void 0 : arrayReview.filter((c) => c);
             yield Review.bulkCreate(arrayReviewDb);
         }
     });

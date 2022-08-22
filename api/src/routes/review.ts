@@ -5,7 +5,7 @@ const review = express.Router();
 
 review.post("/client", async (req: Request, res: Response, next: NextFunction) => {
   //recibe id del client que es destinatario de la review
-  const { id, idOffer, ...review } = req.body;
+  const { id, idOffer, review } = req.body;
   try {
     let response: string;
     //si la review va dirigida al Client, de ejecuta la funcion de review para clients
@@ -18,7 +18,7 @@ review.post("/client", async (req: Request, res: Response, next: NextFunction) =
 
 review.post("/worker", async (req: Request, res: Response, next: NextFunction) => {
   //recibe id del worker qeu es destinatario de la review
-  const { id, idOffer, ...review } = req.body;
+  const { id, idOffer, review } = req.body;
   try {
     let response: string;
     //si la review va dirigida al Worker, de ejecuta la funcion de review para workers

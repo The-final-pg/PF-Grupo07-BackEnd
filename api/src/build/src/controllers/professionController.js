@@ -10,35 +10,41 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllSkills = exports.getAllProfessions = void 0;
-const { Offer, UserWorker } = require('../db');
+const { UserWorker } = require('../db');
+const id = "3748eb17-a207-5bc3-aa4f-3113a1b9409d";
 function getAllProfessions() {
     return __awaiter(this, void 0, void 0, function* () {
-        const offers = yield Offer.findAll({
-            attributes: ['profession']
-        });
-        const workers = yield UserWorker.findAll({
-            attributes: ['profession']
-        });
-        let profession = [];
-        offers.forEach(e => profession = [...profession, ...e.dataValues.profession]);
-        workers.forEach(e => profession = [...profession, ...e.dataValues.profession]);
-        const professionSet = new Set(profession);
-        // profession = profession.filter((e, i) => profession.indexOf(e) === i).sort()
-        return [...professionSet];
+        const workerData = yield UserWorker.findByPk(id, { atributtes: ["profession"] });
+        const professions = workerData.toJSON();
+        return [...professions.profession];
+        /*     const offers: any[] = await Offer.findAll({
+                attributes: ['profession']
+            });
+            const workers: any[] = await UserWorker.findAll({
+                attributes: ['profession']
+            });
+            let profession: string[] = [];
+            offers.forEach(e => profession = [...profession, ...e.dataValues.profession]);
+            workers.forEach(e => profession = [...profession, ...e.dataValues.profession]);
+            const professionSet = new Set(profession);
+            return [...professionSet]; */
     });
 }
 exports.getAllProfessions = getAllProfessions;
+;
 function getAllSkills() {
     return __awaiter(this, void 0, void 0, function* () {
-        const workers = yield UserWorker.findAll({
-            attributes: ['skills']
-        });
-        let skills = [];
-        workers.forEach(e => skills = [...skills, ...e.dataValues.skills]);
-        /*     const skillsSet = new Set(skills);
-            console.log(skillsSet); */
-        skills = skills.filter((e, i) => skills.indexOf(e) === i).sort();
-        return skills;
+        const workerData = yield UserWorker.findByPk(id, { atributtes: ["skills"] });
+        const skills = workerData.toJSON();
+        return [...skills.skills];
+        /*     const workers: any[] = await UserWorker.findAll({
+                attributes: ['skills']
+            });
+            let skills: string[] = [];
+            workers.forEach(e => skills = [...skills, ...e.dataValues.skills]);
+            skills = skills.filter((e, i) => skills.indexOf(e) === i).sort();
+            return skills; */
     });
 }
 exports.getAllSkills = getAllSkills;
+;
