@@ -46,7 +46,7 @@ payment.post("/subscription", (req, res, _next) => __awaiter(void 0, void 0, voi
 payment.post("/notificationIPN", (req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.query.id;
     const topic = req.query.topic;
-    const response = axios_1.default.get(`https://api.mercadopago.com/v1/payments/${id}`);
+    const response = yield axios_1.default.get(`https://api.mercadopago.com/v1/payments/${id}`);
     res.json({ response, topic });
 }));
 exports.default = payment;
