@@ -60,8 +60,8 @@ class PaymentService {
         transaction_amount: 1000,
         currency_id: "ARS"
       },
-      back_url: "https://rework-xi.vercel.app/home",
-      payer_email: Email
+       back_url: "https://rework-xi.vercel.app/home",
+       payer_email: Email,
     };
 
     const subscription = await axios.post(url, body, {
@@ -70,8 +70,6 @@ class PaymentService {
         Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
       }
     });
-
-    console.log(subscription)
 
     return subscription.data;
   }
