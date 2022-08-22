@@ -34,6 +34,7 @@ const setData = () => __awaiter(void 0, void 0, void 0, function* () {
                 photo: e.Worker.photo,
                 notification: e.Worker.notification,
                 isActive: true,
+                description: e.Worker.description,
             });
             arrayClient.push({
                 name: e.Client.name,
@@ -45,6 +46,7 @@ const setData = () => __awaiter(void 0, void 0, void 0, function* () {
                 photo: e.Client.photo,
                 notification: e.Client.notification,
                 isActive: true,
+                description: e.Worker.description,
             });
         });
         yield UserWorker.create({
