@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 const admin = express.Router();
-import { ClientType, WorkerType } from "../types";
-import { getAllUsers, addNewProfessions, addNewSkills } from "../controllers/adminController";
+import { ClientType, OfferType, WorkerType } from "../types";
+import { getAllUsers, addNewProfessions, addNewSkills, getOfferFiltered } from "../controllers/adminController";
 
 admin.get("/users", async (_req: Request, res: Response, next: NextFunction) => {
     try {
@@ -11,6 +11,16 @@ admin.get("/users", async (_req: Request, res: Response, next: NextFunction) => 
       next(error);
     };
   });
+
+admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => {
+  const { isActive } = req.body
+  try {
+    const offers: Array<OfferType> = await getOfferFiltered(isActive)
+    res.json(offers);
+  } catch (error) {
+    next(error);
+  }
+});
 
   admin.put("/profession", async (req: Request, res: Response, next: NextFunction) => {
     try {
