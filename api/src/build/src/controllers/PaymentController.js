@@ -33,7 +33,8 @@ class PaymentController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const subscription = yield this.subscriptionService.createSubscription(req.body);
-                return res.json(subscription);
+                res.json(subscription);
+                return subscription;
             }
             catch (error) {
                 console.log(error);

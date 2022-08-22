@@ -53,6 +53,23 @@ worker.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, func
         next(error instanceof Error);
     }
 }));
+worker.put("/premium", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.body.id;
+        const premium = req.body.premium;
+        if (premium) {
+            const response = yield (0, workerController_1.putWorkerPremium)(id, premium);
+            return res.send(response);
+        }
+        else {
+            res.send("El estado premium es false");
+        }
+        ;
+    }
+    catch (error) {
+        next(error);
+    }
+}));
 worker.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
@@ -65,9 +82,9 @@ worker.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 }));
 worker.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
-    const { name, lastName, born_date, photo, profession, skills, favorites } = req.body;
+    const { name, lastName, born_date, photo, profession, skills, favorites, description } = req.body;
     try {
-        const workerUpdate = yield (0, workerController_1.updateWorkerProfile)(id, name, lastName, born_date, photo, profession, skills, favorites);
+        const workerUpdate = yield (0, workerController_1.updateWorkerProfile)(id, name, lastName, born_date, photo, profession, skills, favorites, description);
         res.json(workerUpdate);
     }
     catch (error) {

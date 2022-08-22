@@ -77,6 +77,10 @@ module.exports = (sequelize: any) => {
         type: DataTypes.ARRAY(DataTypes.JSONB),
         defaultValue: [],
       },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      }
     }
   );
 };

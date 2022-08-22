@@ -28,24 +28,22 @@ auth.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
         console.log("client", clientFound);
         console.log("worker", workerFound);
         if (clientFound) {
-            return res.send(jsonwebtoken_1.default.sign({
+            res.send(jsonwebtoken_1.default.sign({
                 id: clientFound.id,
                 user_mail: clientFound.user_mail,
                 isAdmin: clientFound.isAdmin,
                 isWorker: clientFound.isWorker,
                 premium: clientFound.premium
             }, SECRET_KEY, { expiresIn: "8h" }));
-            /* res.status(200).json(clientFound)   */
         }
         else if (workerFound) {
-            return res.send(jsonwebtoken_1.default.sign({
+            res.send(jsonwebtoken_1.default.sign({
                 id: workerFound.id,
                 user_mail: workerFound.user_mail,
                 isAdmin: workerFound.isAdmin,
                 isWorker: workerFound.isWorker,
                 premium: workerFound.premium
             }, SECRET_KEY, { expiresIn: "8h" }));
-            /* res.status(200).json(workerFound) */
         }
         else {
             res.send('usuario no encontrado');
@@ -175,7 +173,7 @@ auth.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     const newWorker = req.body;
     try {
         console.log("newWorker", newWorker);
-        const hashedPassword = yield bcrypt.hash(newWorker.uid, 8);
+        const hashedPassword = yield bcrypt.hash(newWorker.password, 8);
         const workerGoogle = yield UserWorker.create({
             name: newWorker.name,
             password: hashedPassword,
@@ -190,8 +188,7 @@ auth.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
             premium: false,
             isAdmin: true
         });
-        res.send(workerGoogle);
-        return res.send(jsonwebtoken_1.default.sign({
+        res.send(jsonwebtoken_1.default.sign({
             id: workerGoogle.id,
             user_mail: workerGoogle.user_mail,
             isAdmin: workerGoogle.isAdmin,
