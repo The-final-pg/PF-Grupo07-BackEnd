@@ -15,7 +15,7 @@ auth.post("/", async(req: Request, res: Response, next: NextFunction) => {
         console.log("client", clientFound)
         console.log("worker", workerFound)
         if(clientFound){
-            return res.send(jwt.sign(
+            res.send(jwt.sign(
                 {
                     id: clientFound.id,
                     user_mail: clientFound.user_mail,
@@ -26,9 +26,8 @@ auth.post("/", async(req: Request, res: Response, next: NextFunction) => {
                 SECRET_KEY,
                 { expiresIn: "8h" }
                 ))
-            /* res.status(200).json(clientFound)   */
         } else if(workerFound){
-            return res.send(jwt.sign(
+            res.send(jwt.sign(
                 {
                     id: workerFound.id,
                     user_mail: workerFound.user_mail,
@@ -39,7 +38,6 @@ auth.post("/", async(req: Request, res: Response, next: NextFunction) => {
                 SECRET_KEY,
                 { expiresIn: "8h" }
                 ))
-            /* res.status(200).json(workerFound) */
         } else {
             res.send ('usuario no encontrado' )
         }
@@ -193,10 +191,8 @@ auth.post("/worker", async(req: Request, res: Response, next: NextFunction) => {
             premium: false,
             isAdmin: true
         })
-
-        res.send(workerGoogle)
-
-        return res.send(jwt.sign(
+        
+        res.send(jwt.sign(
             {
                 id: workerGoogle.id,
                 user_mail: workerGoogle.user_mail,
