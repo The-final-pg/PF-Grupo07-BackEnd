@@ -18,10 +18,14 @@ const payment = express_1.default.Router();
 const PaymentController_1 = __importDefault(require("../controllers/PaymentController"));
 const PaymentService_1 = __importDefault(require("../services/PaymentService"));
 <<<<<<< HEAD
+<<<<<<< HEAD
 const axios_1 = __importDefault(require("axios"));
 =======
 
 >>>>>>> 0e7dc9a6620d653bdd5e361d28ad333eaa437ca8
+=======
+const axios_1 = __importDefault(require("axios"));
+>>>>>>> 67edb0ce2e70bb51c78e5f53c175b23e5f294a75
 const { UserWorker } = require("../db");
 const paymentInstance = new PaymentController_1.default(new PaymentService_1.default());
 // autenticación: verifica si el usuario es correcto. Lo busca en la base de datos en passportConfig. Si lo encuentra, genera el token con la info que nos importa para autorizar,
@@ -36,26 +40,17 @@ payment.post("/payment", (req, res, _next) => __awaiter(void 0, void 0, void 0, 
     paymentInstance.getPaymentLink(req, res, _next);
 }));
 payment.post("/subscription", (req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
-    const subscription = paymentInstance.getSubscriptionLink(req, res, _next);
-    if (subscription) {
-        console.log("entro piola");
-        const { id } = req.body;
-        yield UserWorker.update({ premium: true }, {
-            where: {
-                id: id
-            }
-        });
-    }
+    paymentInstance.getSubscriptionLink(req, res, _next);
 }));
 payment.post("/notificationIPN", (req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.body);
     const response = req.body;
     paymentInstance.getPaymentData(req, res, _next);
     if (response) {
-        res.status(200).send("OK");
+        return res.status(200).send("OK");
     }
     else {
-        res.status(400).send("Error al requerir la informacion");
+        return res.status(400).send("Error al requerir la informacion");
     }
 }));
 exports.default = payment;

@@ -63,7 +63,7 @@ class PaymentService {
         return __awaiter(this, void 0, void 0, function* () {
             const url = "https://api.mercadopago.com/preapproval";
             const { Email, id } = form;
-            console.log(Email);
+            console.log(Email, id);
             const body = {
                 reason: "REwork Premium",
                 auto_recurring: {
@@ -74,8 +74,12 @@ class PaymentService {
                 },
                 back_url: "https://rework-xi.vercel.app/home",
 <<<<<<< HEAD
+<<<<<<< HEAD
                 payer_email: Email
 =======
+=======
+                payer_email: Email
+>>>>>>> 67edb0ce2e70bb51c78e5f53c175b23e5f294a75
                 payer_email: Email,
                 payer_name: id
 
@@ -87,9 +91,10 @@ class PaymentService {
                     Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
                 }
             });
-
-            UserWorker.update({
-                IdPayment: subscription.data.payer_id
+            //aca me guardo los datos
+            console.log(subscription.data.payer_id);
+            yield UserWorker.update({
+                IdPayment: subscription.data.payer_id.toString()
             }, {
                 where: {
                     id: id
@@ -102,14 +107,15 @@ class PaymentService {
         return __awaiter(this, void 0, void 0, function* () {
             let information;
             let id_payment;
+            console.log(response);
+            if (response.action === "created")
+                return "All works";
             if (response.hasOwnProperty("entity")) {
+                console.log("ENTREEEEEEEEEEEEEEEEEEEE");
                 information = yield axios_1.default.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`);
                 id_payment = information.payer_id;
             }
-            else {
-                information = yield axios_1.default.get(`https://api.mercadopago.com/v1/${response.type}s/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`);
-                id_payment = information.payer.email;
-            }
+            console.log(information);
             const worker = yield UserWorker.findOne({ where: {
                     IdPayment: id_payment
                 } });

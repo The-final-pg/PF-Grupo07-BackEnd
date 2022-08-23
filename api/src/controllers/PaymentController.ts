@@ -25,8 +25,7 @@ class PaymentController {
     async getSubscriptionLink(req:Request, res:Response, _next:NextFunction) {
       try {
         const subscription = await this.subscriptionService.createSubscription(req.body);
-        res.json(subscription);
-        return subscription;
+       return res.json(subscription); 
       } catch (error) {
         console.log(error);
   
@@ -68,14 +67,14 @@ mercadopago.payment.save(payment_data)
   });
     }
 
-    async getPaymentData(req:Request,res:Response,_next:NextFunction){
+    async getPaymentData(req:Request,res:Response,next:NextFunction){
       try {
         this.subscriptionService.getMPInfo(req.body)
         .then((Info:any)=>{
             return res.json(Info);
         })
       } catch (error) {
-        
+        next(error)
       }
     }
   }
