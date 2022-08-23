@@ -53,7 +53,7 @@ class PaymentService {
   async createSubscription(form:any) {
     const url = "https://api.mercadopago.com/preapproval";
     const {Email, id} = form
-    console.log(Email)
+    console.log(Email, id)
     const body = {
       reason: "REwork Premium",
       auto_recurring: {
@@ -75,9 +75,9 @@ class PaymentService {
     });
 
     //aca me guardo los datos
-
-    UserWorker.update({
-      IdPayment:subscription.data.payer_id
+    console.log(subscription.data.payer_id)
+    await UserWorker.update({
+      IdPayment:subscription.data.payer_id.toString()
     }, {
       where:{
         id:id
