@@ -3,11 +3,22 @@ const { UserClient, UserWorker, Offer } = require("../db");
 
 const id: string = "3748eb17-a207-5bc3-aa4f-3113a1b9409d";
 
-export async function getAllUsers(): Promise<(ClientType | WorkerType)[]> {
-  let allClients: ClientType[] = await UserClient.findAll();
-  let getAllWorkers: WorkerType[] = await UserWorker.findAll();
-  const allUsers = [...allClients, ...getAllWorkers];
-  return allUsers;
+export async function getAllUsers(isActive: string): Promise<(ClientType | WorkerType)[]> {
+  if(isActive === "") {
+    let allClients: ClientType[] = await UserClient.findAll();
+    let getAllWorkers: WorkerType[] = await UserWorker.findAll();
+    const allUsers : (ClientType | WorkerType)[] = [...allClients, ...getAllWorkers];
+    return allUsers;
+  } else {
+    let allClients: ClientType[] = await UserClient.findAll({
+      where: {isActive: isActive}
+    });
+    let getAllWorkers: WorkerType[] = await UserWorker.findAll({
+      where: {isActive: isActive}
+    });
+    const usersAdmin : (ClientType | WorkerType)[] = [...allClients, ...getAllWorkers];
+    return usersAdmin;
+  }
 }
 
 export async function getOfferFiltered(
