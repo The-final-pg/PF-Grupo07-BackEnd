@@ -91,6 +91,7 @@ class PaymentService {
   async getMPInfo(response:any){
     let information:any
     let id_payment:string
+    if(response.action==="created") return "All works"
     if(response.hasOwnProperty("entity")){
       information = await axios.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`)
       id_payment = information.payer_id;
