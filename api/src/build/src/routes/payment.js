@@ -43,6 +43,7 @@ payment.post("/subscription", (req, res, _next) => __awaiter(void 0, void 0, voi
         });
     }
 }));
+
 payment.post("/notificationIPN", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.query.id;
