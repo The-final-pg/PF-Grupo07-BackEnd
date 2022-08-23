@@ -34,7 +34,9 @@ payment.post("/subscription", async (req:Request,res:Response,_next:NextFunction
     }
 });
 
+
 payment.post("/notificationIPN", async(req:Request,res:Response,_next:NextFunction) => {
+
     //paymentInstance.getNotification(req, res, _next);
     console.log(req.body)
     const response = req.body;
@@ -43,6 +45,7 @@ payment.post("/notificationIPN", async(req:Request,res:Response,_next:NextFuncti
     }else{
         res.status(400).send("juanma pto")
     }
+
     // try {
     //     const id = req.query.id;
     //     const topic = req.query.topic;

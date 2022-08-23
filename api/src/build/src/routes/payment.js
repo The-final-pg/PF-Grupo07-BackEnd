@@ -43,6 +43,7 @@ payment.post("/subscription", (req, res, _next) => __awaiter(void 0, void 0, voi
     }
 }));
 payment.post("/notificationIPN", (req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
+
     //paymentInstance.getNotification(req, res, _next);
     console.log(req.body);
     const response = req.body;
