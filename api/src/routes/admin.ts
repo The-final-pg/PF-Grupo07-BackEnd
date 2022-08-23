@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 const admin = express.Router();
 import { ClientType, OfferType, WorkerType } from "../types";
-import { getAllUsers, addNewProfessions, addNewSkills, getOfferFiltered, updateUser } from "../controllers/adminController";
+import { getAllUsers, addNewProfessions, addNewSkills, getOfferFiltered } from "../controllers/adminController";
 
 admin.get("/users", async (req: Request, res: Response, next: NextFunction) => {
     const {isActive} = req.query
@@ -43,7 +43,9 @@ admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => 
     };
   });
 
-  admin.put("/users/isActive" , async(req: Request, res: Response, next: NextFunction) => {
+
+/*   admin.put("/users/isActive" , async(req: Request, res: Response, next: NextFunction) => {
+
     // const {isWorker, id, isAdmin, isActive} = req.body
     try {
       let message: string = await updateUser(req.body);
@@ -51,7 +53,9 @@ admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => 
     } catch(error) {
       next(error);
     }
-  })
+  }) */
+
+
 
   export default admin;
 

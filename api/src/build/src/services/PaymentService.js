@@ -76,7 +76,6 @@ class PaymentService {
                 back_url: "https://rework-xi.vercel.app/home",
                 payer_email: Email,
                 payer_name: id
-
             };
             const subscription = yield axios_1.default.post(url, body, {
                 headers: {
@@ -84,7 +83,7 @@ class PaymentService {
                     Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
                 }
             });
-
+            
             UserWorker.update({
                 IdPayment: subscription.data.payer_id
             }, {
@@ -118,6 +117,15 @@ class PaymentService {
         });
     }
 }
+/*"payer": {
+    "email": "test_user_955808@testuser.com",
+    "entity_type": null,
+    "first_name": null,
+    "id": "1182290827",
+    "identification": {
+      "number": "23011111114",
+      "type": "CUIL"
+    },*/
 /*"payer": {
     "email": "test_user_955808@testuser.com",
     "entity_type": null,
