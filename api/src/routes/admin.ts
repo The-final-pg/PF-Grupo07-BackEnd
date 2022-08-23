@@ -43,7 +43,9 @@ admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => 
     };
   });
 
+
 /*   admin.put("/users/isActive" , async(req: Request, res: Response, next: NextFunction) => {
+
     // const {isWorker, id, isAdmin, isActive} = req.body
     try {
       let message: string = await updateUser(req.body);
@@ -52,6 +54,8 @@ admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => 
       next(error);
     }
   }) */
+
+
 
   export default admin;
 

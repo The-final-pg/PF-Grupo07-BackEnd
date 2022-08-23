@@ -16,6 +16,7 @@ const axios_1 = __importDefault(require("axios"));
 const { ACCESS_TOKEN } = process.env;
 const mercadopago_1 = __importDefault(require("mercadopago"));
 const { UserWorker } = require("../db");
+const { UserWorker } = require("../db");
 mercadopago_1.default.configure({
     access_token: ACCESS_TOKEN
 });
@@ -82,7 +83,7 @@ class PaymentService {
                     Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
                 }
             });
-            //aca me guardo los datos
+            
             UserWorker.update({
                 IdPayment: subscription.data.payer_id
             }, {
