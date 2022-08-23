@@ -15,9 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const admin = express_1.default.Router();
 const adminController_1 = require("../controllers/adminController");
-admin.get("/users", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+admin.get("/users", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { isActive } = req.query;
     try {
-        const users = yield (0, adminController_1.getAllUsers)();
+        const users = yield (0, adminController_1.getAllUsers)(isActive);
         res.json(users);
     }
     catch (error) {
