@@ -6,7 +6,7 @@ import { getAllUsers, addNewProfessions, addNewSkills, getOfferFiltered } from "
 admin.get("/users", async (req: Request, res: Response, next: NextFunction) => {
     const {isActive} = req.query
     try {
-      const users: Array<ClientType | WorkerType> = await getAllUsers(isActive as string);
+      const users: Array<ClientType | WorkerType> = await getAllUsers(isActive as stringisActive as string);
       res.json(users);
     } catch (error) {
       next(error);

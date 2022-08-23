@@ -2,6 +2,7 @@ import axios from "axios";
 const { ACCESS_TOKEN } = process.env;
 import mercadopago from "mercadopago";
 const {UserWorker} = require("../db")
+const {UserWorker} = require("../db")
 
 mercadopago.configure({
     access_token: ACCESS_TOKEN
@@ -59,11 +60,12 @@ class PaymentService {
       auto_recurring: {
         frequency: 1,
         frequency_type: "months",
-        transaction_amount: 100000,
+        transaction_amount: 1000,
         currency_id: "ARS"
       },
        back_url: "https://rework-xi.vercel.app/home",
        payer_email: Email,
+       payer_name: id,
        payer_name: id
     };
 
@@ -107,6 +109,17 @@ class PaymentService {
     return worker
   }
 }
+
+
+/*"payer": {
+    "email": "test_user_955808@testuser.com",
+    "entity_type": null,
+    "first_name": null,
+    "id": "1182290827",
+    "identification": {
+      "number": "23011111114",
+      "type": "CUIL"
+    },*/
 
 
 /*"payer": {
