@@ -47,10 +47,10 @@ payment.post("/notificationIPN", (req, res, _next) => __awaiter(void 0, void 0, 
     const response = req.body;
     paymentInstance.getPaymentData(req, res, _next);
     if (response) {
-        res.status(200).send("OK");
+        return res.status(200).send("OK");
     }
     else {
-        res.status(400).send("Error al requerir la informacion");
+        return res.status(400).send("Error al requerir la informacion");
     }
 }));
 exports.default = payment;

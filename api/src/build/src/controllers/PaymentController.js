@@ -77,7 +77,7 @@ class PaymentController {
             });
         });
     }
-    getPaymentData(req, res, _next) {
+    getPaymentData(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 this.subscriptionService.getMPInfo(req.body)
@@ -86,6 +86,7 @@ class PaymentController {
                 });
             }
             catch (error) {
+                next(error);
             }
         });
     }
