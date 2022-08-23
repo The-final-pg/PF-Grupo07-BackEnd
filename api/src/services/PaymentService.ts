@@ -2,7 +2,6 @@ import axios from "axios";
 const { ACCESS_TOKEN } = process.env;
 import mercadopago from "mercadopago";
 const {UserWorker} = require("../db")
-const {UserWorker} = require("../db")
 
 mercadopago.configure({
     access_token: ACCESS_TOKEN
@@ -66,7 +65,6 @@ class PaymentService {
        back_url: "https://rework-xi.vercel.app/home",
        payer_email: Email,
        payer_name: id,
-       payer_name: id
     };
 
     const subscription = await axios.post(url, body, {
