@@ -79,13 +79,10 @@ class PaymentController {
             });
         });
     }
-    getPaymentData(req, res, next) {
+    getPaymentData(req, _res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                this.subscriptionService.getMPInfo(req.body)
-                    .then((Info) => {
-                    return res.json(Info);
-                });
+                this.subscriptionService.getMPInfo(req.body);
             }
             catch (error) {
                 next(error);
