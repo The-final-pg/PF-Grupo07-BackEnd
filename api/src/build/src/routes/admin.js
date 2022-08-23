@@ -58,6 +58,7 @@ admin.put("/skills", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     }
     ;
 }));
+
 /* admin.put("/users/isActive" , async(req: Request, res: Response, next: NextFunction) => {
   // const {isWorker, id, isAdmin, isActive} = req.body
   try {
@@ -67,4 +68,5 @@ admin.put("/skills", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     next(error);
   }
 }) */
+
 exports.default = admin;

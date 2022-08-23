@@ -43,11 +43,12 @@ admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => 
     };
   });
 
+
   /* admin.put("/users/isActive" , async(req: Request, res: Response, next: NextFunction) => {
     // const {isWorker, id, isAdmin, isActive} = req.body
     try {
-      let message: string = await updateUser(req.body);
-      res.json(message)
+      //let message: string = await updateUser(req.body);
+      //res.json(message)
     } catch(error) {
       next(error);
     }
