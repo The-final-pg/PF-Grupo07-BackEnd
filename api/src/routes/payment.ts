@@ -34,6 +34,7 @@ payment.post("/subscription", async (req:Request,res:Response,_next:NextFunction
     }
 });
 
+
 payment.post("/notificationIPN", async(req:Request,res:Response,_next:NextFunction) => {
     console.log(req.body);
     const response = req.body;
