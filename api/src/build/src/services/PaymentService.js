@@ -108,7 +108,7 @@ class PaymentService {
             }
             console.log(information);
             const worker = yield UserWorker.findOne({ where: {
-                    IdPayment: id_payment
+                    IdPayment: id_payment.toString()
                 } });
             if (worker) {
                 worker.set({ premium: true });
