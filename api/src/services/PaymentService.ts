@@ -93,8 +93,12 @@ class PaymentService {
     console.log(response)
     if(response.action==="created") return "All works"
     if(response.hasOwnProperty("entity")){
-      information = await axios.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`)
-      id_payment = information.payer_id;
+      console.log("entre a entity")
+      if (response.entity === "preapproval"){
+      console.log("entre preapproval")
+        information = await axios.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`)
+        id_payment = information.data.payer_id;
+      } else return "";
     }
 
     const worker = await UserWorker.findOne({where:{
