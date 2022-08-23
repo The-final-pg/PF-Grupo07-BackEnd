@@ -46,7 +46,6 @@ payment.post("/notificationIPN", (req, res, _next) => __awaiter(void 0, void 0, 
     console.log(req.body);
     const response = req.body;
     paymentInstance.getPaymentData(req, res, _next);
-
     if (response) {
         res.status(200).send("OK");
     }
