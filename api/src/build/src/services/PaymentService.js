@@ -75,7 +75,6 @@ class PaymentService {
                 back_url: "https://rework-xi.vercel.app/home",
                 payer_email: Email,
                 payer_name: id
-
             };
             const subscription = yield axios_1.default.post(url, body, {
                 headers: {
@@ -83,7 +82,7 @@ class PaymentService {
                     Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
                 }
             });
-
+            //aca me guardo los datos
             UserWorker.update({
                 IdPayment: subscription.data.payer_id
             }, {
