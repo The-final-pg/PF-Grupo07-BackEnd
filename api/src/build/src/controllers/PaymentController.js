@@ -14,7 +14,7 @@ class PaymentController {
     constructor(subscriptionService) {
         this.subscriptionService = subscriptionService;
     }
-    getPaymentLink(req, res, _next) {
+    getPaymentLink(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 this.subscriptionService.createPayment(req.body)
@@ -24,13 +24,15 @@ class PaymentController {
             }
             catch (error) {
                 console.log(error);
-                return res
-                    .status(500)
-                    .json({ error: true, msg: "Failed to create payment" });
+                next(error);
+                /*
+                      return res
+                        .status(500)
+                        .json({ error: true, msg: "Failed to create payment" }); */
             }
         });
     }
-    getSubscriptionLink(req, res, _next) {
+    getSubscriptionLink(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const subscription = yield this.subscriptionService.createSubscription(req.body);
@@ -38,9 +40,10 @@ class PaymentController {
             }
             catch (error) {
                 console.log(error);
-                return res
-                    .status(500)
-                    .json({ error: true, msg: "Failed to create subscription" });
+                next(error);
+                /*  return res
+                   .status(500)
+                   .json({ error: true, msg: "Failed to create subscription" }); */
             }
         });
     }
