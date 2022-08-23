@@ -98,15 +98,12 @@ class PaymentService {
         return __awaiter(this, void 0, void 0, function* () {
             let information;
             let id_payment;
+            console.log(response);
             if (response.action === "created")
                 return "All works";
             if (response.hasOwnProperty("entity")) {
                 information = yield axios_1.default.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`);
                 id_payment = information.payer_id;
-            }
-            else {
-                information = yield axios_1.default.get(`https://api.mercadopago.com/v1/${response.type}s/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`);
-                id_payment = information.payer.email;
             }
             const worker = yield UserWorker.findOne({ where: {
                     IdPayment: id_payment
