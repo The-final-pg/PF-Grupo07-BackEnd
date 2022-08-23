@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 const { ACCESS_TOKEN } = process.env;
 const mercadopago_1 = __importDefault(require("mercadopago"));
+const { UserWorker } = require("../db");
 mercadopago_1.default.configure({
     access_token: ACCESS_TOKEN
 });
@@ -62,6 +63,7 @@ class PaymentService {
         return __awaiter(this, void 0, void 0, function* () {
             const url = "https://api.mercadopago.com/preapproval";
             const { Email } = form;
+            console.log(Email);
             const body = {
                 reason: "REwork Premium",
                 auto_recurring: {
@@ -79,10 +81,39 @@ class PaymentService {
                     Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
                 }
             });
-            console.log(subscription);
-            console.log(subscription);
             return subscription.data;
         });
     }
+    getMPInfo(response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let information;
+            let payer_mail;
+            if (response.hasOwnProperty("entity")) {
+                information = yield axios_1.default.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`);
+                payer_mail = information.payer_email;
+            }
+            else {
+                information = yield axios_1.default.get(`https://api.mercadopago.com/v1/${response.type}s/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`);
+                payer_mail = information.payer.email;
+            }
+            const worker = yield UserWorker.findOne({ where: {
+                    user_mail: payer_mail
+                } });
+            if (worker) {
+                worker.premium = true;
+                yield worker.save();
+            }
+            return worker;
+        });
+    }
 }
+/*"payer": {
+    "email": "test_user_955808@testuser.com",
+    "entity_type": null,
+    "first_name": null,
+    "id": "1182290827",
+    "identification": {
+      "number": "23011111114",
+      "type": "CUIL"
+    },*/
 exports.default = PaymentService;

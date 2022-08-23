@@ -77,5 +77,17 @@ class PaymentController {
             });
         });
     }
+    getPaymentData(req, res, _next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                this.subscriptionService.getMPInfo(req.body)
+                    .then((Info) => {
+                    return res.json(Info);
+                });
+            }
+            catch (error) {
+            }
+        });
+    }
 }
 exports.default = PaymentController;

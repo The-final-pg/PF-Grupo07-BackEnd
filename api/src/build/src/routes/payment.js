@@ -43,14 +43,14 @@ payment.post("/subscription", (req, res, _next) => __awaiter(void 0, void 0, voi
     }
 }));
 payment.post("/notificationIPN", (req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
-    //paymentInstance.getNotification(req, res, _next);
     console.log(req.body);
     const response = req.body;
+    paymentInstance.getPaymentData(req, res, _next);
     if (response) {
         res.status(200).send("OK");
     }
     else {
-        res.status(400).send("juanma pto");
+        res.status(400).send("Error al requerir la informacion");
     }
     // try {
     //     const id = req.query.id;
