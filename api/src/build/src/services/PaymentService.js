@@ -102,9 +102,14 @@ class PaymentService {
             if (response.action === "created")
                 return "All works";
             if (response.hasOwnProperty("entity")) {
-                information = yield axios_1.default.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`);
-                id_payment = information.payer_id;
+                if (response.entity === "preapproval") {
+                    information = yield axios_1.default.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`);
+                    id_payment = information.data.payer_id;
+                }
+                else
+                    return "";
             }
+            console.log(information);
             const worker = yield UserWorker.findOne({ where: {
                     IdPayment: id_payment
                 } });
