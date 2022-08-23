@@ -34,6 +34,7 @@ payment.post("/subscription", async (req:Request,res:Response,_next:NextFunction
     }
 });
 
+
 payment.post("/notificationIPN", async(req:Request,res:Response,_next:NextFunction) => {
     paymentInstance.getNotification(req, res, _next);
     // try {

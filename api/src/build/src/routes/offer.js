@@ -17,7 +17,7 @@ const offerController_1 = require("../controllers/offerController");
 const filteredSearchOffer_1 = require("../services/filteredSearchOffer");
 const nodemailerConfig_1 = __importDefault(require("../utils/nodemailer/nodemailerConfig"));
 const { REWORK_MAIL } = process.env;
-const { UserWorker, Proposal } = require('../db');
+const { UserWorker, Offer, Proposal } = require('../db');
 const offer = express_1.default.Router();
 offer.get("/", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -97,14 +97,16 @@ offer.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, functi
     try {
         const offerState = yield (0, offerController_1.putOfferState)(id, state);
         const offer = yield Offer.findByPk(id, {
-            include: [Proposal, { include: UserWorker }]
+            include: [{ model: Proposal, include: UserWorker }]
         });
-        const proposal = offer.proposals.find((e) => e.state === 'finalized');
-        const proposalJson = proposal.toJSON();
-        if (proposalJson) {
+        const offerJson = offer.toJSON();
+        console.log("esto es offerJson: ", offerJson);
+        const proposal = offerJson.proposals.find((e) => e.state === 'finalized');
+        console.log("esto es proposal: ", proposal);
+        if (proposal) {
             nodemailerConfig_1.default.sendMail({
                 from: `"REWork" <${REWORK_MAIL}>`,
-                to: proposalJson.userWorker.user_mail,
+                to: proposal.userWorker.user_mail,
                 subject: "Felicitaciones",
                 html: `<!DOCTYPE html>
             <html lang="en">
