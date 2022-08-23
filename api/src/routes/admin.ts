@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 const admin = express.Router();
 import { ClientType, OfferType, WorkerType } from "../types";
-import { getAllUsers, addNewProfessions, addNewSkills, getOfferFiltered } from "../controllers/adminController";
+import { getAllUsers, addNewProfessions, addNewSkills, getOfferFiltered, getOfferFiltered } from "../controllers/adminController";
 
 admin.get("/users", async (_req: Request, res: Response, next: NextFunction) => {
     try {
@@ -43,3 +43,4 @@ admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => 
   });
 
   export default admin;
+

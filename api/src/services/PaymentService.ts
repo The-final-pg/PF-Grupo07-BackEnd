@@ -57,7 +57,7 @@ class PaymentService {
       auto_recurring: {
         frequency: 1,
         frequency_type: "months",
-        transaction_amount: 1000,
+        transaction_amount: 100000,
         currency_id: "ARS"
       },
        back_url: "https://rework-xi.vercel.app/home",
@@ -70,6 +70,8 @@ class PaymentService {
         Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
       }
     });
+
+    console.log(subscription)
 
     console.log(subscription)
 
