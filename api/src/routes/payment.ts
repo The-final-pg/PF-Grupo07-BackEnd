@@ -34,6 +34,7 @@ payment.post("/subscription", async (req:Request,res:Response,_next:NextFunction
     }
 });
 
+
 payment.post("/notificationIPN", async(req:Request,res:Response,_next:NextFunction) => {
     console.log(req.body);
     const response = req.body;
@@ -43,6 +44,7 @@ payment.post("/notificationIPN", async(req:Request,res:Response,_next:NextFuncti
     }else{
         res.status(400).send("Error al requerir la informacion");
     }
+
 });
 
 export default payment
