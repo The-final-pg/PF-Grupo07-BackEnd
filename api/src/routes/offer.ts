@@ -17,7 +17,7 @@ import {
 } from "../services/filteredSearchOffer";
 import transporter from "../utils/nodemailer/nodemailerConfig";
 const { REWORK_MAIL } = process.env;
-const { UserWorker, Proposal }  = require ('../db');
+const { UserWorker, Offer, Proposal }  = require ('../db');
 
 const offer = express.Router();
 
@@ -104,14 +104,16 @@ offer.put("/state", async (req: Request, res: Response, next: NextFunction) => {
   try {
       const offerState: String = await putOfferState(id, state);
       const offer:any = await Offer.findByPk(id, {
-        include: [Proposal, {include: UserWorker}]
+        include: [{model: Proposal, include: UserWorker}]
       })
-      const proposal = offer.proposals.find((e:any) => e.state === 'finalized') 
-      const proposalJson:any = proposal.toJSON()
-      if (proposalJson){
+      const offerJson = offer.toJSON()
+      console.log("esto es offerJson: ", offerJson)
+      const proposal = offerJson.proposals.find((e:any) => e.state === 'finalized')
+      console.log("esto es proposal: ", proposal) 
+      if (proposal){
         transporter.sendMail({
           from: `"REWork" <${REWORK_MAIL}>`,
-            to: proposalJson.userWorker.user_mail, 
+            to: proposal.userWorker.user_mail, 
             subject: "Felicitaciones",
             html: `<!DOCTYPE html>
             <html lang="en">
