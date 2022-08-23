@@ -21,6 +21,34 @@ export async function getAllUsers(isActive: string): Promise<(ClientType | Worke
   }
 }
 
+export async function updateUser(isActive: string, isWorker: string, id: string, /* isAdmin: string */) {
+  if(isWorker === "false") {
+    let client = await UserClient.findByPk(id)
+    if(isActive !== undefined) {
+      await client.set({isActive})
+      await client.save()
+      return "Se actualizo el estado isActive del Client"
+    } /* else if(isAdmin !== undefined ) {
+      await client.set({isAdmin})
+      await client.save()
+      return "Se actualizo el estado isActive del "
+    } */
+  } 
+  
+  if(isWorker === "true") {
+    let worker = await UserWorker.findByPk(id)
+    if(isActive !== undefined) {
+      await worker.set({isActive})
+      await worker.save()
+      return "Se actualizo el estado isActive del Worker"
+    } /* else if(isAdmin !== undefined ) {
+      await worker.set({isAdmin})
+      await worker.save()
+      return "Se actualizo el Client"
+    } */
+  }
+}
+
 export async function getOfferFiltered(
   isActive: string,
 ): Promise<OfferType[]> {
