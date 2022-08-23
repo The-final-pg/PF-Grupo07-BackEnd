@@ -3,7 +3,6 @@ const payment = express.Router();
 //const { SECRET_KEY, ACCESS_TOKEN } = process.env;
 import PaymentController from "../controllers/PaymentController"
 import PaymentService from "../services/PaymentService";
-const {UserWorker} = require("../db")
 
 const paymentInstance = new PaymentController(new PaymentService());
 
@@ -21,17 +20,7 @@ payment.post("/payment", async (req:Request,res:Response,_next:NextFunction) => 
 });
 
 payment.post("/subscription", async (req:Request,res:Response,_next:NextFunction) => {
-    const subscription = paymentInstance.getSubscriptionLink(req, res, _next);
-
-    if(subscription){
-        console.log("entro piola")
-        const {id} = req.body;
-        await UserWorker.update({premium:true}, {
-            where:{
-                id:id
-            }
-        })
-    }
+    paymentInstance.getSubscriptionLink(req, res, _next);
 });
 
 
@@ -40,9 +29,9 @@ payment.post("/notificationIPN", async(req:Request,res:Response,_next:NextFuncti
     const response = req.body;
     paymentInstance.getPaymentData(req,res,_next);
     if(response){
-        res.status(200).send("OK");
+       return res.status(200).send("OK");
     }else{
-        res.status(400).send("Error al requerir la informacion");
+       return res.status(400).send("Error al requerir la informacion");
     }
 });
 
