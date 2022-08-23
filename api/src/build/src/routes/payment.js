@@ -43,10 +43,17 @@ payment.post("/subscription", (req, res, _next) => __awaiter(void 0, void 0, voi
         });
     }
 }));
-payment.post("/notificationIPN", (req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = req.query.id;
-    const topic = req.query.topic;
-    const response = axios_1.default.get(`https://api.mercadopago.com/v1/payments/${id}`);
-    res.json({ response, topic });
+
+payment.post("/notificationIPN", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.query.id;
+        const topic = req.query.topic;
+        const response = yield axios_1.default.get(`https://api.mercadopago.com/v1/payments/${id}`);
+        console.log(response);
+        res.json({ response, topic });
+    }
+    catch (error) {
+        next(error);
+    }
 }));
 exports.default = payment;
