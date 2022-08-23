@@ -17,7 +17,6 @@ const payment = express_1.default.Router();
 //const { SECRET_KEY, ACCESS_TOKEN } = process.env;
 const PaymentController_1 = __importDefault(require("../controllers/PaymentController"));
 const PaymentService_1 = __importDefault(require("../services/PaymentService"));
-const axios_1 = __importDefault(require("axios"));
 const { UserWorker } = require("../db");
 const paymentInstance = new PaymentController_1.default(new PaymentService_1.default());
 // autenticación: verifica si el usuario es correcto. Lo busca en la base de datos en passportConfig. Si lo encuentra, genera el token con la info que nos importa para autorizar,
@@ -44,9 +43,15 @@ payment.post("/subscription", (req, res, _next) => __awaiter(void 0, void 0, voi
     }
 }));
 payment.post("/notificationIPN", (req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = req.query.id;
-    const topic = req.query.topic;
-    const response = axios_1.default.get(`https://api.mercadopago.com/v1/payments/${id}`);
-    res.json({ response, topic });
+    paymentInstance.getNotification(req, res, _next);
+    // try {
+    //     const id = req.query.id;
+    //     const topic = req.query.topic;
+    //     const response = await axios.get(`https://api.mercadopago.com/${topic}/${id}/APP_USR-2475260180747604-081820-6a99fd4d1246c40d04f0cd9e997cda8a-1182295464`)
+    //     console.log(response)
+    //     res.json({response, topic})
+    // } catch (error) {
+    //     next(error);
+    // }
 }));
 exports.default = payment;

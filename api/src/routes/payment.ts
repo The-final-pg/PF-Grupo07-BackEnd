@@ -3,7 +3,6 @@ const payment = express.Router();
 //const { SECRET_KEY, ACCESS_TOKEN } = process.env;
 import PaymentController from "../controllers/PaymentController"
 import PaymentService from "../services/PaymentService";
-import axios from "axios"
 const {UserWorker} = require("../db")
 
 const paymentInstance = new PaymentController(new PaymentService());
@@ -35,16 +34,18 @@ payment.post("/subscription", async (req:Request,res:Response,_next:NextFunction
     }
 });
 
-payment.post("/notificationIPN", async(req:Request,res:Response,next:NextFunction) => {
-    try {
-        const id = req.query.id;
-        const topic = req.query.topic;
-        const response = await axios.get(`https://api.mercadopago.com/merchant_orders/${id}/APP_USR-2475260180747604-081820-6a99fd4d1246c40d04f0cd9e997cda8a-1182295464`)
-        console.log(response)
-        res.json({response, topic})
-    } catch (error) {
-        next(error);
-    }
+
+payment.post("/notificationIPN", async(req:Request,res:Response,_next:NextFunction) => {
+    paymentInstance.getNotification(req, res, _next);
+    // try {
+    //     const id = req.query.id;
+    //     const topic = req.query.topic;
+    //     const response = await axios.get(`https://api.mercadopago.com/${topic}/${id}/APP_USR-2475260180747604-081820-6a99fd4d1246c40d04f0cd9e997cda8a-1182295464`)
+    //     console.log(response)
+    //     res.json({response, topic})
+    // } catch (error) {
+    //     next(error);
+    // }
 
 });
 
