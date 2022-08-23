@@ -26,7 +26,7 @@ admin.get("/users", (_req, res, next) => __awaiter(void 0, void 0, void 0, funct
     ;
 }));
 admin.get("/offers", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { isActive } = req.body;
+    const { isActive } = req.query;
     try {
         const offers = yield (0, adminController_1.getOfferFiltered)(isActive);
         res.json(offers);
