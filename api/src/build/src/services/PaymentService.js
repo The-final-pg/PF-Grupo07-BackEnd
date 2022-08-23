@@ -102,6 +102,7 @@ class PaymentService {
             if (response.action === "created")
                 return "All works";
             if (response.hasOwnProperty("entity")) {
+                console.log("ENTREEEEEEEEEEEEEEEEEEEE");
                 information = yield axios_1.default.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`);
                 id_payment = information.payer_id;
             }
