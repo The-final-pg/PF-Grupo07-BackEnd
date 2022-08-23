@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addNewSkills = exports.addNewProfessions = exports.getOfferFiltered = exports.getAllUsers = void 0;
-const { UserClient, UserWorker, Offer } = require("../db");
+const { UserClient, UserWorker, Offer, Proposal } = require("../db");
 const id = "3748eb17-a207-5bc3-aa4f-3113a1b9409d";
 function getAllUsers() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -28,7 +28,7 @@ function getOfferFiltered(isActive) {
                 where: {
                     isActive: true,
                 },
-                include: UserClient,
+                include: [UserClient, Proposal],
             });
             return allOffers;
         }
@@ -37,12 +37,14 @@ function getOfferFiltered(isActive) {
                 where: {
                     isActive: false,
                 },
-                include: UserClient,
+                include: [UserClient, Proposal],
             });
             return allOffers;
         }
         else {
-            const allOffers = yield Offer.findAll();
+            const allOffers = yield Offer.findAll({
+                include: [UserClient, Proposal],
+            });
             return allOffers;
         }
     });

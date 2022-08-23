@@ -1,5 +1,5 @@
 import { ClientType, OfferType, WorkerType } from "../types";
-const { UserClient, UserWorker, Offer } = require("../db");
+const { UserClient, UserWorker, Offer, Proposal } = require("../db");
 
 const id: string = "3748eb17-a207-5bc3-aa4f-3113a1b9409d";
 
@@ -18,7 +18,7 @@ export async function getOfferFiltered(
       where: {
         isActive: true,
       },
-      include: UserClient,
+      include: [UserClient, Proposal],
     });
     return allOffers;
   } else if (isActive === "false") {
@@ -26,11 +26,13 @@ export async function getOfferFiltered(
       where: {
         isActive: false,
       },
-      include: UserClient,
+      include: [UserClient, Proposal],
     });
     return allOffers;
   } else {
-    const allOffers: OfferType[] = await Offer.findAll();
+    const allOffers: OfferType[] = await Offer.findAll({
+      include: [UserClient, Proposal],
+    });
     return allOffers;
   }
 }
