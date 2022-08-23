@@ -17,7 +17,10 @@ const payment = express_1.default.Router();
 //const { SECRET_KEY, ACCESS_TOKEN } = process.env;
 const PaymentController_1 = __importDefault(require("../controllers/PaymentController"));
 const PaymentService_1 = __importDefault(require("../services/PaymentService"));
+<<<<<<< HEAD
+=======
 const { UserWorker } = require("../db");
+>>>>>>> a63a749ebb6d703433967c6f271f08e139d1611a
 const paymentInstance = new PaymentController_1.default(new PaymentService_1.default());
 // autenticación: verifica si el usuario es correcto. Lo busca en la base de datos en passportConfig. Si lo encuentra, genera el token con la info que nos importa para autorizar,
 // osea si es worker o no y si es admin o no.
@@ -31,16 +34,7 @@ payment.post("/payment", (req, res, _next) => __awaiter(void 0, void 0, void 0, 
     paymentInstance.getPaymentLink(req, res, _next);
 }));
 payment.post("/subscription", (req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
-    const subscription = paymentInstance.getSubscriptionLink(req, res, _next);
-    if (subscription) {
-        console.log("entro piola");
-        const { id } = req.body;
-        yield UserWorker.update({ premium: true }, {
-            where: {
-                id: id
-            }
-        });
-    }
+    paymentInstance.getSubscriptionLink(req, res, _next);
 }));
 payment.post("/notificationIPN", (req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.body);
