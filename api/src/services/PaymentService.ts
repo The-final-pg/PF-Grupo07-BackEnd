@@ -95,38 +95,8 @@ class PaymentService {
     }
     return worker
   }
-
-  async getMPInfo(response:any){
-    let information:any
-    let payer_mail:string
-    if(response.hasOwnProperty("entity")){
-      information = await axios.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`)
-      payer_mail = information.payer_email;
-    }else{
-      information = await axios.get(`https://api.mercadopago.com/v1/${response.type}s/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`)
-      payer_mail = information.payer.email
-    }
-
-    const worker = await UserWorker.findOne({where:{
-      user_mail:payer_mail
-    }})
-    if(worker){
-      worker.premium = true;
-      await worker.save();
-    }
-    return worker
-  }
 }
 
-/*"payer": {
-    "email": "test_user_955808@testuser.com",
-    "entity_type": null,
-    "first_name": null,
-    "id": "1182290827",
-    "identification": {
-      "number": "23011111114",
-      "type": "CUIL"
-    },*/
 
 /*"payer": {
     "email": "test_user_955808@testuser.com",
