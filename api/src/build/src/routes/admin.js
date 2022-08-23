@@ -15,9 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const admin = express_1.default.Router();
 const adminController_1 = require("../controllers/adminController");
-admin.get("/users", (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+admin.get("/users", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { isActive } = req.query;
     try {
-        const users = yield (0, adminController_1.getAllUsers)();
+        const users = yield (0, adminController_1.getAllUsers)(isActive);
         res.json(users);
     }
     catch (error) {
@@ -56,5 +57,15 @@ admin.put("/skills", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         next(error);
     }
     ;
+}));
+admin.put("/users/isActive", (_req, _res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    // const {isWorker, id, isAdmin, isActive} = req.body
+    try {
+        //let message: string = await updateUser(req.body);
+        //res.json(message)
+    }
+    catch (error) {
+        next(error);
+    }
 }));
 exports.default = admin;
