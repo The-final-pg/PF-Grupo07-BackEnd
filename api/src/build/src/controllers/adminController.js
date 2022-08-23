@@ -12,12 +12,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addNewSkills = exports.addNewProfessions = exports.getOfferFiltered = exports.getAllUsers = void 0;
 const { UserClient, UserWorker, Offer, Proposal } = require("../db");
 const id = "3748eb17-a207-5bc3-aa4f-3113a1b9409d";
-function getAllUsers() {
+function getAllUsers(isActive) {
     return __awaiter(this, void 0, void 0, function* () {
-        let allClients = yield UserClient.findAll();
-        let getAllWorkers = yield UserWorker.findAll();
-        const allUsers = [...allClients, ...getAllWorkers];
-        return allUsers;
+        if (isActive === "") {
+            let allClients = yield UserClient.findAll();
+            let getAllWorkers = yield UserWorker.findAll();
+            const allUsers = [...allClients, ...getAllWorkers];
+            return allUsers;
+        }
+        else {
+            let allClients = yield UserClient.findAll({
+                where: { isActive: isActive }
+            });
+            let getAllWorkers = yield UserWorker.findAll({
+                where: { isActive: isActive }
+            });
+            const usersAdmin = [...allClients, ...getAllWorkers];
+            return usersAdmin;
+        }
     });
 }
 exports.getAllUsers = getAllUsers;
