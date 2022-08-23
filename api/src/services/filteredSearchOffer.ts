@@ -231,8 +231,7 @@ export async function offerAllFiltersOn(
       },
     });
     return allFiltersOn;
-  }
-  if (input && !profession && rating && remMax && remMin && work_duration_time) {
+  } if (input && !profession && rating && remMax && remMin && work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         [Op.or]: [
@@ -268,8 +267,7 @@ export async function offerAllFiltersOn(
       },
     });
     return allFiltersOn;
-  }
-  if (input && profession && !rating && remMax && remMin && work_duration_time) {
+  } if (input && profession && !rating && remMax && remMin && work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         [Op.or]: [
@@ -303,8 +301,7 @@ export async function offerAllFiltersOn(
       },
     });
     return allFiltersOn;
-  }
-  if (input && profession && rating && !remMax && !remMin && work_duration_time) {
+  } if (input && profession && rating && !remMax && !remMin && work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         [Op.or]: [
@@ -337,8 +334,7 @@ export async function offerAllFiltersOn(
       },
     });
     return allFiltersOn;
-  }
-  if (input && profession && rating && remMax && remMin && !work_duration_time) {
+  } if (input && profession && rating && remMax && remMin && !work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         [Op.or]: [
@@ -374,8 +370,7 @@ export async function offerAllFiltersOn(
       },
     });
     return allFiltersOn;
-  }
-  if (!input && profession && rating && remMax && remMin && work_duration_time) {
+  } if (!input && profession && rating && remMax && remMin && work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         profession: {
@@ -403,8 +398,7 @@ export async function offerAllFiltersOn(
     });
 
     return allFiltersOn;
-  }
-  if (!input && !profession && rating && remMax && remMin && work_duration_time) {
+  } if (!input && !profession && rating && remMax && remMin && work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         max_remuneration: {
@@ -428,8 +422,7 @@ export async function offerAllFiltersOn(
       },
     });
     return allFiltersOn;
-  }
-  if (!input && profession && !rating && remMax && remMin && work_duration_time) {
+  } if (!input && profession && !rating && remMax && remMin && work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         profession: {
@@ -451,8 +444,7 @@ export async function offerAllFiltersOn(
       },
     });
     return allFiltersOn;
-  }
-  if (!input && profession && rating && !remMax && !remMin && work_duration_time) {
+  } if (!input && profession && rating && !remMax && !remMin && work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         profession: {
@@ -474,8 +466,7 @@ export async function offerAllFiltersOn(
     });
 
     return allFiltersOn;
-  }
-  if (!input && profession && rating && remMax && remMin && !work_duration_time) {
+  } if (!input && profession && rating && remMax && remMin && !work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         profession: {
@@ -500,8 +491,7 @@ export async function offerAllFiltersOn(
     });
 
     return allFiltersOn;
-  }
-  if (input && !profession && !rating && remMax && remMin && work_duration_time) {
+  } if (input && !profession && !rating && remMax && remMin && work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         [Op.or]: [
@@ -530,8 +520,7 @@ export async function offerAllFiltersOn(
       include: UserClient,
     });
     return allFiltersOn;
-  }
-  if (input && !profession && rating && !remMax && !remMin && work_duration_time) {
+  } if (input && !profession && rating && !remMax && !remMin && work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         [Op.or]: [
@@ -561,8 +550,7 @@ export async function offerAllFiltersOn(
       },
     });
     return allFiltersOn;
-  }
-  if (input && !profession && rating && remMax && remMin && !work_duration_time) {
+  } if (input && !profession && rating && remMax && remMin && !work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         [Op.or]: [
@@ -595,8 +583,7 @@ export async function offerAllFiltersOn(
       },
     });
     return allFiltersOn;
-  }
-  if (input && profession && !rating && !remMax && !remMin && work_duration_time) {
+  } if (input && profession && !rating && !remMax && !remMin && work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         [Op.or]: [
@@ -624,8 +611,7 @@ export async function offerAllFiltersOn(
       },
     });
     return allFiltersOn;
-  }
-  if (input && profession && !rating && remMax && remMin && !work_duration_time) {
+  } if (input && profession && !rating && remMax && remMin && !work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         [Op.or]: [
@@ -656,8 +642,7 @@ export async function offerAllFiltersOn(
       },
     });
     return allFiltersOn;
-  }
-  if (input && profession && rating && !remMax && !remMin && !work_duration_time) {
+  } if (input && profession && rating && !remMax && !remMin && !work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         [Op.or]: [
@@ -687,8 +672,7 @@ export async function offerAllFiltersOn(
       },
     });
     return allFiltersOn;
-  }
-  if (!input && !profession && !rating && remMax && remMin && work_duration_time) {
+  } if (!input && !profession && !rating && remMax && remMin && work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         max_remuneration: {
@@ -705,8 +689,7 @@ export async function offerAllFiltersOn(
       include:  UserClient,
     });
     return allFiltersOn;
-  }
-  if (!input && !profession && rating && !remMax && !remMin && work_duration_time) {
+  } if (!input && !profession && rating && !remMax && !remMin && work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         work_duration_time: {
@@ -724,8 +707,7 @@ export async function offerAllFiltersOn(
       },
     });
     return allFiltersOn;
-  }
-  if (!input && !profession && rating && remMax && remMin && !work_duration_time) {
+  } if (!input && !profession && rating && remMax && remMin && !work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         max_remuneration: {
@@ -746,8 +728,7 @@ export async function offerAllFiltersOn(
       },
     });
     return allFiltersOn;
-  }
-  if (!input && profession && !rating && !remMax && !remMin && work_duration_time) {
+  } if (!input && profession && !rating && !remMax && !remMin && work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         profession: {
@@ -763,8 +744,7 @@ export async function offerAllFiltersOn(
       },
     });
     return allFiltersOn;
-  }
-  if (!input && profession && !rating && remMax && remMin && !work_duration_time) {
+  } if (!input && profession && !rating && remMax && remMin && !work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         profession: {
@@ -783,8 +763,7 @@ export async function offerAllFiltersOn(
       },
     });
     return allFiltersOn;
-  }
-  if (!input && profession && rating && !remMax && !remMin && !work_duration_time) {
+  } if (!input && profession && rating && !remMax && !remMin && !work_duration_time) {
     const allFiltersOn = await Offer.findAll({
       where: {
         profession: {
@@ -802,5 +781,13 @@ export async function offerAllFiltersOn(
       },
     });
     return allFiltersOn;
+  } else {
+    const allFiltersOn = await Offer.findAll({
+      where:{
+        isActive: true,
+      },
+      include:  UserClient,
+    });
+    return allFiltersOn
   }
 }

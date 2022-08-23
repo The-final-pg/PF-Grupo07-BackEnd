@@ -73,8 +73,10 @@ class PaymentService {
                     currency_id: "ARS"
                 },
                 back_url: "https://rework-xi.vercel.app/home",
+                payer_email: Email
                 payer_email: Email,
                 payer_name: id
+
             };
             const subscription = yield axios_1.default.post(url, body, {
                 headers: {

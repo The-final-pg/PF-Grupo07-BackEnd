@@ -99,6 +99,13 @@ export async function workerAllfiltersOn(
       },
     });
     return workerAllfiltersOn;
+  } else if (!name && !profession && !rating) {
+    const workerAllfiltersOn = await UserWorker.findAll({
+      where:{
+        isActive: true,
+      }
+    })
+    return workerAllfiltersOn
   } else {
     const workerAllfiltersOn = await UserWorker.findAll({
       where: {
