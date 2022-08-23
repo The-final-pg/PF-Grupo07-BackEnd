@@ -30,7 +30,7 @@ login.post("/", async (req:Request,res:Response,next:NextFunction) => {
         "local",
         { session: false },
         async (error, user) => {
-            if(error) return next(error);
+            if(error) return res.status(400).json("invalid")
             else if(!user) return res.json("invalid");
             else if(user.isActive !== true){
                 return res.status(401).send({message: "Debes confirmar tu cuenta. Por favor verifica tu casilla de correo."})

@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
             allowNull: true,
         },
         state: {
-            type: sequelize_1.DataTypes.ENUM("posted", "cancelled", "rejected", "accepted", "contract accepted", "contract rejected", "contract started", "finalized", "released payment"),
+            type: sequelize_1.DataTypes.ENUM("posted", "accepted", "cancelled", "rejected", "contract accepted", "contract cancelled", "contract rejected", "contract started", "finalized", "released payment"),
             defaultValue: "posted",
         },
         idProposal: {
