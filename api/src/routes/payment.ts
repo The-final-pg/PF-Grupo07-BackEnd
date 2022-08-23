@@ -35,24 +35,14 @@ payment.post("/subscription", async (req:Request,res:Response,_next:NextFunction
 });
 
 payment.post("/notificationIPN", async(req:Request,res:Response,_next:NextFunction) => {
-    //paymentInstance.getNotification(req, res, _next);
-    console.log(req.body)
+    console.log(req.body);
     const response = req.body;
+    paymentInstance.getPaymentData(req,res,_next);
     if(response){
-        res.status(200).send("OK")
+        res.status(200).send("OK");
     }else{
-        res.status(400).send("juanma pto")
+        res.status(400).send("Error al requerir la informacion");
     }
-    // try {
-    //     const id = req.query.id;
-    //     const topic = req.query.topic;
-    //     const response = await axios.get(`https://api.mercadopago.com/${topic}/${id}/APP_USR-2475260180747604-081820-6a99fd4d1246c40d04f0cd9e997cda8a-1182295464`)
-    //     console.log(response)
-    //     res.json({response, topic})
-    // } catch (error) {
-    //     next(error);
-    // }
-
 });
 
 export default payment
