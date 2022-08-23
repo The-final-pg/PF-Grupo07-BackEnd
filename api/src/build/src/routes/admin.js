@@ -61,8 +61,8 @@ admin.put("/skills", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
 /* admin.put("/users/isActive" , async(_req: Request, _res: Response, next: NextFunction) => {
   // const {isWorker, id, isAdmin, isActive} = req.body
   try {
-    ////let message: string = await updateUser(req.body);
-    ////res.json(message)
+    //////let message: string = await updateUser(req.body);
+    //////res.json(message)
   } catch(error) {
     next(error);
   }
