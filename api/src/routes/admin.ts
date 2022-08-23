@@ -13,9 +13,9 @@ admin.get("/users", async (_req: Request, res: Response, next: NextFunction) => 
   });
 
 admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => {
-  const { isActive } = req.body
+  const { isActive } = req.query
   try {
-    const offers: Array<OfferType> = await getOfferFiltered(isActive)
+    const offers: Array<OfferType> = await getOfferFiltered(isActive as string)
     res.json(offers);
   } catch (error) {
     next(error);
@@ -43,3 +43,4 @@ admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => 
   });
 
   export default admin;
+
