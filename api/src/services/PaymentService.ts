@@ -73,7 +73,8 @@ class PaymentService {
         Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
       }
     });
-
+    return subscription.data;
+  }
     UserWorker.update({
       IdPayment:subscription.data.payer_id
     }, {

@@ -36,7 +36,7 @@ login.use((0, express_session_1.default)({
 login.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     passportConfig_1.default.authenticate("local", { session: false }, (error, user) => __awaiter(void 0, void 0, void 0, function* () {
         if (error)
-            return next(error);
+            return res.status(400).json("invalid");
         else if (!user)
             return res.json("invalid");
         else if (user.isActive !== true) {
