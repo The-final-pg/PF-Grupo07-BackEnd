@@ -3,7 +3,6 @@ const payment = express.Router();
 //const { SECRET_KEY, ACCESS_TOKEN } = process.env;
 import PaymentController from "../controllers/PaymentController"
 import PaymentService from "../services/PaymentService";
-import axios from "axios"
 const {UserWorker} = require("../db")
 
 const paymentInstance = new PaymentController(new PaymentService());
@@ -35,11 +34,16 @@ payment.post("/subscription", async (req:Request,res:Response,_next:NextFunction
     }
 });
 
+
 payment.post("/notificationIPN", async(req:Request,res:Response,_next:NextFunction) => {
-    const id = req.query.id;
-    const topic = req.query.topic;
-    const response = axios.get(`https://api.mercadopago.com/v1/payments/${id}`)
-    res.json({response, topic})
+    console.log(req.body);
+    const response = req.body;
+    paymentInstance.getPaymentData(req,res,_next);
+    if(response){
+        res.status(200).send("OK");
+    }else{
+        res.status(400).send("Error al requerir la informacion");
+    }
 });
 
 export default payment

@@ -31,7 +31,7 @@ export async function updateUser(isActive: string, isWorker: string, id: string,
     } /* else if(isAdmin !== undefined ) {
       await client.set({isAdmin})
       await client.save()
-      return "Se actualizo el estado isActive del "
+      return "Se actualizo el estado isAdmin del Client"
     } */
   } 
   
@@ -44,7 +44,7 @@ export async function updateUser(isActive: string, isWorker: string, id: string,
     } /* else if(isAdmin !== undefined ) {
       await worker.set({isAdmin})
       await worker.save()
-      return "Se actualizo el Client"
+      return "Se actualizo el estado isAdmin del Worker"
     } */
   }
 }

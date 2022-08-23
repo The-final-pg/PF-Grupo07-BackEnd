@@ -188,13 +188,13 @@ export async function setReview() {
 
 let profesiones: string = "Blogger,Marketing de afiliados,Freelancer,Asistente virtual,Redactor de contenidos o Copywriter,YouTuber,Clases en línea,Coach en línea,Consultor en línea,Representante de servicio al cliente,Programador,Traductor,Editor de video,Servicios de consultoría,Data Entry,Administración de E-Commerce,Voice acting,Corrección de textos y estilo,Fotografía de stock,Tester videojuegos,SEO,Diseño gráfico,Diseño web,UX Design,UX Researcher,Diseño de producto,Website testing,QA Tester,Community Manager,Agente de viajes,Venta de dibujos,Venta de artesanías,Servicios de animación,Teleoperador,Cuidador de mascotas,Realizar encuestas,Creación de podcasts,Trading,Venta de libros,Servicios de reclutamiento y selección,Técnico informático,Gestión de canal de YouTube,Anfitrión de Airbnb,Growth Hacking,Digital Project Management,Coordinación de eventos,Servicios de contabilidad,Preparación de impuestos,Estilista,Producción musical,Guía local,Nutricionista"
 
-let arrayProfesiones: string[]= profesiones.split(",")
+let arrayProfesiones: string[]= profesiones.split(",").sort();
 
 const randomProfession = () => arrayProfesiones[Math.floor(Math.random() * arrayProfesiones.length)]
 
 
 let skills:string = "Presentación de datos,Manejo de bases de datos,Diagnóstico,Investigación,Interpretación de datos y métricas,Gestión de bases de datos,HTML,CSS,JavaScript,Typescript,C#,Java,C++,Plataformas CRM,Investigación,Creación de prototipos,Desarrollo de flujos de trabajo,Correos electrónicos,Paquete de Microsoft,Google Drive,Redes sociales,Atención a los detalles,Personalización de la interacción,Conocimiento de prod. y serv.,Investigación,Manejo de datos,Comunicación visual,Análisis de datos,Investigación,Diseño gráfico,Negociación,Finanzas,Conocimiento empresariales,Contratación,Logística,Seguimiento de rendimiento,Manejo de presupuesto,Modelado financiero,Manejo de software,Gestión de SCRUM,SEO,SEM,Redacción,Herramientas de Google Analytics,Search Console,Tag Manager,Email marketing,Gestión de embudos,Redes sociales,PPC,Redacción básica,Storytelling,Edición,Periodismo,Copywriting,Escritura académica,Visualización de datos,Photoshop,Illustrator,InDesign,UX research,Sketching,Data visualization,Curiosidad,Trabajo en equipo,Comunicación,Empatía,Manejo del tiempo,Lenguajes de programación,Paradigmas de programación,Bilingüe,Comunicación efectiva,Pensamiento crítico,Capacidad de negociación,Manejo del tiempo,Dominio del inglés,Inteligencia emocional,Colaboración,Positivismo,Conocimiento del mercado,Capacidad de organización";
 
-let arraySkills: string[]= skills.split(",")
+let arraySkills: string[]= skills.split(",").sort();
 
 const randomSkills = () => arraySkills[Math.floor(Math.random() * arraySkills.length)]
