@@ -47,7 +47,7 @@ payment.post("/notificationIPN", (req, res, next) => __awaiter(void 0, void 0, v
     try {
         const id = req.query.id;
         const topic = req.query.topic;
-        const response = yield axios_1.default.get(`https://api.mercadopago.com/v1/payments/${id}`);
+        const response = yield axios_1.default.get(`https://api.mercadopago.com/merchant_orders/${id}/APP_USR-2475260180747604-081820-6a99fd4d1246c40d04f0cd9e997cda8a-1182295464`);
         console.log(response);
         res.json({ response, topic });
     }
