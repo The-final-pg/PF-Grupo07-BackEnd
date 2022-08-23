@@ -68,14 +68,14 @@ mercadopago.payment.save(payment_data)
   });
     }
 
-    async getPaymentData(req:Request,res:Response,_next:NextFunction){
+    async getPaymentData(req:Request,res:Response,next:NextFunction){
       try {
         this.subscriptionService.getMPInfo(req.body)
         .then((Info:any)=>{
             return res.json(Info);
         })
       } catch (error) {
-        
+        next(error)
       }
     }
   }
