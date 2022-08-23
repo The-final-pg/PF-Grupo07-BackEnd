@@ -58,4 +58,14 @@ admin.put("/skills", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     }
     ;
 }));
+admin.put("/users/isActive", (_req, _res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    // const {isWorker, id, isAdmin, isActive} = req.body
+    try {
+        //let message: string = await updateUser(req.body);
+        //res.json(message)
+    }
+    catch (error) {
+        next(error);
+    }
+}));
 exports.default = admin;

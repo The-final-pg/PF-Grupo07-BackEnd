@@ -63,7 +63,7 @@ class PaymentService {
         return __awaiter(this, void 0, void 0, function* () {
             const url = "https://api.mercadopago.com/preapproval";
             const { Email, id } = form;
-            console.log(Email);
+            console.log(Email, id);
             const body = {
                 reason: "REwork Premium",
                 auto_recurring: {
@@ -75,7 +75,6 @@ class PaymentService {
                 back_url: "https://rework-xi.vercel.app/home",
                 payer_email: Email,
                 payer_name: id
-
             };
             const subscription = yield axios_1.default.post(url, body, {
                 headers: {
@@ -83,9 +82,10 @@ class PaymentService {
                     Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
                 }
             });
-
-            UserWorker.update({
-                IdPayment: subscription.data.payer_id
+            //aca me guardo los datos
+            console.log(subscription.data.payer_id);
+            yield UserWorker.update({
+                IdPayment: subscription.data.payer_id.toString()
             }, {
                 where: {
                     id: id
