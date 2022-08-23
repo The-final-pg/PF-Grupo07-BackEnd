@@ -18,7 +18,7 @@ const adminController_1 = require("../controllers/adminController");
 admin.get("/users", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { isActive } = req.query;
     try {
-        const users = yield (0, adminController_1.getAllUsers)(isActiveisActive);
+        const users = yield (0, adminController_1.getAllUsers)(isActiveisActiveisActive);
         res.json(users);
     }
     catch (error) {
