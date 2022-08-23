@@ -6,7 +6,7 @@ import { getAllUsers, addNewProfessions, addNewSkills, getOfferFiltered } from "
 admin.get("/users", async (req: Request, res: Response, next: NextFunction) => {
     const {isActive} = req.query
     try {
-      const users: Array<ClientType | WorkerType> = await getAllUsers(isActive as stringisActive as string);
+      const users: Array<ClientType | WorkerType> = await getAllUsers(isActive as string);
       res.json(users);
     } catch (error) {
       next(error);
@@ -43,12 +43,11 @@ admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => 
     };
   });
 
-
-  /* admin.put("/users/isActive" , async(req: Request, res: Response, next: NextFunction) => {
+  /*admin.put("/users/isActive" , async(_req: Request, _res: Response, next: NextFunction) => {
     // const {isWorker, id, isAdmin, isActive} = req.body
     try {
-      //let message: string = await updateUser(req.body);
-      //res.json(message)
+      ////let message: string = await updateUser(req.body);
+      ////res.json(message)
     } catch(error) {
       next(error);
     }

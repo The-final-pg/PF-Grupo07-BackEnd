@@ -75,7 +75,6 @@ class PaymentService {
                 back_url: "https://rework-xi.vercel.app/home",
                 payer_email: Email,
                 payer_name: id,
-                payer_name: id
             };
             const subscription = yield axios_1.default.post(url, body, {
                 headers: {
@@ -99,6 +98,8 @@ class PaymentService {
         return __awaiter(this, void 0, void 0, function* () {
             let information;
             let id_payment;
+            if (response.action === "created")
+                return "All works";
             if (response.hasOwnProperty("entity")) {
                 information = yield axios_1.default.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`);
                 id_payment = information.payer_id;

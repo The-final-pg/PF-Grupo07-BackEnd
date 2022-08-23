@@ -18,7 +18,7 @@ const adminController_1 = require("../controllers/adminController");
 admin.get("/users", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { isActive } = req.query;
     try {
-        const users = yield (0, adminController_1.getAllUsers)(isActiveisActive);
+        const users = yield (0, adminController_1.getAllUsers)(isActive);
         res.json(users);
     }
     catch (error) {
@@ -58,11 +58,11 @@ admin.put("/skills", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     }
     ;
 }));
-/* admin.put("/users/isActive" , async(req: Request, res: Response, next: NextFunction) => {
+/*admin.put("/users/isActive" , async(_req: Request, _res: Response, next: NextFunction) => {
   // const {isWorker, id, isAdmin, isActive} = req.body
   try {
-    //let message: string = await updateUser(req.body);
-    //res.json(message)
+    ////let message: string = await updateUser(req.body);
+    ////res.json(message)
   } catch(error) {
     next(error);
   }
