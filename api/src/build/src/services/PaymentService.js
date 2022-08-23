@@ -104,7 +104,7 @@ class PaymentService {
             if (response.hasOwnProperty("entity")) {
                 console.log("ENTREEEEEEEEEEEEE");
                 information = yield axios_1.default.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`);
-                id_payment = information.payer_id;
+                id_payment = information.data.payer_id;
             }
             console.log(information);
             const worker = yield UserWorker.findOne({ where: {
