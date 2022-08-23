@@ -18,7 +18,7 @@ const adminController_1 = require("../controllers/adminController");
 admin.get("/users", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { isActive } = req.query;
     try {
-        const users = yield (0, adminController_1.getAllUsers)(isActive);
+        const users = yield (0, adminController_1.getAllUsers)(isActiveisActive);
         res.json(users);
     }
     catch (error) {
@@ -58,13 +58,13 @@ admin.put("/skills", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     }
     ;
 }));
-/*   admin.put("/users/isActive" , async(req: Request, res: Response, next: NextFunction) => {
-    // const {isWorker, id, isAdmin, isActive} = req.body
-    try {
-      let message: string = await updateUser(req.body);
-      res.json(message)
-    } catch(error) {
-      next(error);
-    }
-  }) */
+/* admin.put("/users/isActive" , async(req: Request, res: Response, next: NextFunction) => {
+  // const {isWorker, id, isAdmin, isActive} = req.body
+  try {
+    //let message: string = await updateUser(req.body);
+    //res.json(message)
+  } catch(error) {
+    next(error);
+  }
+}) */
 exports.default = admin;

@@ -54,7 +54,7 @@ class PaymentService {
   async createSubscription(form:any) {
     const url = "https://api.mercadopago.com/preapproval";
     const {Email, id} = form
-    console.log(Email)
+    console.log(Email, id)
     const body = {
       reason: "REwork Premium",
       auto_recurring: {
@@ -65,6 +65,7 @@ class PaymentService {
       },
        back_url: "https://rework-xi.vercel.app/home",
        payer_email: Email,
+       payer_name: id,
        payer_name: id
     };
 
@@ -76,9 +77,9 @@ class PaymentService {
     });
 
     //aca me guardo los datos
-
-    UserWorker.update({
-      IdPayment:subscription.data.payer_id
+    console.log(subscription.data.payer_id)
+    await UserWorker.update({
+      IdPayment:subscription.data.payer_id.toString()
     }, {
       where:{
         id:id
@@ -108,6 +109,17 @@ class PaymentService {
     return worker
   }
 }
+
+
+/*"payer": {
+    "email": "test_user_955808@testuser.com",
+    "entity_type": null,
+    "first_name": null,
+    "id": "1182290827",
+    "identification": {
+      "number": "23011111114",
+      "type": "CUIL"
+    },*/
 
 
 /*"payer": {
