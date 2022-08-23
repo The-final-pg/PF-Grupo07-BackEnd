@@ -52,7 +52,7 @@ class PaymentService {
 
   async createSubscription(form:any) {
     const url = "https://api.mercadopago.com/preapproval";
-    const {Email} = form
+    const {Email, id} = form
     console.log(Email)
     const body = {
       reason: "REwork Premium",
@@ -63,7 +63,8 @@ class PaymentService {
         currency_id: "ARS"
       },
        back_url: "https://rework-xi.vercel.app/home",
-       payer_email: Email
+       payer_email: Email,
+       payer_name: id
     };
 
     const subscription = await axios.post(url, body, {
@@ -74,23 +75,32 @@ class PaymentService {
     });
     return subscription.data;
   }
+    UserWorker.update({
+      IdPayment:subscription.data.payer_id
+    }, {
+      where:{
+        id:id
+      }
+    })
+    return subscription.data;
+  }
 
   async getMPInfo(response:any){
     let information:any
-    let payer_mail:string
+    let id_payment:string
     if(response.hasOwnProperty("entity")){
       information = await axios.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`)
-      payer_mail = information.payer_email;
+      id_payment = information.payer_id;
     }else{
       information = await axios.get(`https://api.mercadopago.com/v1/${response.type}s/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`)
-      payer_mail = information.payer.email
+      id_payment = information.payer.email
     }
 
     const worker = await UserWorker.findOne({where:{
-      user_mail:payer_mail
+      IdPayment:id_payment
     }})
     if(worker){
-      worker.premium = true;
+      worker.set({premium:true})
       await worker.save();
     }
     return worker
