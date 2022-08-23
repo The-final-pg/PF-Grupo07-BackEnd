@@ -44,7 +44,6 @@ payment.post("/notificationIPN", async(req:Request,res:Response,_next:NextFuncti
     }else{
         res.status(400).send("Error al requerir la informacion");
     }
-
 });
 
 export default payment

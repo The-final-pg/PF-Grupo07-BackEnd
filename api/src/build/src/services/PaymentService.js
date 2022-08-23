@@ -62,7 +62,7 @@ class PaymentService {
     createSubscription(form) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = "https://api.mercadopago.com/preapproval";
-            const { Email } = form;
+            const { Email, id } = form;
             console.log(Email);
             const body = {
                 reason: "REwork Premium",
@@ -73,12 +73,22 @@ class PaymentService {
                     currency_id: "ARS"
                 },
                 back_url: "https://rework-xi.vercel.app/home",
-                payer_email: Email
+                payer_email: Email,
+                payer_name: id
+
             };
             const subscription = yield axios_1.default.post(url, body, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
+                }
+            });
+
+            UserWorker.update({
+                IdPayment: subscription.data.payer_id
+            }, {
+                where: {
+                    id: id
                 }
             });
             return subscription.data;
@@ -87,20 +97,20 @@ class PaymentService {
     getMPInfo(response) {
         return __awaiter(this, void 0, void 0, function* () {
             let information;
-            let payer_mail;
+            let id_payment;
             if (response.hasOwnProperty("entity")) {
                 information = yield axios_1.default.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`);
-                payer_mail = information.payer_email;
+                id_payment = information.payer_id;
             }
             else {
                 information = yield axios_1.default.get(`https://api.mercadopago.com/v1/${response.type}s/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`);
-                payer_mail = information.payer.email;
+                id_payment = information.payer.email;
             }
             const worker = yield UserWorker.findOne({ where: {
-                    user_mail: payer_mail
+                    IdPayment: id_payment
                 } });
             if (worker) {
-                worker.premium = true;
+                worker.set({ premium: true });
                 yield worker.save();
             }
             return worker;

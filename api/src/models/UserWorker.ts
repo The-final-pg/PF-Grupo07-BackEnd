@@ -80,7 +80,11 @@ module.exports = (sequelize: any) => {
       description: {
         type: DataTypes.TEXT,
         allowNull: true,
-      }
+      },
+      IdPayment: {
+        type: DataTypes.STRING,
+        allowNull:true
+      },
     }
   );
 };
