@@ -15,11 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const auth = express_1.default.Router();
 const bcrypt = require("bcrypt");
-const bcrypt = require("bcrypt");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const { SECRET_KEY, REWORK_MAIL, REWORK_MAIL } = process.env;
+const { SECRET_KEY, REWORK_MAIL } = process.env;
 const { UserWorker, UserClient } = require("../db");
-const nodemailerConfig_1 = __importDefault(require("../utils/nodemailer/nodemailerConfig"));
 const nodemailerConfig_1 = __importDefault(require("../utils/nodemailer/nodemailerConfig"));
 auth.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const googleUser = req.body;
