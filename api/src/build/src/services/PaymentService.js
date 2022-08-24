@@ -73,17 +73,8 @@ class PaymentService {
                     currency_id: "ARS"
                 },
                 back_url: "https://rework-xi.vercel.app/home",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                payer_email: Email
-=======
-=======
-                payer_email: Email
->>>>>>> 67edb0ce2e70bb51c78e5f53c175b23e5f294a75
                 payer_email: Email,
                 payer_name: id
-
->>>>>>> 0e7dc9a6620d653bdd5e361d28ad333eaa437ca8
             };
             const subscription = yield axios_1.default.post(url, body, {
                 headers: {
@@ -111,11 +102,9 @@ class PaymentService {
             if (response.action === "created")
                 return "All works";
             if (response.hasOwnProperty("entity")) {
-                console.log("ENTREEEEEEEEEEEEEEEEEEEE");
                 information = yield axios_1.default.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`);
                 id_payment = information.payer_id;
             }
-            console.log(information);
             const worker = yield UserWorker.findOne({ where: {
                     IdPayment: id_payment
                 } });
