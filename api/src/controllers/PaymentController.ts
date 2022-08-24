@@ -70,8 +70,7 @@ mercadopago.payment.save(payment_data)
 
     async getPaymentData(req:Request,_res:Response,next:NextFunction){
       try {
-        this.subscriptionService.getMPInfo(req.body)
-         localStorage.removeItem("token");
+        this.subscriptionService.getMPInfo(req.body);
       } catch (error) {
         next(error)
       }
