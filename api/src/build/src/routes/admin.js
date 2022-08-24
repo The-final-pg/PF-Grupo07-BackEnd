@@ -47,6 +47,18 @@ admin.put("/profession", (req, res, next) => __awaiter(void 0, void 0, void 0, f
     }
     ;
 }));
+admin.put("/profession/delete", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const array = req.body.array;
+        const profession = req.body.profession;
+        const response = yield (0, adminController_1.deleteProfession)(array, profession);
+        res.json(response);
+    }
+    catch (error) {
+        next(error);
+    }
+    ;
+}));
 admin.put("/skills", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = req.body.skills;
@@ -58,10 +70,32 @@ admin.put("/skills", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     }
     ;
 }));
+admin.put("/skills/delete", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const array = req.body.array;
+        const skill = req.body.skill;
+        const response = yield (0, adminController_1.deleteSkill)(array, skill);
+        res.json(response);
+    }
+    catch (error) {
+        next(error);
+    }
+    ;
+}));
 admin.put("/users/isActive", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { isWorker, id, /* isAdmin, */ isActive } = req.body;
     try {
         let message = yield (0, adminController_1.updateUser)(/* isAdmin, */ isActive, isWorker, id);
+        res.json(message);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
+admin.put("/users/isAdmin", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { isWorker, id, /* isAdmin, */ isAdmin } = req.body;
+    try {
+        let message = yield (0, adminController_1.updateUserAdmin)(/* isAdmin, */ isAdmin, isWorker, id);
         res.json(message);
     }
     catch (error) {

@@ -89,6 +89,10 @@ module.exports = (sequelize: any) => {
         type: DataTypes.JSONB,
         allowNull: true,
       },
+      superAdmin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     }
   );
 };
