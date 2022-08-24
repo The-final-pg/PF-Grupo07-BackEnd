@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addNewSkills = exports.addNewProfessions = exports.getOfferFiltered = exports.getAllUsers = void 0;
+exports.addNewSkills = exports.addNewProfessions = exports.getOfferFiltered = exports.updateUser = exports.getAllUsers = void 0;
 const { UserClient, UserWorker, Offer, Proposal } = require("../db");
 const id = "3748eb17-a207-5bc3-aa4f-3113a1b9409d";
 function getAllUsers(isActive) {
@@ -33,6 +33,35 @@ function getAllUsers(isActive) {
     });
 }
 exports.getAllUsers = getAllUsers;
+function updateUser(isActive, isWorker, id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (isWorker === "false") {
+            let client = yield UserClient.findByPk(id);
+            if (isActive !== undefined) {
+                yield client.set({ isActive });
+                yield client.save();
+                return "Se actualizo el estado isActive del Client";
+            } /* else if(isAdmin !== undefined ) {
+              await client.set({isAdmin})
+              await client.save()
+              return "Se actualizo el estado isAdmin del Client"
+            } */
+        }
+        if (isWorker === "true") {
+            let worker = yield UserWorker.findByPk(id);
+            if (isActive !== undefined) {
+                yield worker.set({ isActive });
+                yield worker.save();
+                return "Se actualizo el estado isActive del Worker";
+            } /* else if(isAdmin !== undefined ) {
+              await worker.set({isAdmin})
+              await worker.save()
+              return "Se actualizo el estado isAdmin del Worker"
+            } */
+        }
+    });
+}
+exports.updateUser = updateUser;
 function getOfferFiltered(isActive) {
     return __awaiter(this, void 0, void 0, function* () {
         if (isActive === "true") {

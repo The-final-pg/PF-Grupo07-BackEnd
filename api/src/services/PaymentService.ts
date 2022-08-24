@@ -53,7 +53,6 @@ class PaymentService {
   async createSubscription(form:any) {
     const url = "https://api.mercadopago.com/preapproval";
     const {Email, id} = form
-    console.log(Email, id)
     const body = {
       reason: "REwork Premium",
       auto_recurring: {
@@ -75,7 +74,6 @@ class PaymentService {
     });
 
     //aca me guardo los datos
-    console.log(subscription.data.payer_id)
     await UserWorker.update({
       IdPayment:subscription.data.payer_id.toString()
     }, {
@@ -90,14 +88,11 @@ class PaymentService {
     let information:any
     let id_payment:string
 
-    console.log(response)
     if(response.action==="created") return "All works"
     if(response.hasOwnProperty("entity")){
-      console.log("entre a entity")
       if (response.entity === "preapproval"){
-      console.log("entre preapproval")
         information = await axios.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`)
-        id_payment = information.data.payer_id;
+        id_payment = information.data.payer_id.tpString();
       } else return "";
     }
 

@@ -63,7 +63,6 @@ class PaymentService {
         return __awaiter(this, void 0, void 0, function* () {
             const url = "https://api.mercadopago.com/preapproval";
             const { Email, id } = form;
-            console.log(Email, id);
             const body = {
                 reason: "REwork Premium",
                 auto_recurring: {
@@ -73,10 +72,8 @@ class PaymentService {
                     currency_id: "ARS"
                 },
                 back_url: "https://rework-xi.vercel.app/home",
-                payer_email: Email
                 payer_email: Email,
                 payer_name: id
-
             };
             const subscription = yield axios_1.default.post(url, body, {
                 headers: {
@@ -85,7 +82,6 @@ class PaymentService {
                 }
             });
             //aca me guardo los datos
-            console.log(subscription.data.payer_id);
             yield UserWorker.update({
                 IdPayment: subscription.data.payer_id.toString()
             }, {
@@ -100,15 +96,12 @@ class PaymentService {
         return __awaiter(this, void 0, void 0, function* () {
             let information;
             let id_payment;
-            console.log(response);
             if (response.action === "created")
                 return "All works";
             if (response.hasOwnProperty("entity")) {
-                console.log("entre a entity");
                 if (response.entity === "preapproval") {
-                    console.log("entre preapproval");
                     information = yield axios_1.default.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`);
-                    id_payment = information.data.payer_id;
+                    id_payment = information.data.payer_id.tpString();
                 }
                 else
                     return "";
