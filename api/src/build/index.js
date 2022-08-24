@@ -2,7 +2,7 @@
 //...*/,,,,,,,,*,                         
 //,**,*,*,*,,,,,*                        
 //  .//((#%%(/***.                       
-//. .                                                                                                      (%&&&&&&&&&&(                        
+//. .                                                                                                      (%&&&&&&&&&&(                       
 //*/*/(//,/*                                                                                                  /#%%%%%%%%%(                        
 //,..(//**////(#/*//,                                                                                            .##%%%%%%%%%#((                       
 //*((/(,////(/*/**,*//**,                                   ,(##/*(/**.                                         /##%%%%%%%%#(#/                        
@@ -59,7 +59,7 @@ const data_1 = require("./data");
 const cleanDataBase_1 = require("./src/services/cleanDataBase");
 const { PORT } = process.env;
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
     app_1.default.listen(PORT || 3001, () => __awaiter(void 0, void 0, void 0, function* () {
         if (PORT) {
             console.log(`%s listening at ${PORT}`);
