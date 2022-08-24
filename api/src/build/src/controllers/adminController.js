@@ -40,7 +40,6 @@ function updateUser(isActive, isWorker, id) {
             if (isActive !== undefined) {
                 yield client.set({ isActive: isActive });
                 yield client.save();
-                console.log("client:", client);
                 return "Se actualizo el estado isActive del Client";
             } /* else if(isAdmin !== undefined ) {
               await client.set({isAdmin})
