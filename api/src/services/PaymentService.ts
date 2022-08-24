@@ -63,7 +63,7 @@ class PaymentService {
       },
        back_url: "https://rework-xi.vercel.app/home",
        payer_email: Email,
-       payer_name: id
+       payer_name: id,
     };
 
     const subscription = await axios.post(url, body, {
@@ -95,7 +95,7 @@ class PaymentService {
         id_payment = information.data.payer_id.toString();
       } else return "";
     }
-
+    console.log(information);
     const worker = await UserWorker.findOne({where:{
       IdPayment:id_payment
     }})
@@ -106,6 +106,29 @@ class PaymentService {
     return worker
   }
 }
+
+
+/*"payer": {
+    "email": "test_user_955808@testuser.com",
+    "entity_type": null,
+    "first_name": null,
+    "id": "1182290827",
+    "identification": {
+      "number": "23011111114",
+      "type": "CUIL"
+    },*/
+
+
+/*"payer": {
+    "email": "test_user_955808@testuser.com",
+    "entity_type": null,
+    "first_name": null,
+    "id": "1182290827",
+    "identification": {
+      "number": "23011111114",
+      "type": "CUIL"
+    },*/
+
 
 /*"payer": {
     "email": "test_user_955808@testuser.com",

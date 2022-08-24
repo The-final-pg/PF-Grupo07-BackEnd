@@ -16,6 +16,7 @@ const axios_1 = __importDefault(require("axios"));
 const { ACCESS_TOKEN } = process.env;
 const mercadopago_1 = __importDefault(require("mercadopago"));
 const { UserWorker } = require("../db");
+const { UserWorker } = require("../db");
 mercadopago_1.default.configure({
     access_token: ACCESS_TOKEN
 });
@@ -63,12 +64,13 @@ class PaymentService {
         return __awaiter(this, void 0, void 0, function* () {
             const url = "https://api.mercadopago.com/preapproval";
             const { Email, id } = form;
+            const { Email, id } = form;
             const body = {
                 reason: "REwork Premium",
                 auto_recurring: {
                     frequency: 1,
                     frequency_type: "months",
-                    transaction_amount: 1000,
+                    transaction_amount: 100000,
                     currency_id: "ARS"
                 },
                 back_url: "https://rework-xi.vercel.app/home",
@@ -79,6 +81,14 @@ class PaymentService {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
+                }
+            });
+            //aca me guardo los datos
+            yield UserWorker.update({
+                IdPayment: subscription.data.payer_id.toString()
+            }, {
+                where: {
+                    id: id
                 }
             });
             //aca me guardo los datos
