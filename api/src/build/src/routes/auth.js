@@ -15,11 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const auth = express_1.default.Router();
 const bcrypt = require("bcrypt");
-const bcrypt = require("bcrypt");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const { SECRET_KEY, REWORK_MAIL, REWORK_MAIL } = process.env;
+const { SECRET_KEY, REWORK_MAIL } = process.env;
 const { UserWorker, UserClient } = require("../db");
-const nodemailerConfig_1 = __importDefault(require("../utils/nodemailer/nodemailerConfig"));
 const nodemailerConfig_1 = __importDefault(require("../utils/nodemailer/nodemailerConfig"));
 auth.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const googleUser = req.body;
@@ -287,7 +285,39 @@ auth.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         next(error);
     }
 }));
-/* auth.post("/change-password", async (req: any, res: any) => {
-
-}) */
+auth.post("/change-password", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { user_mail, oldPassword, newPassword } = req.body;
+    console.log("oldPassword", oldPassword);
+    console.log("newPassword", newPassword);
+    try {
+        const worker = yield UserWorker.findOne({ where: { user_mail: user_mail } });
+        const client = yield UserClient.findOne({ where: { user_mail: user_mail } });
+        console.log("entre al post del change");
+        let user;
+        if (!worker && !client) {
+            res.send("Usuario incorrecto");
+        }
+        else {
+            if (worker) {
+                user = worker;
+            }
+            else {
+                user = client;
+            }
+            const hashedPassword = yield bcrypt.compare(oldPassword, user.password);
+            if (hashedPassword) {
+                const confirmedPassword = yield bcrypt.hash(newPassword, 8);
+                yield user.set({ password: confirmedPassword });
+                yield user.save();
+                res.send("Contraseña reestablecida");
+            }
+            else {
+                res.send("Contraseña incorrecta");
+            }
+        }
+    }
+    catch (error) {
+        return error;
+    }
+}));
 exports.default = auth;
