@@ -16,7 +16,6 @@ const axios_1 = __importDefault(require("axios"));
 const { ACCESS_TOKEN } = process.env;
 const mercadopago_1 = __importDefault(require("mercadopago"));
 const { UserWorker } = require("../db");
-const { UserWorker } = require("../db");
 mercadopago_1.default.configure({
     access_token: ACCESS_TOKEN
 });
@@ -64,31 +63,22 @@ class PaymentService {
         return __awaiter(this, void 0, void 0, function* () {
             const url = "https://api.mercadopago.com/preapproval";
             const { Email, id } = form;
-            const { Email, id } = form;
             const body = {
                 reason: "REwork Premium",
                 auto_recurring: {
                     frequency: 1,
                     frequency_type: "months",
-                    transaction_amount: 100000,
+                    transaction_amount: 1000,
                     currency_id: "ARS"
                 },
                 back_url: "https://rework-xi.vercel.app/home",
                 payer_email: Email,
-                payer_name: id
+                payer_name: id,
             };
             const subscription = yield axios_1.default.post(url, body, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
-                }
-            });
-            //aca me guardo los datos
-            yield UserWorker.update({
-                IdPayment: subscription.data.payer_id.toString()
-            }, {
-                where: {
-                    id: id
                 }
             });
             //aca me guardo los datos
@@ -116,6 +106,7 @@ class PaymentService {
                 else
                     return "";
             }
+            console.log(information);
             const worker = yield UserWorker.findOne({ where: {
                     IdPayment: id_payment
                 } });
@@ -127,6 +118,24 @@ class PaymentService {
         });
     }
 }
+/*"payer": {
+    "email": "test_user_955808@testuser.com",
+    "entity_type": null,
+    "first_name": null,
+    "id": "1182290827",
+    "identification": {
+      "number": "23011111114",
+      "type": "CUIL"
+    },*/
+/*"payer": {
+    "email": "test_user_955808@testuser.com",
+    "entity_type": null,
+    "first_name": null,
+    "id": "1182290827",
+    "identification": {
+      "number": "23011111114",
+      "type": "CUIL"
+    },*/
 /*"payer": {
     "email": "test_user_955808@testuser.com",
     "entity_type": null,

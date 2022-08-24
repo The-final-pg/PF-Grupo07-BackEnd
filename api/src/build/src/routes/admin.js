@@ -36,6 +36,16 @@ admin.get("/offers", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         next(error);
     }
 }));
+admin.get("/offers", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { isActive } = req.query;
+    try {
+        const offers = yield (0, adminController_1.getOfferFiltered)(isActive);
+        res.json(offers);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
 admin.put("/profession", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = req.body.profession;
@@ -57,6 +67,16 @@ admin.put("/skills", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         next(error);
     }
     ;
+}));
+admin.put("/users/isActive", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { isWorker, id, /* isAdmin, */ isActive } = req.body;
+    try {
+        let message = yield (0, adminController_1.updateUser)(/* isAdmin, */ isActive, isWorker, id);
+        res.json(message);
+    }
+    catch (error) {
+        next(error);
+    }
 }));
 admin.put("/users/isActive", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { isWorker, id, /* isAdmin, */ isActive } = req.body;

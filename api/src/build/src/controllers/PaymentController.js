@@ -47,38 +47,6 @@ class PaymentController {
             }
         });
     }
-    getNotification(req, res, _next) {
-        return __awaiter(this, void 0, void 0, function* () {
-            mercadopago.configurations.setAccessToken(process.env.ACCESS_TOKEN);
-            var payment_data = {
-                transaction_amount: Number(req.body.transactionAmount),
-                token: req.body.token,
-                description: req.body.description,
-                installments: Number(req.body.installments),
-                payment_method_id: req.body.paymentMethodId,
-                issuer_id: req.body.issuer,
-                notification_url: "http://requestbin.fullcontact.com/1ogudgk1",
-                payer: {
-                    email: req.body.email,
-                    identification: {
-                        type: req.body.docType,
-                        number: req.body.docNumber
-                    }
-                }
-            };
-            mercadopago.payment.save(payment_data)
-                .then(function (response) {
-                res.status(response.status).json({
-                    status: response.body.status,
-                    status_detail: response.body.status_detail,
-                    id: response.body.id
-                });
-            })
-                .catch(function (error) {
-                res.status(error.status).send(error);
-            });
-        });
-    }
     getPaymentData(req, _res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -119,19 +87,6 @@ class PaymentController {
                 .catch(function (error) {
                 res.status(error.status).send(error);
             });
-        });
-    }
-    getPaymentData(req, res, next) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                this.subscriptionService.getMPInfo(req.body)
-                    .then((Info) => {
-                    return res.json(Info);
-                });
-            }
-            catch (error) {
-                next(error);
-            }
         });
     }
 }
