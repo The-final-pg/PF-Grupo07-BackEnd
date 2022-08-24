@@ -95,7 +95,6 @@ class PaymentService {
         id_payment = information.data.payer_id.toString();
       } else return "";
     }
-
     const worker = await UserWorker.findOne({where:{
       IdPayment:id_payment
     }})
