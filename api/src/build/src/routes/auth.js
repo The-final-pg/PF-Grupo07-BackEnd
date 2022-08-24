@@ -138,7 +138,7 @@ auth.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
                           <p>Te sugerimos cambiar tu contraseña por una que solo tú conozcas. Puedes hacerlo desde</p>
           
                           <!-- Botón -->
-                          <a class="claseBoton" href="http://localhost:3000/myProfile">AQUÍ</a>
+                          <a class="claseBoton" href="https://re-work-ten.vercel.app/myProfile">AQUÍ</a>
                       </div>
                       <!-- Contenido principal -->
           
@@ -254,7 +254,7 @@ auth.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
                             <p>Te sugerimos cambiar tu contraseña por una que solo tú conozcas. Puedes hacerlo desde</p>
             
                             <!-- Botón -->
-                            <a class="claseBoton" href="http://localhost:3000/myProfile">AQUÍ</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/myProfile">AQUÍ</a>
                         </div>
                         <!-- Contenido principal -->
             

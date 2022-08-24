@@ -79,7 +79,7 @@ login.post("/forgot-password", (req, res) => __awaiter(void 0, void 0, void 0, f
             const token = jsonwebtoken_1.default.sign({
                 user_mail: user.user_mail
             }, SECRET_KEY, { expiresIn: "15m" });
-            const link = `http://localhost:3000/resetPassword?token=${token}`;
+            const link = `https://re-work-ten.vercel.app/resetPassword?token=${token}`;
             console.log("link forgot password", link);
             if (type === "passwordreset") {
                 nodemailerConfig_1.default.sendMail({

@@ -78,11 +78,11 @@ review.post("/client", async (req: Request, res: Response, next: NextFunction) =
                   <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                       <h1>¡Has recibido una nueva review!</h1>
                       <p>Para leerla dirígete a tu perfil en este link (recuerda estar logueado): </p>
-                      <a class="claseBoton" href="http://localhost:3000/myProfile">Click aquí</a>
+                      <a class="claseBoton" href="https://re-work-ten.vercel.app/myProfile">Click aquí</a>
                       <!-- Gracias -->
       
                       <!-- Botón -->
-                      <a class="claseBoton" href="http://localhost:3000/detailOffer/${offerJson.idOffer}">Click aquí para ir a la oferta</a>
+                      <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${offerJson.idOffer}">Click aquí para ir a la oferta</a>
                   </div>
                   <!-- Contenido principal -->
       
@@ -179,11 +179,11 @@ review.post("/worker", async (req: Request, res: Response, next: NextFunction) =
                       <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                           <h1>¡Has recibido una nueva review!</h1>
                           <p>Para leerla dirígete a tu perfil en este link (recuerda estar logueado): </p>
-                          <a class="claseBoton" href="http://localhost:3000/myProfile">Click aquí</a>
+                          <a class="claseBoton" href="https://re-work-ten.vercel.app/myProfile">Click aquí</a>
                           <!-- Gracias -->
           
                           <!-- Botón -->
-                          <a class="claseBoton" href="http://localhost:3000/detailOffer/${offerJson.idOffer}">Click aquí para ir a la oferta</a>
+                          <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${offerJson.idOffer}">Click aquí para ir a la oferta</a>
                       </div>
                       <!-- Contenido principal -->
           

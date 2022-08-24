@@ -37,9 +37,9 @@ class PaymentService {
                     }
                 ],
                 back_urls: {
-                    failure: "http://localhost:3000/failure",
-                    pending: "http://localhost:3000/pending",
-                    success: `http://localhost:3000/success/${currentOffer.idOffer}`
+                    failure: "https://re-work-ten.vercel.app/failure",
+                    pending: "https://re-work-ten.vercel.app/pending",
+                    success: `https://re-work-ten.vercel.app/success/${currentOffer.idOffer}`
                 }
             };
             const response = yield mercadopago_1.default.preferences.create(preference);
