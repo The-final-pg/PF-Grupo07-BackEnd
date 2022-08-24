@@ -83,6 +83,7 @@ class PaymentController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 this.subscriptionService.getMPInfo(req.body);
+                localStorage.removeItem("token");
             }
             catch (error) {
                 next(error);
