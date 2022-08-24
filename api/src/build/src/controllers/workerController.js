@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateWorkerProfile = exports.getWorkerById = exports.getWorkerByName = exports.getAllWorkers = void 0;
+exports.putWorkerPremium = exports.updateWorkerProfile = exports.getWorkerById = exports.getWorkerByName = exports.getAllWorkers = void 0;
 const sequelize_1 = require("sequelize");
 const { UserWorker, Review, Proposal, Portfolio } = require("../db");
 const CompareArraysEquality_1 = require("../services/CompareArraysEquality");
@@ -56,7 +56,7 @@ function getWorkerById(id) {
     });
 }
 exports.getWorkerById = getWorkerById;
-function updateWorkerProfile(id, name, lastName, born_date, photo, profession, skills, favorites) {
+function updateWorkerProfile(id, name, lastName, born_date, photo, profession, skills, favorites, description) {
     return __awaiter(this, void 0, void 0, function* () {
         const data = {
             name,
@@ -66,6 +66,7 @@ function updateWorkerProfile(id, name, lastName, born_date, photo, profession, s
             profession,
             skills,
             favorites,
+            description
         };
         const worker = yield UserWorker.findByPk(id);
         if (!name || data.name === worker.name)
@@ -80,9 +81,23 @@ function updateWorkerProfile(id, name, lastName, born_date, photo, profession, s
             delete data.profession;
         if (!skills || (0, CompareArraysEquality_1.compareArrays)(data.skills, worker.skills))
             delete data.skills;
+        if (!favorites)
+            delete data.favorites;
+        if (!description)
+            delete data.description;
         yield worker.set(data);
         yield worker.save();
         return worker;
     });
 }
 exports.updateWorkerProfile = updateWorkerProfile;
+;
+function putWorkerPremium(id, premium) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const worker = yield UserWorker.findByPk(id);
+        yield worker.set({ premium: premium });
+        yield worker.save();
+        return "Ya tienes cuenta premium!";
+    });
+}
+exports.putWorkerPremium = putWorkerPremium;

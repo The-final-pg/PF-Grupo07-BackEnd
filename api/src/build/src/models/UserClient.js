@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
         },
         photo: {
             type: sequelize_1.DataTypes.TEXT,
-            defaultValue: 'https://res.cloudinary.com/luis-tourn/image/upload/v1660523062/b20425da884ef2173895d2f334a44147_fz6xjf.jpg',
+            defaultValue: "https://res.cloudinary.com/luis-tourn/image/upload/v1660523062/b20425da884ef2173895d2f334a44147_fz6xjf.jpg",
         },
         rating: {
             type: sequelize_1.DataTypes.FLOAT,
@@ -47,7 +47,7 @@ module.exports = (sequelize) => {
         },
         googleId: {
             type: sequelize_1.DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
         },
         isAdmin: {
             type: sequelize_1.DataTypes.BOOLEAN,
@@ -68,6 +68,10 @@ module.exports = (sequelize) => {
         favorites: {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSONB),
             defaultValue: [],
+        },
+        description: {
+            type: sequelize_1.DataTypes.TEXT,
+            allowNull: true,
         },
     });
 };

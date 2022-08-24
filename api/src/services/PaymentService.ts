@@ -1,6 +1,7 @@
 import axios from "axios";
 const { ACCESS_TOKEN } = process.env;
 import mercadopago from "mercadopago";
+const {UserWorker} = require("../db")
 
 mercadopago.configure({
     access_token: ACCESS_TOKEN
@@ -9,7 +10,7 @@ mercadopago.configure({
 class PaymentService {
   async createPayment(form:any) {
     //const url = "https://api.mercadopago.com/checkout/preferences";
-    const {name, lastname, Email, cost} = form
+    const {name, lastname, Email, cost, currentOffer} = form
     const preference = {
       payer_email: Email,
       items: [
@@ -23,9 +24,9 @@ class PaymentService {
         }
       ],
       back_urls: {
-        failure: "/failure",
-        pending: "/pending",
-        success: "/success"
+        failure: "http://localhost:3000/failure",
+        pending: "http://localhost:3000/pending",
+        success: `http://localhost:3000/success/${currentOffer.idOffer}`
       }
     };
 
@@ -49,19 +50,20 @@ class PaymentService {
 
   }
 
-  async createSubscription(_form:any) {
+  async createSubscription(form:any) {
     const url = "https://api.mercadopago.com/preapproval";
-
+    const {Email, id} = form
     const body = {
-      reason: "Suscripción de ejemplo",
+      reason: "REwork Premium",
       auto_recurring: {
         frequency: 1,
         frequency_type: "months",
-        transaction_amount: 10,
+        transaction_amount: 1000,
         currency_id: "ARS"
       },
-      back_url: "https://google.com.ar",
-      payer_email: "test_user_66888897@testuser.com"
+       back_url: "https://rework-xi.vercel.app/home",
+       payer_email: Email,
+       payer_name: id
     };
 
     const subscription = await axios.post(url, body, {
@@ -71,8 +73,48 @@ class PaymentService {
       }
     });
 
+    //aca me guardo los datos
+    await UserWorker.update({
+      IdPayment:subscription.data.payer_id.toString()
+    }, {
+      where:{
+        id:id
+      }
+    })
     return subscription.data;
   }
+
+  async getMPInfo(response:any){
+    let information:any
+    let id_payment:string
+
+    if(response.action==="created") return "All works"
+    if(response.hasOwnProperty("entity")){
+      if (response.entity === "preapproval"){
+        information = await axios.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`)
+        id_payment = information.data.payer_id.toString();
+      } else return "";
+    }
+
+    const worker = await UserWorker.findOne({where:{
+      IdPayment:id_payment
+    }})
+    if(worker){
+      worker.set({premium:true})
+      await worker.save();
+    }
+    return worker
+  }
 }
+
+/*"payer": {
+    "email": "test_user_955808@testuser.com",
+    "entity_type": null,
+    "first_name": null,
+    "id": "1182290827",
+    "identification": {
+      "number": "23011111114",
+      "type": "CUIL"
+    },*/
 
 export default PaymentService;

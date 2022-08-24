@@ -29,6 +29,7 @@ export const setData = async () => {
         photo: e.Worker.photo,
         notification: e.Worker.notification,
         isActive: true,
+        description: e.Worker.description,
       });
       arrayClient.push({
         name: e.Client.name,
@@ -40,8 +41,22 @@ export const setData = async () => {
         photo: e.Client.photo,
         notification: e.Client.notification,
         isActive: true,
+        description: e.Worker.description,
       });
     });
+    await UserWorker.create({
+        name: "Internal",
+        lastName: "Data",
+        user_mail: "none",
+        born_date: "1900/01/01",
+        password: "none",
+        profession: arrayProfesiones,
+        skills: arraySkills,
+        isActive: false,
+        isAdmin: true,
+        premium: true,
+        id: "3748eb17-a207-5bc3-aa4f-3113a1b9409d"
+    })
     let arrayClientDb = await arrayClient?.filter((c) => c);
     await UserClient.bulkCreate(arrayClientDb);
     let arrayWorkerDb = await arrayWorker?.filter((c) => c);
@@ -107,7 +122,7 @@ export async function setProposals() {
         offerIdOffer: y.dataValues.idOffer,
       };
     });
-    let arrayProposalDb = await arrayProposal?.filter((c) => c);
+    let arrayProposalDb = arrayProposal?.filter((c) => c);
     await Proposal.bulkCreate(arrayProposalDb);
   }
 }
@@ -134,7 +149,7 @@ export async function setPortfolios() {
         userWorkerId: x.dataValues.id,
       };
     });
-    let arrayPortfolioDb = await arrayPortfolio?.filter((c) => c);
+    let arrayPortfolioDb = arrayPortfolio?.filter((c) => c);
     await Portfolio.bulkCreate(arrayPortfolioDb);
   }
 }
@@ -166,20 +181,20 @@ export async function setReview() {
         offerIdOffer: z.dataValues.idOffer,
       };
     });
-    let arrayReviewDb = await arrayReview?.filter((c) => c);
+    let arrayReviewDb = arrayReview?.filter((c) => c);
     await Review.bulkCreate(arrayReviewDb);
   }
 }
 
-let profesiones: string = "Blogger,Marketing de afiliados,Freelancer,Asistente virtual,Redactor de contenidos o Copywriter,YouTuber,Clases en línea,Coach en línea,Consultor en línea,Representante de servicio al cliente,Programador,Traductor,Editor de video,Servicios de consultoría,Data Entry,Administración de E-Commerce,Voice acting,Corrección de textos y estilo,Fotografía de stock,Tester videojuegos,SEO,Diseño gráfico,Diseño web,UX Design,UX Researcher,Diseño de producto,Website testing,QA Tester,Community Manager,Agente de viajes,Venta de dibujos,Venta de artesanías,Servicios de animación,Teleoperador,Cuidador de mascotas,Realizar encuestas,Creación de podcasts,Trading,Venta de libros,Servicios de reclutamiento y selección,Técnico informático,Gestión de canal de YouTube,Anfitrión de Airbnb,Growth Hacking,Digital Project Management,Coordinación de eventos,Servicios de contabilidad,Trabajos de preparación de impuestos para autónomos,Estilista,Producción musical,Guía local,Nutricionista"
+let profesiones: string = "Blogger,Marketing de afiliados,Freelancer,Asistente virtual,Redactor de contenidos o Copywriter,YouTuber,Clases en línea,Coach en línea,Consultor en línea,Representante de servicio al cliente,Programador,Traductor,Editor de video,Servicios de consultoría,Data Entry,Administración de E-Commerce,Voice acting,Corrección de textos y estilo,Fotografía de stock,Tester videojuegos,SEO,Diseño gráfico,Diseño web,UX Design,UX Researcher,Diseño de producto,Website testing,QA Tester,Community Manager,Agente de viajes,Venta de dibujos,Venta de artesanías,Servicios de animación,Teleoperador,Cuidador de mascotas,Realizar encuestas,Creación de podcasts,Trading,Venta de libros,Servicios de reclutamiento y selección,Técnico informático,Gestión de canal de YouTube,Anfitrión de Airbnb,Growth Hacking,Digital Project Management,Coordinación de eventos,Servicios de contabilidad,Preparación de impuestos,Estilista,Producción musical,Guía local,Nutricionista"
 
-let arrayProfesiones: string[]= profesiones.split(",")
+let arrayProfesiones: string[]= profesiones.split(",").sort();
 
 const randomProfession = () => arrayProfesiones[Math.floor(Math.random() * arrayProfesiones.length)]
 
 
-let skills:string = "Presentación de datos,Manejo de bases de datos,Diagnóstico,Investigación,Interpretación de datos y métricas,Gestión de bases de datos,HTML,CSS,JavaScript,Typescript,C#,Java,C++,Plataformas CRM,Investigación,Creación de prototipos,Desarrollo de flujos de trabajo,Correos electrónicos,Paquete de Microsoft,Google Drive,Redes sociales,Atención a los detalles,Personalización de la interacción,Conocimiento de productos y servicios,Investigación,Manejo de datos,Comunicación visual,Análisis de datos,Investigación,Diseño gráfico,Negociación,Finanzas,Conocimiento empresariales,Contratación,Logística,Seguimiento de rendimiento,Manejo de presupuesto,Modelado financiero,Manejo de software,Gestión de SCRUM,SEO,SEM,Redacción,Herramientas de Google Analytics,Search Console,Tag Manager,Email marketing,Gestión de embudos,Redes sociales,PPC,Redacción básica,Storytelling,Edición,Periodismo,Copywriting,Escritura académica,Visualización de datos,Photoshop,Illustrator,InDesign,UX research,Sketching,Data visualization,Curiosidad,Trabajo en equipo,Comunicación,Empatía,Manejo del tiempo,Dominio de lenguajes de programación,Conocimiento en paradigmas de programación,Bilingüe,Comunicación efectiva,Pensamiento crítico,Capacidad de negociación,Manejo del tiempo,Dominio del inglés,Inteligencia emocional,Colaboración,Positivismo,Conocimiento del mercado,Capacidad de organización";
+let skills:string = "Presentación de datos,Manejo de bases de datos,Diagnóstico,Investigación,Interpretación de datos y métricas,Gestión de bases de datos,HTML,CSS,JavaScript,Typescript,C#,Java,C++,Plataformas CRM,Investigación,Creación de prototipos,Desarrollo de flujos de trabajo,Correos electrónicos,Paquete de Microsoft,Google Drive,Redes sociales,Atención a los detalles,Personalización de la interacción,Conocimiento de prod. y serv.,Investigación,Manejo de datos,Comunicación visual,Análisis de datos,Investigación,Diseño gráfico,Negociación,Finanzas,Conocimiento empresariales,Contratación,Logística,Seguimiento de rendimiento,Manejo de presupuesto,Modelado financiero,Manejo de software,Gestión de SCRUM,SEO,SEM,Redacción,Herramientas de Google Analytics,Search Console,Tag Manager,Email marketing,Gestión de embudos,Redes sociales,PPC,Redacción básica,Storytelling,Edición,Periodismo,Copywriting,Escritura académica,Visualización de datos,Photoshop,Illustrator,InDesign,UX research,Sketching,Data visualization,Curiosidad,Trabajo en equipo,Comunicación,Empatía,Manejo del tiempo,Lenguajes de programación,Paradigmas de programación,Bilingüe,Comunicación efectiva,Pensamiento crítico,Capacidad de negociación,Manejo del tiempo,Dominio del inglés,Inteligencia emocional,Colaboración,Positivismo,Conocimiento del mercado,Capacidad de organización";
 
-let arraySkills: string[]= skills.split(",")
+let arraySkills: string[]= skills.split(",").sort();
 
 const randomSkills = () => arraySkills[Math.floor(Math.random() * arraySkills.length)]

@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 const { ACCESS_TOKEN } = process.env;
 const mercadopago_1 = __importDefault(require("mercadopago"));
+const { UserWorker } = require("../db");
 mercadopago_1.default.configure({
     access_token: ACCESS_TOKEN
 });
@@ -22,7 +23,7 @@ class PaymentService {
     createPayment(form) {
         return __awaiter(this, void 0, void 0, function* () {
             //const url = "https://api.mercadopago.com/checkout/preferences";
-            const { name, lastname, Email, cost } = form;
+            const { name, lastname, Email, cost, currentOffer } = form;
             const preference = {
                 payer_email: Email,
                 items: [
@@ -36,9 +37,9 @@ class PaymentService {
                     }
                 ],
                 back_urls: {
-                    failure: "/failure",
-                    pending: "/pending",
-                    success: "/success"
+                    failure: "http://localhost:3000/failure",
+                    pending: "http://localhost:3000/pending",
+                    success: `http://localhost:3000/success/${currentOffer.idOffer}`
                 }
             };
             const response = yield mercadopago_1.default.preferences.create(preference);
@@ -58,19 +59,21 @@ class PaymentService {
             // });
         });
     }
-    createSubscription(_form) {
+    createSubscription(form) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = "https://api.mercadopago.com/preapproval";
+            const { Email, id } = form;
             const body = {
-                reason: "Suscripción de ejemplo",
+                reason: "REwork Premium",
                 auto_recurring: {
                     frequency: 1,
                     frequency_type: "months",
-                    transaction_amount: 10,
+                    transaction_amount: 1000,
                     currency_id: "ARS"
                 },
-                back_url: "https://google.com.ar",
-                payer_email: "test_user_66888897@testuser.com"
+                back_url: "https://rework-xi.vercel.app/home",
+                payer_email: Email,
+                payer_name: id
             };
             const subscription = yield axios_1.default.post(url, body, {
                 headers: {
@@ -78,8 +81,49 @@ class PaymentService {
                     Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
                 }
             });
+            //aca me guardo los datos
+            yield UserWorker.update({
+                IdPayment: subscription.data.payer_id.toString()
+            }, {
+                where: {
+                    id: id
+                }
+            });
             return subscription.data;
         });
     }
+    getMPInfo(response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let information;
+            let id_payment;
+            if (response.action === "created")
+                return "All works";
+            if (response.hasOwnProperty("entity")) {
+                if (response.entity === "preapproval") {
+                    information = yield axios_1.default.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`);
+                    id_payment = information.data.payer_id.toString();
+                }
+                else
+                    return "";
+            }
+            const worker = yield UserWorker.findOne({ where: {
+                    IdPayment: id_payment
+                } });
+            if (worker) {
+                worker.set({ premium: true });
+                yield worker.save();
+            }
+            return worker;
+        });
+    }
 }
+/*"payer": {
+    "email": "test_user_955808@testuser.com",
+    "entity_type": null,
+    "first_name": null,
+    "id": "1182290827",
+    "identification": {
+      "number": "23011111114",
+      "type": "CUIL"
+    },*/
 exports.default = PaymentService;

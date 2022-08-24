@@ -76,5 +76,13 @@ module.exports = (sequelize) => {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.JSONB),
             defaultValue: [],
         },
+        description: {
+            type: sequelize_1.DataTypes.TEXT,
+            allowNull: true,
+        },
+        IdPayment: {
+            type: sequelize_1.DataTypes.STRING,
+            allowNull: true
+        },
     });
 };

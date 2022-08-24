@@ -32,4 +32,15 @@ payment.post("/payment", (req, res, _next) => __awaiter(void 0, void 0, void 0, 
 payment.post("/subscription", (req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
     paymentInstance.getSubscriptionLink(req, res, _next);
 }));
+payment.post("/notificationIPN", (req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.body);
+    const response = req.body;
+    paymentInstance.getPaymentData(req, res, _next);
+    if (response) {
+        return res.status(200).send("OK");
+    }
+    else {
+        return res.status(400).send("Error al requerir la informacion");
+    }
+}));
 exports.default = payment;

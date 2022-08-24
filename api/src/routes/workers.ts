@@ -5,7 +5,8 @@ import {
   getAllWorkers,
   getWorkerById,
   getWorkerByName,
-  updateWorkerProfile
+  updateWorkerProfile,
+  putWorkerPremium
 } from "../controllers/workerController";
 import {
   workerAllfiltersOn,
@@ -49,6 +50,21 @@ worker.get(
   }
 );
 
+worker.put("/premium", async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const id: string = req.body.id;
+    const premium: boolean = req.body.premium;
+    if (premium) {
+      const response: string = await putWorkerPremium(id, premium);
+      return res.send(response);
+    } else {
+      res.send("El estado premium es false");
+    };
+  } catch (error) {
+    next(error);
+  }
+})
+
 worker.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   try {
@@ -68,7 +84,8 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     photo,
     profession,
     skills,
-    favorites
+    favorites,
+    description
   }: {
     name: string;
     lastName: string;
@@ -77,6 +94,7 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     profession: string[];
     skills: string[];
     favorites: OfferType[];
+    description: string;
   } = req.body;
   try {
     const workerUpdate: WorkerType = await updateWorkerProfile(
@@ -87,7 +105,8 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
       photo,
       profession,
       skills,
-      favorites
+      favorites,
+      description
     );
     res.json(workerUpdate);
   } catch (error) {

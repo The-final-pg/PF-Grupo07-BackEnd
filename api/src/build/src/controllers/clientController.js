@@ -27,9 +27,9 @@ function getClientById(id) {
     });
 }
 exports.getClientById = getClientById;
-function updateClientProfile(id, name, lastName, born_date, photo, favorites) {
+function updateClientProfile(id, name, lastName, born_date, photo, favorites, description) {
     return __awaiter(this, void 0, void 0, function* () {
-        const data = { name, lastName, born_date, photo, favorites };
+        const data = { name, lastName, born_date, photo, favorites, description };
         const client = yield UserClient.findByPk(id);
         if (!name || data.name === client.name)
             delete data.name;
@@ -39,6 +39,10 @@ function updateClientProfile(id, name, lastName, born_date, photo, favorites) {
             delete data.born_date;
         if (!photo || data.photo === client.photo)
             delete data.photo;
+        if (!favorites)
+            delete data.favorites;
+        if (!description)
+            delete data.description;
         yield client.set(data);
         yield client.save();
         return client;

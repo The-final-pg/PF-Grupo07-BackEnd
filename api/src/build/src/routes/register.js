@@ -126,8 +126,6 @@ register.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, f
               </div>
           </body>
           </html>`
-                /* `<span>Más de 1000 freelancers disponibles para concretar tus proyectos, ¿qué estás esperando?</span>
-                      <b>Confirma tu cuenta <a href="http://localhost:3000/confirm/client/${id}"> AQUÍ </a> </b>` */
             });
             res.send({ message: "Usuario registrado exitosamente! Por favor, verifica tu casilla de correo." });
         }

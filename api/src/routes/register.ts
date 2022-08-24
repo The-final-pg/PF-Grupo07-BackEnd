@@ -112,9 +112,7 @@ register.post(
                   </div>
               </div>
           </body>
-          </html>`
-          /* `<span>Más de 1000 freelancers disponibles para concretar tus proyectos, ¿qué estás esperando?</span>
-                <b>Confirma tu cuenta <a href="http://localhost:3000/confirm/client/${id}"> AQUÍ </a> </b>` */   
+          </html>` 
       })
         res.send({message: "Usuario registrado exitosamente! Por favor, verifica tu casilla de correo."});
       } else if(clientFound){
@@ -131,10 +129,13 @@ register.post(
   "/worker",
   async (req: Request, res: Response, next: NextFunction) => {
     const newWorker = req.body;
+
     if (newWorker.photo === '') delete newWorker.photo;
-    try {const mail = newWorker.user_mail
+    try {
+      const mail = newWorker.user_mail
       const workerFound = await UserWorker.findOne({where: {user_mail: mail}})
       const clientFound = await UserClient.findOne({where: {user_mail: mail}})
+
       if(clientFound){
         res.send({message: "El correo electrónico ya pertenece a una cuenta de cliente. Por favor, utiliza otra cuenta de correo o inicia sesión como cliente."})
       } else if(!workerFound && !clientFound){
