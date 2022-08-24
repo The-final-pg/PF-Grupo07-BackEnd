@@ -35,3 +35,6 @@ router.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
 });
 
 export default router;
+
+
+// cambiar password
