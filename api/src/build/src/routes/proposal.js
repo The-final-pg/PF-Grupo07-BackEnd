@@ -41,7 +41,7 @@ proposal.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         nodemailerConfig_1.default.sendMail({
             from: `"REWork" <${REWORK_MAIL}>`,
             to: offerJson.userClient.user_mail,
-            subject: "Tu oferta de trabajo ha recibido una propuesta",
+            subject: "¡Tu oferta de trabajo ha recibido una propuesta!",
             html: `<!DOCTYPE html>
         <html lang="en">
         <head>
@@ -60,9 +60,10 @@ proposal.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         
                 .claseBoton{
                     width: 30%;
-                        background-color: #fcae3b;
-                        border: 2px solid #fcae3b;
-                        color: black; 
+                        background-color: #F4A261;
+                        border: 2px solid #F4A261;
+                        border-radius: 5px;
+                        color: #ffffff; 
                         padding: 16px 32px;
                         text-align: center;
                         text-decoration: none;
@@ -74,7 +75,7 @@ proposal.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
                         cursor: pointer;
                 }
                 .claseBoton:hover{
-                    background-color: #000000;
+                    background-color: e76f51;
                     color: #ffffff;
                 }
                 .imag{
@@ -85,7 +86,7 @@ proposal.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
                     margin: 0px 5px 0 5px;
                 }
                 .afooter{
-                    color: #ffffff !important; 
+                    color: #264653 !important; 
                     text-decoration: none;
                     font-size: 13px !important;
                 }
@@ -97,21 +98,19 @@ proposal.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
                     <!-- Contenido principal -->
                     <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                         <h1>¡Felicitaciones, tu oferta de trabajo: ${offerJson.title} recibió una nueva propuesta!</h1>
-                        <p>Accede a verla en el detalle de tu oferta o a través del siguiente link.</p>
-                        <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${offerJson.idOffer}">Detalle de oferta</a>
+                        <h2>Accede en el detalle de tu oferta o a través del siguiente link.</h2>
+                        <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${offerJson.idOffer}">Ver oferta</a>
                         <!-- Gracias -->
         
                     </div>
                     <!-- Contenido principal -->
         
                     <!-- Footer -->
-                    <div style="background-color: #ffffff; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                        <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                    <div style="background-color: #264653; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                          <p style="background-color: #264653; padding: 10px 0px 10px 0px; font-size: 12px !important;">
                             © 2022 REwork, todos los derechos reservados.
                         </p>
                     </div>
-                    <!-- Footer -->
-        
                 </div>
             </div>
         </body>
@@ -136,7 +135,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
             nodemailerConfig_1.default.sendMail({
                 from: `"REWork" <${REWORK_MAIL}>`,
                 to: proposalJson.userWorker.user_mail,
-                subject: "Aceptaron tu propuesta de trabajo",
+                subject: "¡Tu propuesta de trabajo fue aceptada!",
                 html: `<!DOCTYPE html>
             <html lang="en">
             <head>
@@ -155,9 +154,10 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
             
                     .claseBoton{
                         width: 30%;
-                            background-color: #fcae3b;
-                            border: 2px solid #fcae3b;
-                            color: black; 
+                            background-color: #F4A261;
+                            border: 2px solid #F4A261;
+                            border-radius: 5px;
+                            color: #ffffff; 
                             padding: 16px 32px;
                             text-align: center;
                             text-decoration: none;
@@ -169,7 +169,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                             cursor: pointer;
                     }
                     .claseBoton:hover{
-                        background-color: #000000;
+                        background-color: e76f51;
                         color: #ffffff;
                     }
                     .imag{
@@ -180,7 +180,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                         margin: 0px 5px 0 5px;
                     }
                     .afooter{
-                        color: #ffffff !important; 
+                        color: #264653 !important; 
                         text-decoration: none;
                         font-size: 13px !important;
                     }
@@ -192,23 +192,21 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                         <!-- Contenido principal -->
                         <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                             <h1>¡Felicitaciones, aceptaron tu propuesta en la oferta: ${proposalJson.offer.title}!</h1>
-                            <p>Sólo falta que leas y aceptes el contrato en el siguiente link.</p>
+                            <h2>Sólo falta que leas y aceptes el contrato en el siguiente link.</h2>
                             <a class="claseBoton" href="https://re-work-ten.vercel.app/contract/${proposalJson.offer.idOffer}">Contrato</a>
                             <!-- Gracias -->
             
                             <!-- Botón -->
-                            <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${proposalJson.offer.idOffer}">Click aquí para ir a la oferta</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${proposalJson.offer.idOffer}">Ver oferta</a>
                         </div>
                         <!-- Contenido principal -->
             
                         <!-- Footer -->
-                        <div style="background-color: #ffffff; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                            <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                        <div style="background-color: #264653; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                          <p style="background-color: #264653; padding: 10px 0px 10px 0px; font-size: 12px !important;">
                                 © 2022 REwork, todos los derechos reservados.
                             </p>
                         </div>
-                        <!-- Footer -->
-            
                     </div>
                 </div>
             </body>
@@ -239,9 +237,10 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
             
                     .claseBoton{
                         width: 30%;
-                            background-color: #fcae3b;
-                            border: 2px solid #fcae3b;
-                            color: black; 
+                            background-color: #F4A261;
+                            border: 2px solid #F4A261;
+                            border-radius: 5px;
+                            color: #ffffff; 
                             padding: 16px 32px;
                             text-align: center;
                             text-decoration: none;
@@ -253,7 +252,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                             cursor: pointer;
                     }
                     .claseBoton:hover{
-                        background-color: #000000;
+                        background-color: e76f51;
                         color: #ffffff;
                     }
                     .imag{
@@ -264,7 +263,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                         margin: 0px 5px 0 5px;
                     }
                     .afooter{
-                        color: #ffffff !important; 
+                        color: #264653 !important; 
                         text-decoration: none;
                         font-size: 13px !important;
                     }
@@ -275,23 +274,21 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                     <div style="padding: 20px 10px 20px 10px;">
                         <!-- Contenido principal -->
                         <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
-                            <h1>La oferta: ${proposalJson.offer.title} a la que habías aplicado una propuesta, ya ha terminado</h1>
+                            <h1>La oferta: ${proposalJson.offer.title} a la que habías aplicado una propuesta, ha finalizado.</h1>
             
                             <!-- Gracias -->
             
                             <!-- Botón -->
-                            <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${proposalJson.offer.idOffer}">Click aquí para ir a la oferta</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${proposalJson.offer.idOffer}">Ver oferta</a>
                         </div>
                         <!-- Contenido principal -->
             
                         <!-- Footer -->
-                        <div style="background-color: #ffffff; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                            <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                        <div style="background-color: #264653; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                          <p style="background-color: #264653; padding: 10px 0px 10px 0px; font-size: 12px !important;">
                                 © 2022 REwork, todos los derechos reservados.
                             </p>
                         </div>
-                        <!-- Footer -->
-            
                     </div>
                 </div>
             </body>
@@ -322,9 +319,10 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
             
                     .claseBoton{
                         width: 30%;
-                            background-color: #fcae3b;
-                            border: 2px solid #fcae3b;
-                            color: black; 
+                            background-color: #F4A261;
+                            border: 2px solid #F4A261;
+                            border-radius: 5px;
+                            color: #ffffff; 
                             padding: 16px 32px;
                             text-align: center;
                             text-decoration: none;
@@ -336,7 +334,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                             cursor: pointer;
                     }
                     .claseBoton:hover{
-                        background-color: #000000;
+                        background-color: e76f51;
                         color: #ffffff;
                     }
                     .imag{
@@ -347,7 +345,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                         margin: 0px 5px 0 5px;
                     }
                     .afooter{
-                        color: #ffffff !important; 
+                        color: #264653 !important; 
                         text-decoration: none;
                         font-size: 13px !important;
                     }
@@ -359,22 +357,20 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                         <!-- Contenido principal -->
                         <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                             <h1>Lamentamos que hayas cancelado tu propuesta</h1>
-                            <p>A no desanimarse, dirígete a nuestra página principal para aplicar a otras fabulosas ofertas</p>
+                            <h2>¡No te desanimes! Dirígete a nuestra página principal para aplicar a otras fabulosas ofertas</h2>
                             <!-- Gracias -->
             
                             <!-- Botón -->
-                            <a class="claseBoton" href="https://re-work-ten.vercel.app/home">Click aquí</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/home">Ver ofertas</a>
                         </div>
                         <!-- Contenido principal -->
             
                         <!-- Footer -->
-                        <div style="background-color: #ffffff; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                            <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                        <div style="background-color: #264653; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                          <p style="background-color: #264653; padding: 10px 0px 10px 0px; font-size: 12px !important;">
                                 © 2022 REwork, todos los derechos reservados.
                             </p>
                         </div>
-                        <!-- Footer -->
-            
                     </div>
                 </div>
             </body>
@@ -405,9 +401,10 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
             
                     .claseBoton{
                         width: 30%;
-                            background-color: #fcae3b;
-                            border: 2px solid #fcae3b;
-                            color: black; 
+                            background-color: #F4A261;
+                            border: 2px solid #F4A261;
+                            border-radius: 5px;
+                            color: #ffffff; 
                             padding: 16px 32px;
                             text-align: center;
                             text-decoration: none;
@@ -419,7 +416,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                             cursor: pointer;
                     }
                     .claseBoton:hover{
-                        background-color: #000000;
+                        background-color: e76f51;
                         color: #ffffff;
                     }
                     .imag{
@@ -430,7 +427,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                         margin: 0px 5px 0 5px;
                     }
                     .afooter{
-                        color: #ffffff !important; 
+                        color: #264653 !important; 
                         text-decoration: none;
                         font-size: 13px !important;
                     }
@@ -441,7 +438,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                     <div style="padding: 20px 10px 20px 10px;">
                         <!-- Contenido principal -->
                         <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
-                            <h1>Solo falta firmar el contrato para que empiece el trabajo el freelancer, puedes ingresar a través del siguiente link</h1>
+                            <h1>¡Hola! Solo falta firmar el contrato para que el freelancer pueda comenzar su trabajo, puedes ingresar a través del siguiente link</h1>
             
                             <!-- Gracias -->
             
@@ -451,13 +448,11 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                         <!-- Contenido principal -->
             
                         <!-- Footer -->
-                        <div style="background-color: #ffffff; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                            <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                        <div style="background-color: #264653; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                          <p style="background-color: #264653; padding: 10px 0px 10px 0px; font-size: 12px !important;">
                                 © 2022 REwork, todos los derechos reservados.
                             </p>
                         </div>
-                        <!-- Footer -->
-            
                     </div>
                 </div>
             </body>
@@ -488,9 +483,10 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
             
                     .claseBoton{
                         width: 30%;
-                            background-color: #fcae3b;
-                            border: 2px solid #fcae3b;
-                            color: black; 
+                            background-color: #F4A261;
+                            border: 2px solid #F4A261;
+                            border-radius: 5px;
+                            color: #ffffff; 
                             padding: 16px 32px;
                             text-align: center;
                             text-decoration: none;
@@ -502,7 +498,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                             cursor: pointer;
                     }
                     .claseBoton:hover{
-                        background-color: #000000;
+                        background-color: e76f51;
                         color: #ffffff;
                     }
                     .imag{
@@ -513,7 +509,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                         margin: 0px 5px 0 5px;
                     }
                     .afooter{
-                        color: #ffffff !important; 
+                        color: #264653 !important; 
                         text-decoration: none;
                         font-size: 13px !important;
                     }
@@ -524,27 +520,25 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                     <div style="padding: 20px 10px 20px 10px;">
                         <!-- Contenido principal -->
                         <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
-                            <h1>¡Felicitaciones, ya puedes empezar!</h1>
-                              <p>Te brindamos los datos del cliente para que puedas ponerte en contacto y llevar a cabo el trabajo:
+                            <h1>¡Buenas noticias, ya puedes comenzar el trabajo!</h1>
+                              <h3>Te brindamos los datos del cliente para que puedas ponerte en contacto:
                               Nombre: ${proposalJson.offer.userClient.name}
-                              Mail: ${proposalJson.offer.userClient.user_mail} </p>
+                              Mail: ${proposalJson.offer.userClient.user_mail} </h3>
 
-                              Detalle de la oferta de empleo en el siguiente link
+                              <!-- Detalle de la oferta de empleo en el siguiente link -->
                             <!-- Gracias -->
             
                             <!-- Botón -->
-                            <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${proposalJson.offer.idOffer}">Click aquí</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${proposalJson.offer.idOffer}">Ir a la oferta</a>
                         </div>
                         <!-- Contenido principal -->
             
                         <!-- Footer -->
-                        <div style="background-color: #ffffff; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                            <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                        <div style="background-color: #264653; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                          <p style="background-color: #264653; padding: 10px 0px 10px 0px; font-size: 12px !important;">
                                 © 2022 REwork, todos los derechos reservados.
                             </p>
                         </div>
-                        <!-- Footer -->
-            
                     </div>
                 </div>
             </body>
@@ -556,7 +550,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
             nodemailerConfig_1.default.sendMail({
                 from: `"REWork" <${REWORK_MAIL}>`,
                 to: proposalJson.userClient.user_mail,
-                subject: "El freelancer rechazó el contrato",
+                subject: "El contrato ha sido rechazado",
                 html: `<!DOCTYPE html>
             <html lang="en">
             <head>
@@ -575,9 +569,10 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
             
                     .claseBoton{
                         width: 30%;
-                            background-color: #fcae3b;
-                            border: 2px solid #fcae3b;
-                            color: black; 
+                            background-color: #F4A261;
+                            border: 2px solid #F4A261;
+                            border-radius: 5px;
+                            color: #ffffff; 
                             padding: 16px 32px;
                             text-align: center;
                             text-decoration: none;
@@ -589,7 +584,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                             cursor: pointer;
                     }
                     .claseBoton:hover{
-                        background-color: #000000;
+                        background-color: e76f51;
                         color: #ffffff;
                     }
                     .imag{
@@ -600,7 +595,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                         margin: 0px 5px 0 5px;
                     }
                     .afooter{
-                        color: #ffffff !important; 
+                        color: #264653 !important; 
                         text-decoration: none;
                         font-size: 13px !important;
                     }
@@ -611,10 +606,10 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                     <div style="padding: 20px 10px 20px 10px;">
                         <!-- Contenido principal -->
                         <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
-                            <h1>El freelancer rechazó el contrato</h1>
-                              <p>A no desanimarse, tu publicación esta visible para todos, puedes aceptar otra propuesta</p>
+                            <h1>El freelancer rechazó el contrato.</h1>
+                              <h2>¡No te desanimes! Tu publicación sigue visible para los freelancers, puedes aceptar otra propuesta</h2>
 
-                              Revisa tu oferta en el siguiente link
+                              Chequea tu oferta en el siguiente link
                             <!-- Gracias -->
             
                             <!-- Botón -->
@@ -623,13 +618,11 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                         <!-- Contenido principal -->
             
                         <!-- Footer -->
-                        <div style="background-color: #ffffff; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                            <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                        <div style="background-color: #264653; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                          <p style="background-color: #264653; padding: 10px 0px 10px 0px; font-size: 12px !important;">
                                 © 2022 REwork, todos los derechos reservados.
                             </p>
                         </div>
-                        <!-- Footer -->
-            
                     </div>
                 </div>
             </body>
@@ -659,36 +652,37 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                       a{font-size: 30px !important;}
               
                       .claseBoton{
-                          width: 30%;
-                              background-color: #fcae3b;
-                              border: 2px solid #fcae3b;
-                              color: black; 
-                              padding: 16px 32px;
-                              text-align: center;
-                              text-decoration: none;
-                              font-weight: bold;
-                              display: inline-block;
-                              font-size: 16px;
-                              margin: 4px 2px;
-                              transition-duration: 0.4s;
-                              cursor: pointer;
-                      }
-                      .claseBoton:hover{
-                          background-color: #000000;
-                          color: #ffffff;
-                      }
-                      .imag{
-                          width: 20px;
-                          height: 20px;
-                      }
-                      .contA{
-                          margin: 0px 5px 0 5px;
-                      }
-                      .afooter{
-                          color: #ffffff !important; 
-                          text-decoration: none;
-                          font-size: 13px !important;
-                      }
+                        width: 30%;
+                            background-color: #F4A261;
+                            border: 2px solid #F4A261;
+                            border-radius: 5px;
+                            color: #ffffff; 
+                            padding: 16px 32px;
+                            text-align: center;
+                            text-decoration: none;
+                            font-weight: bold;
+                            display: inline-block;
+                            font-size: 16px;
+                            margin: 4px 2px;
+                            transition-duration: 0.4s;
+                            cursor: pointer;
+                    }
+                    .claseBoton:hover{
+                        background-color: e76f51;
+                        color: #ffffff;
+                    }
+                    .imag{
+                        width: 20px;
+                        height: 20px;
+                    }
+                    .contA{
+                        margin: 0px 5px 0 5px;
+                    }
+                    .afooter{
+                        color: #264653 !important; 
+                        text-decoration: none;
+                        font-size: 13px !important;
+                    }
                   </style>
               </head>
               <body>
@@ -697,23 +691,21 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                           <!-- Contenido principal -->
                           <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                               <h1>Lamentamos que el cliente haya rechazado el contrato</h1>
-                                <p>¡A no desanimarse, dirígete con el siguiente link a la página principal para buscar nuevas ofertas!</p>
+                                <h2>¡No te desanimes! Dirígete a la página principal para buscar nuevas ofertas.</h2>
   
                               <!-- Gracias -->
               
                               <!-- Botón -->
-                              <a class="claseBoton" href="https://re-work-ten.vercel.app/home">Click aquí</a>
+                              <a class="claseBoton" href="https://re-work-ten.vercel.app/home">Ver ofertas</a>
                           </div>
                           <!-- Contenido principal -->
               
                           <!-- Footer -->
-                          <div style="background-color: #ffffff; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                              <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                          <div style="background-color: #264653; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                          <p style="background-color: #264653; padding: 10px 0px 10px 0px; font-size: 12px !important;">
                                   © 2022 REwork, todos los derechos reservados.
                               </p>
                           </div>
-                          <!-- Footer -->
-              
                       </div>
                   </div>
               </body>
@@ -744,9 +736,10 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
             
                     .claseBoton{
                         width: 30%;
-                            background-color: #fcae3b;
-                            border: 2px solid #fcae3b;
-                            color: black; 
+                            background-color: #F4A261;
+                            border: 2px solid #F4A261;
+                            border-radius: 5px;
+                            color: #ffffff; 
                             padding: 16px 32px;
                             text-align: center;
                             text-decoration: none;
@@ -758,7 +751,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                             cursor: pointer;
                     }
                     .claseBoton:hover{
-                        background-color: #000000;
+                        background-color: e76f51;
                         color: #ffffff;
                     }
                     .imag{
@@ -769,7 +762,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                         margin: 0px 5px 0 5px;
                     }
                     .afooter{
-                        color: #ffffff !important; 
+                        color: #264653 !important; 
                         text-decoration: none;
                         font-size: 13px !important;
                     }
@@ -780,25 +773,23 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                     <div style="padding: 20px 10px 20px 10px;">
                         <!-- Contenido principal -->
                         <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
-                            <h1>¡Felicidades, el freelancer ha marcado el trabajo como finalizado!</h1>
-                              <p>Por favor dirígete a tu oferta para marcarla como finalizada así liberamos el pago</p>
+                            <h1>¡Buenas noticias, el freelancer ha marcado el trabajo como finalizado!</h1>
+                              <h2>Si estás conforme con el resultado, por favor dirígete a tu oferta para marcarla como finalizada.</h2>
 
-                              Link para ir a tu oferta, recuerda estar logueado.
+                              <!-- Link para ir a tu oferta, recuerda estar logueado.  -->
                             <!-- Gracias -->
             
                             <!-- Botón -->
-                            <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${proposalJson.offer.idOffer}">Click aquí</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${proposalJson.offer.idOffer}">Ir a la oferta</a>
                         </div>
                         <!-- Contenido principal -->
             
                         <!-- Footer -->
-                        <div style="background-color: #ffffff; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                            <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                        <div style="background-color: #264653; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                          <p style="background-color: #264653; padding: 10px 0px 10px 0px; font-size: 12px !important;">
                                 © 2022 REwork, todos los derechos reservados.
                             </p>
                         </div>
-                        <!-- Footer -->
-            
                     </div>
                 </div>
             </body>
@@ -810,7 +801,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
             nodemailerConfig_1.default.sendMail({
                 from: `"REWork" <${REWORK_MAIL}>`,
                 to: proposalJson.userWorker.user_mail,
-                subject: "¡Felicitaciones, el pago a sido liberado!",
+                subject: "¡Buenas noticias, tienes un pago disponible!",
                 html: `<!DOCTYPE html>
             <html lang="en">
             <head>
@@ -829,9 +820,10 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
             
                     .claseBoton{
                         width: 30%;
-                            background-color: #fcae3b;
-                            border: 2px solid #fcae3b;
-                            color: black; 
+                            background-color: #F4A261;
+                            border: 2px solid #F4A261;
+                            border-radius: 5px;
+                            color: #ffffff; 
                             padding: 16px 32px;
                             text-align: center;
                             text-decoration: none;
@@ -843,7 +835,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                             cursor: pointer;
                     }
                     .claseBoton:hover{
-                        background-color: #000000;
+                        background-color: e76f51;
                         color: #ffffff;
                     }
                     .imag{
@@ -854,7 +846,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                         margin: 0px 5px 0 5px;
                     }
                     .afooter{
-                        color: #ffffff !important; 
+                        color: #264653 !important; 
                         text-decoration: none;
                         font-size: 13px !important;
                     }
@@ -865,9 +857,9 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                     <div style="padding: 20px 10px 20px 10px;">
                         <!-- Contenido principal -->
                         <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
-                            <h1>¡Felicidades, el pago ya ha sido transferido a tu cuenta!</h1>
+                            <h1>¡Buenas noticias, el pago ya ha sido transferido a tu cuenta!</h1>
                               
-                              <p>Sigue aplicando a mas ofertas.</p>
+                              <h2>Sigue aplicando a más ofertas.</h2>
                             <!-- Gracias -->
             
                             <!-- Botón -->
@@ -876,13 +868,11 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                         <!-- Contenido principal -->
             
                         <!-- Footer -->
-                        <div style="background-color: #ffffff; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                            <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                        <div style="background-color: #264653; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                          <p style="background-color: #264653; padding: 10px 0px 10px 0px; font-size: 12px !important;">
                                 © 2022 REwork, todos los derechos reservados.
                             </p>
                         </div>
-                        <!-- Footer -->
-            
                     </div>
                 </div>
             </body>

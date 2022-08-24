@@ -51,36 +51,37 @@ review.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
               a{font-size: 30px !important;}
       
               .claseBoton{
-                  width: 30%;
-                      background-color: #fcae3b;
-                      border: 2px solid #fcae3b;
-                      color: black; 
-                      padding: 16px 32px;
-                      text-align: center;
-                      text-decoration: none;
-                      font-weight: bold;
-                      display: inline-block;
-                      font-size: 16px;
-                      margin: 4px 2px;
-                      transition-duration: 0.4s;
-                      cursor: pointer;
-              }
-              .claseBoton:hover{
-                  background-color: #000000;
-                  color: #ffffff;
-              }
-              .imag{
-                  width: 20px;
-                  height: 20px;
-              }
-              .contA{
-                  margin: 0px 5px 0 5px;
-              }
-              .afooter{
-                  color: #ffffff !important; 
-                  text-decoration: none;
-                  font-size: 13px !important;
-              }
+                width: 30%;
+                    background-color: #F4A261;
+                    border: 2px solid #F4A261;
+                    border-radius: 5px;
+                    color: #ffffff; 
+                    padding: 16px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    font-weight: bold;
+                    display: inline-block;
+                    font-size: 16px;
+                    margin: 4px 2px;
+                    transition-duration: 0.4s;
+                    cursor: pointer;
+            }
+            .claseBoton:hover{
+                background-color: e76f51;
+                color: #ffffff;
+            }
+            .imag{
+                width: 20px;
+                height: 20px;
+            }
+            .contA{
+                margin: 0px 5px 0 5px;
+            }
+            .afooter{
+                color: #264653 !important; 
+                text-decoration: none;
+                font-size: 13px !important;
+            }
           </style>
       </head>
       <body>
@@ -89,24 +90,22 @@ review.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                   <!-- Contenido principal -->
                   <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                       <h1>¡Has recibido una nueva review!</h1>
-                      <p>Para leerla dirígete a tu perfil en este link (recuerda estar logueado): </p>
+                      <h2>Para leerla dirígete a tu perfil en este link (recuerda estar logueado): </h2>
                       <a class="claseBoton" href="https://re-work-ten.vercel.app/myProfile">Click aquí</a>
                       <!-- Gracias -->
       
                       <!-- Botón -->
-                      <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${offerJson.idOffer}">Click aquí para ir a la oferta</a>
+                      <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${offerJson.idOffer}">Ver oferta</a>
                   </div>
                   <!-- Contenido principal -->
       
                   <!-- Footer -->
-                  <div style="background-color: #ffffff; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                      <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                  <div style="background-color: #264653; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                          <p style="background-color: #264653; padding: 10px 0px 10px 0px; font-size: 12px !important;">
                           © 2022 REwork, todos los derechos reservados.
                       </p>
                   </div>
-                  <!-- Footer -->
-      
-              </div>
+                </div>
           </div>
       </body>
       </html>`
@@ -133,7 +132,7 @@ review.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
             nodemailerConfig_1.default.sendMail({
                 from: `"REWork" <${REWORK_MAIL}>`,
                 to: workerJson.user_mail,
-                subject: "Tenes una nueva Review",
+                subject: "Tienes una nueva Review",
                 html: `<!DOCTYPE html>
           <html lang="en">
           <head>
@@ -151,36 +150,37 @@ review.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                   a{font-size: 30px !important;}
           
                   .claseBoton{
-                      width: 30%;
-                          background-color: #fcae3b;
-                          border: 2px solid #fcae3b;
-                          color: black; 
-                          padding: 16px 32px;
-                          text-align: center;
-                          text-decoration: none;
-                          font-weight: bold;
-                          display: inline-block;
-                          font-size: 16px;
-                          margin: 4px 2px;
-                          transition-duration: 0.4s;
-                          cursor: pointer;
-                  }
-                  .claseBoton:hover{
-                      background-color: #000000;
-                      color: #ffffff;
-                  }
-                  .imag{
-                      width: 20px;
-                      height: 20px;
-                  }
-                  .contA{
-                      margin: 0px 5px 0 5px;
-                  }
-                  .afooter{
-                      color: #ffffff !important; 
-                      text-decoration: none;
-                      font-size: 13px !important;
-                  }
+                    width: 30%;
+                        background-color: #F4A261;
+                        border: 2px solid #F4A261;
+                        border-radius: 5px;
+                        color: #ffffff; 
+                        padding: 16px 32px;
+                        text-align: center;
+                        text-decoration: none;
+                        font-weight: bold;
+                        display: inline-block;
+                        font-size: 16px;
+                        margin: 4px 2px;
+                        transition-duration: 0.4s;
+                        cursor: pointer;
+                }
+                .claseBoton:hover{
+                    background-color: e76f51;
+                    color: #ffffff;
+                }
+                .imag{
+                    width: 20px;
+                    height: 20px;
+                }
+                .contA{
+                    margin: 0px 5px 0 5px;
+                }
+                .afooter{
+                    color: #264653 !important; 
+                    text-decoration: none;
+                    font-size: 13px !important;
+                }
               </style>
           </head>
           <body>
@@ -189,24 +189,22 @@ review.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                       <!-- Contenido principal -->
                       <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                           <h1>¡Has recibido una nueva review!</h1>
-                          <p>Para leerla dirígete a tu perfil en este link (recuerda estar logueado): </p>
+                          <h2>Para leerla dirígete a tu perfil en este link (recuerda estar logueado): </h2>
                           <a class="claseBoton" href="https://re-work-ten.vercel.app/myProfile">Click aquí</a>
                           <!-- Gracias -->
           
                           <!-- Botón -->
-                          <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${offerJson.idOffer}">Click aquí para ir a la oferta</a>
+                          <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${offerJson.idOffer}">Ver oferta</a>
                       </div>
                       <!-- Contenido principal -->
           
                       <!-- Footer -->
-                      <div style="background-color: #ffffff; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                          <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                      <div style="background-color: #264653; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                          <p style="background-color: #264653; padding: 10px 0px 10px 0px; font-size: 12px !important;">
                               © 2022 REwork, todos los derechos reservados.
                           </p>
                       </div>
-                      <!-- Footer -->
-          
-                  </div>
+                    </div>
               </div>
           </body>
           </html>`
