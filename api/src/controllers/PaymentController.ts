@@ -17,10 +17,10 @@ class PaymentController {
         console.log(error);
         next(error);
   /*       next(error);
-  /* 
+  
         return res
           .status(500)
-          .json({ error: true, msg: "Failed to create payment" }); */ */
+          .json({ error: true, msg: "Failed to create payment" }); */ 
       }
     }
   
@@ -30,10 +30,10 @@ class PaymentController {
        return res.json(subscription); 
       } catch (error) {
         console.log(error);
-        next(error)      next(error)
+        next(error) 
        /* /*  return res
           .status(500)
-          .json({ error: true, msg: "Failed to create subscription" }); */ */
+          .json({ error: true, msg: "Failed to create subscription" }); */
       }
     }
     async getNotification(req:Request, res:Response, _next:NextFunction){
@@ -72,7 +72,7 @@ mercadopago.payment.save(payment_data)
     async getPaymentData(req:Request,__res:Response,next:NextFunction){
       try {
         this.subscriptionService.getMPInfo(req.body)
-         localStorage.removeItem("token");
+        localStorage.removeItem("token");
       } catch (error) {
         next(error)
       }
