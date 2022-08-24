@@ -63,7 +63,6 @@ class PaymentService {
         return __awaiter(this, void 0, void 0, function* () {
             const url = "https://api.mercadopago.com/preapproval";
             const { Email, id } = form;
-            console.log(Email, id);
             const body = {
                 reason: "REwork Premium",
                 auto_recurring: {
@@ -83,7 +82,6 @@ class PaymentService {
                 }
             });
             //aca me guardo los datos
-            console.log(subscription.data.payer_id);
             yield UserWorker.update({
                 IdPayment: subscription.data.payer_id.toString()
             }, {
@@ -98,7 +96,6 @@ class PaymentService {
         return __awaiter(this, void 0, void 0, function* () {
             let information;
             let id_payment;
-            console.log(response);
             if (response.action === "created")
                 return "All works";
             if (response.hasOwnProperty("entity")) {

@@ -106,6 +106,14 @@ function workerAllfiltersOn(name, profession, rating) {
             });
             return workerAllfiltersOn;
         }
+        else if (!name && !profession && !rating) {
+            const workerAllfiltersOn = yield UserWorker.findAll({
+                where: {
+                    isActive: true,
+                }
+            });
+            return workerAllfiltersOn;
+        }
         else {
             const workerAllfiltersOn = yield UserWorker.findAll({
                 where: {

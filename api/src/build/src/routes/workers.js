@@ -82,7 +82,7 @@ worker.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 }));
 worker.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
-    const { name, lastName, born_date, photo, profession, skills, favorites, description } = req.body;
+    const { name, lastName, born_date, photo, profession, skills, favorites, description, } = req.body;
     try {
         const workerUpdate = yield (0, workerController_1.updateWorkerProfile)(id, name, lastName, born_date, photo, profession, skills, favorites, description);
         res.json(workerUpdate);
@@ -91,4 +91,15 @@ worker.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         next(error);
     }
 }));
+worker.put("/bank", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id, bank_data } = req.body;
+    try {
+        const updateWorkerDataBank = yield (0, workerController_1.addBankDataWorker)(id, bank_data);
+        return res.json(updateWorkerDataBank);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
 exports.default = worker;
+// cambiar password

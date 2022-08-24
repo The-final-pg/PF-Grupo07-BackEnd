@@ -27,6 +27,7 @@ export async function updateUser(isActive: string, isWorker: boolean, id: string
     if(isActive !== undefined) {
       await client.set({isActive: isActive})
       await client.save()
+      console.log("client:" , client)
       return "Se actualizo el estado isActive del Client"
     } /* else if(isAdmin !== undefined ) {
       await client.set({isAdmin})
