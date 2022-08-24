@@ -21,7 +21,7 @@ server.use(passport.initialize()) */
   credentials:true,            //access-control-allow-credentials:true
   methods: "GET,POST,PUT,DELETE,OPTIONS"
 } */
-const corsOptions = "http://localhost:3000";
+const corsOptions = "https://re-work-ten.vercel.app";
 server.use((0, morgan_1.default)("dev"));
 server.use((0, helmet_1.default)());
 server.use((0, cors_1.default)({ origin: corsOptions, credentials: true }));

@@ -24,9 +24,9 @@ class PaymentService {
         }
       ],
       back_urls: {
-        failure: "http://localhost:3000/failure",
-        pending: "http://localhost:3000/pending",
-        success: `http://localhost:3000/success/${currentOffer.idOffer}`
+        failure: "https://re-work-ten.vercel.app/failure",
+        pending: "https://re-work-ten.vercel.app/pending",
+        success: `https://re-work-ten.vercel.app/success/${currentOffer.idOffer}`
       }
     };
 
@@ -53,7 +53,6 @@ class PaymentService {
   async createSubscription(form:any) {
     const url = "https://api.mercadopago.com/preapproval";
     const {Email, id} = form
-    console.log(Email, id)
     const body = {
       reason: "REwork Premium",
       auto_recurring: {
@@ -62,7 +61,7 @@ class PaymentService {
         transaction_amount: 1000,
         currency_id: "ARS"
       },
-       back_url: "https://rework-xi.vercel.app/home",
+       back_url: "https://re-work-ten.vercel.app/home",
        payer_email: Email,
        payer_name: id
     };
@@ -75,7 +74,6 @@ class PaymentService {
     });
 
     //aca me guardo los datos
-    console.log(subscription.data.payer_id)
     await UserWorker.update({
       IdPayment:subscription.data.payer_id.toString()
     }, {
@@ -89,15 +87,14 @@ class PaymentService {
   async getMPInfo(response:any){
     let information:any
     let id_payment:string
+
     if(response.action==="created") return "All works"
     if(response.hasOwnProperty("entity")){
-      information = await axios.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`)
-      id_payment = information.payer_id;
-    }else{
-      information = await axios.get(`https://api.mercadopago.com/v1/${response.type}s/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`)
-      id_payment = information.payer.email
+      if (response.entity === "preapproval"){
+        information = await axios.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`)
+        id_payment = information.data.payer_id.toString();
+      } else return "";
     }
-
     const worker = await UserWorker.findOne({where:{
       IdPayment:id_payment
     }})

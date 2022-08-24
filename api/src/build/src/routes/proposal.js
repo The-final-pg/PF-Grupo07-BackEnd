@@ -98,7 +98,7 @@ proposal.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
                     <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                         <h1>¡Felicitaciones, tu oferta de trabajo: ${offerJson.title} recibió una nueva propuesta!</h1>
                         <p>Accede a verla en el detalle de tu oferta o a través del siguiente link.</p>
-                        <a class="claseBoton" href="http://localhost:3000/detailOffer/${offerJson.idOffer}">Detalle de oferta</a>
+                        <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${offerJson.idOffer}">Detalle de oferta</a>
                         <!-- Gracias -->
         
                     </div>
@@ -193,11 +193,11 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                         <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                             <h1>¡Felicitaciones, aceptaron tu propuesta en la oferta: ${proposalJson.offer.title}!</h1>
                             <p>Sólo falta que leas y aceptes el contrato en el siguiente link.</p>
-                            <a class="claseBoton" href="http://localhost:3000/contract/${proposalJson.offer.idOffer}">Contrato</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/contract/${proposalJson.offer.idOffer}">Contrato</a>
                             <!-- Gracias -->
             
                             <!-- Botón -->
-                            <a class="claseBoton" href="http://localhost:3000/detailOffer/${proposalJson.offer.idOffer}">Click aquí para ir a la oferta</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${proposalJson.offer.idOffer}">Click aquí para ir a la oferta</a>
                         </div>
                         <!-- Contenido principal -->
             
@@ -280,7 +280,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                             <!-- Gracias -->
             
                             <!-- Botón -->
-                            <a class="claseBoton" href="http://localhost:3000/detailOffer/${proposalJson.offer.idOffer}">Click aquí para ir a la oferta</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${proposalJson.offer.idOffer}">Click aquí para ir a la oferta</a>
                         </div>
                         <!-- Contenido principal -->
             
@@ -363,7 +363,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                             <!-- Gracias -->
             
                             <!-- Botón -->
-                            <a class="claseBoton" href="http://localhost:3000/home">Click aquí</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/home">Click aquí</a>
                         </div>
                         <!-- Contenido principal -->
             
@@ -446,7 +446,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                             <!-- Gracias -->
             
                             <!-- Botón -->
-                            <a class="claseBoton" href="http://localhost:3000/contract/${proposalJson.offer.idOffer}">Click aquí</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/contract/${proposalJson.offer.idOffer}">Click aquí</a>
                         </div>
                         <!-- Contenido principal -->
             
@@ -533,7 +533,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                             <!-- Gracias -->
             
                             <!-- Botón -->
-                            <a class="claseBoton" href="http://localhost:3000/detailOffer/${proposalJson.offer.idOffer}">Click aquí</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${proposalJson.offer.idOffer}">Click aquí</a>
                         </div>
                         <!-- Contenido principal -->
             
@@ -618,7 +618,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                             <!-- Gracias -->
             
                             <!-- Botón -->
-                            <a class="claseBoton" href="http://localhost:3000/detailOffer/${proposalJson.offer.idOffer}">Click aquí</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${proposalJson.offer.idOffer}">Click aquí</a>
                         </div>
                         <!-- Contenido principal -->
             
@@ -702,7 +702,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                               <!-- Gracias -->
               
                               <!-- Botón -->
-                              <a class="claseBoton" href="http://localhost:3000/home">Click aquí</a>
+                              <a class="claseBoton" href="https://re-work-ten.vercel.app/home">Click aquí</a>
                           </div>
                           <!-- Contenido principal -->
               
@@ -787,7 +787,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                             <!-- Gracias -->
             
                             <!-- Botón -->
-                            <a class="claseBoton" href="http://localhost:3000/detailOffer/${proposalJson.offer.idOffer}">Click aquí</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/detailOffer/${proposalJson.offer.idOffer}">Click aquí</a>
                         </div>
                         <!-- Contenido principal -->
             
@@ -871,7 +871,7 @@ proposal.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                             <!-- Gracias -->
             
                             <!-- Botón -->
-                            <a class="claseBoton" href="http://localhost:3000/home">Click aquí</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/home">Click aquí</a>
                         </div>
                         <!-- Contenido principal -->
             

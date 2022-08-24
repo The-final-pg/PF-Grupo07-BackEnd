@@ -16,10 +16,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tsc --build -w",
     "start": "nodemon src/build/index",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "build": "tsc --build -w"
   },
   "keywords": [],
   "author": "",

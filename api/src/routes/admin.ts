@@ -1,8 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 const admin = express.Router();
 import { ClientType, OfferType, WorkerType } from "../types";
-import { getAllUsers, addNewProfessions, addNewSkills, getOfferFiltered } from "../controllers/adminController";
-
+import { getAllUsers, addNewProfessions, addNewSkills, getOfferFiltered, updateUser } from "../controllers/adminController";
 admin.get("/users", async (req: Request, res: Response, next: NextFunction) => {
     const {isActive} = req.query
     try {
@@ -11,7 +10,7 @@ admin.get("/users", async (req: Request, res: Response, next: NextFunction) => {
     } catch (error) {
       next(error);
     };
-  });
+  })
 
 admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => {
   const { isActive } = req.query
@@ -22,6 +21,7 @@ admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => 
     next(error);
   }
 });
+
 
   admin.put("/profession", async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -43,14 +43,14 @@ admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => 
     };
   });
 
-  /* admin.put("/users/isActive" , async(_req: Request, _res: Response, next: NextFunction) => {
-    // const {isWorker, id, isAdmin, isActive} = req.body
+  admin.put("/users/isActive" , async(req: Request, res: Response, next: NextFunction) => {
+    const {isWorker, id, /* isAdmin, */ isActive} = req.body
     try {
-      ////let message: string = await updateUser(req.body);
-      ////res.json(message)
+      let message: string = await updateUser( /* isAdmin, */ isActive , isWorker , id);
+      res.json(message)
     } catch(error) {
       next(error);
     }
-  }) */
+  })
 
   export default admin;
