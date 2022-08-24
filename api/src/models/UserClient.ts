@@ -72,5 +72,9 @@ module.exports = (sequelize: any) => {
       type: DataTypes.TEXT,
       allowNull: true,
     },
+    superAdmin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   });
 };
