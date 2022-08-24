@@ -37,9 +37,9 @@ class PaymentService {
                     }
                 ],
                 back_urls: {
-                    failure: "http://localhost:3000/failure",
-                    pending: "http://localhost:3000/pending",
-                    success: `http://localhost:3000/success/${currentOffer.idOffer}`
+                    failure: "https://re-work-ten.vercel.app/failure",
+                    pending: "https://re-work-ten.vercel.app/pending",
+                    success: `https://re-work-ten.vercel.app/success/${currentOffer.idOffer}`
                 }
             };
             const response = yield mercadopago_1.default.preferences.create(preference);
@@ -63,7 +63,6 @@ class PaymentService {
         return __awaiter(this, void 0, void 0, function* () {
             const url = "https://api.mercadopago.com/preapproval";
             const { Email, id } = form;
-            console.log(Email, id);
             const body = {
                 reason: "REwork Premium",
                 auto_recurring: {
@@ -83,7 +82,6 @@ class PaymentService {
                 }
             });
             //aca me guardo los datos
-            console.log(subscription.data.payer_id);
             yield UserWorker.update({
                 IdPayment: subscription.data.payer_id.toString()
             }, {
@@ -98,7 +96,6 @@ class PaymentService {
         return __awaiter(this, void 0, void 0, function* () {
             let information;
             let id_payment;
-            console.log(response);
             if (response.action === "created")
                 return "All works";
             if (response.hasOwnProperty("entity")) {
