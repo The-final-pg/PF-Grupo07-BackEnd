@@ -102,4 +102,3 @@ worker.put("/bank", (req, res, next) => __awaiter(void 0, void 0, void 0, functi
     }
 }));
 exports.default = worker;
-// cambiar password

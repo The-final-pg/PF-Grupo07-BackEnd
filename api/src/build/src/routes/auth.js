@@ -25,7 +25,7 @@ auth.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
         console.log(googleUser);
         const clientFound = yield UserClient.findOne({ where: { user_mail: googleUser === null || googleUser === void 0 ? void 0 : googleUser.user_mail } });
         const workerFound = yield UserWorker.findOne({ where: { user_mail: googleUser === null || googleUser === void 0 ? void 0 : googleUser.user_mail } });
-        console.log("clientt", clientFound);
+        console.log("client", clientFound);
         console.log("worker", workerFound);
         if (clientFound) {
             res.send(jsonwebtoken_1.default.sign({
@@ -285,7 +285,39 @@ auth.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         next(error);
     }
 }));
-/* auth.post("/change-password", async (req: any, res: any) => {
-
-}) */
+auth.post("/change-password", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { user_mail, oldPassword, newPassword } = req.body;
+    console.log("oldPassword", oldPassword);
+    console.log("newPassword", newPassword);
+    try {
+        const worker = yield UserWorker.findOne({ where: { user_mail: user_mail } });
+        const client = yield UserClient.findOne({ where: { user_mail: user_mail } });
+        console.log("entre al post del change");
+        let user;
+        if (!worker && !client) {
+            res.send("Usuario incorrecto");
+        }
+        else {
+            if (worker) {
+                user = worker;
+            }
+            else {
+                user = client;
+            }
+            const hashedPassword = yield bcrypt.compare(oldPassword, user.password);
+            if (hashedPassword) {
+                const confirmedPassword = yield bcrypt.hash(newPassword, 8);
+                yield user.set({ password: confirmedPassword });
+                yield user.save();
+                res.send("Contraseña reestablecida");
+            }
+            else {
+                res.send("Contraseña incorrecta");
+            }
+        }
+    }
+    catch (error) {
+        return error;
+    }
+}));
 exports.default = auth;

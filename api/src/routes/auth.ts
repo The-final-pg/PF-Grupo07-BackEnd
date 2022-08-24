@@ -12,7 +12,7 @@ auth.post("/", async(req: Request, res: Response, next: NextFunction) => {
         console.log(googleUser)
         const clientFound = await UserClient.findOne({where: {user_mail: googleUser?.user_mail}})
         const workerFound = await UserWorker.findOne({where: {user_mail: googleUser?.user_mail}})
-        console.log("clientt", clientFound)
+        console.log("client", clientFound)
         console.log("worker", workerFound)
         if(clientFound){
             res.send(jwt.sign(
@@ -294,9 +294,41 @@ auth.post("/worker", async(req: Request, res: Response, next: NextFunction) => {
     }
 })
 
-/* auth.post("/change-password", async (req: any, res: any) => {
+auth.post("/change-password", async (req:Request, res: Response) => {
+    const {user_mail, oldPassword, newPassword} = req.body
+    console.log("oldPassword", oldPassword)
+    console.log("newPassword", newPassword)
+    try {
+        
+        const worker = await UserWorker.findOne({ where: {user_mail: user_mail}})
+        const client = await UserClient.findOne({ where: {user_mail: user_mail}})
 
-}) */
+        console.log("entre al post del change")
+
+        let user: any
+        if(!worker && !client){
+            res.send("Usuario incorrecto")
+        } else {
+            if(worker){
+                user = worker
+            } else{
+                user = client
+            } 
+            
+            const hashedPassword = await bcrypt.compare(oldPassword, user.password)
+            if(hashedPassword){
+                const confirmedPassword = await bcrypt.hash(newPassword, 8)
+                await user.set({password : confirmedPassword});
+                await user.save()
+                res.send("Contraseña reestablecida")
+            } else {
+                res.send("Contraseña incorrecta")
+            }    
+        }
+    } catch(error){
+        return error
+    }
+}) 
 
 
 export default auth
