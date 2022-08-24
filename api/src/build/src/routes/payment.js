@@ -33,7 +33,6 @@ payment.post("/subscription", (req, res, _next) => __awaiter(void 0, void 0, voi
     paymentInstance.getSubscriptionLink(req, res, _next);
 }));
 payment.post("/notificationIPN", (req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.body);
     const response = req.body;
     paymentInstance.getPaymentData(req, res, _next);
     if (response) {
