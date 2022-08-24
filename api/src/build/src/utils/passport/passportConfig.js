@@ -79,6 +79,7 @@ passport_1.default.use(new passport_http_bearer_1.Strategy((token, done) => {
         if (err)
             return done(err);
         console.log('Estoy ene l verify', token);
+        console.log("user bearer", user);
         return done(null, user ? user : false);
     });
 }));

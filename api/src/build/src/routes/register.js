@@ -100,14 +100,15 @@ register.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, f
                   <div style="padding: 20px 10px 20px 10px;">
                       <!-- Contenido principal -->
                       <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
-                          <h1>¡Comienza a utilizar REwork!</h1>
+                          <h1>¡${clientCreated.dataValues.name}, comienza a utilizar REwork!</h1>
+
                           <p>Sólo falta que verifiques tu cuenta.</p>
           
                           <!-- Gracias -->
                           <p>Confirma tu correo electrónico</p>
           
                           <!-- Botón -->
-                          <a class="claseBoton" href="http://localhost:3000/confirm/client/${id}">AQUÍ</a>  
+                          <a class="claseBoton" href="http://localhost:3000/confirm/client/${id}">AQUÍ</a>
                       </div>
                       <!-- Contenido principal -->
           
@@ -125,8 +126,6 @@ register.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, f
               </div>
           </body>
           </html>`
-                /* `<span>Más de 1000 freelancers disponibles para concretar tus proyectos, ¿qué estás esperando?</span>
-                      <b>Confirma tu cuenta <a href="http://localhost:3000/confirm/client/${id}"> AQUÍ </a> </b>` */
             });
             res.send({ message: "Usuario registrado exitosamente! Por favor, verifica tu casilla de correo." });
         }
@@ -213,7 +212,7 @@ register.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, f
                   <div style="padding: 20px 10px 20px 10px;">
                       <!-- Contenido principal -->
                       <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
-                          <h1>¡Comienza a utilizar REwork!</h1>
+                          <h1>¡${workerCreated.dataValues.name}, comienza a utilizar REwork!</h1>
                           <p>Sólo falta que verifiques tu cuenta.</p>
           
                           <!-- Gracias -->

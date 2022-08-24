@@ -802,6 +802,15 @@ function offerAllFiltersOn(input, profession, rating, remMax, remMin, work_durat
             });
             return allFiltersOn;
         }
+        else {
+            const allFiltersOn = yield Offer.findAll({
+                where: {
+                    isActive: true,
+                },
+                include: UserClient,
+            });
+            return allFiltersOn;
+        }
     });
 }
 exports.offerAllFiltersOn = offerAllFiltersOn;
