@@ -917,4 +917,14 @@ proposal.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     }
     ;
 }));
+proposal.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    try {
+        const proposal = yield (0, proposalController_1.getProposalById)(id);
+        return res.json(proposal);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
 exports.default = proposal;

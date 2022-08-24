@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateProposalWorkerPremium = exports.putProposalIsActive = exports.putProposalState = exports.postNewProposal = void 0;
+exports.getProposalById = exports.updateProposalWorkerPremium = exports.putProposalIsActive = exports.putProposalState = exports.postNewProposal = void 0;
 const { Proposal, Offer, UserWorker } = require("../db");
 function postNewProposal(proposal, idOffer, idWorker) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -93,3 +93,12 @@ function updateProposalWorkerPremium(id, remuneration, proposal_description, wor
     });
 }
 exports.updateProposalWorkerPremium = updateProposalWorkerPremium;
+function getProposalById(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let proposal = yield Proposal.findByPk(id, {
+            include: UserWorker
+        });
+        return proposal.toJSON();
+    });
+}
+exports.getProposalById = getProposalById;
