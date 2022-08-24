@@ -91,3 +91,10 @@ export async function updateProposalWorkerPremium(
   await proposal.save();
   return proposal;
 }
+
+export async function getProposalById(id:any){
+  let proposal = await Proposal.findByPk(id, {
+    include: UserWorker
+  });
+  return proposal.toJSON();
+}
