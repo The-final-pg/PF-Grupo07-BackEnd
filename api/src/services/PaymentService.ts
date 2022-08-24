@@ -61,7 +61,7 @@ class PaymentService {
         transaction_amount: 1000,
         currency_id: "ARS"
       },
-       back_url: "https://rework-xi.vercel.app/home",
+       back_url: "https://re-work-ten.vercel.app/home",
        payer_email: Email,
        payer_name: id
     };
