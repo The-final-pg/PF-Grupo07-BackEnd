@@ -56,7 +56,7 @@ function getWorkerById(id) {
     });
 }
 exports.getWorkerById = getWorkerById;
-function updateWorkerProfile(id, name, lastName, born_date, photo, profession, skills, favorites, description, bank_data) {
+function updateWorkerProfile(id, name, lastName, born_date, photo, profession, skills, favorites, description) {
     return __awaiter(this, void 0, void 0, function* () {
         const data = {
             name,
@@ -67,7 +67,6 @@ function updateWorkerProfile(id, name, lastName, born_date, photo, profession, s
             skills,
             favorites,
             description,
-            bank_data,
         };
         const worker = yield UserWorker.findByPk(id);
         if (!name || data.name === worker.name)
@@ -85,8 +84,6 @@ function updateWorkerProfile(id, name, lastName, born_date, photo, profession, s
         if (!favorites)
             delete data.favorites;
         if (!description)
-            delete data.description;
-        if (!bank_data)
             delete data.description;
         yield worker.set(data);
         yield worker.save();

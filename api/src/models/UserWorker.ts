@@ -85,10 +85,10 @@ module.exports = (sequelize: any) => {
         type: DataTypes.STRING,
         allowNull:true
       },
-      bank_data: {
-        type: DataTypes.JSONB,
+      /* bank_data: {
+        type: DataTypes.STRING,
         allowNull: true,
-      },
+      }, */
     }
   );
 };

@@ -29,7 +29,6 @@ export interface WorkerType {
   favorites: OfferType[];
   isActive: boolean;
   description: String;
-  bank_data: JSON;
 }
 
 export interface ReviewType {

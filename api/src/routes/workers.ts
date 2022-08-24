@@ -86,7 +86,6 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     skills,
     favorites,
     description,
-    bank_data
   }: {
     name: string;
     lastName: string;
@@ -96,7 +95,6 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     skills: string[];
     favorites: OfferType[];
     description: string;
-    bank_data: JSON;
   } = req.body;
   try {
     const workerUpdate: WorkerType = await updateWorkerProfile(
@@ -109,7 +107,6 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
       skills,
       favorites,
       description,
-      bank_data,
     );
     res.json(workerUpdate);
   } catch (error) {
