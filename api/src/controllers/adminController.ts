@@ -50,6 +50,27 @@ export async function updateUser(isActive: string, isWorker: boolean, id: string
   }
 }
 
+export async function  updateUserAdmin(isAdmin: string, isWorker: boolean, id: string, /* isAdmin: string */) {
+  if(isWorker === false) {
+    let client = await UserClient.findByPk(id)
+    if(isAdmin !== undefined) {
+      await client.set({isAdmin: isAdmin})
+      await client.save()
+      console.log("client:" , client)
+      return "El usuario cliente ahora es administrador"
+    }
+  } 
+  
+  if(isWorker === true) {
+    let worker = await UserWorker.findByPk(id)
+    if(isAdmin !== undefined) {
+      await worker.set({isAdmin: isAdmin})
+      await worker.save()
+      return "El usuario trabajador ahora es administrador"
+    }
+  }
+}
+
 export async function getOfferFiltered(
   isActive: string,
 ): Promise<OfferType[]> {
@@ -101,6 +122,21 @@ export async function addNewProfessions(
   return totalNewProfessions;
 }
 
+export async function deleteProfession(array: string[], profession: string) {
+  const professions = array.filter((e: string) => profession !== e)
+  await UserWorker.update(
+    {
+      profession: professions,
+    },
+    {
+      where: {
+        id,
+      },
+    }
+  );
+  return "Profesión eliminada con éxito";
+}
+
 export async function addNewSkills(skills: string[]): Promise<string[]> {
   const workerData: any = await UserWorker.findByPk(id, {
     attributes: ["skills"],
@@ -121,4 +157,19 @@ export async function addNewSkills(skills: string[]): Promise<string[]> {
     }
   );
   return totalNewSkills;
+}
+
+export async function deleteSkill(array: string[], skill: string) {
+  const skills = array.filter((e: string) => skill !== e);
+  await UserWorker.update(
+    {
+      skills: skills,
+    },
+    {
+      where: {
+        id,
+      },
+    }
+  );
+  return "Aptitud eliminada con éxito";
 }
