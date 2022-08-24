@@ -87,7 +87,8 @@ register.post(
                   <div style="padding: 20px 10px 20px 10px;">
                       <!-- Contenido principal -->
                       <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
-                          <h1>¡Comienza a utilizar REwork!</h1>
+                          <h1>¡${clientCreated.dataValues.name}, comienza a utilizar REwork!</h1>
+
                           <p>Sólo falta que verifiques tu cuenta.</p>
           
                           <!-- Gracias -->
@@ -199,7 +200,7 @@ register.post(
                   <div style="padding: 20px 10px 20px 10px;">
                       <!-- Contenido principal -->
                       <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
-                          <h1>¡Comienza a utilizar REwork!</h1>
+                          <h1>¡${workerCreated.dataValues.name}, comienza a utilizar REwork!</h1>
                           <p>Sólo falta que verifiques tu cuenta.</p>
           
                           <!-- Gracias -->
