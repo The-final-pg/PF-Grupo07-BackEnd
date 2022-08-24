@@ -95,7 +95,7 @@ class PaymentService {
     if(response.hasOwnProperty("entity")){
       if (response.entity === "preapproval") {
         information = await axios.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`)
-        id_payment = information.data.payer_id;
+        id_payment = information.data.payer_id.toString();
       } else return ""
     }
     console.log(information);
