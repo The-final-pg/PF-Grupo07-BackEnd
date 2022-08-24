@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from "express";
-import { postNewProposal, putProposalIsActive, putProposalState, updateProposalWorkerPremium } from "../controllers/proposalController";
+import { postNewProposal, putProposalIsActive, putProposalState, updateProposalWorkerPremium, getProposalById } from "../controllers/proposalController";
 import { ProposalType } from "../types";
 import transporter from "../utils/nodemailer/nodemailerConfig";
 const { REWORK_MAIL } = process.env;
@@ -886,5 +886,15 @@ proposal.put("/:id", async (req: Request, res: Response, next: NextFunction) => 
     next(error);
   };
 });
+
+proposal.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params;
+  try {
+    const proposal: any = await getProposalById(id);
+      return res.json(proposal);
+  } catch (error) {
+    next(error);
+  }
+})
 
 export default proposal;
