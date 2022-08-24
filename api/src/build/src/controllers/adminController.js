@@ -35,11 +35,12 @@ function getAllUsers(isActive) {
 exports.getAllUsers = getAllUsers;
 function updateUser(isActive, isWorker, id) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (isWorker === "false") {
+        if (isWorker === false) {
             let client = yield UserClient.findByPk(id);
             if (isActive !== undefined) {
-                yield client.set({ isActive });
+                yield client.set({ isActive: isActive });
                 yield client.save();
+                console.log("client:", client);
                 return "Se actualizo el estado isActive del Client";
             } /* else if(isAdmin !== undefined ) {
               await client.set({isAdmin})
@@ -47,10 +48,10 @@ function updateUser(isActive, isWorker, id) {
               return "Se actualizo el estado isAdmin del Client"
             } */
         }
-        if (isWorker === "true") {
+        if (isWorker === true) {
             let worker = yield UserWorker.findByPk(id);
             if (isActive !== undefined) {
-                yield worker.set({ isActive });
+                yield worker.set({ isActive: isActive });
                 yield worker.save();
                 return "Se actualizo el estado isActive del Worker";
             } /* else if(isAdmin !== undefined ) {
@@ -69,7 +70,7 @@ function getOfferFiltered(isActive) {
                 where: {
                     isActive: true,
                 },
-                include: [UserClient, Proposal],
+                include: [UserClient, { model: Proposal, include: UserWorker }],
             });
             return allOffers;
         }
@@ -78,13 +79,13 @@ function getOfferFiltered(isActive) {
                 where: {
                     isActive: false,
                 },
-                include: [UserClient, Proposal],
+                include: [UserClient, { model: Proposal, include: UserWorker }],
             });
             return allOffers;
         }
         else {
             const allOffers = yield Offer.findAll({
-                include: [UserClient, Proposal],
+                include: [UserClient, { model: Proposal, include: UserWorker }],
             });
             return allOffers;
         }

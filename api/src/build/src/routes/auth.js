@@ -25,7 +25,7 @@ auth.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
         console.log(googleUser);
         const clientFound = yield UserClient.findOne({ where: { user_mail: googleUser === null || googleUser === void 0 ? void 0 : googleUser.user_mail } });
         const workerFound = yield UserWorker.findOne({ where: { user_mail: googleUser === null || googleUser === void 0 ? void 0 : googleUser.user_mail } });
-        console.log("clientt", clientFound);
+        console.log("client", clientFound);
         console.log("worker", workerFound);
         if (clientFound) {
             res.send(jsonwebtoken_1.default.sign({

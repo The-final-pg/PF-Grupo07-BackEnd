@@ -12,7 +12,7 @@ auth.post("/", async(req: Request, res: Response, next: NextFunction) => {
         console.log(googleUser)
         const clientFound = await UserClient.findOne({where: {user_mail: googleUser?.user_mail}})
         const workerFound = await UserWorker.findOne({where: {user_mail: googleUser?.user_mail}})
-        console.log("clientt", clientFound)
+        console.log("client", clientFound)
         console.log("worker", workerFound)
         if(clientFound){
             res.send(jwt.sign(
