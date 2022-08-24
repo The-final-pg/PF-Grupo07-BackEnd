@@ -113,7 +113,7 @@ offer.put("/state", async (req: Request, res: Response, next: NextFunction) => {
         transporter.sendMail({
           from: `"REWork" <${REWORK_MAIL}>`,
             to: proposal.userWorker.user_mail, 
-            subject: "Felicitaciones",
+            subject: "¡Buenas noticias!",
             html: `<!DOCTYPE html>
             <html lang="en">
             <head>
@@ -131,36 +131,37 @@ offer.put("/state", async (req: Request, res: Response, next: NextFunction) => {
                     a{font-size: 30px !important;}
             
                     .claseBoton{
-                        width: 30%;
-                            background-color: #fcae3b;
-                            border: 2px solid #fcae3b;
-                            color: black; 
-                            padding: 16px 32px;
-                            text-align: center;
-                            text-decoration: none;
-                            font-weight: bold;
-                            display: inline-block;
-                            font-size: 16px;
-                            margin: 4px 2px;
-                            transition-duration: 0.4s;
-                            cursor: pointer;
-                    }
-                    .claseBoton:hover{
-                        background-color: #000000;
-                        color: #ffffff;
-                    }
-                    .imag{
-                        width: 20px;
-                        height: 20px;
-                    }
-                    .contA{
-                        margin: 0px 5px 0 5px;
-                    }
-                    .afooter{
-                        color: #ffffff !important; 
-                        text-decoration: none;
-                        font-size: 13px !important;
-                    }
+                      width: 30%;
+                          background-color: #F4A261;
+                          border: 2px solid #F4A261;
+                          border-radius: 5px;
+                          color: #ffffff; 
+                          padding: 16px 32px;
+                          text-align: center;
+                          text-decoration: none;
+                          font-weight: bold;
+                          display: inline-block;
+                          font-size: 16px;
+                          margin: 4px 2px;
+                          transition-duration: 0.4s;
+                          cursor: pointer;
+                  }
+                  .claseBoton:hover{
+                      background-color: e76f51;
+                      color: #ffffff;
+                  }
+                  .imag{
+                      width: 20px;
+                      height: 20px;
+                  }
+                  .contA{
+                      margin: 0px 5px 0 5px;
+                  }
+                  .afooter{
+                      color: #264653 !important; 
+                      text-decoration: none;
+                      font-size: 13px !important;
+                  }
                 </style>
             </head>
             <body>
@@ -168,25 +169,23 @@ offer.put("/state", async (req: Request, res: Response, next: NextFunction) => {
                     <div style="padding: 20px 10px 20px 10px;">
                         <!-- Contenido principal -->
                         <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
-                            <h1>¡Felicitaciones, el cliente también finalizó el trabajo!</h1>
-                            <p>En un plazo máximo de 30 días verás reflejado el pago en tu cuenta. Recuerda que si eres Premium este plazo se reduce.</p>
+                            <h1>¡Buenas noticias, el trabajo finalizó exitosamente!</h1>
+                            <h2>En un plazo máximo de 30 días verás reflejado el pago en tu cuenta. Recuerda que si cuentas con un usuario Premium este plazo se reduce.</h2>
                         
                             <!-- Gracias -->
-                            <p>¡Bien hecho, sigue así, ve al siguiente link para buscar nuevas ofertas!</p>
+                            <h3>¡Bien hecho, sigue así, ve al siguiente link para buscar nuevas ofertas!</h3>
                             <!-- Botón -->
                             <a class="claseBoton" href="https://re-work-ten.vercel.app/home">Click aquí</a>
                         </div>
                         <!-- Contenido principal -->
             
                         <!-- Footer -->
-                        <div style="background-color: #ffffff; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                            <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                        <div style="background-color: #264653; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                          <p style="background-color: #264653; padding: 10px 0px 10px 0px; font-size: 12px !important;">
                                 © 2022 REwork, todos los derechos reservados.
                             </p>
                         </div>
-                        <!-- Footer -->
-            
-                    </div>
+                      </div>
                 </div>
             </body>
             </html>`

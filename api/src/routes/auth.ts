@@ -92,9 +92,10 @@ auth.post("/client", async(req: Request, res: Response, next: NextFunction) => {
           
                   .claseBoton{
                       width: 30%;
-                          background-color: #fcae3b;
-                          border: 2px solid #fcae3b;
-                          color: black; 
+                          background-color: #F4A261;
+                          border: 2px solid #F4A261;
+                          border-radius: 5px;
+                          color: #ffffff; 
                           padding: 16px 32px;
                           text-align: center;
                           text-decoration: none;
@@ -106,7 +107,7 @@ auth.post("/client", async(req: Request, res: Response, next: NextFunction) => {
                           cursor: pointer;
                   }
                   .claseBoton:hover{
-                      background-color: #000000;
+                      background-color: e76f51;
                       color: #ffffff;
                   }
                   .imag{
@@ -117,7 +118,7 @@ auth.post("/client", async(req: Request, res: Response, next: NextFunction) => {
                       margin: 0px 5px 0 5px;
                   }
                   .afooter{
-                      color: #ffffff !important; 
+                      color: #264653 !important; 
                       text-decoration: none;
                       font-size: 13px !important;
                   }
@@ -129,27 +130,23 @@ auth.post("/client", async(req: Request, res: Response, next: NextFunction) => {
                       <!-- Contenido principal -->
                       <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                           <h1>¡Hola ${clientGoogle.name}!</h1>
-                          <h3>Tu cuenta en REwork fue creada con éxito.</h3>
-                          <p>Tu contraseña asignada momentáneamente es: ${newClient.password}</p>
+                          <h2>Tu cuenta en REwork fue creada con éxito.</h2>
+                          <h3>Tu contraseña asignada momentáneamente es: ${newClient.password}</h3>
           
                           <!-- Gracias -->
                           <p>Te sugerimos cambiar tu contraseña por una que solo tú conozcas. Puedes hacerlo desde</p>
           
                           <!-- Botón -->
-                          <a class="claseBoton" href="https://re-work-ten.vercel.app/myProfile">AQUÍ</a>
+                          <a class="claseBoton" href="https://re-work-ten.vercel.app/changePassword">AQUÍ</a>
                       </div>
                       <!-- Contenido principal -->
           
                       <!-- Footer -->
-                      <div style="background-color: #ffffff; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                          <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                      <div style="background-color: #264653; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                          <p style="background-color: #264653; padding: 10px 0px 10px 0px; font-size: 12px !important;">
                               © 2022 REwork, todos los derechos reservados.
                           </p>
                       </div>
-                      <!-- Footer -->
-          
-          
-          
                   </div>
               </div>
           </body>
@@ -217,9 +214,10 @@ auth.post("/worker", async(req: Request, res: Response, next: NextFunction) => {
             
                     .claseBoton{
                         width: 30%;
-                            background-color: #fcae3b;
-                            border: 2px solid #fcae3b;
-                            color: black; 
+                            background-color: #F4A261;
+                            border: 2px solid #F4A261;
+                            border-radius: 5px;
+                            color: #ffffff; 
                             padding: 16px 32px;
                             text-align: center;
                             text-decoration: none;
@@ -231,7 +229,7 @@ auth.post("/worker", async(req: Request, res: Response, next: NextFunction) => {
                             cursor: pointer;
                     }
                     .claseBoton:hover{
-                        background-color: #000000;
+                        background-color: e76f51;
                         color: #ffffff;
                     }
                     .imag{
@@ -242,7 +240,7 @@ auth.post("/worker", async(req: Request, res: Response, next: NextFunction) => {
                         margin: 0px 5px 0 5px;
                     }
                     .afooter{
-                        color: #ffffff !important; 
+                        color: #264653 !important; 
                         text-decoration: none;
                         font-size: 13px !important;
                     }
@@ -254,27 +252,23 @@ auth.post("/worker", async(req: Request, res: Response, next: NextFunction) => {
                         <!-- Contenido principal -->
                         <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                             <h1>¡Hola ${workerGoogle.name}!</h1>
-                            <h3>Tu cuenta en REwork fue creada con éxito.</h3>
-                            <p>Tu contraseña asignada momentáneamente es: ${newWorker.password}</p>
+                            <h2>Tu cuenta en REwork fue creada con éxito.</h2>
+                            <h3>Tu contraseña asignada momentáneamente es: ${newWorker.password}</h3>
             
                             <!-- Gracias -->
                             <p>Te sugerimos cambiar tu contraseña por una que solo tú conozcas. Puedes hacerlo desde</p>
             
                             <!-- Botón -->
-                            <a class="claseBoton" href="https://re-work-ten.vercel.app/myProfile">AQUÍ</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/changePassword">AQUÍ</a>
                         </div>
                         <!-- Contenido principal -->
             
                         <!-- Footer -->
-                        <div style="background-color: #ffffff; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                            <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                        <div style="background-color: #264653; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                          <p style="background-color: #264653; padding: 10px 0px 10px 0px; font-size: 12px !important;">
                                 © 2022 REwork, todos los derechos reservados.
                             </p>
                         </div>
-                        <!-- Footer -->
-            
-            
-            
                     </div>
                 </div>
             </body>
