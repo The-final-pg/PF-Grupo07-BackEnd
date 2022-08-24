@@ -21,7 +21,8 @@ auth.post("/", async(req: Request, res: Response, next: NextFunction) => {
                     user_mail: clientFound.user_mail,
                     isAdmin: clientFound.isAdmin,
                     isWorker: clientFound.isWorker,
-                    premium: clientFound.premium
+                    premium: clientFound.premium,
+                    isSuper: clientFound.superAdmin
                 },
                 SECRET_KEY,
                 { expiresIn: "8h" }
@@ -33,7 +34,8 @@ auth.post("/", async(req: Request, res: Response, next: NextFunction) => {
                     user_mail: workerFound.user_mail,
                     isAdmin: workerFound.isAdmin,
                     isWorker: workerFound.isWorker,
-                    premium: workerFound.premium
+                    premium: workerFound.premium,
+                    isSuper: workerFound.superAdmin
                 },
                 SECRET_KEY,
                 { expiresIn: "8h" }
@@ -161,7 +163,8 @@ auth.post("/client", async(req: Request, res: Response, next: NextFunction) => {
                 user_mail: clientGoogle.user_mail,
                 isAdmin: clientGoogle.isAdmin,
                 isWorker: clientGoogle.isWorker,
-                premium: clientGoogle.premium
+                premium: clientGoogle.premium,
+                isSuper: clientGoogle.superAdmin
             },
             SECRET_KEY,
             { expiresIn: "8h" }
@@ -189,7 +192,7 @@ auth.post("/worker", async(req: Request, res: Response, next: NextFunction) => {
             isActive: true,
             isWorker: true,
             premium: false,
-            isAdmin: true
+            isAdmin: false
         })
 
         transporter.sendMail({
@@ -284,7 +287,8 @@ auth.post("/worker", async(req: Request, res: Response, next: NextFunction) => {
                 user_mail: workerGoogle.user_mail,
                 isAdmin: workerGoogle.isAdmin,
                 isWorker: workerGoogle.isWorker,
-                premium: workerGoogle.premium
+                premium: workerGoogle.premium,
+                isSuper: workerGoogle.superAdmin
             },
             SECRET_KEY,
             { expiresIn: "8h" }
