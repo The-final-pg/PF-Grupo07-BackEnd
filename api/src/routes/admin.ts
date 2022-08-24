@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 const admin = express.Router();
 import { ClientType, OfferType, WorkerType } from "../types";
-import { getAllUsers, addNewProfessions, addNewSkills, getOfferFiltered, updateUser } from "../controllers/adminController";
+import { getAllUsers, addNewProfessions, addNewSkills, getOfferFiltered, updateUser, deleteProfession, deleteSkill, updateUserAdmin } from "../controllers/adminController";
 admin.get("/users", async (req: Request, res: Response, next: NextFunction) => {
     const {isActive} = req.query
     try {
@@ -33,6 +33,17 @@ admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => 
     };
   });
 
+  admin.put("/profession/delete", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const array: string[] = req.body.array;
+      const profession: string = req.body.profession;
+      const response: string = await deleteProfession(array, profession);
+      res.json(response);
+    } catch (error) {
+      next(error);
+    };
+  });
+
   admin.put("/skills", async (req: Request, res: Response, next: NextFunction) => {
     try {
       const data: string[] = req.body.skills;
@@ -43,10 +54,31 @@ admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => 
     };
   });
 
+  admin.put("/skills/delete", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const array: string[] = req.body.array;
+      const skill: string = req.body.skill;
+      const response: string = await deleteSkill(array, skill);
+      res.json(response);
+    } catch (error) {
+      next(error);
+    };
+  });
+
   admin.put("/users/isActive" , async(req: Request, res: Response, next: NextFunction) => {
     const {isWorker, id, /* isAdmin, */ isActive} = req.body
     try {
       let message: string = await updateUser( /* isAdmin, */ isActive , isWorker , id);
+      res.json(message)
+    } catch(error) {
+      next(error);
+    }
+  })
+
+  admin.put("/users/isAdmin" , async(req: Request, res: Response, next: NextFunction) => {
+    const {isWorker, id, /* isAdmin, */ isAdmin} = req.body
+    try {
+      let message: string = await updateUserAdmin( /* isAdmin, */ isAdmin , isWorker , id);
       res.json(message)
     } catch(error) {
       next(error);
