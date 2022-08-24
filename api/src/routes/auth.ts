@@ -22,7 +22,7 @@ auth.post("/", async(req: Request, res: Response, next: NextFunction) => {
                     isAdmin: clientFound.isAdmin,
                     isWorker: clientFound.isWorker,
                     premium: clientFound.premium,
-                    superAdmin: clientFound.superAdmin
+                    isSuper: clientFound.superAdmin
                 },
                 SECRET_KEY,
                 { expiresIn: "8h" }
@@ -35,7 +35,7 @@ auth.post("/", async(req: Request, res: Response, next: NextFunction) => {
                     isAdmin: workerFound.isAdmin,
                     isWorker: workerFound.isWorker,
                     premium: workerFound.premium,
-                    superAdmin: workerFound.superAdmin
+                    isSuper: workerFound.superAdmin
                 },
                 SECRET_KEY,
                 { expiresIn: "8h" }
@@ -164,7 +164,7 @@ auth.post("/client", async(req: Request, res: Response, next: NextFunction) => {
                 isAdmin: clientGoogle.isAdmin,
                 isWorker: clientGoogle.isWorker,
                 premium: clientGoogle.premium,
-                superAdmin: clientGoogle.superAdmin
+                isSuper: clientGoogle.superAdmin
             },
             SECRET_KEY,
             { expiresIn: "8h" }
@@ -192,7 +192,7 @@ auth.post("/worker", async(req: Request, res: Response, next: NextFunction) => {
             isActive: true,
             isWorker: true,
             premium: false,
-            isAdmin: true
+            isAdmin: false
         })
 
         transporter.sendMail({
@@ -288,7 +288,7 @@ auth.post("/worker", async(req: Request, res: Response, next: NextFunction) => {
                 isAdmin: workerGoogle.isAdmin,
                 isWorker: workerGoogle.isWorker,
                 premium: workerGoogle.premium,
-                superAdmin: workerGoogle.superAdmin
+                isSuper: workerGoogle.superAdmin
             },
             SECRET_KEY,
             { expiresIn: "8h" }
