@@ -92,3 +92,4 @@ worker.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     }
 }));
 exports.default = worker;
+// cambiar password

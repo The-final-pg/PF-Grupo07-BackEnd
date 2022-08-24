@@ -71,6 +71,7 @@ passport.use(
       jwt.verify(token, SECRET_KEY, function (err, user) {
         if (err) return done(err);
         console.log('Estoy ene l verify', token )
+        console.log("user bearer", user)
         return done(null, user ? user : false);
       });
     })
