@@ -24,9 +24,9 @@ class PaymentService {
         }
       ],
       back_urls: {
-        failure: "http://localhost:3000/failure",
-        pending: "http://localhost:3000/pending",
-        success: `http://localhost:3000/success/${currentOffer.idOffer}`
+        failure: "https://rework-xi.vercel.app/failure",
+        pending: "https://rework-xi.vercel.app/pending",
+        success: `https://rework-xi.vercel.app/success/${currentOffer.idOffer}`
       }
     };
 
