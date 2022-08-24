@@ -134,7 +134,7 @@ auth.post("/client", async(req: Request, res: Response, next: NextFunction) => {
                           <p>Te sugerimos cambiar tu contraseña por una que solo tú conozcas. Puedes hacerlo desde</p>
           
                           <!-- Botón -->
-                          <a class="claseBoton" href="http://localhost:3000/myProfile">AQUÍ</a>
+                          <a class="claseBoton" href="https://re-work-ten.vercel.app/myProfile">AQUÍ</a>
                       </div>
                       <!-- Contenido principal -->
           
@@ -258,7 +258,7 @@ auth.post("/worker", async(req: Request, res: Response, next: NextFunction) => {
                             <p>Te sugerimos cambiar tu contraseña por una que solo tú conozcas. Puedes hacerlo desde</p>
             
                             <!-- Botón -->
-                            <a class="claseBoton" href="http://localhost:3000/myProfile">AQUÍ</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/myProfile">AQUÍ</a>
                         </div>
                         <!-- Contenido principal -->
             

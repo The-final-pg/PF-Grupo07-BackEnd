@@ -84,7 +84,7 @@ login.post("/forgot-password", async (req:Request, res: Response) => {
                     { expiresIn: "15m" }
                 ) 
 
-                const link = `http://localhost:3000/resetPassword?token=${token}` 
+                const link = `https://re-work-ten.vercel.app/resetPassword?token=${token}` 
                 console.log("link forgot password", link)
                 if(type === "passwordreset"){
                 transporter.sendMail({

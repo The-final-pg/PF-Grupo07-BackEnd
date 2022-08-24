@@ -174,7 +174,7 @@ offer.put("/state", async (req: Request, res: Response, next: NextFunction) => {
                             <!-- Gracias -->
                             <p>¡Bien hecho, sigue así, ve al siguiente link para buscar nuevas ofertas!</p>
                             <!-- Botón -->
-                            <a class="claseBoton" href="http://localhost:3000/home">Click aquí</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/home">Click aquí</a>
                         </div>
                         <!-- Contenido principal -->
             

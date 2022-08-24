@@ -10,7 +10,7 @@ const config = {
     authRequired: false,
     auth0Logout: true,
     secret: 'a long, randomly-generated string stored in env',
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://re-work-ten.vercel.app/',
     clientID: 'sSXCQMJihDhmx4EcIculf0lYKyrstmM0',
     issuerBaseURL: 'https://dev-nwcict1k.us.auth0.com'
 };

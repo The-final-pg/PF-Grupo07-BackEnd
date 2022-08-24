@@ -108,7 +108,7 @@ register.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, f
                           <p>Confirma tu correo electrónico</p>
           
                           <!-- Botón -->
-                          <a class="claseBoton" href="http://localhost:3000/confirm/client/${id}">AQUÍ</a>
+                          <a class="claseBoton" href="https://re-work-ten.vercel.app/confirm/client/${id}">AQUÍ</a>
                       </div>
                       <!-- Contenido principal -->
           
@@ -219,7 +219,7 @@ register.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, f
                           <p>Confirma tu correo electrónico</p>
           
                           <!-- Botón -->
-                          <a class="claseBoton" href="http://localhost:3000/confirm/worker/${id}">AQUÍ</a>
+                          <a class="claseBoton" href="https://re-work-ten.vercel.app/confirm/worker/${id}">AQUÍ</a>
                       </div>
                       <!-- Contenido principal -->
           
