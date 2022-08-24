@@ -57,7 +57,6 @@ offer.get("/search", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
             offers = yield (0, filteredSearchOffer_1.offerFilteredByWorDurationTime)(q, wdt);
         }
         else if (!q && !p && !r && !max && !min && wdt) {
-            console.log("entre al filtro");
             offers = yield (0, filteredSearchOffer_1.offerFilteredByWorDurationTime)(q, wdt);
         }
         else {
@@ -168,7 +167,7 @@ offer.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, functi
                             <!-- Gracias -->
                             <p>¡Bien hecho, sigue así, ve al siguiente link para buscar nuevas ofertas!</p>
                             <!-- Botón -->
-                            <a class="claseBoton" href="http://localhost:3000/home">Click aquí</a>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/home">Click aquí</a>
                         </div>
                         <!-- Contenido principal -->
             

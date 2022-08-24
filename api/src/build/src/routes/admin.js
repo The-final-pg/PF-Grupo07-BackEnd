@@ -58,13 +58,14 @@ admin.put("/skills", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     }
     ;
 }));
-/* admin.put("/users/isActive" , async(_req: Request, _res: Response, next: NextFunction) => {
-  // const {isWorker, id, isAdmin, isActive} = req.body
-  try {
-    //////let message: string = await updateUser(req.body);
-    //////res.json(message)
-  } catch(error) {
-    next(error);
-  }
-}) */
+admin.put("/users/isActive", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { isWorker, id, /* isAdmin, */ isActive } = req.body;
+    try {
+        let message = yield (0, adminController_1.updateUser)(/* isAdmin, */ isActive, isWorker, id);
+        res.json(message);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
 exports.default = admin;

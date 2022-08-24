@@ -49,7 +49,7 @@ export async function updateWorkerProfile(
   profession: string[],
   skills: string[],
   favorites: OfferType[], 
-  description: string
+  description: string,
 ): Promise<WorkerType> {
   const data = {
     name,
@@ -59,7 +59,7 @@ export async function updateWorkerProfile(
     profession,
     skills,
     favorites,
-    description
+    description,
   };
   const worker = await UserWorker.findByPk(id);
   if (!name || data.name === worker.name) delete data.name;
@@ -81,4 +81,15 @@ export async function putWorkerPremium (id: string, premium: boolean): Promise<s
   await worker.set({premium: premium});
   await worker.save();
   return "Ya tienes cuenta premium!";
+}
+
+export async function addBankDataWorker (id: string, data_bank: JSON): Promise<string> {
+  
+  await UserWorker.update({
+    data_bank: data_bank,
+    where: {
+      id: id,
+    }
+  })
+  return "Datos bancarios cargados exitosamente"
 }

@@ -21,6 +21,35 @@ export async function getAllUsers(isActive: string): Promise<(ClientType | Worke
   }
 }
 
+export async function updateUser(isActive: string, isWorker: boolean, id: string, /* isAdmin: string */) {
+  if(isWorker === false) {
+    let client = await UserClient.findByPk(id)
+    if(isActive !== undefined) {
+      await client.set({isActive: isActive})
+      await client.save()
+      console.log("client:" , client)
+      return "Se actualizo el estado isActive del Client"
+    } /* else if(isAdmin !== undefined ) {
+      await client.set({isAdmin})
+      await client.save()
+      return "Se actualizo el estado isAdmin del Client"
+    } */
+  } 
+  
+  if(isWorker === true) {
+    let worker = await UserWorker.findByPk(id)
+    if(isActive !== undefined) {
+      await worker.set({isActive: isActive})
+      await worker.save()
+      return "Se actualizo el estado isActive del Worker"
+    } /* else if(isAdmin !== undefined ) {
+      await worker.set({isAdmin})
+      await worker.save()
+      return "Se actualizo el estado isAdmin del Worker"
+    } */
+  }
+}
+
 export async function getOfferFiltered(
   isActive: string,
 ): Promise<OfferType[]> {
@@ -29,7 +58,7 @@ export async function getOfferFiltered(
       where: {
         isActive: true,
       },
-      include: [UserClient, Proposal],
+      include: [UserClient, {model: Proposal, include:UserWorker}],
     });
     return allOffers;
   } else if (isActive === "false") {
@@ -37,12 +66,12 @@ export async function getOfferFiltered(
       where: {
         isActive: false,
       },
-      include: [UserClient, Proposal],
+      include: [UserClient, {model: Proposal, include:UserWorker}],
     });
     return allOffers;
   } else {
     const allOffers: OfferType[] = await Offer.findAll({
-      include: [UserClient, Proposal],
+      include: [UserClient, {model: Proposal, include:UserWorker}],
     });
     return allOffers;
   }

@@ -24,9 +24,9 @@ class PaymentService {
         }
       ],
       back_urls: {
-        failure: "http://localhost:3000/failure",
-        pending: "http://localhost:3000/pending",
-        success: `http://localhost:3000/success/${currentOffer.idOffer}`
+        failure: "https://re-work-ten.vercel.app/failure",
+        pending: "https://re-work-ten.vercel.app/pending",
+        success: `https://re-work-ten.vercel.app/success/${currentOffer.idOffer}`
       }
     };
 
@@ -53,7 +53,6 @@ class PaymentService {
   async createSubscription(form:any) {
     const url = "https://api.mercadopago.com/preapproval";
     const {Email, id} = form
-    console.log(Email, id)
     const body = {
       reason: "REwork Premium",
       auto_recurring: {
@@ -75,7 +74,6 @@ class PaymentService {
     });
 
     //aca me guardo los datos
-    console.log(subscription.data.payer_id)
     await UserWorker.update({
       IdPayment:subscription.data.payer_id.toString()
     }, {
@@ -90,13 +88,12 @@ class PaymentService {
     let information:any
     let id_payment:string
 
-    console.log(response)
     if(response.action==="created") return "All works"
     if(response.hasOwnProperty("entity")){
-      if (response.entity === "preapproval") {
+      if (response.entity === "preapproval"){
         information = await axios.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`)
         id_payment = information.data.payer_id.toString();
-      } else return ""
+      } else return "";
     }
     console.log(information);
     const worker = await UserWorker.findOne({where:{
