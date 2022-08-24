@@ -84,9 +84,9 @@ module.exports = (sequelize) => {
             type: sequelize_1.DataTypes.STRING,
             allowNull: true
         },
-        /* bank_data: {
-          type: DataTypes.STRING,
-          allowNull: true,
-        }, */
+        bank_data: {
+            type: sequelize_1.DataTypes.JSONB,
+            allowNull: true,
+        },
     });
 };

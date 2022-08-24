@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.putWorkerPremium = exports.updateWorkerProfile = exports.getWorkerById = exports.getWorkerByName = exports.getAllWorkers = void 0;
+exports.addBankDataWorker = exports.putWorkerPremium = exports.updateWorkerProfile = exports.getWorkerById = exports.getWorkerByName = exports.getAllWorkers = void 0;
 const sequelize_1 = require("sequelize");
 const { UserWorker, Review, Proposal, Portfolio } = require("../db");
 const CompareArraysEquality_1 = require("../services/CompareArraysEquality");
@@ -101,3 +101,15 @@ function putWorkerPremium(id, premium) {
     });
 }
 exports.putWorkerPremium = putWorkerPremium;
+function addBankDataWorker(id, data_bank) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield UserWorker.update({
+            data_bank: data_bank,
+            where: {
+                id: id,
+            }
+        });
+        return "Datos bancarios cargados exitosamente";
+    });
+}
+exports.addBankDataWorker = addBankDataWorker;

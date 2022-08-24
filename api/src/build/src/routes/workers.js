@@ -91,5 +91,15 @@ worker.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         next(error);
     }
 }));
+worker.put("/bank", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id, bank_data } = req.body;
+    try {
+        const updateWorkerDataBank = yield (0, workerController_1.addBankDataWorker)(id, bank_data);
+        return res.json(updateWorkerDataBank);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
 exports.default = worker;
 // cambiar password
