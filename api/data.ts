@@ -6,7 +6,7 @@ const {
   Proposal,
   Portfolio,
   Review,
-} = require("./src/db");
+} = require("./src/db"); 
 
 export const setData = async () => {
   const users = await UserClient.findAll();
