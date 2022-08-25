@@ -25,7 +25,8 @@ class PaymentController {
             catch (error) {
                 console.log(error);
                 next(error);
-                /*
+                /*       next(error);
+                
                       return res
                         .status(500)
                         .json({ error: true, msg: "Failed to create payment" }); */
@@ -41,7 +42,7 @@ class PaymentController {
             catch (error) {
                 console.log(error);
                 next(error);
-                /*  return res
+                /* /*  return res
                    .status(500)
                    .json({ error: true, msg: "Failed to create subscription" }); */
             }
@@ -79,7 +80,7 @@ class PaymentController {
             });
         });
     }
-    getPaymentData(req, _res, next) {
+    getPaymentData(req, __res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 this.subscriptionService.getMPInfo(req.body);

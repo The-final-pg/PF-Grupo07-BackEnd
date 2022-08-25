@@ -103,12 +103,12 @@ function putWorkerPremium(id, premium) {
 exports.putWorkerPremium = putWorkerPremium;
 function addBankDataWorker(id, bank_data) {
     return __awaiter(this, void 0, void 0, function* () {
-        yield UserWorker.update({
-            bank_data: bank_data,
-            where: {
-                id: id,
-            }
-        });
+        const worker = yield UserWorker.findByPk(id);
+        console.log(worker);
+        console.log("id", id);
+        console.log("bank_data", bank_data);
+        yield worker.set({ bank_data: bank_data });
+        yield worker.save();
         return "Datos bancarios cargados exitosamente";
     });
 }
