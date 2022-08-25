@@ -93,6 +93,8 @@ worker.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 }));
 worker.put("/bank", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id, bank_data } = req.body;
+        console.log(id);
+    console.log(bank_data);
     try {
         const updateWorkerDataBank = yield (0, workerController_1.addBankDataWorker)(id, bank_data);
         return res.json(updateWorkerDataBank);
