@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express"; 
 import { OfferType } from "../types";
 import {
   getAllOffers,
