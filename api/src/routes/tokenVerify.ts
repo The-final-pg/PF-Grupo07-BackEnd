@@ -52,7 +52,7 @@ tokenVerify.post("/renew", async (req: Request, res: Response, next: NextFunctio
                     isAdmin: newToken.isAdmin,
                     isWorker: newToken.isWorker,
                     premium: newToken.premium,
-                    superAdmin: newToken.superAdmin,
+                    isSuper: newToken.isSuper,
                     exp: newToken.exp
                 },
                 SECRET_KEY

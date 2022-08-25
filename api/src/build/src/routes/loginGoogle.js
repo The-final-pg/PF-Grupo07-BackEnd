@@ -34,7 +34,7 @@ loginGoogle.get("/successClient", (req, res) => {
                 isAdmin: false,
                 isWorker: true,
                 premium: false,
-                superAdmin: user.superAdmin
+                isSuper: false
             }, SECRET_KEY, { expiresIn: "8h" })
         };
         res.send(newUser);
@@ -55,7 +55,7 @@ loginGoogle.get("/successWorker", (req, res) => {
                 isAdmin: false,
                 isWorker: true,
                 premium: false,
-                superAdmin: user.superAdmin
+                isSuper: false
             }, SECRET_KEY, { expiresIn: "8h" })
         };
         res.send(newUser);

@@ -63,7 +63,7 @@ tokenVerify.post("/renew", (req, res, next) => __awaiter(void 0, void 0, void 0,
             isAdmin: newToken.isAdmin,
             isWorker: newToken.isWorker,
             premium: newToken.premium,
-            superAdmin: newToken.superAdmin,
+            isSuper: newToken.isSuper,
             exp: newToken.exp
         }, SECRET_KEY);
         res.send(renewedToken);

@@ -50,7 +50,7 @@ login.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
                 isAdmin: user.isAdmin,
                 isWorker: user.isWorker,
                 premium: user.premium,
-                superAdmin: user.superAdmin
+                isSuper: user.superAdmin
             }, SECRET_KEY, { expiresIn: "8h" }));
         }
     }))(req, res, next);
@@ -105,9 +105,10 @@ login.post("/forgot-password", (req, res) => __awaiter(void 0, void 0, void 0, f
                     
                             .claseBoton{
                                 width: 30%;
-                                    background-color: #fcae3b;
-                                    border: 2px solid #fcae3b;
-                                    color: black; 
+                                    background-color: #F4A261;
+                                    border: 2px solid #F4A261;
+                                    border-radius: 5px;
+                                    color: #ffffff; 
                                     padding: 16px 32px;
                                     text-align: center;
                                     text-decoration: none;
@@ -119,7 +120,7 @@ login.post("/forgot-password", (req, res) => __awaiter(void 0, void 0, void 0, f
                                     cursor: pointer;
                             }
                             .claseBoton:hover{
-                                background-color: #000000;
+                                background-color: e76f51;
                                 color: #ffffff;
                             }
                             .imag{
@@ -130,7 +131,7 @@ login.post("/forgot-password", (req, res) => __awaiter(void 0, void 0, void 0, f
                                 margin: 0px 5px 0 5px;
                             }
                             .afooter{
-                                color: #ffffff !important; 
+                                color: #264653 !important; 
                                 text-decoration: none;
                                 font-size: 13px !important;
                             }
@@ -142,11 +143,12 @@ login.post("/forgot-password", (req, res) => __awaiter(void 0, void 0, void 0, f
                                 <!-- Contenido principal -->
                                 <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                                     <h1>¡Hola ${user.dataValues.name}!</h1>
-                                    <h3>Has solicitado cambiar tu contraseña.</h3>
-                                    <p>Haz click en el siguiente botón e ingresa una nueva contraseña.</p>
+                                    <h2>Has solicitado cambiar tu contraseña.</h2>
+                                    <h3>Haz click en el siguiente botón e ingresa una nueva contraseña.</h3>
                                     
                                     <!-- Botón -->
                                     <a class="claseBoton" href="${link}">Restablecer contraseña</a>
+                                    <br>
                                     <br>
                                     <p>Si no has solicitado el cambio de tu contraseña, por favor comunícate con nosotros envíandonos un mensaje a ${REWORK_MAIL}.</p>
                                 </div>
