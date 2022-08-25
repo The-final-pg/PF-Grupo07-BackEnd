@@ -99,16 +99,13 @@ export async function getOfferFiltered(
 }
 
 export async function addNewProfessions(
-  professions: string[]
-): Promise<string[]> {
+  newProfession: string
+): Promise<string> {
   const workerData: any = await UserWorker.findByPk(id, {
     attributes: ["profession"],
   });
   const totalProfessions: any = workerData.toJSON();
-  const totalNewProfessions: string[] = totalProfessions.profession;
-  professions.forEach((e: string) =>
-    totalNewProfessions.includes(e) ? null : totalNewProfessions.push(e)
-  );
+  const totalNewProfessions: string[] = totalProfessions.profession.concat(newProfession);
   await UserWorker.update(
     {
       profession: totalNewProfessions,
@@ -119,7 +116,7 @@ export async function addNewProfessions(
       },
     }
   );
-  return totalNewProfessions;
+  return "Profesión cargada con éxito!";
 }
 
 export async function deleteProfession(array: string[], profession: string) {
@@ -137,15 +134,12 @@ export async function deleteProfession(array: string[], profession: string) {
   return "Profesión eliminada con éxito";
 }
 
-export async function addNewSkills(skills: string[]): Promise<string[]> {
+export async function addNewSkills(skill: string): Promise<string> {
   const workerData: any = await UserWorker.findByPk(id, {
     attributes: ["skills"],
   });
   const totalSkills: any = workerData.toJSON();
-  const totalNewSkills: string[] = totalSkills.skills;
-  skills.forEach((e: string) =>
-    totalNewSkills.includes(e) ? null : totalNewSkills.push(e)
-  );
+  const totalNewSkills: string[] = totalSkills.skills.concat(skill);
   await UserWorker.update(
     {
       skills: totalNewSkills,
@@ -156,7 +150,7 @@ export async function addNewSkills(skills: string[]): Promise<string[]> {
       },
     }
   );
-  return totalNewSkills;
+  return "Aptitud cargada con éxito!";
 }
 
 export async function deleteSkill(array: string[], skill: string) {

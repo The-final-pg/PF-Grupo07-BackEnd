@@ -33,7 +33,8 @@ auth.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
                 user_mail: clientFound.user_mail,
                 isAdmin: clientFound.isAdmin,
                 isWorker: clientFound.isWorker,
-                premium: clientFound.premium
+                premium: clientFound.premium,
+                superAdmin: clientFound.superAdmin
             }, SECRET_KEY, { expiresIn: "8h" }));
         }
         else if (workerFound) {
@@ -42,7 +43,8 @@ auth.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
                 user_mail: workerFound.user_mail,
                 isAdmin: workerFound.isAdmin,
                 isWorker: workerFound.isWorker,
-                premium: workerFound.premium
+                premium: workerFound.premium,
+                superAdmin: workerFound.superAdmin
             }, SECRET_KEY, { expiresIn: "8h" }));
         }
         else {
@@ -162,7 +164,8 @@ auth.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
             user_mail: clientGoogle.user_mail,
             isAdmin: clientGoogle.isAdmin,
             isWorker: clientGoogle.isWorker,
-            premium: clientGoogle.premium
+            premium: clientGoogle.premium,
+            superAdmin: clientGoogle.superAdmin
         }, SECRET_KEY, { expiresIn: "8h" }));
     }
     catch (error) {
@@ -278,7 +281,8 @@ auth.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
             user_mail: workerGoogle.user_mail,
             isAdmin: workerGoogle.isAdmin,
             isWorker: workerGoogle.isWorker,
-            premium: workerGoogle.premium
+            premium: workerGoogle.premium,
+            superAdmin: workerGoogle.superAdmin
         }, SECRET_KEY, { expiresIn: "8h" }));
     }
     catch (error) {
