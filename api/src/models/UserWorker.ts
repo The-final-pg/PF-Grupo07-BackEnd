@@ -35,9 +35,11 @@ module.exports = (sequelize: any) => {
       },
       profession: {
         type: DataTypes.ARRAY(DataTypes.STRING),
+        defaultValue: [],
       },
       skills: {
         type: DataTypes.ARRAY(DataTypes.STRING),
+        defaultValue: [],
       },
       rating: {
         type: DataTypes.FLOAT,
