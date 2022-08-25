@@ -50,36 +50,37 @@ register.post(
                   a{font-size: 30px !important;}
           
                   .claseBoton{
-                      width: 30%;
-                          background-color: #fcae3b;
-                          border: 2px solid #fcae3b;
-                          color: black; 
-                          padding: 16px 32px;
-                          text-align: center;
-                          text-decoration: none;
-                          font-weight: bold;
-                          display: inline-block;
-                          font-size: 16px;
-                          margin: 4px 2px;
-                          transition-duration: 0.4s;
-                          cursor: pointer;
-                  }
-                  .claseBoton:hover{
-                      background-color: #000000;
-                      color: #ffffff;
-                  }
-                  .imag{
-                      width: 20px;
-                      height: 20px;
-                  }
-                  .contA{
-                      margin: 0px 5px 0 5px;
-                  }
-                  .afooter{
-                      color: #ffffff !important; 
-                      text-decoration: none;
-                      font-size: 13px !important;
-                  }
+                    width: 30%;
+                        background-color: #F4A261;
+                        border: 2px solid #F4A261;
+                        border-radius: 5px;
+                        color: #ffffff; 
+                        padding: 16px 32px;
+                        text-align: center;
+                        text-decoration: none;
+                        font-weight: bold;
+                        display: inline-block;
+                        font-size: 16px;
+                        margin: 4px 2px;
+                        transition-duration: 0.4s;
+                        cursor: pointer;
+                }
+                .claseBoton:hover{
+                    background-color: e76f51;
+                    color: #ffffff;
+                }
+                .imag{
+                    width: 20px;
+                    height: 20px;
+                }
+                .contA{
+                    margin: 0px 5px 0 5px;
+                }
+                .afooter{
+                    color: #264653 !important; 
+                    text-decoration: none;
+                    font-size: 13px !important;
+                }
               </style>
           </head>
           <body>
@@ -89,10 +90,10 @@ register.post(
                       <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                           <h1>¡${clientCreated.dataValues.name}, comienza a utilizar REwork!</h1>
 
-                          <p>Sólo falta que verifiques tu cuenta.</p>
+                          <h2>Sólo falta que verifiques tu cuenta.</h2>
           
                           <!-- Gracias -->
-                          <p>Confirma tu correo electrónico</p>
+                          <h3>Confirma tu correo electrónico</h3>
           
                           <!-- Botón -->
                           <a class="claseBoton" href="https://re-work-ten.vercel.app/confirm/client/${id}">AQUÍ</a>
@@ -100,15 +101,11 @@ register.post(
                       <!-- Contenido principal -->
           
                       <!-- Footer -->
-                      <div style="background-color: #ffffff; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                          <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                      <div style="background-color: #264653; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                          <p style="background-color: #264653; padding: 10px 0px 10px 0px; font-size: 12px !important;">
                               © 2022 REwork, todos los derechos reservados.
                           </p>
                       </div>
-                      <!-- Footer -->
-          
-          
-          
                   </div>
               </div>
           </body>
@@ -164,36 +161,37 @@ register.post(
                   a{font-size: 30px !important;}
           
                   .claseBoton{
-                      width: 30%;
-                          background-color: #fcae3b;
-                          border: 2px solid #fcae3b;
-                          color: black; 
-                          padding: 16px 32px;
-                          text-align: center;
-                          text-decoration: none;
-                          font-weight: bold;
-                          display: inline-block;
-                          font-size: 16px;
-                          margin: 4px 2px;
-                          transition-duration: 0.4s;
-                          cursor: pointer;
-                  }
-                  .claseBoton:hover{
-                      background-color: #000000;
-                      color: #ffffff;
-                  }
-                  .imag{
-                      width: 20px;
-                      height: 20px;
-                  }
-                  .contA{
-                      margin: 0px 5px 0 5px;
-                  }
-                  .afooter{
-                      color: #ffffff !important; 
-                      text-decoration: none;
-                      font-size: 13px !important;
-                  }
+                    width: 30%;
+                        background-color: #F4A261;
+                        border: 2px solid #F4A261;
+                        border-radius: 5px;
+                        color: #ffffff; 
+                        padding: 16px 32px;
+                        text-align: center;
+                        text-decoration: none;
+                        font-weight: bold;
+                        display: inline-block;
+                        font-size: 16px;
+                        margin: 4px 2px;
+                        transition-duration: 0.4s;
+                        cursor: pointer;
+                }
+                .claseBoton:hover{
+                    background-color: e76f51;
+                    color: #ffffff;
+                }
+                .imag{
+                    width: 20px;
+                    height: 20px;
+                }
+                .contA{
+                    margin: 0px 5px 0 5px;
+                }
+                .afooter{
+                    color: #264653 !important; 
+                    text-decoration: none;
+                    font-size: 13px !important;
+                }
               </style>
           </head>
           <body>
@@ -202,27 +200,23 @@ register.post(
                       <!-- Contenido principal -->
                       <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                           <h1>¡${workerCreated.dataValues.name}, comienza a utilizar REwork!</h1>
-                          <p>Sólo falta que verifiques tu cuenta.</p>
+                          <h2>Sólo falta que verifiques tu cuenta.</h2>
           
                           <!-- Gracias -->
-                          <p>Confirma tu correo electrónico</p>
+                          <h3>Confirma tu correo electrónico</h3>
           
                           <!-- Botón -->
-                          <a class="claseBoton" href="https://re-work-ten.vercel.app/confirm/worker/${id}">AQUÍ</a>
+                          <a class="claseBoton" href="https://re-work-ten.vercel.app/confirm/worker/${id}">Aquí</a>
                       </div>
                       <!-- Contenido principal -->
           
                       <!-- Footer -->
-                      <div style="background-color: #ffffff; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
-                          <p style="background-color: black; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                      <div style="background-color: #264653; color: #ffffff; padding: 5px 0px 0px 0px; width: 100%; text-align: center;">
+                          <p style="background-color: #264653; padding: 10px 0px 10px 0px; font-size: 12px !important;">
                               © 2022 REwork, todos los derechos reservados.
                           </p>
                       </div>
-                      <!-- Footer -->
-          
-          
-          
-                  </div>
+                    </div>
               </div>
           </body>
           </html>`
