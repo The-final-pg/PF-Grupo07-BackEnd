@@ -95,21 +95,21 @@ auth.post("/client", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
                   a{font-size: 30px !important;}
           
                   .claseBoton{
-                      width: 30%;
-                          background-color: #F4A261;
-                          border: 2px solid #F4A261;
-                          border-radius: 5px;
-                          color: #ffffff; 
-                          padding: 16px 32px;
-                          text-align: center;
-                          text-decoration: none;
-                          font-weight: bold;
-                          display: inline-block;
-                          font-size: 16px;
-                          margin: 4px 2px;
-                          transition-duration: 0.4s;
-                          cursor: pointer;
-                  }
+                    width: 220px;
+                    height: 60px
+                        background-color: #F4A261;
+                        border: 2px solid #F4A261;
+                        border-radius: 5px;
+                        color: #ffffff; 
+                        padding: 16px 32px;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        font-size: 15px;
+                        margin: 4px 2px;
+                        transition-duration: 0.4s;
+                        cursor: pointer;
+                }
                   .claseBoton:hover{
                       background-color: e76f51;
                       color: #ffffff;
@@ -209,7 +209,8 @@ auth.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
                     a{font-size: 30px !important;}
             
                     .claseBoton{
-                        width: 30%;
+                        width: 220px;
+                        height: 60px
                             background-color: #F4A261;
                             border: 2px solid #F4A261;
                             border-radius: 5px;
@@ -217,9 +218,8 @@ auth.post("/worker", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
                             padding: 16px 32px;
                             text-align: center;
                             text-decoration: none;
-                            font-weight: bold;
                             display: inline-block;
-                            font-size: 16px;
+                            font-size: 15px;
                             margin: 4px 2px;
                             transition-duration: 0.4s;
                             cursor: pointer;

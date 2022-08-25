@@ -124,7 +124,8 @@ offer.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, functi
                     a{font-size: 30px !important;}
             
                     .claseBoton{
-                      width: 30%;
+                      width: 220px;
+                      height: 60px
                           background-color: #F4A261;
                           border: 2px solid #F4A261;
                           border-radius: 5px;
@@ -132,9 +133,8 @@ offer.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, functi
                           padding: 16px 32px;
                           text-align: center;
                           text-decoration: none;
-                          font-weight: bold;
                           display: inline-block;
-                          font-size: 16px;
+                          font-size: 15px;
                           margin: 4px 2px;
                           transition-duration: 0.4s;
                           cursor: pointer;
@@ -163,7 +163,10 @@ offer.put("/state", (req, res, next) => __awaiter(void 0, void 0, void 0, functi
                         <!-- Contenido principal -->
                         <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                             <h1>¡Buenas noticias, el trabajo finalizó exitosamente!</h1>
-                            <h2>En un plazo máximo de 30 días verás reflejado el pago en tu cuenta. Recuerda que si cuentas con un usuario Premium este plazo se reduce.</h2>
+                            <h2>Es necesario que llenes el formulario del siguiente link para que podamos liberarte el pago</h2>
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/payment/refund"
+                            
+                            <h2>En un plazo máximo de 10 días verás reflejado el pago en tu cuenta. Recuerda que si cuentas con un usuario Premium este plazo se reduce.</h2>
                         
                             <!-- Gracias -->
                             <h3>¡Bien hecho, sigue así, ve al siguiente link para buscar nuevas ofertas!</h3>
