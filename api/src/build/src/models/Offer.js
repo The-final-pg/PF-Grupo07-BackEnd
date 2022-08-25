@@ -33,6 +33,7 @@ module.exports = (sequelize) => {
         },
         photo: {
             type: sequelize_1.DataTypes.TEXT,
+            defaultValue: 'https://res.cloudinary.com/luis-tourn/image/upload/v1661412877/logo_footer_mpoycn.png',
         },
         profession: {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING),
