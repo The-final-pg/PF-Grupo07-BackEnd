@@ -46,7 +46,7 @@ admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => 
 
   admin.put("/skills", async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const skill: string = req.body.skills;
+      const skill: string = req.body.skill;
       const response: string = await addNewSkills(skill);
       res.json(response);
     } catch (error) {

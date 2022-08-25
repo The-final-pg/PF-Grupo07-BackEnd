@@ -61,7 +61,7 @@ admin.put("/profession/delete", (req, res, next) => __awaiter(void 0, void 0, vo
 }));
 admin.put("/skills", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const skill = req.body.skills;
+        const skill = req.body.skill;
         const response = yield (0, adminController_1.addNewSkills)(skill);
         res.json(response);
     }

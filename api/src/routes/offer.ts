@@ -171,7 +171,7 @@ offer.put("/state", async (req: Request, res: Response, next: NextFunction) => {
                         <div style="background-color: #ffffff; padding: 20px 0px 5px 0px; width: 100%; text-align: center;">
                             <h1>¡Buenas noticias, el trabajo finalizó exitosamente!</h1>
                             <h2>Es necesario que llenes el formulario del siguiente link para que podamos liberarte el pago</h2>
-                            <a class="claseBoton" href="https://re-work-ten.vercel.app/payment/refund"
+                            <a class="claseBoton" href="https://re-work-ten.vercel.app/payment/refund">Formulario</a>
                             
                             <h2>En un plazo máximo de 10 días verás reflejado el pago en tu cuenta. Recuerda que si cuentas con un usuario Premium este plazo se reduce.</h2>
                         
