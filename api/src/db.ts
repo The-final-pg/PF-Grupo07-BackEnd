@@ -14,7 +14,7 @@ const sequelize = new Sequelize(DATABASE_URL, {
       rejectUnauthorized: false,
     },
 }
-});
+  });
 const basename = path.basename(__filename);
 
 const modelDefiners: any[] = [];
