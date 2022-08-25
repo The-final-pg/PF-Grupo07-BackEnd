@@ -96,7 +96,7 @@ class PaymentService {
         return __awaiter(this, void 0, void 0, function* () {
             let information;
             let id_payment;
-            if (response.action === "created")
+            if (response.action === 'created' || response.action === 'payment.created')
                 return "All works";
             if (response.hasOwnProperty("entity")) {
                 if (response.entity === "preapproval") {
