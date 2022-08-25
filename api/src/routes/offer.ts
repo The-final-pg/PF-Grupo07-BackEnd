@@ -173,7 +173,7 @@ offer.put("/state", async (req: Request, res: Response, next: NextFunction) => {
                             <h2>Es necesario que llenes el formulario del siguiente link para que podamos liberarte el pago</h2>
                             <a class="claseBoton" href="https://re-work-ten.vercel.app/payment/refund"
                             
-                            <h2>En un plazo máximo de 30 días verás reflejado el pago en tu cuenta. Recuerda que si cuentas con un usuario Premium este plazo se reduce.</h2>
+                            <h2>En un plazo máximo de 10 días verás reflejado el pago en tu cuenta. Recuerda que si cuentas con un usuario Premium este plazo se reduce.</h2>
                         
                             <!-- Gracias -->
                             <h3>¡Bien hecho, sigue así, ve al siguiente link para buscar nuevas ofertas!</h3>
