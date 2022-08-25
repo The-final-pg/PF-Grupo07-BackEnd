@@ -88,7 +88,7 @@ class PaymentService {
     let information:any
     let id_payment:string
 
-    if(response.action==="created") return "All works"
+    if(response.action==='created' || response.action==='payment.created') return "All works"
     if(response.hasOwnProperty("entity")){
       if (response.entity === "preapproval"){
         information = await axios.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`)
