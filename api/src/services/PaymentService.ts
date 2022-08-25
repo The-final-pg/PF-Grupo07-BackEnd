@@ -15,7 +15,7 @@ class PaymentService {
       payer_email: Email,
       items: [
         {
-          title: "Pago N#4452172",
+          title: `Pago de ${name} ${lastname}`,
           description: `Pago retenido por trabajo para ${name} ${lastname}`,
           picture_url: "http://www.myapp.com/myimage.jpg",
           category_id: "category123",
@@ -94,15 +94,15 @@ class PaymentService {
         information = await axios.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`)
         id_payment = information.data.payer_id.toString();
       } else return "";
-    }
-    const worker = await UserWorker.findOne({where:{
-      IdPayment:id_payment
-    }})
-    if(worker){
-      worker.set({premium:true})
-      await worker.save();
-    }
-    return worker
+      const worker = await UserWorker.findOne({where:{
+        IdPayment:id_payment
+      }})
+      if(worker){
+        worker.set({premium:true})
+        await worker.save();
+      }
+      return worker
+    } 
   }
 }
 

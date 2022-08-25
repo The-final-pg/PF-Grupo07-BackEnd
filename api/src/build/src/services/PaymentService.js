@@ -28,7 +28,7 @@ class PaymentService {
                 payer_email: Email,
                 items: [
                     {
-                        title: "Pago N#4452172",
+                        title: `Pago de ${name} ${lastname}`,
                         description: `Pago retenido por trabajo para ${name} ${lastname}`,
                         picture_url: "http://www.myapp.com/myimage.jpg",
                         category_id: "category123",
@@ -105,15 +105,15 @@ class PaymentService {
                 }
                 else
                     return "";
+                const worker = yield UserWorker.findOne({ where: {
+                        IdPayment: id_payment
+                    } });
+                if (worker) {
+                    worker.set({ premium: true });
+                    yield worker.save();
+                }
+                return worker;
             }
-            const worker = yield UserWorker.findOne({ where: {
-                    IdPayment: id_payment
-                } });
-            if (worker) {
-                worker.set({ premium: true });
-                yield worker.save();
-            }
-            return worker;
         });
     }
 }
