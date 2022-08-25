@@ -25,9 +25,9 @@ admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => 
 
   admin.put("/profession", async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const data: string[] = req.body.profession;
-      const profession: string[] = await addNewProfessions(data);
-      res.json(profession);
+      const profession: string = req.body.profession;
+      const response: string = await addNewProfessions(profession);
+      res.json(response);
     } catch (error) {
       next(error);
     };
@@ -46,9 +46,9 @@ admin.get("/offers", async (req: Request, res: Response, next: NextFunction) => 
 
   admin.put("/skills", async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const data: string[] = req.body.skills;
-      const skills: string[] = await addNewSkills(data);
-      res.json(skills);
+      const skill: string = req.body.skills;
+      const response: string = await addNewSkills(skill);
+      res.json(response);
     } catch (error) {
       next(error);
     };

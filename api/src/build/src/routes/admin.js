@@ -38,9 +38,9 @@ admin.get("/offers", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
 }));
 admin.put("/profession", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = req.body.profession;
-        const profession = yield (0, adminController_1.addNewProfessions)(data);
-        res.json(profession);
+        const profession = req.body.profession;
+        const response = yield (0, adminController_1.addNewProfessions)(profession);
+        res.json(response);
     }
     catch (error) {
         next(error);
@@ -61,9 +61,9 @@ admin.put("/profession/delete", (req, res, next) => __awaiter(void 0, void 0, vo
 }));
 admin.put("/skills", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = req.body.skills;
-        const skills = yield (0, adminController_1.addNewSkills)(data);
-        res.json(skills);
+        const skill = req.body.skills;
+        const response = yield (0, adminController_1.addNewSkills)(skill);
+        res.json(response);
     }
     catch (error) {
         next(error);
