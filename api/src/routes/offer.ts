@@ -131,7 +131,8 @@ offer.put("/state", async (req: Request, res: Response, next: NextFunction) => {
                     a{font-size: 30px !important;}
             
                     .claseBoton{
-                      width: 30%;
+                      width: 220px;
+                      height: 60px
                           background-color: #F4A261;
                           border: 2px solid #F4A261;
                           border-radius: 5px;
@@ -139,9 +140,8 @@ offer.put("/state", async (req: Request, res: Response, next: NextFunction) => {
                           padding: 16px 32px;
                           text-align: center;
                           text-decoration: none;
-                          font-weight: bold;
                           display: inline-block;
-                          font-size: 16px;
+                          font-size: 15px;
                           margin: 4px 2px;
                           transition-duration: 0.4s;
                           cursor: pointer;
