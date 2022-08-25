@@ -114,14 +114,13 @@ function getOfferFiltered(isActive) {
     });
 }
 exports.getOfferFiltered = getOfferFiltered;
-function addNewProfessions(professions) {
+function addNewProfessions(newProfession) {
     return __awaiter(this, void 0, void 0, function* () {
         const workerData = yield UserWorker.findByPk(id, {
             attributes: ["profession"],
         });
         const totalProfessions = workerData.toJSON();
-        const totalNewProfessions = totalProfessions.profession;
-        professions.forEach((e) => totalNewProfessions.includes(e) ? null : totalNewProfessions.push(e));
+        const totalNewProfessions = totalProfessions.profession.concat(newProfession);
         yield UserWorker.update({
             profession: totalNewProfessions,
         }, {
@@ -129,7 +128,7 @@ function addNewProfessions(professions) {
                 id,
             },
         });
-        return totalNewProfessions;
+        return "Profesión cargada con éxito!";
     });
 }
 exports.addNewProfessions = addNewProfessions;
@@ -147,14 +146,13 @@ function deleteProfession(array, profession) {
     });
 }
 exports.deleteProfession = deleteProfession;
-function addNewSkills(skills) {
+function addNewSkills(skill) {
     return __awaiter(this, void 0, void 0, function* () {
         const workerData = yield UserWorker.findByPk(id, {
             attributes: ["skills"],
         });
         const totalSkills = workerData.toJSON();
-        const totalNewSkills = totalSkills.skills;
-        skills.forEach((e) => totalNewSkills.includes(e) ? null : totalNewSkills.push(e));
+        const totalNewSkills = totalSkills.skills.concat(skill);
         yield UserWorker.update({
             skills: totalNewSkills,
         }, {
@@ -162,7 +160,7 @@ function addNewSkills(skills) {
                 id,
             },
         });
-        return totalNewSkills;
+        return "Aptitud cargada con éxito!";
     });
 }
 exports.addNewSkills = addNewSkills;

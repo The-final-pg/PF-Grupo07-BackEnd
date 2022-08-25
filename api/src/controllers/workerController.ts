@@ -83,13 +83,15 @@ export async function putWorkerPremium (id: string, premium: boolean): Promise<s
   return "Ya tienes cuenta premium!";
 }
 
-export async function addBankDataWorker (id: string, data_bank: JSON): Promise<string> {
+export async function addBankDataWorker (id: string, bank_data: any): Promise<string> {
   
-  await UserWorker.update({
-    data_bank: data_bank,
-    where: {
-      id: id,
-    }
-  })
+  const worker: any = await UserWorker.findByPk(id);
+  console.log(worker)
+  console.log("id", id)
+  console.log("bank_data", bank_data)
+  
+  await worker.set({bank_data: bank_data});
+  await worker.save();
+
   return "Datos bancarios cargados exitosamente"
 }
