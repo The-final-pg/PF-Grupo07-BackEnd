@@ -103,10 +103,8 @@ class PaymentService {
                     information = yield axios_1.default.get(`https://api.mercadopago.com/${response.entity}/${response.data.id}?access_token=${process.env.ACCESS_TOKEN}`);
                     id_payment = information.data.payer_id.toString();
                 }
-                else
-                    return "";
-            }
-            const worker = yield UserWorker.findOne({ where: {
+                else {return "";}
+                const worker = yield UserWorker.findOne({ where: {
                     IdPayment: id_payment
                 } });
             if (worker) {
@@ -114,6 +112,7 @@ class PaymentService {
                 yield worker.save();
             }
             return worker;
+            }
         });
     }
 }
