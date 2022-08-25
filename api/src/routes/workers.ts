@@ -116,7 +116,7 @@ worker.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
 });
 
 worker.put("/bank", async (req: Request, res: Response, next: NextFunction) => {
-  const { id, bank_data}:{id:string, bank_data:JSON} = req.body;
+  const { id, bank_data}:{id:string, bank_data:any} = req.body;
   try {
     const updateWorkerDataBank:any = await addBankDataWorker(id, bank_data);
     return res.json(updateWorkerDataBank);

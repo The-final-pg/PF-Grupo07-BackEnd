@@ -101,10 +101,10 @@ function putWorkerPremium(id, premium) {
     });
 }
 exports.putWorkerPremium = putWorkerPremium;
-function addBankDataWorker(id, data_bank) {
+function addBankDataWorker(id, bank_data) {
     return __awaiter(this, void 0, void 0, function* () {
         yield UserWorker.update({
-            data_bank: data_bank,
+            bank_data: bank_data,
             where: {
                 id: id,
             }
